@@ -1,0 +1,1035 @@
+
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>همراه ذهن</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Vazirmatn',sans-serif;
+}
+
+
+body{
+
+    min-height:100dvh;
+    background:#eee7f3;
+
+    display:flex;
+    justify-content:center;
+
+}
+
+
+.mobile{
+
+    width:100%;
+    max-width:480px;
+
+    min-height:100dvh;
+
+    background:#fdf6f4;
+
+    padding:20px;
+
+}
+
+
+
+/* لینک ها */
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+
+/* هدر */
+
+
+.header{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+}
+
+
+.profile{
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    flex-shrink:0;
+
+}
+
+
+.profile img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+.header h2{
+
+    color:#8472a7;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+/* برنامه امروز */
+
+
+.today{
+
+    margin-top:25px;
+
+    padding:20px;
+
+    border-radius:25px;
+
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #aa98cf,
+    #8472a7
+    );
+
+
+    color:white;
+
+    box-shadow:
+
+    0 10px 25px rgba(132,114,167,.25);
+
+}
+
+
+
+.today h3{
+
+    font-size:18px;
+
+}
+
+
+
+.date{
+
+    font-size:13px;
+
+    opacity:.9;
+
+    margin:5px 0 15px;
+
+}
+
+
+
+.task{
+
+    background:white;
+
+    color:#555;
+
+    padding:13px;
+
+    border-radius:15px;
+
+    margin-bottom:10px;
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+.circle{
+
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    border:2px solid #a996ca;
+
+}
+
+
+
+.more{
+
+    color:white;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+/* منوی اصلی */
+
+
+.menu{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:8px;
+
+    margin:25px 0;
+
+}
+
+
+
+.menu-item{
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:#665b70;
+
+}
+
+
+
+.icon{
+
+    width:55px;
+
+    height:55px;
+
+    margin:auto;
+
+    margin-bottom:6px;
+
+    border-radius:18px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    font-size:24px;
+
+}
+
+
+
+.menu-item:nth-child(1) .icon{
+
+    background:#eee5f7;
+
+    color:#8472a7;
+
+}
+
+
+.menu-item:nth-child(2) .icon{
+
+    background:#e6f1f3;
+
+    color:#5c9da7;
+
+}
+
+
+.menu-item:nth-child(3) .icon{
+
+    background:#f7eadf;
+
+    color:#c68d5d;
+
+}
+
+
+.menu-item:nth-child(4) .icon{
+
+    background:#e8f2eb;
+
+    color:#6b9b7b;
+
+}
+
+
+
+
+
+/* کارت ها */
+
+
+.card{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+
+    padding:15px;
+
+    border-radius:22px;
+
+    margin-bottom:15px;
+
+
+    box-shadow:
+
+    0 8px 25px rgba(132,114,167,.18);
+
+}
+
+
+
+.article{
+
+    background:#f2f0f6;
+
+}
+
+
+
+.relax{
+
+    background:#9fc9cf;
+
+}
+
+
+
+.card-image{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    flex-shrink:0;
+
+    background:#ddd;
+
+}
+
+
+
+.card-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+.card b{
+
+    color:#665580;
+
+    font-size:16px;
+
+}
+
+
+
+.card p{
+
+    margin-top:8px;
+
+    color:#555;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+}
+
+
+
+.relax button,
+
+.relax a.btn{
+
+    margin-top:10px;
+
+    background:#8472a7;
+
+    color:white;
+
+    border:0;
+
+    padding:9px 18px;
+
+    border-radius:15px;
+
+    display:inline-block;
+
+    font-size:inherit;
+
+    cursor:pointer;
+
+    transition:background 0.2s;
+
+}
+
+.relax a.btn:hover{
+
+    background:#6f5a8f;
+
+}
+
+
+
+
+
+/* پایین */
+
+
+.bottom-nav{
+
+    margin-top:25px;
+
+    padding-top:15px;
+
+    border-top:1px solid #eadfdc;
+
+
+    display:flex;
+
+    justify-content:space-around;
+
+}
+
+
+
+.nav-item{
+
+    text-align:center;
+
+    font-size:11px;
+
+    color:#999;
+
+}
+
+
+
+.nav-item i{
+
+    display:block;
+
+    font-size:20px;
+
+    margin-bottom:5px;
+
+}
+
+
+
+.active{
+
+    color:#8472a7;
+
+}
+
+
+
+
+
+@media(max-width:360px){
+
+.mobile{
+
+padding:15px;
+
+}
+
+
+.header h2{
+
+font-size:18px;
+
+}
+
+
+.card-image{
+
+width:75px;
+height:75px;
+
+}
+
+
+.icon{
+
+width:45px;
+height:45px;
+
+font-size:20px;
+
+}
+
+}
+
+/* ===== استایل جدید برای تیک زدن تسک‌ها (بدون خط خوردن متن) ===== */
+.task {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.circle {
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.circle::after {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 13px;
+    display: none;
+}
+
+.task.completed .circle {
+    background: #8472a7;
+    border-color: #8472a7;
+}
+
+.task.completed .circle::after {
+    display: block;
+}
+
+/* خط خوردن متن حذف شد */
+/* .task.completed span {
+    text-decoration: line-through;
+    opacity: 0.6;
+} */
+
+</style>
+<body>
+
+<div class="mobile">
+
+
+<!-- هدر -->
+
+<div class="header">
+
+
+<div class="profile">
+
+<img src="Profile.PNG" alt="profile">
+
+</div>
+
+
+<h2>
+سلام نرگس جان
+</h2>
+
+
+</div>
+
+
+
+
+
+<!-- برنامه امروز -->
+
+<div class="today">
+
+
+<h3>
+برنامه امروز
+</h3>
+
+
+<div class="date" id="todayDate"></div>
+
+
+
+
+<div class="task">
+
+<span>
+داروی صبح
+</span>
+
+
+<div class="circle"></div>
+
+
+</div>
+
+
+
+
+<div class="task">
+
+<span>
+صبحانه
+</span>
+
+
+<div class="circle"></div>
+
+
+</div>
+
+
+
+
+<div class="task">
+
+<span>
+پیاده‌روی
+</span>
+
+
+<div class="circle"></div>
+
+
+</div>
+
+
+
+<a href="tasks.html" class="more">
+
+مشاهده همه
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- منوی چهارگانه -->
+
+
+<div class="menu">
+
+
+
+<a href="education.html" class="menu-item">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-book-open-reader"></i>
+
+</div>
+
+
+آموزش
+
+
+</a>
+
+
+
+
+
+<a href="chat.html" class="menu-item">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-comments"></i>
+
+</div>
+
+
+چت‌ها
+
+
+</a>
+
+
+
+
+
+<a href="reminder.html" class="menu-item">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-bell"></i>
+
+</div>
+
+
+یادآورها
+
+
+</a>
+
+
+
+
+
+<a href="care.html" class="menu-item">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-heart-pulse"></i>
+
+</div>
+
+
+مراقبت
+
+
+</a>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- کارت مقاله -->
+
+
+<a href="article.html" class="card article">
+
+
+
+<div class="card-image">
+
+
+<img src="art.PNG" alt="article">
+
+
+</div>
+
+
+
+
+<div>
+
+
+<b>
+مقاله پیشنهادی برای شما
+</b>
+
+
+<p>
+مدیریت بی‌قراری در آلزایمر
+</p>
+
+
+
+</div>
+
+
+
+</a>
+
+
+
+
+
+
+
+
+
+<!-- کارت استراحت -->
+
+
+<div class="card relax">
+
+
+
+<div class="card-image">
+
+
+<img src="rest.PNG" alt="rest">
+
+</div>
+
+
+
+
+<div>
+
+
+<b>
+به خودت هم استراحت بده
+</b>
+
+
+<p>
+برای مراقبت بهتر، مراقب خودت هم باش
+</p>
+
+
+
+<a href="relax.html" class="btn">
+تمرین آرامش بخش
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ناوبری پایین -->
+
+
+<div class="bottom-nav">
+
+
+
+<a href="index.html" class="nav-item active">
+
+<i class="fa-solid fa-house"></i>
+
+خانه
+
+</a>
+
+
+
+
+
+<a href="education.html" class="nav-item">
+
+<i class="fa-solid fa-book-open"></i>
+
+آموزش
+
+</a>
+
+
+
+
+
+<a href="chat.html" class="nav-item">
+
+<i class="fa-solid fa-comments"></i>
+
+چت‌ها
+
+</a>
+
+
+
+
+
+<a href="reminder.html" class="nav-item">
+
+<i class="fa-solid fa-bell"></i>
+
+یادآورها
+
+</a>
+
+
+
+
+
+<a href="care.html" class="nav-item">
+
+<i class="fa-solid fa-heart"></i>
+
+مراقبت
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+function gregorianToJalali(gy, gm, gd) {
+
+    let g_d_m = [
+        0,31,59,90,120,151,
+        181,212,243,273,
+        304,334
+    ];
+
+    let jy = (gy <= 1600) ? 0 : 979;
+
+    gy -= (gy <= 1600) ? 621 : 1600;
+
+    let gy2 = (gm > 2) ? (gy + 1) : gy;
+
+    let days = 
+        (365 * gy)
+        + Math.floor((gy2 + 3) / 4)
+        - Math.floor((gy2 + 99) / 100)
+        + Math.floor((gy2 + 399) / 400)
+        - 80
+        + gd
+        + g_d_m[gm - 1];
+
+
+    jy += 33 * Math.floor(days / 12053);
+
+    days %= 12053;
+
+
+    jy += 4 * Math.floor(days / 1461);
+
+    days %= 1461;
+
+
+    if(days > 365){
+
+        jy += Math.floor((days - 1) / 365);
+
+        days = (days - 1) % 365;
+
+    }
+
+
+    let jm;
+
+    let jd;
+
+
+    if(days < 186){
+
+        jm = 1 + Math.floor(days / 31);
+
+        jd = 1 + (days % 31);
+
+    }
+
+    else{
+
+        jm = 7 + Math.floor((days - 186) / 30);
+
+        jd = 1 + ((days - 186) % 30);
+
+    }
+
+
+    return [jy, jm, jd];
+
+}
+
+
+
+
+const today = new Date();
+
+document.getElementById("todayDate").textContent =
+today.toLocaleDateString("fa-IR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+});
+
+
+
+// ===== کد جدید برای تیک زدن تسک‌ها (بدون خط خوردن) =====
+const tasks = document.querySelectorAll('.today .task');
+tasks.forEach(task => {
+    task.addEventListener('click', function() {
+        this.classList.toggle('completed');
+    });
+});
+
+</script>
+
+
+
+</body>
+</html>
