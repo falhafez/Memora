@@ -1,1035 +1,1026 @@
-
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>همراه ذهن</title>
+    <title>همراه ذهن</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
-<style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Vazirmatn',sans-serif;
-}
 
+        body {
 
-body{
+            min-height: 100dvh;
+            background: #eee7f3;
 
-    min-height:100dvh;
-    background:#eee7f3;
+            display: flex;
+            justify-content: center;
 
-    display:flex;
-    justify-content:center;
+        }
 
-}
 
+        .mobile {
 
-.mobile{
+            width: 100%;
+            max-width: 480px;
 
-    width:100%;
-    max-width:480px;
+            min-height: 100dvh;
 
-    min-height:100dvh;
+            background: #fdf6f4;
 
-    background:#fdf6f4;
+            padding: 20px;
 
-    padding:20px;
+        }
 
-}
 
 
+        /* لینک ها */
 
-/* لینک ها */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-a{
-    text-decoration:none;
-    color:inherit;
-}
 
 
+        /* هدر */
 
-/* هدر */
 
+        .header {
 
-.header{
+            display: flex;
+            align-items: center;
+            gap: 12px;
 
-    display:flex;
-    align-items:center;
-    gap:12px;
+        }
 
-}
 
+        .profile {
+            display: inline-block;
+            /* برای لینک شدن به درستی */
+            width: 58px;
+            height: 58px;
 
-.profile{
+            border-radius: 50%;
 
-    width:58px;
-    height:58px;
+            overflow: hidden;
 
-    border-radius:50%;
+            flex-shrink: 0;
 
-    overflow:hidden;
+        }
 
-    flex-shrink:0;
 
-}
+        .profile img {
 
+            width: 100%;
+            height: 100%;
 
-.profile img{
+            object-fit: cover;
 
-    width:100%;
-    height:100%;
+        }
 
-    object-fit:cover;
 
-}
 
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
 
+        .header-text h2 {
 
-.header h2{
+            color: #8472a7;
 
-    color:#8472a7;
+            font-size: 22px;
 
-    font-size:22px;
+            font-weight: 700;
 
-    font-weight:700;
+            line-height: 1.2;
+        }
 
-}
+        .header-text p {
+            font-size: 14px;
+            color: #8472a7;
+            margin-top: 2px;
+            font-weight: 500;
+        }
 
 
 
 
+        /* برنامه امروز */
 
-/* برنامه امروز */
 
+        .today {
 
-.today{
+            margin-top: 25px;
 
-    margin-top:25px;
+            padding: 20px;
 
-    padding:20px;
+            border-radius: 25px;
 
-    border-radius:25px;
 
+            background:
 
-    background:
+                linear-gradient(135deg,
+                    #aa98cf,
+                    #8472a7);
 
-    linear-gradient(
-    135deg,
-    #aa98cf,
-    #8472a7
-    );
 
+            color: white;
 
-    color:white;
+            box-shadow:
 
-    box-shadow:
+                0 10px 25px rgba(132, 114, 167, .25);
 
-    0 10px 25px rgba(132,114,167,.25);
+        }
 
-}
 
 
+        .today h3 {
 
-.today h3{
+            font-size: 18px;
 
-    font-size:18px;
+        }
 
-}
 
 
+        .date {
 
-.date{
+            font-size: 13px;
 
-    font-size:13px;
+            opacity: .9;
 
-    opacity:.9;
+            margin: 5px 0 15px;
 
-    margin:5px 0 15px;
+        }
 
-}
 
 
+        .task {
 
-.task{
+            background: white;
 
-    background:white;
+            color: #555;
 
-    color:#555;
+            padding: 13px;
 
-    padding:13px;
+            border-radius: 15px;
 
-    border-radius:15px;
+            margin-bottom: 10px;
 
-    margin-bottom:10px;
 
+            display: flex;
 
-    display:flex;
+            justify-content: space-between;
 
-    justify-content:space-between;
+            align-items: center;
 
-    align-items:center;
+        }
 
-}
 
 
+        .circle {
 
-.circle{
+            width: 20px;
+            height: 20px;
 
-    width:20px;
-    height:20px;
+            border-radius: 50%;
 
-    border-radius:50%;
+            border: 2px solid #a996ca;
 
-    border:2px solid #a996ca;
+        }
 
-}
 
 
+        .more {
 
-.more{
+            color: white;
 
-    color:white;
+            font-size: 14px;
 
-    font-size:14px;
+        }
 
-}
 
 
 
 
+        /* منوی اصلی */
 
-/* منوی اصلی */
 
+        .menu {
 
-.menu{
+            display: grid;
 
-    display:grid;
+            grid-template-columns: repeat(4, 1fr);
 
-    grid-template-columns:repeat(4,1fr);
+            gap: 8px;
 
-    gap:8px;
+            margin: 25px 0;
 
-    margin:25px 0;
+        }
 
-}
 
 
+        .menu-item {
 
-.menu-item{
+            text-align: center;
 
-    text-align:center;
+            font-size: 12px;
 
-    font-size:12px;
+            color: #665b70;
 
-    color:#665b70;
+        }
 
-}
 
 
+        .icon {
 
-.icon{
+            width: 55px;
 
-    width:55px;
+            height: 55px;
 
-    height:55px;
+            margin: auto;
 
-    margin:auto;
+            margin-bottom: 6px;
 
-    margin-bottom:6px;
+            border-radius: 18px;
 
-    border-radius:18px;
 
+            display: flex;
 
-    display:flex;
+            align-items: center;
 
-    align-items:center;
+            justify-content: center;
 
-    justify-content:center;
 
+            font-size: 24px;
 
-    font-size:24px;
+        }
 
-}
 
 
+        .menu-item:nth-child(1) .icon {
 
-.menu-item:nth-child(1) .icon{
+            background: #eee5f7;
 
-    background:#eee5f7;
+            color: #8472a7;
 
-    color:#8472a7;
+        }
 
-}
 
+        .menu-item:nth-child(2) .icon {
 
-.menu-item:nth-child(2) .icon{
+            background: #e6f1f3;
 
-    background:#e6f1f3;
+            color: #5c9da7;
 
-    color:#5c9da7;
+        }
 
-}
 
+        .menu-item:nth-child(3) .icon {
 
-.menu-item:nth-child(3) .icon{
+            background: #f7eadf;
 
-    background:#f7eadf;
+            color: #c68d5d;
 
-    color:#c68d5d;
+        }
 
-}
 
+        .menu-item:nth-child(4) .icon {
 
-.menu-item:nth-child(4) .icon{
+            background: #e8f2eb;
 
-    background:#e8f2eb;
+            color: #6b9b7b;
 
-    color:#6b9b7b;
+        }
 
-}
 
 
 
 
+        /* کارت ها */
 
-/* کارت ها */
 
+        .card {
 
-.card{
+            display: flex;
 
-    display:flex;
+            gap: 15px;
 
-    gap:15px;
+            align-items: center;
 
-    align-items:center;
 
+            padding: 15px;
 
-    padding:15px;
+            border-radius: 22px;
 
-    border-radius:22px;
+            margin-bottom: 15px;
 
-    margin-bottom:15px;
 
+            box-shadow:
 
-    box-shadow:
+                0 8px 25px rgba(132, 114, 167, .18);
 
-    0 8px 25px rgba(132,114,167,.18);
+        }
 
-}
 
 
+        .article {
 
-.article{
+            background: #f2f0f6;
 
-    background:#f2f0f6;
+        }
 
-}
 
 
+        .relax {
 
-.relax{
+            background: #9fc9cf;
 
-    background:#9fc9cf;
+        }
 
-}
 
 
+        .card-image {
 
-.card-image{
+            width: 90px;
 
-    width:90px;
+            height: 90px;
 
-    height:90px;
+            border-radius: 18px;
 
-    border-radius:18px;
+            overflow: hidden;
 
-    overflow:hidden;
+            flex-shrink: 0;
 
-    flex-shrink:0;
+            background: #ddd;
 
-    background:#ddd;
+        }
 
-}
 
 
+        .card-image img {
 
-.card-image img{
+            width: 100%;
 
-    width:100%;
+            height: 100%;
 
-    height:100%;
+            object-fit: cover;
 
-    object-fit:cover;
+        }
 
-}
 
 
+        .card b {
 
-.card b{
+            color: #665580;
 
-    color:#665580;
+            font-size: 16px;
 
-    font-size:16px;
+        }
 
-}
 
 
+        .card p {
 
-.card p{
+            margin-top: 8px;
 
-    margin-top:8px;
+            color: #555;
 
-    color:#555;
+            font-size: 14px;
 
-    font-size:14px;
+            line-height: 1.8;
 
-    line-height:1.8;
+        }
 
-}
 
 
+        .relax button,
+        .relax a.btn {
 
-.relax button,
+            margin-top: 10px;
 
-.relax a.btn{
+            background: #8472a7;
 
-    margin-top:10px;
+            color: white;
 
-    background:#8472a7;
+            border: 0;
 
-    color:white;
+            padding: 9px 18px;
 
-    border:0;
+            border-radius: 15px;
 
-    padding:9px 18px;
+            display: inline-block;
 
-    border-radius:15px;
+            font-size: inherit;
 
-    display:inline-block;
+            cursor: pointer;
 
-    font-size:inherit;
+            transition: background 0.2s;
 
-    cursor:pointer;
+        }
 
-    transition:background 0.2s;
+        .relax a.btn:hover {
 
-}
+            background: #6f5a8f;
 
-.relax a.btn:hover{
+        }
 
-    background:#6f5a8f;
 
-}
 
 
 
+        /* پایین */
 
 
-/* پایین */
+        .bottom-nav {
 
+            margin-top: 25px;
 
-.bottom-nav{
+            padding-top: 15px;
 
-    margin-top:25px;
+            border-top: 1px solid #eadfdc;
 
-    padding-top:15px;
 
-    border-top:1px solid #eadfdc;
+            display: flex;
 
+            justify-content: space-around;
 
-    display:flex;
+        }
 
-    justify-content:space-around;
 
-}
 
+        .nav-item {
 
+            text-align: center;
 
-.nav-item{
+            font-size: 11px;
 
-    text-align:center;
+            color: #999;
 
-    font-size:11px;
+        }
 
-    color:#999;
 
-}
 
+        .nav-item i {
 
+            display: block;
 
-.nav-item i{
+            font-size: 20px;
 
-    display:block;
+            margin-bottom: 5px;
 
-    font-size:20px;
+        }
 
-    margin-bottom:5px;
 
-}
 
+        .active {
 
+            color: #8472a7;
 
-.active{
+        }
 
-    color:#8472a7;
 
-}
 
 
 
+        @media(max-width:360px) {
+            .mobile {
+                padding: 15px;
+            }
 
 
-@media(max-width:360px){
+            .header-text h2 {
+                font-size: 18px;
+            }
 
-.mobile{
 
-padding:15px;
+            .card-image {
+                width: 75px;
+                height: 75px;
 
-}
+            }
 
 
-.header h2{
+            .icon {
+                width: 45px;
+                height: 45px;
 
-font-size:18px;
+                font-size: 20px;
 
-}
+            }
+        }
 
+        /* ===== استایل جدید برای تیک زدن تسک‌ها (بدون خط خوردن متن) ===== */
+        .task {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
 
-.card-image{
+        .circle {
+            position: relative;
+            transition: background 0.2s, border-color 0.2s;
+        }
 
-width:75px;
-height:75px;
+        .circle::after {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 13px;
+            display: none;
+        }
 
-}
+        .task.completed .circle {
+            background: #8472a7;
+            border-color: #8472a7;
+        }
 
+        .task.completed .circle::after {
+            display: block;
+        }
 
-.icon{
+        /* .task.completed span {
+            text-decoration: line-through;
+            opacity: 0.6;
+        } */
+    </style>
 
-width:45px;
-height:45px;
+    <body>
 
-font-size:20px;
+        <div class="mobile">
 
-}
 
-}
+            <!-- هدر -->
 
-/* ===== استایل جدید برای تیک زدن تسک‌ها (بدون خط خوردن متن) ===== */
-.task {
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-}
+            <div class="header">
 
-.circle {
-    position: relative;
-    transition: background 0.2s, border-color 0.2s;
-}
+                <a href="profile.html" class="profile">
+                    <img src="profile.png" alt="profile">
+                </a>
 
-.circle::after {
-    content: "\f00c";
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 13px;
-    display: none;
-}
+                <div class="header-text">
+                    <h2>سلام نرگس جان</h2>
+                    <p>خوش آمدی</p>
+                </div>
 
-.task.completed .circle {
-    background: #8472a7;
-    border-color: #8472a7;
-}
+            </div>
 
-.task.completed .circle::after {
-    display: block;
-}
 
 
-/* .task.completed span {
-    text-decoration: line-through;
-    opacity: 0.6;
-} */
 
-</style>
-<body>
 
-<div class="mobile">
+            <!-- برنامه امروز -->
 
+            <div class="today">
 
-<!-- هدر -->
 
-<div class="header">
+                <h3>
+                    برنامه امروز
+                </h3>
 
 
-<div class="profile">
+                <div class="date" id="todayDate"></div>
 
-<img src="profile.png" alt="profile">
 
-</div>
 
 
-<h2>
-سلام نرگس جان
-</h2>
+                <div class="task">
 
+                    <span>
+                        داروی صبح
+                    </span>
 
-</div>
 
+                    <div class="circle"></div>
 
 
+                </div>
 
 
-<!-- برنامه امروز -->
 
-<div class="today">
 
+                <div class="task">
 
-<h3>
-برنامه امروز
-</h3>
+                    <span>
+                        صبحانه
+                    </span>
 
 
-<div class="date" id="todayDate"></div>
+                    <div class="circle"></div>
 
 
+                </div>
 
 
-<div class="task">
 
-<span>
-داروی صبح
-</span>
 
+                <div class="task">
 
-<div class="circle"></div>
+                    <span>
+                        پیاده‌روی
+                    </span>
 
 
-</div>
+                    <div class="circle"></div>
 
 
+                </div>
 
 
-<div class="task">
 
-<span>
-صبحانه
-</span>
+                <a href="tasks.html" class="more">
 
+                    مشاهده همه
 
-<div class="circle"></div>
+                </a>
 
 
-</div>
 
+            </div>
 
 
 
-<div class="task">
 
-<span>
-پیاده‌روی
-</span>
 
 
-<div class="circle"></div>
 
+            <!-- منوی چهارگانه -->
 
-</div>
 
+            <div class="menu">
 
 
-<a href="tasks.html" class="more">
 
-مشاهده همه
+                <a href="education.html" class="menu-item">
 
-</a>
 
+                    <div class="icon">
 
+                        <i class="fa-solid fa-book-open-reader"></i>
 
-</div>
+                    </div>
 
 
+                    آموزش
 
 
+                </a>
 
 
 
-<!-- منوی چهارگانه -->
 
 
-<div class="menu">
+                <a href="chat.html" class="menu-item">
 
 
+                    <div class="icon">
 
-<a href="education.html" class="menu-item">
+                        <i class="fa-solid fa-comments"></i>
 
+                    </div>
 
-<div class="icon">
 
-<i class="fa-solid fa-book-open-reader"></i>
+                    چت‌ها
 
-</div>
 
+                </a>
 
-آموزش
 
 
-</a>
 
 
+                <a href="reminder.html" class="menu-item">
 
 
+                    <div class="icon">
 
-<a href="chat.html" class="menu-item">
+                        <i class="fa-solid fa-bell"></i>
 
+                    </div>
 
-<div class="icon">
 
-<i class="fa-solid fa-comments"></i>
+                    یادآورها
 
-</div>
 
+                </a>
 
-چت‌ها
 
 
-</a>
 
 
+                <a href="daily-care.html" class="menu-item">
 
 
+                    <div class="icon">
 
-<a href="reminder.html" class="menu-item">
+                        <i class="fa-solid fa-heart-pulse"></i>
 
+                    </div>
 
-<div class="icon">
 
-<i class="fa-solid fa-bell"></i>
+                    مراقبت
 
-</div>
 
+                </a>
 
-یادآورها
 
 
-</a>
 
+            </div>
 
 
 
 
-<a href="care.html" class="menu-item">
 
 
-<div class="icon">
 
-<i class="fa-solid fa-heart-pulse"></i>
 
-</div>
 
+            <!-- کارت مقاله -->
 
-مراقبت
 
+            <a href="article.html" class="card article">
 
-</a>
 
 
+                <div class="card-image">
 
 
-</div>
+                    <img src="art.png" alt="article">
 
 
+                </div>
 
 
 
 
+                <div>
 
 
+                    <b>
+                        مقاله پیشنهادی برای شما
+                    </b>
 
-<!-- کارت مقاله -->
 
+                    <p>
+                        مدیریت بی‌قراری در آلزایمر
+                    </p>
 
-<a href="article.html" class="card article">
 
 
+                </div>
 
-<div class="card-image">
 
 
-<img src="art.png" alt="article">
+            </a>
 
 
-</div>
 
 
 
 
-<div>
 
 
-<b>
-مقاله پیشنهادی برای شما
-</b>
 
+            <!-- کارت استراحت -->
 
-<p>
-مدیریت بی‌قراری در آلزایمر
-</p>
 
+            <div class="card relax">
 
 
-</div>
 
+                <div class="card-image">
 
 
-</a>
+                    <img src="rest.png" alt="rest">
 
+                </div>
 
 
 
 
+                <div>
 
 
+                    <b>
+                        به خودت هم استراحت بده
+                    </b>
 
 
-<!-- کارت استراحت -->
+                    <p>
+                        برای مراقبت بهتر، مراقب خودت هم باش
+                    </p>
 
 
-<div class="card relax">
 
+                    <a href="relax.html" class="btn">
+                        تمرین آرامش بخش
+                    </a>
 
 
-<div class="card-image">
+                </div>
 
 
-<img src="rest.png" alt="rest">
 
-</div>
+            </div>
 
 
 
 
-<div>
 
 
-<b>
-به خودت هم استراحت بده
-</b>
 
 
-<p>
-برای مراقبت بهتر، مراقب خودت هم باش
-</p>
 
+            <!-- ناوبری پایین -->
 
 
-<a href="relax.html" class="btn">
-تمرین آرامش بخش
-</a>
+            <div class="bottom-nav">
 
 
-</div>
 
+                <a href="index.html" class="nav-item active">
 
+                    <i class="fa-solid fa-house"></i>
 
-</div>
+                    خانه
 
+                </a>
 
 
 
 
 
+                <a href="education.html" class="nav-item">
 
+                    <i class="fa-solid fa-book-open"></i>
 
+                    آموزش
 
-<!-- ناوبری پایین -->
+                </a>
 
 
-<div class="bottom-nav">
 
 
 
-<a href="index.html" class="nav-item active">
+                <a href="chat.html" class="nav-item">
 
-<i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-comments"></i>
 
-خانه
+                    چت‌ها
 
-</a>
+                </a>
 
 
 
 
 
-<a href="education.html" class="nav-item">
+                <a href="reminder.html" class="nav-item">
 
-<i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-bell"></i>
 
-آموزش
+                    یادآورها
 
-</a>
+                </a>
 
 
 
 
 
-<a href="chat.html" class="nav-item">
+                <a href="daily-care.html" class="nav-item">
 
-<i class="fa-solid fa-comments"></i>
+                    <i class="fa-solid fa-heart"></i>
 
-چت‌ها
+                    مراقبت
 
-</a>
+                </a>
 
 
 
+            </div>
 
 
-<a href="reminder.html" class="nav-item">
 
-<i class="fa-solid fa-bell"></i>
+        </div>
 
-یادآورها
 
-</a>
 
 
 
+        <script>
+            function gregorianToJalali(gy, gm, gd) {
 
+                let g_d_m = [
+                    0, 31, 59, 90, 120, 151,
+                    181, 212, 243, 273,
+                    304, 334
+                ];
 
-<a href="care.html" class="nav-item">
+                let jy = (gy <= 1600) ? 0 : 979;
 
-<i class="fa-solid fa-heart"></i>
+                gy -= (gy <= 1600) ? 621 : 1600;
 
-مراقبت
+                let gy2 = (gm > 2) ? (gy + 1) : gy;
 
-</a>
+                let days =
+                    (365 * gy) +
+                    Math.floor((gy2 + 3) / 4) -
+                    Math.floor((gy2 + 99) / 100) +
+                    Math.floor((gy2 + 399) / 400) -
+                    80 +
+                    gd +
+                    g_d_m[gm - 1];
 
 
+                jy += 33 * Math.floor(days / 12053);
 
-</div>
+                days %= 12053;
 
 
+                jy += 4 * Math.floor(days / 1461);
 
-</div>
+                days %= 1461;
 
 
+                if (days > 365) {
 
+                    jy += Math.floor((days - 1) / 365);
 
+                    days = (days - 1) % 365;
 
-<script>
+                }
 
-function gregorianToJalali(gy, gm, gd) {
 
-    let g_d_m = [
-        0,31,59,90,120,151,
-        181,212,243,273,
-        304,334
-    ];
+                let jm;
 
-    let jy = (gy <= 1600) ? 0 : 979;
+                let jd;
 
-    gy -= (gy <= 1600) ? 621 : 1600;
 
-    let gy2 = (gm > 2) ? (gy + 1) : gy;
+                if (days < 186) {
 
-    let days = 
-        (365 * gy)
-        + Math.floor((gy2 + 3) / 4)
-        - Math.floor((gy2 + 99) / 100)
-        + Math.floor((gy2 + 399) / 400)
-        - 80
-        + gd
-        + g_d_m[gm - 1];
+                    jm = 1 + Math.floor(days / 31);
 
+                    jd = 1 + (days % 31);
 
-    jy += 33 * Math.floor(days / 12053);
+                } else {
 
-    days %= 12053;
+                    jm = 7 + Math.floor((days - 186) / 30);
 
+                    jd = 1 + ((days - 186) % 30);
 
-    jy += 4 * Math.floor(days / 1461);
+                }
 
-    days %= 1461;
 
+                return [jy, jm, jd];
 
-    if(days > 365){
+            }
 
-        jy += Math.floor((days - 1) / 365);
 
-        days = (days - 1) % 365;
 
-    }
 
+            const today = new Date();
 
-    let jm;
+            document.getElementById("todayDate").textContent =
+                today.toLocaleDateString("fa-IR", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                });
 
-    let jd;
 
 
-    if(days < 186){
+            // ===== کد جدید برای تیک زدن تسک‌ها (بدون خط خوردن) =====
+            const tasks = document.querySelectorAll('.today .task');
+            tasks.forEach(task => {
+                task.addEventListener('click', function() {
+                    this.classList.toggle('completed');
+                });
+            });
+        </script>
 
-        jm = 1 + Math.floor(days / 31);
 
-        jd = 1 + (days % 31);
 
-    }
+    </body>
 
-    else{
-
-        jm = 7 + Math.floor((days - 186) / 30);
-
-        jd = 1 + ((days - 186) % 30);
-
-    }
-
-
-    return [jy, jm, jd];
-
-}
-
-
-
-
-const today = new Date();
-
-document.getElementById("todayDate").textContent =
-today.toLocaleDateString("fa-IR", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-});
-
-
-
-// ===== کد جدید برای تیک زدن تسک‌ها (بدون خط خوردن) =====
-const tasks = document.querySelectorAll('.today .task');
-tasks.forEach(task => {
-    task.addEventListener('click', function() {
-        this.classList.toggle('completed');
-    });
-});
-
-</script>
-
-
-
-</body>
 </html>

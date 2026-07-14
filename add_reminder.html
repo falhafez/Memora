@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>افزودن یادآور جدید</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Persian Datepicker -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker/dist/css/persian-datepicker.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-date/dist/persian-date.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-datepicker/dist/js/persian-datepicker.min.js"></script>
+
+  <style>
+    /* ===== ریست ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    body {
+      min-height: 100dvh;
+      background: #eee7f3;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ===== محفظه موبایل (همانند کد اول) ===== */
+    .mobile {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100dvh;
+      background: #fdf6f4;
+      padding: 20px;               /* ← مثل کد اول */
+      /* padding-bottom حذف شد تا نوار پایین در انتهای محتوا قرار بگیرد */
+    }
+
+    /* ===== هدر (همانند کد اول) ===== */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;                   /* ← مثل کد اول */
+      margin-bottom: 25px;         /* ← برای فاصله با فرم (مشابه فاصلهٔ .today تا منو در کد اول) */
+    }
+
+    .back {
+      width: 48px;                 /* ← هماهنگ با اندازهٔ آیکون‌های منو (55px نیست، ولی 48 مناسب است) */
+      height: 48px;
+      background: #eee5f7;
+      color: #8472a7;
+      border-radius: 14px;         /* ← مثل border-radius آیکون‌های منو */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 22px;             /* ← هماهنگ با سایز آیکون‌های منو */
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+    .back:hover {
+      background: #e0d5ee;
+      transform: scale(1.05);
+    }
+
+    .header h2 {
+      color: #8472a7;              /* ← مثل کد اول */
+      font-size: 22px;             /* ← مثل کد اول */
+      font-weight: 700;            /* ← مثل کد اول */
+    }
+
+    /* ===== فرم (با استایل مشابه باکس «برنامه امروز») ===== */
+    .form-container {
+      background: white;           /* ← مثل پس‌زمینهٔ تسک‌ها */
+      border-radius: 25px;         /* ← مثل .today */
+      padding: 20px;               /* ← مثل .today */
+      box-shadow: 0 10px 25px rgba(132, 114, 167, 0.25); /* ← مثل سایهٔ .today */
+      margin-bottom: 25px;         /* ← فاصله تا نوار پایین */
+    }
+
+    .form-group {
+      margin-bottom: 20px;         /* ← مثل فاصلهٔ بین تسک‌ها (margin-bottom:10px بود، ولی برای فرم 20 مناسب است) */
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      color: #665580;              /* ← رنگ مشابه عنوان کارت‌ها */
+      margin-bottom: 8px;
+      font-size: 14px;             /* ← مثل توضیحات کارت */
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;          /* ← مثل padding تسک‌ها (13px بود، نزدیک) */
+      border: 2px solid #eee7f3;
+      border-radius: 15px;         /* ← مثل border-radius تسک‌ها */
+      font-size: 15px;             /* ← کمی بزرگتر از 14px کد اول، اما برای ورودی مناسب است */
+      color: #665580;
+      background: #faf8fc;
+      transition: 0.25s;
+      outline: none;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #8472a7;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(132, 114, 167, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238472a7' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 16px center;
+      padding-left: 40px;
+      cursor: pointer;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ===== دکمه‌ها با استایل مشابه دکمهٔ «تمرین آرامش‌بخش» ===== */
+    .btn-submit {
+      width: 100%;
+      background: #8472a7;
+      color: white;
+      border: none;
+      border-radius: 15px;         /* ← مثل دکمهٔ آرامش */
+      padding: 14px 18px;          /* ← نزدیک به 9px 18px ولی برای دکمهٔ بزرگ‌تر */
+      font-size: 16px;             /* ← مثل font-size عنوان کارت */
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(132, 114, 167, 0.35);
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 8px;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+    .btn-submit:hover {
+      background: #6f5a8f;         /* ← مثل هاور دکمهٔ آرامش */
+      transform: translateY(-2px);
+    }
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .btn-cancel {
+      width: 100%;
+      background: transparent;
+      color: #8472a7;
+      border: 2px solid #eee7f3;
+      border-radius: 15px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.25s;
+      margin-top: 10px;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+    .btn-cancel:hover {
+      background: #f5f0fa;
+      border-color: #8472a7;
+    }
+
+    /* ===== آیکون داخل ورودی‌ها ===== */
+    .input-icon-wrapper {
+      position: relative;
+    }
+    .input-icon-wrapper i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8472a7;
+      opacity: 0.6;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .input-icon-wrapper input,
+    .input-icon-wrapper select {
+      padding-left: 44px;
+    }
+    .input-icon-wrapper textarea + i {
+      top: 20px;
+      transform: none;
+    }
+
+    /* ===== Toggle (هماهنگ با رنگ‌های کلی) ===== */
+    .toggle-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .toggle-label {
+      color: #888;
+      font-size: 14px;
+    }
+    .toggle-switch {
+      width: 48px;
+      height: 26px;
+      border-radius: 30px;
+      background: #ddd;
+      position: relative;
+      cursor: pointer;
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    .toggle-switch.on {
+      background: #8472a7;
+    }
+    .toggle-switch.on::before {
+      right: 25px;
+    }
+
+    /* ===== نوار پایین (دقیقاً مشابه کد اول) ===== */
+    .bottom-nav {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #eadfdc;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .nav-item {
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      text-decoration: none;
+    }
+
+    .nav-item i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .active {
+      color: #8472a7;
+    }
+
+    /* ===== واکنش‌گرایی (همانند کد اول) ===== */
+    @media (max-width: 360px) {
+      .mobile {
+        padding: 15px;
+      }
+      .header h2 {
+        font-size: 18px;
+      }
+      .back {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+      }
+      .form-container {
+        padding: 15px;
+      }
+    }
+
+    /* جلوگیری از زوم آیفون */
+    @media (max-width: 480px) {
+      .form-group input[type="date"],
+      .form-group input[type="time"] {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile">
+    <!-- ===== هدر با دکمه برگشت ===== -->
+    <div class="header">
+      <a href="reminder.html" class="back"><i class="fa-solid fa-arrow-right"></i></a>
+      <h2>افزودن یادآور جدید</h2>
+    </div>
+
+    <!-- ===== فرم ===== -->
+    <div class="form-container">
+      <form id="reminderForm">
+        <!-- عنوان -->
+        <div class="form-group">
+          <label for="title">عنوان یادآور</label>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-tag"></i>
+            <input type="text" id="title" placeholder="مثلاً: داروی عصر" required />
+          </div>
+        </div>
+
+        <!-- توضیحات -->
+        <div class="form-group">
+          <label for="description">توضیحات (اختیاری)</label>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-pen"></i>
+            <textarea id="description" placeholder="توضیحات بیشتر درباره یادآور..."></textarea>
+          </div>
+        </div>
+
+        <!-- تاریخ و زمان -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">تاریخ</label>
+            <div class="input-icon-wrapper">
+              <i class="fa-solid fa-calendar-day"></i>
+              <input type="text" id="date" placeholder="انتخاب تاریخ" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="time">زمان</label>
+            <div class="input-icon-wrapper">
+              <i class="fa-solid fa-clock"></i>
+              <input type="time" id="time" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- دسته‌بندی -->
+        <div class="form-group">
+          <label for="category">دسته‌بندی</label>
+          <div class="input-icon-wrapper">
+            <i class="fa-solid fa-list"></i>
+            <select id="category">
+              <option value="دارو">دارو</option>
+              <option value="غذا">غذا</option>
+              <option value="ورزش">ورزش</option>
+              <option value="خواب">خواب</option>
+              <option value="سایر">سایر</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- وضعیت (Toggle) -->
+        <div class="form-group">
+          <label>وضعیت</label>
+          <div class="toggle-wrapper">
+            <div class="toggle-switch on" onclick="toggleSwitch(this)"></div>
+            <span class="toggle-label" id="statusLabel">فعال</span>
+          </div>
+        </div>
+
+        <!-- دکمه‌ها -->
+        <button type="submit" class="btn-submit">
+          <i class="fa-solid fa-plus"></i>
+          افزودن یادآور
+        </button>
+        <button type="button" class="btn-cancel" onclick="window.location.href='reminder.html'">
+          انصراف
+        </button>
+      </form>
+    </div>
+
+    <!-- ===== نوار پایین (دقیقاً مشابه کد اول) ===== -->
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
+      <a href="education.html" class="nav-item"><i class="fa-solid fa-book-open"></i>آموزش</a>
+      <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+      <a href="reminders.html" class="nav-item active"><i class="fa-solid fa-bell"></i>یادآورها</a>
+      <a href="care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
+    </div>
+  </div>
+
+  <script>
+    // ===== تغییر وضعیت Toggle =====
+    function toggleSwitch(element) {
+      element.classList.toggle('on');
+      const label = document.getElementById('statusLabel');
+      label.textContent = element.classList.contains('on') ? 'فعال' : 'غیرفعال';
+    }
+
+    // ===== مقداردهی اولیه تاریخ شمسی =====
+    $(document).ready(function () {
+      $('#date').persianDatepicker({
+        format: 'YYYY/MM/DD',
+        initialValue: true,
+        autoClose: true
+      });
+    });
+
+    // ===== تنظیم زمان پیش‌فرض =====
+    document.addEventListener('DOMContentLoaded', function () {
+      const now = new Date();
+      // تاریخ شمسی امروز (توسط persian-datepicker مقداردهی می‌شود، اما برای اطمینان)
+      const today = new persianDate(now).format('YYYY/MM/DD');
+      document.getElementById('date').value = today;
+
+      // زمان (نزدیک‌ترین ربع ساعت)
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(Math.floor(now.getMinutes() / 15) * 15).padStart(2, '0');
+      document.getElementById('time').value = hours + ':' + minutes;
+    });
+
+    // ===== ارسال فرم =====
+    document.getElementById('reminderForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      // تبدیل به تاریخ فارسی برای نمایش
+      const dateObj = new Date(date + 'T' + time);
+      const persianDate = dateObj.toLocaleDateString('fa-IR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      const persianTime = dateObj.toLocaleTimeString('fa-IR', {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      alert('✅ یادآور "' + title + '" با موفقیت افزوده شد!\n📅 تاریخ: ' + persianDate + '\n🕐 زمان: ' + persianTime);
+      window.location.href = 'reminders.html';
+    });
+  </script>
+</body>
+</html>

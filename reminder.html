@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>یادآورها</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Vazirmatn, sans-serif;
+    }
+    body {
+      background: #eee7f3;
+      display: flex;
+      justify-content: center;
+      min-height: 100dvh;
+    }
+    .mobile {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100dvh;
+      background: #fdf6f4;
+      padding: 20px;
+      position: relative;
+    }
+    
+    /* ===== هدر هماهنگ با صفحه خانه ===== */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .back {
+      width: 42px;
+      height: 42px;
+      background: #eee5f7;
+      color: #8472a7;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.2s;
+    }
+    .back:hover {
+      background: #e0d5ed;
+    }
+    .header h2 {
+      color: #665580;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* ===== باکس بنفش ===== */
+    .hero {
+      margin: 25px 0 20px 0;  /* هماهنگ با فاصله‌های صفحه خانه */
+      background: linear-gradient(135deg, #aa98cf, #8472a7);
+      border-radius: 25px;
+      padding: 20px;
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(132, 114, 167, .25);
+    }
+    .hero h3 {
+      font-size: 18px;
+    }
+    .hero small {
+      opacity: .9;
+      font-size: 13px;
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* ===== فیلترها ===== */
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow: auto;
+      margin-bottom: 20px;
+      padding: 2px 0;
+    }
+    .chip {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: #fff;
+      color: #8472a7;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .chip.active {
+      background: #8472a7;
+      color: #fff;
+    }
+    .chip:hover {
+      transform: translateY(-1px);
+    }
+
+    /* ===== کارت‌ها ===== */
+    .card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 20px rgba(132, 114, 167, .12);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+    }
+    .left {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .p { background: #eee5f7; color: #8472a7; }
+    .o { background: #f7eadf; color: #c68d5d; }
+    .g { background: #e8f2eb; color: #6b9b7b; }
+    .b { background: #e6f1f3; color: #5c9da7; }
+    
+    .title {
+      font-weight: 700;
+      color: #665580;
+      font-size: 16px;
+    }
+    .sub {
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+    }
+    .time {
+      margin-top: 6px;
+      display: inline-block;
+      background: #f2f0f6;
+      color: #8472a7;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    /* ===== دکمه‌ی toggle ===== */
+    .toggle {
+      width: 48px;
+      height: 26px;
+      border-radius: 30px;
+      background: #ddd;
+      position: relative;
+      cursor: pointer;
+      transition: .2s;
+      flex-shrink: 0;
+    }
+    .toggle:before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: .2s;
+    }
+    .toggle.on {
+      background: #8472a7;
+    }
+    .toggle.on:before {
+      right: 25px;
+    }
+
+    /* ===== دکمه‌ی افزودن ===== */
+    .add-btn-wrapper {
+      margin-top: 20px;
+      padding-top: 5px;
+    }
+    .add-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: #8472a7;
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(132, 114, 167, .35);
+      cursor: pointer;
+      transition: .25s;
+      text-decoration: none;
+    }
+    .add-btn:hover {
+      background: #715e97;
+      transform: translateY(-2px);
+    }
+    .add-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* ===== نوار پایین هماهنگ با صفحه خانه ===== */
+    .bottom-nav {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #eadfdc;
+      display: flex;
+      justify-content: space-around;
+    }
+    .nav-item {
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-item:hover {
+      color: #8472a7;
+    }
+    .nav-item i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .active {
+      color: #8472a7;
+    }
+
+    /* ===== ریسپانسیو ===== */
+    @media(max-width:360px) {
+      .mobile {
+        padding: 15px;
+      }
+      .header h2 {
+        font-size: 18px;
+      }
+      .icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+      }
+      .card {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile">
+    <!-- ===== هدر ===== -->
+    <div class="header">
+      <a href="home.html" class="back"><i class="fa-solid fa-arrow-right"></i></a>
+      <h2>یادآورها</h2>
+    </div>
+
+    <!-- ===== باکس بنفش ===== -->
+    <div class="hero">
+      <h3>یادآورهای امروز</h3>
+      <small>۴ فعالیت برنامه‌ریزی شده</small>
+    </div>
+
+    <!-- ===== فیلترها ===== -->
+    <div class="filters">
+      <div class="chip active">همه</div>
+      <div class="chip">دارو</div>
+      <div class="chip">غذا</div>
+      <div class="chip">ورزش</div>
+      <div class="chip">خواب</div>
+    </div>
+
+    <!-- ===== کارت‌های یادآور ===== -->
+    <div class="card">
+      <div class="left">
+        <div class="icon p"><i class="fa-solid fa-pills"></i></div>
+        <div>
+          <div class="title">داروی صبح</div>
+          <div class="sub">بعد از صبحانه</div>
+          <span class="time">08:00</span>
+        </div>
+      </div>
+      <div class="toggle on"></div>
+    </div>
+
+    <div class="card">
+      <div class="left">
+        <div class="icon o"><i class="fa-solid fa-utensils"></i></div>
+        <div>
+          <div class="title">صبحانه</div>
+          <div class="sub">رژیم پیشنهادی</div>
+          <span class="time">08:30</span>
+        </div>
+      </div>
+      <div class="toggle on"></div>
+    </div>
+
+    <div class="card">
+      <div class="left">
+        <div class="icon g"><i class="fa-solid fa-person-walking"></i></div>
+        <div>
+          <div class="title">پیاده‌روی</div>
+          <div class="sub">۲۰ دقیقه</div>
+          <span class="time">17:00</span>
+        </div>
+      </div>
+      <div class="toggle"></div>
+    </div>
+
+    <div class="card">
+      <div class="left">
+        <div class="icon b"><i class="fa-solid fa-bed"></i></div>
+        <div>
+          <div class="title">خواب شب</div>
+          <div class="sub">آرامش قبل خواب</div>
+          <span class="time">22:30</span>
+        </div>
+      </div>
+      <div class="toggle on"></div>
+    </div>
+
+    <!-- ===== دکمه افزودن ===== -->
+    <div class="add-btn-wrapper">
+      <a href="add_reminder.html" class="add-btn">
+        <i class="fa-solid fa-plus"></i>
+        افزودن یادآور
+      </a>
+    </div>
+
+    <!-- ===== نوار پایین ===== -->
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
+      <a href="education.html" class="nav-item"><i class="fa-solid fa-book-open"></i>آموزش</a>
+      <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+      <a href="#" class="nav-item active"><i class="fa-solid fa-bell"></i>یادآورها</a>
+      <a href="care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.toggle').forEach(t => t.onclick = () => t.classList.toggle('on'));
+  </script>
+</body>
+</html>
