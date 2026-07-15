@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>همراه ذهن</title>
+    <title>ممورا</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
 
@@ -579,7 +579,7 @@
                 </a>
 
                 <div class="header-text">
-                    <h2>سلام نرگس جان</h2>
+                    <h2 id="welcomeName">سلام</h2>
                     <p>خوش آمدی</p>
                 </div>
 
@@ -859,7 +859,7 @@
 
 
 
-                <a href="index.html" class="nav-item active">
+                <a href="home.html" class="nav-item active">
 
                     <i class="fa-solid fa-house"></i>
 
@@ -928,95 +928,68 @@
 
 
         <script>
-            function gregorianToJalali(gy, gm, gd) {
+            
+let profile = JSON.parse(localStorage.getItem("patientProfile"));
 
-                let g_d_m = [
-                    0, 31, 59, 90, 120, 151,
-                    181, 212, 243, 273,
-                    304, 334
-                ];
+if(profile && profile.caregiverName){
 
-                let jy = (gy <= 1600) ? 0 : 979;
+    document.getElementById("welcomeName").textContent =
+        "سلام " + profile.caregiverName;
 
-                gy -= (gy <= 1600) ? 621 : 1600;
+}else{
 
-                let gy2 = (gm > 2) ? (gy + 1) : gy;
+    document.getElementById("welcomeName").textContent =
+        "سلام";
 
-                let days =
-                    (365 * gy) +
-                    Math.floor((gy2 + 3) / 4) -
-                    Math.floor((gy2 + 99) / 100) +
-                    Math.floor((gy2 + 399) / 400) -
-                    80 +
-                    gd +
-                    g_d_m[gm - 1];
+}
 
+function gregorianToJalali(gy, gm, gd) {
 
-                jy += 33 * Math.floor(days / 12053);
+    let g_d_m = [
+        0, 31, 59, 90, 120, 151,
+        181, 212, 243, 273,
+        304, 334
+    ];
 
-                days %= 12053;
+    let jy = (gy <= 1600) ? 0 : 979;
 
+    gy -= (gy <= 1600) ? 621 : 1600;
 
-                jy += 4 * Math.floor(days / 1461);
+    let gy2 = (gm > 2) ? (gy + 1) : gy;
 
-                days %= 1461;
+    let days =
+        (365 * gy) +
+        Math.floor((gy2 + 3) / 4) -
+        Math.floor((gy2 + 99) / 100) +
+        Math.floor((gy2 + 399) / 400) -
+        80 +
+        gd +
+        g_d_m[gm - 1];
 
+    jy += 33 * Math.floor(days / 12053);
+    days %= 12053;
 
-                if (days > 365) {
+    jy += 4 * Math.floor(days / 1461);
+    days %= 1461;
 
-                    jy += Math.floor((days - 1) / 365);
+    if (days > 365) {
+        jy += Math.floor((days - 1) / 365);
+        days = (days - 1) % 365;
+    }
 
-                    days = (days - 1) % 365;
+    let jm;
+    let jd;
 
-                }
+    if (days < 186) {
+        jm = 1 + Math.floor(days / 31);
+        jd = 1 + (days % 31);
+    } else {
+        jm = 7 + Math.floor((days - 186) / 30);
+        jd = 1 + ((days - 186) % 30);
+    }
 
-
-                let jm;
-
-                let jd;
-
-
-                if (days < 186) {
-
-                    jm = 1 + Math.floor(days / 31);
-
-                    jd = 1 + (days % 31);
-
-                } else {
-
-                    jm = 7 + Math.floor((days - 186) / 30);
-
-                    jd = 1 + ((days - 186) % 30);
-
-                }
-
-
-                return [jy, jm, jd];
-
-            }
-
-
-
-
-            const today = new Date();
-
-            document.getElementById("todayDate").textContent =
-                today.toLocaleDateString("fa-IR", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                });
-
-
-
-            // ===== کد جدید برای تیک زدن تسک‌ها (بدون خط خوردن) =====
-            const tasks = document.querySelectorAll('.today .task');
-            tasks.forEach(task => {
-                task.addEventListener('click', function() {
-                    this.classList.toggle('completed');
-                });
-            });
+    return [jy, jm, jd];
+}
         </script>
 
 

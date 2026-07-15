@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تکمیل اطلاعات بیمار | ممورا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        body {
+            background: #eee7f3;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .mobile {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background: #fdf6f4;
+            padding: 20px;
+            padding-bottom: 30px;
+        }
+        .header {
+            background: linear-gradient(135deg, #aa98cf, #8472a7);
+            border-radius: 25px;
+            padding: 22px;
+            color: #fff;
+        }
+        .card {
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 22px;
+            padding: 18px;
+            box-shadow: 0 8px 25px rgba(132, 114, 167, .15);
+        }
+        .card h3 {
+            color: #8472a7;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin: 8px 0 5px;
+            color: #666;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 15px;
+            background: #f7f4fb;
+            outline: none;
+        }
+        textarea {
+            height: 90px;
+            resize: none;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .btn-group button {
+            width: 100%;
+            height: 58px;
+            border: none;
+            border-radius: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity .2s;
+        }
+        .btn-group button:hover {
+            opacity: .85;
+        }
+        .save {
+            background: linear-gradient(90deg, #8472a7, #5c9da7);
+            color: #fff;
+        }
+        .cancel {
+            background: #e8e0ed;
+            color: #6b5b7a;
+            border: 2px solid #d5c8e0 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile">
+        <div class="header">
+            <h2>تکمیل پروفایل بیمار</h2>
+            <p>برای شخصی‌سازی برنامه، لطفاً اطلاعات بیمار و مراقب را وارد کنید.</p>
+        </div>
+
+        <div class="card">
+            <h3>اطلاعات مراقب</h3>
+            <label>نام و نام خانوادگی مراقب</label>
+            <input id="caregiverName" placeholder="مثال: احمد رضایی" />
+
+            <label>نسبت با بیمار</label>
+            <select id="relation">
+                <option>همسر</option>
+                <option>فرزند</option>
+                <option>خواهر / برادر</option>
+                <option>پرستار</option>
+                <option>سایر</option>
+            </select>
+
+            <label>شماره تماس</label>
+            <input id="caregiverPhone" type="text" inputmode="numeric" maxlength="11" placeholder="مثال: 09123456789" oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+        </div>
+
+        <div class="card">
+            <h3>اطلاعات بیمار</h3>
+            <label>نام و نام خانوادگی بیمار</label>
+            <input id="patientName" placeholder="مثال: زهرا رضایی" />
+
+            <label>سن</label>
+            <input id="patientAge" type="text" inputmode="numeric" maxlength="3" placeholder="مثال: ۷۲" oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+
+            <label>جنسیت</label>
+            <select id="gender">
+                <option>زن</option>
+                <option>مرد</option>
+            </select>
+        </div>
+
+        <div class="card">
+            <h3>وضعیت بیماری</h3>
+            <label>مرحله بیماری</label>
+            <select id="stage">
+                <option>خفیف</option>
+                <option>متوسط</option>
+                <option>پیشرفته</option>
+            </select>
+
+            <label>سال تشخیص</label>
+            <input id="diagnosisYear" type="text" inputmode="numeric" maxlength="4" placeholder="مثال: ۱۴۰۰" oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+
+            <label>بیماری‌های همراه</label>
+            <input id="otherDiseases" placeholder="مثال: فشار خون، دیابت" />
+
+            <label>داروهای مصرفی</label>
+            <textarea id="medicines" placeholder="داروهای مصرفی بیمار را وارد کنید"></textarea>
+
+            <label>توضیحات</label>
+            <textarea id="notes" placeholder="توضیحات تکمیلی..."></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button class="save" onclick="saveProfile()">ذخیره اطلاعات و ورود به برنامه</button>
+            <button class="cancel" onclick="cancelProfile()">انصراف و بازگشت به صفحه ورود</button>
+        </div>
+    </div>
+
+    <script>
+        // بارگذاری اطلاعات قبلی برای ویرایش
+        let username = localStorage.getItem("currentUser");
+        let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+
+        if (profiles[username]) {
+
+            let profile = profiles[username];
+
+            document.getElementById("caregiverName").value = profile.caregiverName || "";
+            document.getElementById("relation").value = profile.relation || "";
+            document.getElementById("caregiverPhone").value = profile.caregiverPhone || "";
+
+            document.getElementById("patientName").value = profile.patientName || "";
+            document.getElementById("patientAge").value = profile.patientAge || "";
+            document.getElementById("gender").value = profile.gender || "";
+
+            document.getElementById("stage").value = profile.stage || "";
+            document.getElementById("diagnosisYear").value = profile.diagnosisYear || "";
+            document.getElementById("otherDiseases").value = profile.otherDiseases || "";
+            document.getElementById("medicines").value = profile.medicines || "";
+            document.getElementById("notes").value = profile.notes || "";
+        }
+
+        function saveProfile() {
+            // دریافت مقادیر
+            let caregiverName = document.getElementById("caregiverName").value.trim();
+            let patientName = document.getElementById("patientName").value.trim();
+            let patientAge = document.getElementById("patientAge").value.trim();
+            let caregiverPhone = document.getElementById("caregiverPhone").value.trim();
+            let diagnosisYear = document.getElementById("diagnosisYear").value.trim();
+
+            // اعتبارسنجی فیلدهای اجباری
+            if (caregiverName === "" || patientName === "" || patientAge === "") {
+                alert("لطفاً نام مراقب، نام بیمار و سن بیمار را وارد کنید.");
+                return;
+            }
+
+            // اعتبارسنجی سن (فقط عدد)
+            if (!/^\d+$/.test(patientAge)) {
+                alert("سن باید فقط شامل عدد باشد.");
+                return;
+            }
+
+            // اعتبارسنجی شماره تماس (اختیاری، ولی اگر وارد شده باشد فقط عدد)
+            if (caregiverPhone !== "" && !/^\d+$/.test(caregiverPhone)) {
+                alert("شماره تماس باید فقط شامل عدد باشد.");
+                return;
+            }
+
+            // اعتبارسنجی سال تشخیص (اختیاری، ولی اگر وارد شده باشد فقط عدد)
+            if (diagnosisYear !== "" && !/^\d+$/.test(diagnosisYear)) {
+                alert("سال تشخیص باید فقط شامل عدد باشد.");
+                return;
+            }
+
+            // گرفتن رفرنس‌ها
+            let relation = document.getElementById("relation");
+            let gender = document.getElementById("gender");
+            let stage = document.getElementById("stage");
+            let otherDiseases = document.getElementById("otherDiseases");
+            let medicines = document.getElementById("medicines");
+            let notes = document.getElementById("notes");
+
+            // ساخت شیء پروفایل
+            const profile = {
+                caregiverName,
+                relation: relation.value,
+                caregiverPhone,
+
+                patientName,
+                patientAge,
+
+                gender: gender.value,
+                stage: stage.value,
+
+                diagnosisYear,
+                otherDiseases: otherDiseases.value.trim(),
+                medicines: medicines.value.trim(),
+                notes: notes.value.trim()
+            };
+
+            // ذخیره در localStorage
+            let username = localStorage.getItem("currentUser");
+            if (!username) {
+                alert("خطا: کاربر وارد نشده است. لطفاً ابتدا وارد شوید.");
+                return;
+            }
+
+            let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+            profiles[username] = profile;
+            localStorage.setItem("profiles", JSON.stringify(profiles));
+            localStorage.setItem("profileCompleted", "true");
+
+            alert("اطلاعات با موفقیت ذخیره شد.");
+            location.href = "home.html";
+        }
+
+        function cancelProfile() {
+            // بازگشت به صفحه ورود بدون پاک کردن اطلاعات
+            location.href = "login.html";
+        }
+    </script>
+</body>
+</html>

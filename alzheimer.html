@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محتوای آموزشی</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+body{background:#eee7f3;display:flex;justify-content:center}
+.mobile{width:100%;max-width:480px;min-height:100vh;background:#fdf6f4;padding:20px;padding-bottom:30px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.back{width:42px;height:42px;border-radius:14px;background:#eee5f7;color:#8472a7;
+display:flex;align-items:center;justify-content:center;text-decoration:none}
+.title{font-size:22px;font-weight:700;color:#665580}
+
+.hero{
+overflow:hidden;border-radius:24px;background:#fff;
+box-shadow:0 8px 25px rgba(132,114,167,.15);
+}
+.hero img{width:100%;height:220px;object-fit:cover;display:block}
+
+.content{
+background:#fff;margin-top:15px;padding:20px;border-radius:24px;
+box-shadow:0 8px 25px rgba(132,114,167,.12);
+}
+
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:999px;
+background:#eee5f7;
+color:#8472a7;
+font-size:12px;
+margin-bottom:12px;
+}
+
+h1{
+font-size:24px;
+line-height:1.8;
+color:#665580;
+margin-bottom:10px;
+}
+
+.meta{
+display:flex;
+gap:15px;
+color:#999;
+font-size:12px;
+margin-bottom:18px;
+}
+
+p{
+color:#555;
+line-height:2.1;
+margin-bottom:14px;
+}
+
+.section-title{
+color:#8472a7;
+font-size:18px;
+margin:20px 0 12px;
+}
+
+ul{
+padding-right:18px;
+}
+
+li{
+margin-bottom:10px;
+line-height:2;
+color:#555;
+}
+
+.action{
+margin-top:20px;
+display:flex;
+gap:10px;
+}
+
+.btn{
+flex:1;
+border:0;
+padding:12px;
+border-radius:16px;
+background:#8472a7;
+color:#fff;
+font-size:14px;
+cursor:pointer;
+transition:opacity .2s;
+}
+.btn:hover{opacity:.85}
+
+.btn.secondary{
+background:#9fc9cf;
+}
+
+.bottom-nav{
+margin-top:25px;
+padding-top:15px;
+border-top:1px solid #eadfdc;
+display:flex;
+justify-content:space-around;
+}
+
+.nav-item{
+text-align:center;
+font-size:11px;
+color:#999;
+text-decoration:none;
+}
+
+.nav-item i{
+display:block;
+font-size:20px;
+margin-bottom:5px;
+}
+
+.active{color:#8472a7;}
+
+/* دکمه مطالعه بیشتر */
+.read-more-btn {
+    display:inline-block;
+    background:#eee5f7;
+    color:#8472a7;
+    padding:8px 18px;
+    border-radius:999px;
+    border:none;
+    font-size:14px;
+    cursor:pointer;
+    font-weight:700;
+    transition:background .2s;
+    margin-top:5px;
+}
+.read-more-btn:hover {
+    background:#d9cce8;
+}
+
+/* محتوای اضافی که در ابتدا مخفی است */
+.extra-content {
+    display:none;
+    margin-top:10px;
+}
+.extra-content.show {
+    display:block;
+}
+</style>
+</head>
+
+<body>
+<div class="mobile">
+
+<div class="header">
+<a href="education.html" class="back">
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+<div class="title">محتوای آموزشی</div>
+
+<i class="fa-regular fa-bookmark" style="color:#8472a7"></i>
+</div>
+
+<div class="hero">
+<img src="alzheimer.png" alt="cover">
+</div>
+
+<div class="content">
+
+<span class="badge">مقاله آموزشی</span>
+
+<h1>دمانس و بیماری آلزایمر</h1>
+
+<div class="meta">
+<span><i class="fa-regular fa-clock"></i> ۱۵ دقیقه مطالعه</span>
+<span><i class="fa-regular fa-calendar"></i> ۱۴۰۴/۰۵/۰۱</span>
+</div>
+
+<!-- بخش خلاصه (همیشه قابل مشاهده) -->
+<div id="summary">
+<p>
+دمانس که زوال مغزی یا عقلی نیز نامیده می‌شود، افت عملکردی شناختی پیشرونده می‌باشد که توانایی فرد را در زندگی اجتماعی و فعال دشوار می‌سازد. شایع‌ترین نوع دمانس، زوال عقل سالخوردگی یا آلزایمر است.
+هر فردی منحصربه‌فرد است و زوال عقل بر افراد مختلف، به‌صورت متفاوتی تأثیر می‌گذارد به عبارتی هیچ دو نفری علائم مشابهی ندارند. شخصیت فرد، سلامت عمومی و موقعیت اجتماعی همه عوامل مهمی در تعیین تأثیر زوال عقل بر افراد هستند.
+</p>
+</div>
+
+<!-- دکمه مطالعه بیشتر -->
+<button class="read-more-btn" id="readMoreBtn">مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i></button>
+
+<!-- محتوای اضافی (مخفی در ابتدا) -->
+<div class="extra-content" id="extraContent">
+
+<p>
+شایع‌ترین علائم اولیه زوال عقل از دست دادن حافظه و کاهش توانایی‌های عملی است که می‌تواند منجر به کناره‌گیری از کار یا فعالیت‌های اجتماعی شود. اگر فکر می‌کنید این مشکلات بر زندگی روزمره سالمند تأثیر می‌گذارد، باید با پزشک صحبت کنید یا او را تشویق کنید تا با پزشک خود صحبت کند.
+</p>
+
+<h3 class="section-title">بیماری آلزایمر چیست؟</h3>
+<p>
+بیماری آلزایمر شایع‌ترین نوع دِمانس (اختلال شناخت و حافظه) با شروع تدریجی و پیشرفت مداوم است که به مرور حافظه و توانایی‌های ذهنی دیگر مانند تفکر، استدلال و قضاوت فرد را تحت تأثیر قرار می‌دهد و فرد را در انجام وظایف روزانه زندگی با مشکل مواجه می‌کند.
+</p>
+
+<h3 class="section-title">اثرات بیماری آلزایمر</h3>
+<p>
+معمولاً روند آسیب مغز در این بیماری از حافظه کوتاه‌مدت شروع می‌شود و سپس با درگیر شدن قسمت‌های مختلف مغز، طیف وسیعی از علائم متفاوت ایجاد می‌شود از جمله:
+</p>
+<ul>
+<li><strong>اختلالات شناختی:</strong> ضعف در حافظه و فراموش کردن مطالب، اختلال در زبان (بیان و یا درک کلمات)، اختلال در تفکر (بروز هذیان، آسیب در تفکر انتزاعی و…)، اختلال در جهت‌یابی و آگاهی به زمان و مکان، اختلال در تصمیم‌گیری و حل مسئله، کاهش توجه و تمرکز.</li>
+<li><strong>اختلالات خلقی / روانی:</strong> شکاکی، سوءظن، بدبینی و بی‌اعتمادی، بی‌خوابی و آشفتگی خواب.</li>
+<li><strong>اختلالات رفتاری:</strong> غروب‌زدگی (افزایش بی‌قراری در هنگام غروب)، کاهش تعادل فیزیکی و مهارت‌های حرکتی و هماهنگی میان آنها در راه رفتن، غذا خوردن، لباس پوشیدن، استحمام، بروز رفتارهای ناپسند.</li>
+</ul>
+
+<h3 class="section-title">مراحل بیماری</h3>
+<p><strong>مرحله اولیه:</strong> علائم بیماری به تدریج ظاهر می‌شوند. بنابراین نمی‌توان زمان دقیق شروع این مرحله از بیماری را مشخص نمود:</p>
+<ul>
+<li>اختلال در حافظه کوتاه‌مدت (آنچه که اخیراً آموخته یا اتفاق افتاده است، حوادث اخیر)</li>
+<li>اختلال در تکلم</li>
+<li>گم کردن زمان و وقت</li>
+<li>گم شدن حتی در مکان‌ها و محله‌های آشنا</li>
+<li>اشکال در انتخاب و تصمیم‌گیری‌های ساده</li>
+<li>بروز افسردگی و حتی عصبانیت (پرخاشگری)</li>
+<li>کاهش علاقه نسبت به انجام فعالیت‌ها و تفریحات معمول</li>
+</ul>
+
+<p><strong>مرحله متوسط و شدید:</strong> به‌تدریج که بیمار به زوال عقل در حد متوسط نزدیک می‌شود، ناتوانی در فعالیت‌های روزمره نیز بروز می‌کند. فعالیت‌های اساسی در زندگی روزمره عبارتند از: حمام کردن و نظافت، لباس پوشیدن، جابه‌جا شدن (توان حرکت کردن و راه رفتن در منزل)، غذا خوردن و کنترل ادرار و مدفوع.</p>
+<p>بیمار در این مرحله قادر نیست که اطلاعات جدید را ثبت و حفظ نماید. جهت‌یابی خود را نسبت به زمان و مکان از دست می‌دهد، حتی در محیط خانواده، فامیل و آشنا، گاه حالت گم‌شده دارد. ممکن است در محیط خانواده نتواند اتاق‌خواب و یا حمام را پیدا کند. در این شرایط، بیمار در معرض خطر بالایی برای زمین خوردن و حوادث ناشی از سقوط است؛ زیرا احساس گیجی می‌کند و قدرت قضاوت او از شرایط فعالی ضعیف شده است.</p>
+<p>به‌تدریج که بیماری پیشرفت می‌کند، اختلالات رفتاری، هذیان‌های ویژه و سوءظن و بدگمانی عمومی پیشرفت می‌کند. درنهایت فرد ممکن است حتی خود را در آینه نشناسد و توهم وجود فرد دیگری را در خانه پیدا کند.</p>
+<p>حالت تهاجم فیزیکی، رفتار نامناسب و بی‌قراری در این مراحل ممکن است به چشم بخورد. درنهایت فرد به‌طور کامل وابسته می‌شود و قادر به انجام هیچ‌یک از فعالیت‌های روزمره زندگی نخواهد بود.</p>
+
+<p><strong>مرحله نهایی:</strong> در مراحل نهایی بیماری، فرد قادر به حرکت نیست. در بلع غذا مشکل دارد و در معرض فقر تغذیه و آسپیراسیون قرار می‌گیرد. آسپیراسیون موقعیتی است که در آن غذا و یا جسم وارد نای و ریه‌های فرد می‌شود و باعث سرفه، احساس گیرکردن چیزی در گلو، بلع دردناک و تنفس سخت می‌شود. عدم تحرک طولانی منجر به پیدایش زخم بستر می‌شود و بروز تشنج نیز در این مراحل دیده می‌شود. به‌طور خلاصه در مراحل نهایی، کم‌آبی بدن، فقر تغذیه، آسپیراسیون، زخم بستر اجتناب‌ناپذیر است و نیاز به پرستاری و مراقبت از بیماری افزایش می‌یابد.</p>
+
+<h3 class="section-title">درمان</h3>
+<p>
+داروهای آلزایمر ذهن بیمار را کمی تیزتر می‌کنند و حافظه و توانایی انجام کارهای روزمره را بهتر می‌کنند، اما اثرشان موقتی است و بین ۶ ماه تا ۲ سال بیشتر دوام نمی‌آورد. اگر دارو را قطع کنید، حتماً علائم بیمار بدتر می‌شود، پس باید تا آخر عمر مصرف شوند. تهوع، استفراغ، اسهال و کاهش وزن از عوارض شایع هستند. همچنین، داروی ممانتین برای مراحل شدیدتر است و روند تخریب مغز را کمی کند می‌کند.
+برای افسردگی، اضطراب و پرخاشگری داروهای جداگانه وجود دارد، اما مراقب قرص خواب‌آور باشید چون خطر زمین خوردن را بالا می‌برد.
+هیچ وقت دارو را خودسرانه قطع نکنید. اگر بدن بیمار داغ شد اما عرق نمی‌کند، سریع به پزشک مراجعه کنید.
+موسیقی، ماساژ و ورزش روزانه می‌تواند کمک کند، ولی هرگز جای دارو را نمی‌گیرد.
+</p>
+
+<h3 class="section-title">اختلال در شناخت، درک صحیح تصاویر، تشخیص اندازه و فاصله</h3>
+<p>
+فرد مبتلا به بیماری آلزایمر ممکن است یکی یا همه موارد ذیل را تجربه کند:
+</p>
+<ul>
+<li>ضعف در خواندن (تشخیص و تلفظ صحیح حروف، جا انداختن کلمات یا عبارات)</li>
+<li>اختلال در درک و تشخیص فاصله‌ها (دوری، نزدیکی)</li>
+<li>عدم درک صحیح و شناخت واقعی از تصاویر (سایه‌ها، تصاویر تلویزیونی، خطاهای بینایی و …)</li>
+<li>عدم تمییز رنگ‌ها</li>
+</ul>
+<p>همه این موارد به نوبه خود می‌توانند باعث بروز مشکلاتی در زندگی روزمره فرد مبتلا به بیماری آلزایمر گردند (رانندگی، غذا خوردن، راه رفتن و…)</p>
+
+<h3 class="section-title">زمان (فقدان درک) در فرد مبتلا به بیماری آلزایمر</h3>
+<p>
+به تدریج توانایی درک زمان در اثر ابتلا به دمانس و بیماری آلزایمر از بین می‌رود. فرد مبتلا ممکن است مکرراً از شما بپرسد که الان چه زمانی است. عدم درک گذر زمان می‌تواند باعث نگرانی فرد مبتلا شود.
+استفاده از یک ساعت بزرگ (بدون شیشه، با عقربه‌ها و اعداد بزرگ و واضح) و یک تقویم دیواری بزرگ (با حروف و اعداد درشت و تصاویر فصلی) می‌تواند به آرامش بیمار کمک کند.
+</p>
+<p>
+نوسان در سطح توانایی افراد مبتلا به دمانس و بیماری آلزایمر شایع است. بعضی از نوسانات هیچگونه توضیحی ندارند. دلیل هر چه باشد، چنین نوساناتی طبیعی بوده و نشانه تغییری جدید در سیر بیماری نمی‌باشد.
+</p>
+
+</div> <!-- پایان extra-content -->
+
+<div class="action">
+<button class="btn">اشتراک‌گذاری</button>
+<button class="btn secondary">ذخیره مقاله</button>
+</div>
+
+</div>
+
+<!-- دکمه بازگشت به خانه -->
+<button class="btn" style="margin-top:20px;width:100%;background:#8472a7;color:#fff;border:0;padding:14px;border-radius:18px;font-size:16px;font-weight:700;cursor:pointer;" onclick="location.href='home.html'">
+    بازگشت به صفحه اصلی
+</button>
+
+<div class="bottom-nav">
+<a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
+<a href="education.html" class="nav-item active"><i class="fa-solid fa-book-open"></i>آموزش</a>
+<a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+<a href="reminder.html" class="nav-item"><i class="fa-solid fa-bell"></i>یادآورها</a>
+<a href="care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
+</div>
+
+</div>
+
+<script>
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    const extraContent = document.getElementById('extraContent');
+    let expanded = false;
+
+    readMoreBtn.addEventListener('click', function() {
+        expanded = !expanded;
+        if (expanded) {
+            extraContent.classList.add('show');
+            readMoreBtn.innerHTML = 'مطالعه کمتر <i class="fa-solid fa-chevron-up"></i>';
+        } else {
+            extraContent.classList.remove('show');
+            readMoreBtn.innerHTML = 'مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i>';
+        }
+    });
+</script>
+
+</body>
+</html>

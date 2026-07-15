@@ -1,1 +1,87 @@
-<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>پروفایل</title><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Vazirmatn,sans-serif}body{background:#eee7f3;display:flex;justify-content:center}.mobile{max-width:480px;width:100%;min-height:100vh;background:#fdf6f4;padding:20px}.header{display:flex;align-items:center;justify-content:space-between}.back{width:42px;height:42px;background:#eee5f7;color:#8472a7;border-radius:14px;text-decoration:none;display:flex;align-items:center;justify-content:center}h2{color:#665580}.card,.note{background:#fff;border-radius:22px;box-shadow:0 8px 25px rgba(132,114,167,.12);padding:18px;margin-top:18px}.top{text-align:center}.avatar{width:110px;height:110px;border-radius:50%;margin:auto;background:#ddd;overflow:hidden;border:5px solid #eee5f7}.avatar img{width:100%;height:100%;object-fit:cover}.name{font-size:24px;color:#665580;margin-top:12px}.age{color:#888;margin:6px 0}.badge{display:inline-block;background:#eee5f7;color:#8472a7;padding:7px 16px;border-radius:999px;font-size:13px}.row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f0ecf6}.row:last-child{border:none}.label{color:#888}.value{color:#555;font-weight:700}.note h3{color:#8472a7;margin-bottom:10px}.bottom-nav{margin-top:25px;padding-top:15px;border-top:1px solid #eadfdc;display:flex;justify-content:space-around}.nav-item{text-decoration:none;color:#999;font-size:11px;text-align:center}.nav-item i{display:block;font-size:20px;margin-bottom:5px}.active{color:#8472a7}</style></head><body><div class="mobile"><div class="header"><a href="home.html" class="back"><i class="fa-solid fa-arrow-right"></i></a><h2>پروفایل بیمار</h2><i class="fa-regular fa-bookmark" style="color:#8472a7"></i></div><div class="card top"><div class="avatar"><img src="profile.png"></div><div class="name">نرگس</div><div class="age">۷۲ سال</div><div class="badge">مرحله بیماری: متوسط</div></div><div class="card"><div class="row"><span class="label">جنسیت</span><span class="value">زن</span></div><div class="row"><span class="label">توانایی حرکتی</span><span class="value">با کمک</span></div><div class="row"><span class="label">بیماری‌های همراه</span><span class="value">فشار خون</span></div><div class="row"><span class="label">علایق</span><span class="value">موسیقی و باغبانی</span></div></div><div class="note"><h3>یادداشت مهم</h3><p style="line-height:2;color:#555">نرگس با موسیقی آرامش می‌گیرد و هنگام پیاده‌روی کوتاه همکاری بهتری دارد. بهتر است داروها در ساعت مشخص مصرف شوند.</p></div><div class="bottom-nav"><a class="nav-item" href="index.html"><i class="fa-solid fa-house"></i>خانه</a><a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a><a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>چت‌ها</a><a class="nav-item" href="reminder.html"><i class="fa-solid fa-bell"></i>یادآورها</a><a class="nav-item active" href="#"><i class="fa-solid fa-user"></i>پروفایل</a></div></div></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>پروفایل بیمار</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Vazirmatn,sans-serif}
+body{background:#eee7f3;display:flex;justify-content:center}
+.mobile{max-width:480px;width:100%;min-height:100vh;background:#fdf6f4;padding:20px;padding-bottom:30px}
+.header{display:flex;align-items:center;justify-content:space-between}
+.back{width:42px;height:42px;background:#eee5f7;color:#8472a7;border-radius:14px;text-decoration:none;display:flex;align-items:center;justify-content:center}
+h2{color:#665580}.card,.note{background:#fff;border-radius:22px;box-shadow:0 8px 25px rgba(132,114,167,.12);padding:18px;margin-top:18px}
+.top{text-align:center}.avatar{width:110px;height:110px;border-radius:50%;margin:auto;background:#ddd;overflow:hidden;border:5px solid #eee5f7}.avatar img{width:100%;height:100%;object-fit:cover}
+.name{font-size:24px;color:#665580;margin-top:12px}.age{color:#888;margin:6px 0}.badge{display:inline-block;background:#eee5f7;color:#8472a7;padding:7px 16px;border-radius:999px}
+.row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f0ecf6}.row:last-child{border:none}
+.label{color:#888}.value{font-weight:700;color:#555}
+.btn-group{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.btn-group button{width:100%;height:52px;border:none;border-radius:16px;font-size:16px;cursor:pointer;transition:opacity .2s}
+.btn-group button:hover{opacity:.85}
+.edit{background:#8472a7;color:#fff}
+.cancel{background:#e8e0ed;color:#6b5b7a;border:2px solid #d5c8e0 !important}
+</style></head>
+<body><div class="mobile">
+<div class="header"><a href="home.html" class="back"><i class="fa-solid fa-arrow-right"></i></a><h2>پروفایل بیمار</h2><i class="fa-regular fa-bookmark" style="color:#8472a7"></i></div>
+<div class="card top"><div class="avatar"><img src="profile.png"></div><div class="name" id="patientName">-</div><div class="age" id="patientAge">-</div><div class="badge" id="patientStage"></div></div>
+<div class="card">
+<div class="row"><span class="label">جنسیت</span><span class="value" id="gender"></span></div>
+<div class="row"><span class="label">نام مراقب</span><span class="value" id="caregiver"></span></div>
+<div class="row"><span class="label">شماره تماس</span><span class="value" id="phone"></span></div>
+<div class="row"><span class="label">بیماری‌های همراه</span><span class="value" id="diseases"></span></div>
+</div>
+<div class="note"><h3>یادداشت</h3><p id="notes" style="line-height:2;color:#555"></p></div>
+<div class="btn-group">
+    <button class="edit" onclick="location.href='patient-profile.html'">ویرایش اطلاعات</button>
+    <button class="cancel" onclick="cancelProfile()">انصراف و بازگشت به صفحه اصلی</button>
+</div>
+</div>
+<script>
+
+// نام کاربری فردی که وارد شده
+let username = localStorage.getItem("currentUser");
+
+// همه پروفایل‌ها
+let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+
+// پروفایل همین کاربر
+let profile = profiles[username];
+
+if(!profile){
+    alert("ابتدا اطلاعات بیمار را تکمیل کنید.");
+    location.href = "patient-profile.html";
+}else{
+
+    document.getElementById("patientName").textContent =
+        profile.patientName || "-";
+
+    document.getElementById("patientAge").textContent =
+        (profile.patientAge || "-") + " سال";
+
+    document.getElementById("patientStage").textContent =
+        "مرحله بیماری: " + (profile.stage || "-");
+
+    document.getElementById("gender").textContent =
+        profile.gender || "-";
+
+    document.getElementById("caregiver").textContent =
+        profile.caregiverName || "-";
+
+    document.getElementById("phone").textContent =
+        profile.caregiverPhone || "-";
+
+    document.getElementById("diseases").textContent =
+        profile.otherDiseases || "ثبت نشده";
+
+    document.getElementById("notes").textContent =
+        profile.notes || "یادداشتی ثبت نشده است.";
+
+}
+
+function cancelProfile() {
+    // بازگشت به صفحه اصلی
+    location.href = "home.html";
+}
+
+</script></body></html>

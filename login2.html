@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ثبت نام | ممورا</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Vazirmatn',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#eceaf7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.mobile{
+    width:100%;
+    max-width:480px;
+    min-height:100vh;
+    background:#fff;
+    position:relative;
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+}
+
+.bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,.2);
+}
+
+.content{
+    position:relative;
+    z-index:2;
+    min-height:100vh;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+}
+
+/* لوگو مثل صفحه اول */
+
+.logo{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.logo img{
+    width:250px;
+}
+
+/* عنوان */
+
+.title{
+    margin-top:8px;
+    text-align:center;
+    font-size:28px;
+    font-weight:800;
+    color:#555;
+}
+
+.subtitle{
+    margin-top:5px;
+    margin-bottom:28px;
+    text-align:center;
+    font-size:16px;
+    line-height:1.7;
+    color:#666;
+}
+
+/* فرم */
+
+.form{
+    margin-top:5px;
+}
+
+.input-group{
+    margin-bottom:16px;
+}
+
+.input-group input{
+    width:100%;
+    height:56px;
+    border:none;
+    border-radius:18px;
+    padding:0 18px;
+    font-size:15px;
+    outline:none;
+    background:#fff;
+    box-shadow:0 5px 14px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.input-group input:focus{
+    box-shadow:0 0 0 3px rgba(115,89,217,.20);
+}
+
+/* دکمه */
+
+.btn{
+    width:100%;
+    height:58px;
+    border:none;
+    border-radius:18px;
+    background:linear-gradient(90deg,#7359d9,#4bb7b0);
+    color:#fff;
+    font-size:19px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(115,89,217,.30);
+    transition:.2s;
+}
+
+.btn:active{
+    transform:scale(.98);
+}
+
+.login-link{
+    margin-top:22px;
+    text-align:center;
+    font-size:14px;
+    color:#555;
+}
+
+.login-link a{
+    color:#7359d9;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.login-link a:hover{
+    text-decoration:underline;
+}
+
+.footer{
+    margin-top:auto;
+    padding:25px 0 15px;
+    text-align:center;
+    font-size:12px;
+    color:#999;
+}
+
+@media(max-width:360px){
+
+.logo img{
+    width:220px;
+}
+
+.title{
+    font-size:24px;
+}
+
+.subtitle{
+    font-size:14px;
+}
+
+.input-group input{
+    height:52px;
+}
+
+.btn{
+    height:54px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="mobile">
+
+<img class="bg" src="bg.png">
+
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="logo">
+    <img src="logo.png">
+</div>
+
+<div class="title">
+ثبت نام
+</div>
+
+<div class="subtitle">
+برای استفاده از امکانات ممورا<br>
+حساب کاربری خود را ایجاد کنید.
+</div>
+
+<div class="form">
+
+<div class="input-group">
+<input type="text" id="username" placeholder="نام کاربری">
+</div>
+
+<div class="input-group">
+<input type="password" id="password" placeholder="رمز عبور">
+</div>
+
+<div class="input-group">
+<input type="password" id="password2" placeholder="تکرار رمز عبور">
+</div>
+
+<button class="btn" onclick="register()">
+ایجاد حساب کاربری
+</button>
+
+<div class="login-link">
+قبلاً ثبت‌نام کرده‌اید؟
+<a href="login.html">ورود به حساب</a>
+</div>
+
+</div>
+
+<div class="footer">
+© ممورا
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function register(){
+
+    let user = document.getElementById("username").value.trim();
+    let pass = document.getElementById("password").value;
+    let pass2 = document.getElementById("password2").value;
+
+    if(user=="" || pass=="" || pass2==""){
+        alert("لطفاً همه فیلدها را تکمیل کنید.");
+        return;
+    }
+
+    if(pass!==pass2){
+        alert("رمز عبور و تکرار آن یکسان نیست.");
+        return;
+    }
+
+    // گرفتن لیست کاربران
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // بررسی تکراری نبودن نام کاربری
+    let exists = users.find(u => u.username === user);
+
+    if(exists){
+        alert("این نام کاربری قبلاً ثبت شده است.");
+        return;
+    }
+
+    // اضافه کردن کاربر جدید
+    users.push({
+        username: user,
+        password: pass
+    });
+
+    // ذخیره لیست
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("ثبت‌نام با موفقیت انجام شد.");
+
+    location.href="login.html";
+}
+
+</script>
+
+</body>
+</html>
+

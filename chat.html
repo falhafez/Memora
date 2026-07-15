@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>چت‌بات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        body {
+            background: #eee7f3;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ===== تغییر اصلی: تبدیل mobile به فلکس ===== */
+        .mobile {
+            max-width: 480px;
+            width: 100%;
+            height: 100vh;
+            background: #fdf6f4;
+            padding: 20px;
+            padding-bottom: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* جلوگیری از اسکرول کل صفحه */;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .back {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: #eee5f7;
+            color: #8472a7;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2 {
+            color: #665580;
+        }
+
+        .hero {
+            margin: 20px 0;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 12px 28px rgba(132, 114, 167, 0.18);
+            flex-shrink: 0;
+        }
+        .hero img {
+            width: 100%;
+            display: block;
+        }
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            text-align: center;
+            color: #fff;
+        }
+        .hero-text h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .hero-text p {
+            font-size: 14px;
+            line-height: 2;
+            opacity: 0.95;
+        }
+        .hero-text span {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(8px);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .sug {
+            display: flex;
+            gap: 8px;
+            overflow: auto;
+            margin: 14px 0;
+            flex-shrink: 0;
+        }
+        .chip {
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: #8472a7;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+            white-space: nowrap;
+        }
+
+        /* ===== کانتینر پیام‌ها با اسکرول ===== */
+        .chat-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            padding-bottom: 130px;
+            /* فاصله برای نوار ورودی + ناوبری */
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* اسکرول‌بار زیبا */
+        .chat-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+            background: #cbc0d6;
+            border-radius: 10px;
+        }
+
+        .msg {
+            max-width: 82%;
+            padding: 14px 16px;
+            border-radius: 18px;
+            margin: 6px 0;
+            line-height: 1.9;
+            word-break: break-word;
+        }
+        .botmsg {
+            background: #f2f0f6;
+            color: #555;
+            border-top-right-radius: 6px;
+            align-self: flex-start;
+        }
+        .usermsg {
+            background: #8472a7;
+            color: #fff;
+            border-top-left-radius: 6px;
+            align-self: flex-end;
+        }
+
+        /* ===== نوار ورودی ثابت ===== */
+        .inputbar {
+            position: fixed;
+            bottom: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            padding: 12px 20px;
+            background: #fdf6f4;
+            z-index: 10;
+        }
+        .box {
+            background: #fff;
+            border-radius: 18px;
+            padding: 8px;
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 6px 18px rgba(132, 114, 167, 0.12);
+        }
+        .box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            padding: 10px;
+            background: transparent;
+        }
+        .send {
+            width: 46px;
+            height: 46px;
+            border: none;
+            border-radius: 14px;
+            background: #8472a7;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* ===== ناوبری پایین ثابت ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: #fdf6f4;
+            border-top: 1px solid #eadfdc;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            z-index: 10;
+        }
+        .nav-item {
+            text-decoration: none;
+            color: #999;
+            font-size: 11px;
+            text-align: center;
+        }
+        .nav-item i {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .active {
+            color: #8472a7;
+        }
+
+        /* ===== ریسپانسیو برای صفحه‌های کوچک ===== */
+        @media (max-height: 700px) {
+            .hero {
+                margin: 10px 0;
+            }
+            .hero img {
+                max-height: 140px;
+                object-fit: cover;
+            }
+            .hero-text h3 {
+                font-size: 18px;
+            }
+            .hero-text p {
+                font-size: 12px;
+                line-height: 1.6;
+            }
+            .hero-text span {
+                font-size: 11px;
+                padding: 4px 14px;
+                margin-top: 6px;
+            }
+            .sug {
+                margin: 8px 0;
+            }
+            .chat-scroll {
+                padding-bottom: 120px;
+            }
+            .inputbar {
+                bottom: 60px;
+                padding: 8px 20px;
+            }
+            .bottom-nav {
+                padding: 6px 0;
+            }
+            .nav-item i {
+                font-size: 17px;
+            }
+            .nav-item {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .hero {
+                margin: 6px 0;
+            }
+            .hero img {
+                max-height: 100px;
+                object-fit: cover;
+            }
+            .hero-text h3 {
+                font-size: 15px;
+                margin-bottom: 4px;
+            }
+            .hero-text p {
+                font-size: 11px;
+                line-height: 1.4;
+            }
+            .hero-text span {
+                font-size: 10px;
+                padding: 3px 12px;
+                margin-top: 4px;
+            }
+            .sug {
+                margin: 4px 0;
+                gap: 5px;
+            }
+            .chip {
+                padding: 4px 10px;
+                font-size: 12px;
+            }
+            .chat-scroll {
+                padding-bottom: 110px;
+                padding-top: 4px;
+            }
+            .msg {
+                padding: 10px 14px;
+                font-size: 14px;
+                margin: 4px 0;
+            }
+            .inputbar {
+                bottom: 55px;
+                padding: 6px 20px;
+            }
+            .box input {
+                font-size: 14px;
+                padding: 6px 8px;
+            }
+            .send {
+                width: 38px;
+                height: 38px;
+            }
+            .bottom-nav {
+                padding: 4px 0;
+            }
+            .nav-item i {
+                font-size: 15px;
+                margin-bottom: 2px;
+            }
+            .nav-item {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile">
+
+        <!-- هدر -->
+        <div class="header">
+            <a href="home.html" class="back"><i class="fa-solid fa-arrow-right"></i></a>
+            <h2>چت در ممورا</h2>
+        </div>
+
+        <!-- بخش hero -->
+        <div class="hero">
+            <img src="chat.png" alt="Memora AI" />
+        </div>
+
+        <!-- چیپ‌های پیشنهادی -->
+        <div class="sug">
+            <div class="chip">علائم آلزایمر</div>
+            <div class="chip">داروها</div>
+            <div class="chip">تغذیه</div>
+            <div class="chip">مراقبت روزانه</div>
+        </div>
+
+        <!-- ===== کانتینر پیام‌ها با اسکرول ===== -->
+        <div class="chat-scroll">
+
+            <div class="msg botmsg">سلام  🌸<br />امروز چطور می‌توانم به شما کمک کنم؟</div>
+            <div class="msg usermsg">برای کاهش بی‌قراری چه کاری انجام دهم؟</div>
+            <div class="msg botmsg">حفظ آرامش محیط، برنامه منظم روزانه و فعالیت‌های ساده می‌تواند کمک‌کننده باشد. اگر علائم شدید یا ناگهانی هستند، با پزشک معالج نیز مشورت کنید.</div>
+
+            <!-- چند پیام اضافی برای تست اسکرول -->
+            <div class="msg usermsg">آیا تغییرات آب‌وهوا روی آلزایمر تأثیر دارد؟</div>
+            <div class="msg botmsg">بله، برخی افراد با تغییرات آب‌وهوا دچار بی‌قراری یا گیجی بیشتر می‌شوند. سعی کنید محیط را معتدل و آرام نگه دارید و در صورت نیاز با پزشک مشورت کنید.</div>
+            <div class="msg usermsg">بهترین زمان برای مصرف داروها چه موقعی است؟</div>
+            <div class="msg botmsg">بهترین زمان بستگی به نوع دارو دارد. معمولاً پزشک معالج برنامه دقیقی تجویز می‌کند. توصیه می‌کنم طبق نسخه پزشک عمل کنید و در ساعت مشخصی داروها را مصرف کنید.</div>
+            <div class="msg usermsg">چطور می‌توانم حافظه را تقویت کنم؟</div>
+            <div class="msg botmsg">فعالیت‌های ذهنی مانند جدول، خواندن کتاب، یادگیری زبان جدید و همچنین ورزش روزانه و تغذیه مناسب می‌تواند به تقویت حافظه کمک کند. همچنین خواب کافی بسیار مهم است.</div>
+
+        </div>
+        <!-- ===== پایان کانتینر پیام‌ها ===== -->
+
+        <!-- نوار ورودی پیام -->
+        <div class="inputbar">
+            <div class="box">
+                <button class="send"><i class="fa-solid fa-paper-plane"></i></button>
+                <input placeholder="پیام خود را بنویسید..." />
+            </div>
+        </div>
+
+        <!-- ناوبری پایین -->
+        <div class="bottom-nav">
+            <a class="nav-item" href="index.html"><i class="fa-solid fa-house"></i>خانه</a>
+            <a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a>
+            <a class="nav-item active" href="#"><i class="fa-solid fa-comments"></i>چت</a>
+            <a class="nav-item" href="reminder.html"><i class="fa-solid fa-bell"></i>یادآورها</a>
+            <a class="nav-item" href="care.html"><i class="fa-solid fa-heart"></i>مراقبت</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

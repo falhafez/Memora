@@ -9,41 +9,99 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Vazirmatn,sans-serif}
 body{background:#eee7f3;display:flex;justify-content:center}
-.mobile{width:100%;max-width:480px;min-height:100vh;background:#fdf6f4;padding:20px}
-.header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.back{width:42px;height:42px;background:#eee5f7;color:#8472a7;border-radius:14px;display:flex;align-items:center;justify-content:center;text-decoration:none}
+.mobile{width:100%;max-width:480px;min-height:100vh;background:#fdf6f4;padding:20px;padding-bottom:110px;position:relative}
+.header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.back{width:42px;height:42px;border-radius:14px;background:#eee5f7;color:#8472a7;display:flex;align-items:center;justify-content:center;text-decoration:none}
 h2{color:#665580}
-.card{background:#fff;border-radius:22px;padding:18px;margin-bottom:16px;box-shadow:0 8px 24px rgba(132,114,167,.12)}
-.label{color:#8472a7;font-weight:700;margin-bottom:14px}
+.card{background:#fff;border-radius:24px;padding:20px;margin-bottom:18px;box-shadow:0 10px 28px rgba(132,114,167,.18);border:1px solid #f2edf8}
+.label{font-weight:700;color:#8472a7;margin-bottom:14px}
 .moods{display:flex;justify-content:space-between}
 .mood{width:58px;height:58px;border-radius:18px;background:#f3f0f8;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:.2s}
 .mood.active{background:#eee5f7;outline:3px solid #8472a7}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.chip{padding:10px;border-radius:14px;background:#f3f0f8;text-align:center;color:#666;cursor:pointer}
-.chip.active{background:#eee5f7;color:#8472a7;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.chip{padding:12px;border-radius:15px;background:#f3f0f8;text-align:center;cursor:pointer}
+.chip.active{background:#8472a7;color:#fff}
 textarea{width:100%;height:120px;border:1px solid #eadfdc;border-radius:16px;padding:12px;resize:none}
-button{width:100%;padding:14px;border:0;border-radius:16px;background:#8472a7;color:#fff;font-size:16px}
-.bottom-nav{margin-top:22px;padding-top:15px;border-top:1px solid #eadfdc;display:flex;justify-content:space-around}
-.nav-item{text-decoration:none;color:#999;font-size:11px;text-align:center}.nav-item i{display:block;font-size:20px;margin-bottom:5px}.active-nav{color:#8472a7}
-</style></head><body><div class="mobile">
-<div class="header"><a class="back" href="home.html"><i class="fa-solid fa-arrow-right"></i></a><h2>ثبت مراقبت روزانه</h2></div>
-<div class="card"><div class="label">حال امروز نرگس</div><div class="moods">
-<div class="mood">😣</div><div class="mood">😕</div><div class="mood active">🙂</div><div class="mood">😊</div><div class="mood">😁</div>
-</div></div>
-<div class="card"><div class="label">علائم مشاهده شده</div><div class="grid">
-<div class="chip">فراموشی</div><div class="chip active">بی‌قراری</div><div class="chip">بی‌اشتهایی</div>
-<div class="chip">خواب‌آلودگی</div><div class="chip">پرخاشگری</div><div class="chip">سایر</div>
-</div></div>
-<div class="card"><div class="label">یادداشت</div><textarea placeholder="امروز چه اتفاقی افتاد؟"></textarea></div>
-<button>ذخیره مراقبت روزانه</button>
-<div class="bottom-nav">
-<a class="nav-item" href="index.html"><i class="fa-solid fa-house"></i>خانه</a>
-<a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a>
-<a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>چت‌ها</a>
-<a class="nav-item" href="#"><i class="fa-solid fa-bell"></i>یادآورها</a>
-<a class="nav-item active-nav" href="care.html"><i class="fa-solid fa-heart"></i>مراقبت</a>
-</div></div>
+.btn-group{display:flex;gap:10px;margin-top:8px}
+.btn-group button{flex:1;padding:14px;border:none;border-radius:16px;font-size:16px;cursor:pointer}
+.btn-cancel{background:#e9e1f4;color:#8472a7;box-shadow:none}
+.btn-save{background:linear-gradient(135deg,#9a87c3,#8472a7);color:#fff}
+/* ناوبری پایین */
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fdf6f4;border-top:1px solid #eadfdc;padding:10px 0;display:flex;justify-content:space-around;z-index:10}
+.nav-item{text-decoration:none;color:#999;font-size:11px;text-align:center}
+.nav-item i{display:block;font-size:20px;margin-bottom:5px}
+.active-nav{color:#8472a7}
+</style>
+</head>
+<body>
+<div class="mobile">
+    <!-- هدر -->
+    <div class="header">
+        <a class="back" href="home.html"><i class="fa-solid fa-arrow-right"></i></a>
+        <h2>ثبت مراقبت روزانه</h2>
+    </div>
+
+    <!-- حال امروز -->
+    <div class="card">
+        <div class="label">حال امروز نرگس</div>
+        <div class="moods">
+            <div class="mood">😣</div>
+            <div class="mood">😕</div>
+            <div class="mood active">🙂</div>
+            <div class="mood">😊</div>
+            <div class="mood">😁</div>
+        </div>
+    </div>
+
+    <!-- علائم -->
+    <div class="card">
+        <div class="label">علائم مشاهده شده</div>
+        <div class="grid">
+            <div class="chip">فراموشی</div>
+            <div class="chip active">بی‌قراری</div>
+            <div class="chip">بی‌اشتهایی</div>
+            <div class="chip">خواب‌آلودگی</div>
+            <div class="chip">پرخاشگری</div>
+            <div class="chip">سایر</div>
+        </div>
+    </div>
+
+    <!-- یادداشت -->
+    <div class="card">
+        <div class="label">یادداشت</div>
+        <textarea placeholder="امروز چه اتفاقی افتاد؟"></textarea>
+    </div>
+
+    <!-- دکمه‌ها (اصلاح شده) -->
+    <div class="btn-group">
+        <button class="btn-cancel">انصراف</button>
+        <button class="btn-save" onclick="window.location.href='daily-care-success.html';">ذخیره مراقبت روزانه</button>
+    </div>
+
+    <!-- ناوبری پایین (مجزا و کامل) -->
+    <div class="bottom-nav">
+        <a class="nav-item" href="home.html"><i class="fa-solid fa-house"></i>خانه</a>
+        <a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a>
+        <a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+        <a class="nav-item" href="reminder.html"><i class="fa-solid fa-bell"></i>یادآورها</a>
+        <a class="nav-item active-nav" href="daily-care.html"><i class="fa-solid fa-heart"></i>مراقبت</a>
+    </div>
+</div>
+
 <script>
-document.querySelectorAll('.mood').forEach(m=>m.onclick=()=>{document.querySelectorAll('.mood').forEach(x=>x.classList.remove('active'));m.classList.add('active');});
-document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>c.classList.toggle('active'));
-</script></body></html>
+    // انتخاب حالت (mood)
+    document.querySelectorAll('.mood').forEach(m => {
+        m.onclick = function() {
+            document.querySelectorAll('.mood').forEach(x => x.classList.remove('active'));
+            this.classList.add('active');
+        }
+    });
+    // انتخاب علائم (chip)
+    document.querySelectorAll('.chip').forEach(c => {
+        c.onclick = function() {
+            this.classList.toggle('active');
+        }
+    });
+</script>
+</body>
+</html>

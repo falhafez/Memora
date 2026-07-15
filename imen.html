@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مشکلات روزمره مراقبت و ایمنی بیمار آلزایمر</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+body{background:#eee7f3;display:flex;justify-content:center}
+.mobile{width:100%;max-width:480px;min-height:100vh;background:#fdf6f4;padding:20px;padding-bottom:30px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.back{width:42px;height:42px;border-radius:14px;background:#eee5f7;color:#8472a7;
+display:flex;align-items:center;justify-content:center;text-decoration:none}
+.title{font-size:22px;font-weight:700;color:#665580}
+
+.hero{
+overflow:hidden;border-radius:24px;background:#fff;
+box-shadow:0 8px 25px rgba(132,114,167,.15);
+}
+.hero img{width:100%;height:220px;object-fit:cover;display:block}
+
+.content{
+background:#fff;margin-top:15px;padding:20px;border-radius:24px;
+box-shadow:0 8px 25px rgba(132,114,167,.12);
+}
+
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:999px;
+background:#eee5f7;
+color:#8472a7;
+font-size:12px;
+margin-bottom:12px;
+}
+
+h1{
+font-size:24px;
+line-height:1.8;
+color:#665580;
+margin-bottom:10px;
+}
+
+.meta{
+display:flex;
+gap:15px;
+color:#999;
+font-size:12px;
+margin-bottom:18px;
+}
+
+p{
+color:#555;
+line-height:2.1;
+margin-bottom:14px;
+}
+
+.section-title{
+color:#8472a7;
+font-size:18px;
+margin:20px 0 12px;
+}
+
+ul{
+padding-right:18px;
+}
+
+li{
+margin-bottom:10px;
+line-height:2;
+color:#555;
+}
+
+.action{
+margin-top:20px;
+display:flex;
+gap:10px;
+}
+
+.btn{
+flex:1;
+border:0;
+padding:12px;
+border-radius:16px;
+background:#8472a7;
+color:#fff;
+font-size:14px;
+cursor:pointer;
+transition:opacity .2s;
+}
+.btn:hover{opacity:.85}
+
+.btn.secondary{
+background:#9fc9cf;
+}
+
+.bottom-nav{
+margin-top:25px;
+padding-top:15px;
+border-top:1px solid #eadfdc;
+display:flex;
+justify-content:space-around;
+}
+
+.nav-item{
+text-align:center;
+font-size:11px;
+color:#999;
+text-decoration:none;
+}
+
+.nav-item i{
+display:block;
+font-size:20px;
+margin-bottom:5px;
+}
+
+.active{color:#8472a7;}
+
+/* دکمه مطالعه بیشتر */
+.read-more-btn {
+    display:inline-block;
+    background:#eee5f7;
+    color:#8472a7;
+    padding:8px 18px;
+    border-radius:999px;
+    border:none;
+    font-size:14px;
+    cursor:pointer;
+    font-weight:700;
+    transition:background .2s;
+    margin-top:5px;
+}
+.read-more-btn:hover {
+    background:#d9cce8;
+}
+
+/* محتوای اضافی که در ابتدا مخفی است */
+.extra-content {
+    display:none;
+    margin-top:10px;
+}
+.extra-content.show {
+    display:block;
+}
+</style>
+</head>
+
+<body>
+<div class="mobile">
+
+<div class="header">
+<a href="education.html" class="back">
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+<div class="title">محتوای آموزشی</div>
+
+<i class="fa-regular fa-bookmark" style="color:#8472a7"></i>
+</div>
+
+<div class="hero">
+<img src="imen.png" alt="cover">
+</div>
+
+<div class="content">
+
+<span class="badge">راهنمای مراقبت روزانه</span>
+
+<h1>مشکلات روزمره مراقبت و ایمنی بیمار آلزایمر</h1>
+
+<div class="meta">
+<span><i class="fa-regular fa-clock"></i> ۱۴ دقیقه مطالعه</span>
+<span><i class="fa-regular fa-calendar"></i> ۱۴۰۴/۰۵/۰۶</span>
+</div>
+
+<!-- بخش خلاصه (همیشه قابل مشاهده) -->
+<div id="summary">
+<p>
+بیمار آلزایمر به تدریج توانایی مراقبت از خود را از دست می‌دهد، اما دعوا و اجبار نه تنها کمکی نمی‌کند بلکه او را آشفته‌تر می‌کند. مشکل حمام کردن و تعویض لباس خیلی شایع است، چون این کارها شخصی و خصوصی هستند و او احساس می‌کند استقلالش را از دست داده یا تحقیر می‌شود. همیشه آرام و خونسرد باشید، از بحث بپرهیزید، کارها را قدم به قدم و خیلی ساده به او یادآوری کنید.
+</p>
+<p>
+برای تغذیه، در محیط آرام و بدون تلویزیون به او غذا دهید، هر بار فقط یک نوع غذا جلویش بگذارید، غذاهای نرم و خردشده تهیه کنید، اگر قاشق و چنگال را فراموش کرده، خوردن با دست اشکالی ندارد. برای بی‌خوابی، او را در طول روز فعال و بیدار نگه دارید، پیاده‌روی عصرگاهی خیلی کمک می‌کند، از چرت طولانی روزانه جلوگیری کنید.
+</p>
+</div>
+
+<!-- دکمه مطالعه بیشتر -->
+<button class="read-more-btn" id="readMoreBtn">مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i></button>
+
+<!-- محتوای اضافی (مخفی در ابتدا) -->
+<div class="extra-content" id="extraContent">
+
+<h3 class="section-title">حمام کردن و تعویض لباس</h3>
+<p>
+عادت‌های قدیمی بیمار را حفظ کنید، مثلاً اگر همیشه صبح حمام می‌کرده، همان موقع را انتخاب کنید. اگر مقاومت می‌کند، او را با ابر تمیز کنید. هرگز بیمار را تنها در حمام رها نکنید، کف وان زیرانداز ضدلغزش بگذارید و دمای آب را خودتان کنترل کنید. برای لباس پوشیدن، لباس‌های راحت و بدون دکمه و زیپ تهیه کنید، لباس‌های همرنگ را روی یک چوب‌آویز بگذارید و گزینه‌های اضافی را از دسترس دور کنید. اگر لباس را پس و رو پوشید، سخت نگیرید.
+</p>
+
+<h3 class="section-title">بی‌اختیاری ادرار و مدفوع</h3>
+<p>
+هرگز بیمار را سرزنش نکنید. اول با پزشک مشورت کنید چون ممکن است عفونت یا یبوست یا عارضه دارویی باشد. یک برنامه منظم هر دو تا سه ساعت یکبار او را به دستشویی ببرید، حتی اگر نخواسته باشد. شب‌ها مصرف مایعات را کم کنید، چراغ خواب روشن بگذارید و صندلی لگن‌دار کنار تخت بگذارید. از پوشینه‌های بزرگسال استفاده کنید اما سعی کنید برنامه توالت رفتن را جایگزین آن کنید.
+</p>
+
+<h3 class="section-title">تغذیه</h3>
+<p>
+اگر پرخوری می‌کند، ممکن است تشنگی را با گرسنگی اشتباه بگیرد یا فراموش کرده همین الان غذا خورده است. به جای دعوا، غذا را چند قسمت کنید و سبزیجات و میوه بیشتر بدهید.
+</p>
+
+<h3 class="section-title">بی‌خوابی</h3>
+<p>
+قبل از خواب حتماً به دستشویی برود، دوش آب گرم و شیر گرم بنوشد. داروی خواب‌آور را خودسرانه ندهید، چون خطر زمین خوردن و گیجی را خیلی بالا می‌برد. در همه این موقعیت‌ها صبوری کنید، داد نزنید، تحقیر نکنید و به یاد داشته باشید که این رفتارها از روی عمد نیست، بیماری مغز او را تغییر داده است.
+</p>
+
+<h3 class="section-title">ایمنی فرد مبتلا به آلزایمر</h3>
+<p>
+بیمار آلزایمر ممکن است تعادل نداشته باشد یا گیج شود، پس محیط خانه را باید ایمن کنید. اول خطرها را از بین ببرید: قفل محکم روی درهای خروجی بزنید اما قفل در حمام را بردارید تا نتواند خودش را حبس کند. کابینت مواد شوینده و داروها را قفل کنید. چاقو، فندک، کبریت و وسایل تیز را دور از دسترس بگذارید.
+</p>
+<p>
+از روی زمین هیچ وسیله‌ای که باعث زمین خوردن شود جمع کنید. کفپوش ضدلغزش بگذارید و قالی‌های لغزنده را بردارید. برای جلوگیری از آتش‌سوزی، دودکش و حسگر دود نصب کنید و کپسول آتش‌نشانی داشته باشید. پله‌ها نرده مطمئن داشته باشند و لبه پله‌ها را با رنگ براق مشخص کنید. دمای آب گرم را تنظیم کنید تا نسوزد. هنگام بیرون رفتن، برگه مشخصات بیمار (نام، نشانی، بیماری) را در جیبش بگذارید.
+</p>
+
+<h3 class="section-title">چیدمان منزل برای ایمنی بیشتر</h3>
+<ul>
+<li>از رنگ‌های متضاد استفاده کنید تا وسایل مهم را بهتر ببیند، مثلاً در دستشویی را با رنگ متفاوت از دیوار کنید یا بشقاب را با رومیزی متضاد انتخاب کنید.</li>
+<li>کف‌ها را یک رنگ مات انتخاب کنید نه براق، و از کف‌های طرح‌دار و شلوغ استفاده نکنید چون او خیال می‌کند چاله یا پله است و زمین می‌خورد.</li>
+<li>رنگ سبز و آبی آرامش‌بخش هستند، قرمز انرژی می‌دهد اما فضا را کوچک‌تر نشان می‌دهد.</li>
+</ul>
+
+<h3 class="section-title">رانندگی</h3>
+<p>
+به محض دیدن علائمی مثل گم شدن در مسیر آشنا، تصادف، سبقت یا سرعت غیرعادی، حتماً رانندگی را قطع کنید. با مهربانی اما قاطع بگویید دیگر رانندگی نمی‌کند. از پزشک کمک بگیرید که بنویسد «دیگر رانندگی نکند». اگر قبول نکرد، کلید ماشین را پنهان کنید یا ماشین را از دسترس دور کنید. به یاد داشته باشید حفظ جان بیمار از استقلالش مهم‌تر است.
+</p>
+
+<p style="margin-top:10px; background:#f7f4fb; padding:12px 16px; border-radius:16px; color:#665580; font-weight:500;">
+💡 نکته کلیدی: در تمام مراحل مراقبت، صبوری، احترام و همدلی را فراموش نکنید. بیمار به خاطر بیماری‌اش رفتارهای دشوار نشان می‌دهد، نه از روی عمد. با آرامش و برنامه‌ریزی می‌توانید زندگی روزمره را برای هر دویتان آسان‌تر کنید.
+</p>
+
+</div> <!-- پایان extra-content -->
+
+<div class="action">
+<button class="btn">اشتراک‌گذاری</button>
+<button class="btn secondary">ذخیره مقاله</button>
+</div>
+
+</div>
+
+<!-- دکمه بازگشت به خانه -->
+<button class="btn" style="margin-top:20px;width:100%;background:#8472a7;color:#fff;border:0;padding:14px;border-radius:18px;font-size:16px;font-weight:700;cursor:pointer;" onclick="location.href='home.html'">
+    بازگشت به صفحه اصلی
+</button>
+
+<div class="bottom-nav">
+<a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
+<a href="education.html" class="nav-item active"><i class="fa-solid fa-book-open"></i>آموزش</a>
+<a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+<a href="reminder.html" class="nav-item"><i class="fa-solid fa-bell"></i>یادآورها</a>
+<a href="care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
+</div>
+
+</div>
+
+<script>
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    const extraContent = document.getElementById('extraContent');
+    let expanded = false;
+
+    readMoreBtn.addEventListener('click', function() {
+        expanded = !expanded;
+        if (expanded) {
+            extraContent.classList.add('show');
+            readMoreBtn.innerHTML = 'مطالعه کمتر <i class="fa-solid fa-chevron-up"></i>';
+        } else {
+            extraContent.classList.remove('show');
+            readMoreBtn.innerHTML = 'مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i>';
+        }
+    });
+</script>
+
+</body>
+</html>

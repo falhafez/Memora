@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پرسش‌هایی برای ملاقات با پزشک</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+body{background:#eee7f3;display:flex;justify-content:center}
+.mobile{width:100%;max-width:480px;min-height:100vh;background:#fdf6f4;padding:20px;padding-bottom:30px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.back{width:42px;height:42px;border-radius:14px;background:#eee5f7;color:#8472a7;
+display:flex;align-items:center;justify-content:center;text-decoration:none}
+.title{font-size:22px;font-weight:700;color:#665580}
+
+.hero{
+overflow:hidden;border-radius:24px;background:#fff;
+box-shadow:0 8px 25px rgba(132,114,167,.15);
+}
+.hero img{width:100%;height:220px;object-fit:cover;display:block}
+
+.content{
+background:#fff;margin-top:15px;padding:20px;border-radius:24px;
+box-shadow:0 8px 25px rgba(132,114,167,.12);
+}
+
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:999px;
+background:#eee5f7;
+color:#8472a7;
+font-size:12px;
+margin-bottom:12px;
+}
+
+h1{
+font-size:24px;
+line-height:1.8;
+color:#665580;
+margin-bottom:10px;
+}
+
+.meta{
+display:flex;
+gap:15px;
+color:#999;
+font-size:12px;
+margin-bottom:18px;
+}
+
+p{
+color:#555;
+line-height:2.1;
+margin-bottom:14px;
+}
+
+.section-title{
+color:#8472a7;
+font-size:18px;
+margin:20px 0 12px;
+}
+
+ul{
+padding-right:18px;
+}
+
+li{
+margin-bottom:10px;
+line-height:2;
+color:#555;
+}
+
+.action{
+margin-top:20px;
+display:flex;
+gap:10px;
+}
+
+.btn{
+flex:1;
+border:0;
+padding:12px;
+border-radius:16px;
+background:#8472a7;
+color:#fff;
+font-size:14px;
+cursor:pointer;
+transition:opacity .2s;
+}
+.btn:hover{opacity:.85}
+
+.btn.secondary{
+background:#9fc9cf;
+}
+
+.bottom-nav{
+margin-top:25px;
+padding-top:15px;
+border-top:1px solid #eadfdc;
+display:flex;
+justify-content:space-around;
+}
+
+.nav-item{
+text-align:center;
+font-size:11px;
+color:#999;
+text-decoration:none;
+}
+
+.nav-item i{
+display:block;
+font-size:20px;
+margin-bottom:5px;
+}
+
+.active{color:#8472a7;}
+
+/* دکمه مطالعه بیشتر */
+.read-more-btn {
+    display:inline-block;
+    background:#eee5f7;
+    color:#8472a7;
+    padding:8px 18px;
+    border-radius:999px;
+    border:none;
+    font-size:14px;
+    cursor:pointer;
+    font-weight:700;
+    transition:background .2s;
+    margin-top:5px;
+}
+.read-more-btn:hover {
+    background:#d9cce8;
+}
+
+/* محتوای اضافی که در ابتدا مخفی است */
+.extra-content {
+    display:none;
+    margin-top:10px;
+}
+.extra-content.show {
+    display:block;
+}
+</style>
+</head>
+
+<body>
+<div class="mobile">
+
+<div class="header">
+<a href="education.html" class="back">
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+<div class="title">محتوای آموزشی</div>
+
+<i class="fa-regular fa-bookmark" style="color:#8472a7"></i>
+</div>
+
+<div class="hero">
+<img src="q.png" alt="cover">
+</div>
+
+<div class="content">
+
+<span class="badge">راهنمای مراقب</span>
+
+<h1>پرسش‌هایی برای ملاقات با پزشک</h1>
+
+<div class="meta">
+<span><i class="fa-regular fa-clock"></i> ۸ دقیقه مطالعه</span>
+<span><i class="fa-regular fa-calendar"></i> ۱۴۰۴/۰۵/۰۷</span>
+</div>
+
+<!-- بخش خلاصه (همیشه قابل مشاهده) -->
+<div id="summary">
+<p>
+وقتی با فرد مبتلا به آلزایمر پیش پزشک می‌روید، شاید کمی سردرگم یا نگران باشید. این چند پرسش به شما کمک می‌کند تا همه چیز را شفاف بفهمید. قبل از رفتن پیش پزشک حتماً لیست همه داروها و ویتامین‌هایی که بیمار مصرف می‌کند را همراه داشته باشید، زمان تقریبی شروع علائم را یادداشت کنید و چیزی برای یادداشت کردن حرف‌های دکتر همراه داشته باشید.
+</p>
+<p>
+درباره خود بیماری بپرسید که آیا جدی است یا خفیف، با گذشت زمان خوب می‌شود یا بدتر، علتش چیست، مسری هست یا نه، تشخیص قطعی است یا نیاز به آزمایش بیشتر دارد و چه چیزهایی باعث بدتر شدن حالش می‌شود.
+</p>
+</div>
+
+<!-- دکمه مطالعه بیشتر -->
+<button class="read-more-btn" id="readMoreBtn">مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i></button>
+
+<!-- محتوای اضافی (مخفی در ابتدا) -->
+<div class="extra-content" id="extraContent">
+
+<h3 class="section-title">پرسش‌های مهم درباره داروها</h3>
+<ul>
+<li>این قرص‌ها دقیقاً چه کاری برای بیمار انجام می‌دهند؟</li>
+<li>چند بار در روز و چه ساعتی باید خورده شوند؟</li>
+<li>چقدر طول می‌کشد تا اثرشان را نشان بدهند؟</li>
+<li>اگر یک روز مصرف یادتان رفت چه کار کنید؟</li>
+<li>عوارض جانبی دارند یا نه؟ اگر عوارضی دیدید به کجا زنگ بزنید؟</li>
+<li>آیا باعث خواب‌آلودگی می‌شوند؟</li>
+<li>تا آخر عمر باید مصرف شوند یا فقط برای مدتی خاص؟</li>
+<li>آیا درمان غیردارویی هم وجود دارد؟</li>
+<li>آیا باید دارو را تدریجی قطع کنید؟</li>
+</ul>
+
+<h3 class="section-title">پرسش‌هایی درباره ادامه زندگی روزمره</h3>
+<ul>
+<li>آیا او هنوز می‌تواند رانندگی کند؟</li>
+<li>کارهای خانه مثل آشپزی یا باغبانی را انجام دهد؟</li>
+<li>سر کار برود؟</li>
+<li>برای مستقل ماندن هر چه بیشتر چه کارهایی می‌توانید انجام دهید؟</li>
+<li>آیا باید برنامه مراقبت‌های آینده و وصیت‌نامه را زودتر تنظیم کنید؟</li>
+<li>چه روش‌هایی برای تقویت مغز او توصیه می‌شود؟</li>
+</ul>
+
+<h3 class="section-title">نکات مهم قبل از ملاقات با پزشک</h3>
+<p>
+قبل از رفتن پیش پزشک حتماً این موارد را آماده کنید:
+</p>
+<ul>
+<li>لیست کامل همه داروها و ویتامین‌هایی که بیمار مصرف می‌کند (با دوز مصرفی)</li>
+<li>زمان تقریبی شروع علائم و تغییرات مشاهده شده</li>
+<li>دفترچه یا گوشی برای یادداشت کردن حرف‌های پزشک</li>
+<li>لیست سوالاتی که می‌خواهید بپرسید (همان سوالات بالا)</li>
+<li>اگر بیمار سابقه بیماری دیگری دارد، حتماً یادداشت کنید</li>
+</ul>
+
+<p style="margin-top:10px; background:#f7f4fb; padding:12px 16px; border-radius:16px; color:#665580; font-weight:500;">
+💡 نکته کلیدی: هیچ سوالی کوچک یا بی‌اهمیت نیست. پزشک شما برای پاسخ دادن به همه پرسش‌هایتان آنجاست. هرچه بیشتر بپرسید، بهتر می‌توانید از بیمار خود مراقبت کنید. همراه داشتن یک همراه دیگر هم می‌تواند کمک کند تا چیزی را فراموش نکنید.
+</p>
+
+</div> <!-- پایان extra-content -->
+
+<div class="action">
+<button class="btn">اشتراک‌گذاری</button>
+<button class="btn secondary">ذخیره مقاله</button>
+</div>
+
+</div>
+
+<!-- دکمه بازگشت به خانه -->
+<button class="btn" style="margin-top:20px;width:100%;background:#8472a7;color:#fff;border:0;padding:14px;border-radius:18px;font-size:16px;font-weight:700;cursor:pointer;" onclick="location.href='home.html'">
+    بازگشت به صفحه اصلی
+</button>
+
+<div class="bottom-nav">
+<a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
+<a href="education.html" class="nav-item active"><i class="fa-solid fa-book-open"></i>آموزش</a>
+<a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+<a href="reminder.html" class="nav-item"><i class="fa-solid fa-bell"></i>یادآورها</a>
+<a href="care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
+</div>
+
+</div>
+
+<script>
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    const extraContent = document.getElementById('extraContent');
+    let expanded = false;
+
+    readMoreBtn.addEventListener('click', function() {
+        expanded = !expanded;
+        if (expanded) {
+            extraContent.classList.add('show');
+            readMoreBtn.innerHTML = 'مطالعه کمتر <i class="fa-solid fa-chevron-up"></i>';
+        } else {
+            extraContent.classList.remove('show');
+            readMoreBtn.innerHTML = 'مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i>';
+        }
+    });
+</script>
+
+</body>
+</html>

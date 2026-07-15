@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراقبت روزانه از بیمار آلزایمر</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+body{background:#eee7f3;display:flex;justify-content:center}
+.mobile{width:100%;max-width:480px;min-height:100vh;background:#fdf6f4;padding:20px;padding-bottom:30px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.back{width:42px;height:42px;border-radius:14px;background:#eee5f7;color:#8472a7;
+display:flex;align-items:center;justify-content:center;text-decoration:none}
+.title{font-size:22px;font-weight:700;color:#665580}
+
+.hero{
+overflow:hidden;border-radius:24px;background:#fff;
+box-shadow:0 8px 25px rgba(132,114,167,.15);
+}
+.hero img{width:100%;height:220px;object-fit:cover;display:block}
+
+.content{
+background:#fff;margin-top:15px;padding:20px;border-radius:24px;
+box-shadow:0 8px 25px rgba(132,114,167,.12);
+}
+
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:999px;
+background:#eee5f7;
+color:#8472a7;
+font-size:12px;
+margin-bottom:12px;
+}
+
+h1{
+font-size:24px;
+line-height:1.8;
+color:#665580;
+margin-bottom:10px;
+}
+
+.meta{
+display:flex;
+gap:15px;
+color:#999;
+font-size:12px;
+margin-bottom:18px;
+}
+
+p{
+color:#555;
+line-height:2.1;
+margin-bottom:14px;
+}
+
+.section-title{
+color:#8472a7;
+font-size:18px;
+margin:20px 0 12px;
+}
+
+ul{
+padding-right:18px;
+}
+
+li{
+margin-bottom:10px;
+line-height:2;
+color:#555;
+}
+
+.action{
+margin-top:20px;
+display:flex;
+gap:10px;
+}
+
+.btn{
+flex:1;
+border:0;
+padding:12px;
+border-radius:16px;
+background:#8472a7;
+color:#fff;
+font-size:14px;
+cursor:pointer;
+transition:opacity .2s;
+}
+.btn:hover{opacity:.85}
+
+.btn.secondary{
+background:#9fc9cf;
+}
+
+.bottom-nav{
+margin-top:25px;
+padding-top:15px;
+border-top:1px solid #eadfdc;
+display:flex;
+justify-content:space-around;
+}
+
+.nav-item{
+text-align:center;
+font-size:11px;
+color:#999;
+text-decoration:none;
+}
+
+.nav-item i{
+display:block;
+font-size:20px;
+margin-bottom:5px;
+}
+
+.active{color:#8472a7;}
+
+/* دکمه مطالعه بیشتر */
+.read-more-btn {
+    display:inline-block;
+    background:#eee5f7;
+    color:#8472a7;
+    padding:8px 18px;
+    border-radius:999px;
+    border:none;
+    font-size:14px;
+    cursor:pointer;
+    font-weight:700;
+    transition:background .2s;
+    margin-top:5px;
+}
+.read-more-btn:hover {
+    background:#d9cce8;
+}
+
+/* محتوای اضافی که در ابتدا مخفی است */
+.extra-content {
+    display:none;
+    margin-top:10px;
+}
+.extra-content.show {
+    display:block;
+}
+</style>
+</head>
+
+<body>
+<div class="mobile">
+
+<div class="header">
+<a href="education.html" class="back">
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+<div class="title">محتوای آموزشی</div>
+
+<i class="fa-regular fa-bookmark" style="color:#8472a7"></i>
+</div>
+
+<div class="hero">
+<img src="care.png" alt="cover">
+</div>
+
+<div class="content">
+
+<span class="badge">راهنمای مراقبت</span>
+
+<h1>مراقبت روزانه از بیمار آلزایمر</h1>
+
+<div class="meta">
+<span><i class="fa-regular fa-clock"></i> ۱۰ دقیقه مطالعه</span>
+<span><i class="fa-regular fa-calendar"></i> ۱۴۰۴/۰۵/۰۵</span>
+</div>
+
+<!-- بخش خلاصه (همیشه قابل مشاهده) -->
+<div id="summary">
+<p>
+برای اینکه هم شما و هم بیمار کیفیت زندگی خوبی داشته باشید، اول بیماری را بپذیرید و از منابع کمک بگیرید. اصول کلی مراقبت عبارتند از حفظ عزت نفس بیمار، حفظ استقلال او تا جایی که می‌تواند، حفظ ایمنی، احترام گذاشتن، و گاهی حواس او را با یک موضوع دیگر پرت کنید تا از ناراحتی در بیاید. اما مهم‌ترین نکته این است که حتماً از خودتان هم مراقبت کنید، چون اگر شما از پا دربیایید، هیچ کسی نیست از بیمار مراقبت کند.
+</p>
+<p>
+به موقع و سالم غذا بخورید، خواب کافی داشته باشید، ورزش کنید و حتماً گاهی از بیمار دور شوید و استراحت کنید. وقتی شما خسته و عجول و عصبی باشید، بیمار هم آشفته می‌شود و رفتارش بدتر می‌شود. برای خودتان وقت بگذارید، با دوستانتان حرف بزنید، بخندید، به آنها توضیح دهید که این بیماری مسری نیست و بیمار دیوانه نشده، فقط حافظه‌اش ضعیف شده.
+</p>
+</div>
+
+<!-- دکمه مطالعه بیشتر -->
+<button class="read-more-btn" id="readMoreBtn">مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i></button>
+
+<!-- محتوای اضافی (مخفی در ابتدا) -->
+<div class="extra-content" id="extraContent">
+
+<h3 class="section-title">اصول مراقبت از فرد مبتلا به بیماری آلزایمر</h3>
+<p>
+اگر احساس می‌کنید غمگین هستید، وزن کم می‌کنید، شبها از نگرانی بیدار می‌شوید، زیاد عصبانی می‌شوید یا به خودکشی فکر می‌کنید، حتماً از یک روانشناس یا پزشک کمک بگیرید. برای مراقبت از بیمار، هر بار فقط یک مشکل را حل کنید، مثلاً فقط روی حمام کردن یا فقط روی تغذیه کار کنید. از شوخ‌طبعی استفاده کنید، خیلی از بحران‌ها را با خنده می‌شود حل کرد. بیمار را فعال نگه دارید اما او را با تحریک زیاد و هیاهو آشفته نکنید.
+</p>
+<p>
+بپذیرید که بعضی مهارت‌ها برای همیشه از دست رفته، اما روی توانایی‌هایی که هنوز دارد تمرکز کنید. مثلاً اگر نمی‌تواند غذا بپزد، می‌تواند سیب‌زمینی پوست بکند. هیچ وقت در حضور بیمار درباره‌اش صحبت نکنید. برای آینده برنامه ریزی کنید، شماره انجمن آلزایمر، پزشک، همسایه، و فرد کمکی را داشته باشید.
+</p>
+<p>
+برای برقراری ارتباط با بیمار، آرام و شمرده و با لبخند صحبت کنید، جملات کوتاه و ساده بگویید، هر بار فقط یک دستور بدهید، مثلاً بگویید «لطفا بلند شو» نه یکدفعه «بلند شو، برو دستشویی، مسواک بزن». از جلو به او نزدیک شوید، تماس چشمی بگیرید، اگر سؤالی را چند بار تکرار کرد، بدانید یادش رفته جواب را، دوباره جواب دهید اما با آرامش و حوصله. به جای جملات منفی مثل «این کار را نکن»، بگویید «آن کار را بکن». تلویزیون و رادیو را هنگام صحبت خاموش کنید تا حواست پرت نشود. صبور باشید، عجله نکنید، و هیچ وقت او را مسخره نکنید.
+</p>
+
+<h3 class="section-title">چگونه به فرد مبتلا به آلزایمر کمک کنیم ضعف حافظه‌اش را مدیریت کند؟</h3>
+<p>
+به عنوان مراقب، بدانید که ابتلا به آلزایمر نباید مانع شود فرد کارهایی را که دوست دارد انجام ندهد، فقط ممکن است بعضی کارها برایش سخت‌تر شده باشد، مثل به خاطر آوردن اسم افراد، یادآوری اتفاقات روزمره، گم کردن کلید یا عینک، گم شدن در جاهای آشنا، دنبال کردن یک مکالمه، فراموش کردن قرار ملاقات‌ها یا تاریخ تولدها یا دنبال کردن مراحل یک دستور غذا. طبیعی است که خود فرد از این مشکلات کلافه یا نگران شود و اعتماد به نفسش را از دست بدهد، اما شما می‌توانید با چند راهکار ساده به او کمک کنید.
+</p>
+<ul>
+<li>به او کمک کنید یک برنامه روزمره مشخص داشته باشد، یعنی همان کارها را همان ساعت هر روز انجام دهد.</li>
+<li>کارها را برایش ساده کنید و هر کاری را به قدم‌های کوچکتر تقسیم کنید و تشویقش کنید فقط روی یک کار تمرکز کند.</li>
+<li>به او یادآوری کنید آرام‌تر و بدون عجله کارهایش را انجام دهد و قبل از شروع کار، وسایل مورد نیاز مثل مواد آشپزی یا وسایل باغبانی را از قبل بیرون بگذارید.</li>
+<li>صداهای اطراف که حواستان را پرت می‌کند کم کنید.</li>
+<li>او را تشویق کنید با دوستان یا خانواده صحبت کند، گاهی صحبت کردن با دیگران خیلی کمک می‌کند.</li>
+<li>روی مشکلاتی که بیشتر اتفاق می‌افتد بیشتر کار کنید، اما مهم‌تر از همه اینکه روی کارهایی که او هنوز به یاد می‌آورد و می‌تواند انجام دهد تمرکز داشته باشید، چون هنوز کارهای زیادی هست که او در گذشته یاد گرفته و می‌تواند انجام دهد.</li>
+<li>بعد از اینکه کاری را انجام داد، با او در مورد آن کار صحبت کنید، این به او کمک می‌کند آن رویداد را بهتر به یاد بیاورد و احساس مثبتی نسبت به روزش پیدا کند.</li>
+</ul>
+
+<p style="margin-top:10px; background:#f7f4fb; padding:12px 16px; border-radius:16px; color:#665580; font-weight:500;">
+💡 نکته کلیدی: در مراقبت روزانه، فراموش نکنید که بین نیازهای جسمی و عاطفی تعادل برقرار کنید. گاهی بیمار تغذیه خوبی دارد ولی احساس تنهایی می‌کند. او را بدون قضاوت بپذیرید، به گذشته و تجربیاتش احترام بگذارید، ارتباطی صمیمی برقرار کنید و همیشه روی توانایی‌هایش تمرکز کنید، نه ناتوانی‌هایش.
+</p>
+
+</div> <!-- پایان extra-content -->
+
+<div class="action">
+<button class="btn">اشتراک‌گذاری</button>
+<button class="btn secondary">ذخیره مقاله</button>
+</div>
+
+</div>
+
+<!-- دکمه بازگشت به خانه -->
+<button class="btn" style="margin-top:20px;width:100%;background:#8472a7;color:#fff;border:0;padding:14px;border-radius:18px;font-size:16px;font-weight:700;cursor:pointer;" onclick="location.href='home.html'">
+    بازگشت به صفحه اصلی
+</button>
+
+<div class="bottom-nav">
+<a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
+<a href="education.html" class="nav-item active"><i class="fa-solid fa-book-open"></i>آموزش</a>
+<a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+<a href="reminder.html" class="nav-item"><i class="fa-solid fa-bell"></i>یادآورها</a>
+<a href="care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
+</div>
+
+</div>
+
+<script>
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    const extraContent = document.getElementById('extraContent');
+    let expanded = false;
+
+    readMoreBtn.addEventListener('click', function() {
+        expanded = !expanded;
+        if (expanded) {
+            extraContent.classList.add('show');
+            readMoreBtn.innerHTML = 'مطالعه کمتر <i class="fa-solid fa-chevron-up"></i>';
+        } else {
+            extraContent.classList.remove('show');
+            readMoreBtn.innerHTML = 'مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i>';
+        }
+    });
+</script>
+
+</body>
+</html>
