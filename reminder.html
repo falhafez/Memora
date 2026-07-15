@@ -28,7 +28,7 @@
       position: relative;
     }
     
-    /* ===== هدر هماهنگ با صفحه خانه ===== */
+    /* ===== هدر ===== */
     .header {
       display: flex;
       align-items: center;
@@ -58,7 +58,7 @@
 
     /* ===== باکس بنفش ===== */
     .hero {
-      margin: 25px 0 20px 0;  /* هماهنگ با فاصله‌های صفحه خانه */
+      margin: 25px 0 20px 0;
       background: linear-gradient(135deg, #aa98cf, #8472a7);
       border-radius: 25px;
       padding: 20px;
@@ -186,38 +186,57 @@
       right: 25px;
     }
 
-    /* ===== دکمه‌ی افزودن ===== */
-    .add-btn-wrapper {
+    /* ===== دکمه‌ها (افزودن + انصراف) ===== */
+    .btn-group {
+      display: flex;
+      gap: 10px;
       margin-top: 20px;
-      padding-top: 5px;
     }
-    .add-btn {
+    .btn-group a,
+    .btn-group button {
+      flex: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      width: 100%;
-      background: #8472a7;
-      color: #fff;
-      border: none;
+      gap: 8px;
+      padding: 14px 10px;
       border-radius: 18px;
-      padding: 14px 20px;
       font-size: 16px;
       font-weight: 700;
-      box-shadow: 0 10px 25px rgba(132, 114, 167, .35);
+      text-decoration: none;
+      border: none;
       cursor: pointer;
       transition: .25s;
-      text-decoration: none;
+      font-family: Vazirmatn, sans-serif;
     }
-    .add-btn:hover {
+    .btn-group a {
+      background: #8472a7;
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(132, 114, 167, .35);
+    }
+    .btn-group a:hover {
       background: #715e97;
       transform: translateY(-2px);
     }
-    .add-btn:active {
+    .btn-group a:active {
       transform: scale(0.98);
     }
 
-    /* ===== نوار پایین هماهنگ با صفحه خانه ===== */
+    /* ===== دکمه انصراف (اصلاح شده) ===== */
+    .btn-cancel {
+      background: #e9e1f4;
+      color: #8472a7;
+      box-shadow: none;
+    }
+    .btn-cancel:hover {
+      background: #ddd2ea;
+      transform: translateY(-2px);
+    }
+    .btn-cancel:active {
+      transform: scale(0.98);
+    }
+
+    /* ===== نوار پایین ===== */
     .bottom-nav {
       margin-top: 25px;
       padding-top: 15px;
@@ -259,6 +278,11 @@
       }
       .card {
         padding: 12px;
+      }
+      .btn-group a,
+      .btn-group button {
+        font-size: 14px;
+        padding: 12px 8px;
       }
     }
   </style>
@@ -335,17 +359,21 @@
       <div class="toggle on"></div>
     </div>
 
-    <!-- ===== دکمه افزودن ===== -->
-    <div class="add-btn-wrapper">
+    <!-- ===== دکمه‌های افزودن و انصراف (ردیف کنار هم) ===== -->
+    <div class="btn-group">
       <a href="add_reminder.html" class="add-btn">
         <i class="fa-solid fa-plus"></i>
         افزودن یادآور
       </a>
+      <button type="button" class="btn-cancel" onclick="window.location.href='home.html'">
+        <i class="fa-solid fa-xmark"></i>
+        انصراف
+      </button>
     </div>
 
     <!-- ===== نوار پایین ===== -->
     <div class="bottom-nav">
-      <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
+      <a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
       <a href="education.html" class="nav-item"><i class="fa-solid fa-book-open"></i>آموزش</a>
       <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
       <a href="#" class="nav-item active"><i class="fa-solid fa-bell"></i>یادآورها</a>
