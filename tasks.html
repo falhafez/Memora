@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>همه برنامه‌ها</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    body {
+      min-height: 100dvh;
+      background: linear-gradient(180deg, #efe9fa, #fdf6f4);
+      display: flex;
+      justify-content: center;
+      animation: fadePage .35s ease;
+    }
+
+    @keyframes fadePage {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .mobile {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100dvh;
+      background: transparent;
+      padding: 20px 20px 100px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== هدر ===== */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(20px);
+      background: rgba(253, 246, 244, .8);
+      z-index: 99;
+      padding: 8px 0;
+      border-radius: 20px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8472a7;
+      box-shadow: 0 8px 22px rgba(132, 114, 167, .15);
+      font-size: 18px;
+    }
+
+    .header h2 {
+      color: #8472a7;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .header p {
+      color: #9a8db3;
+      font-size: 13px;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .add-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #8472a7;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(132, 114, 167, .3);
+      font-size: 20px;
+    }
+
+    /* ===== کارت گرادیانی ===== */
+    .today-card {
+      background: linear-gradient(135deg, #8472a7, #a896cf);
+      color: white;
+      border-radius: 28px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 20px 40px rgba(132, 114, 167, .35);
+    }
+
+    .today-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .today-card .date {
+      margin-top: 6px;
+      opacity: .9;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+      background: rgba(255, 255, 255, .15);
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 22px;
+      padding: 16px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .summary-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .summary-item b {
+      display: block;
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .summary-item span {
+      font-size: 12px;
+      opacity: .9;
+    }
+
+    .summary-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255, 255, 255, .25);
+    }
+
+    .progress {
+      height: 8px;
+      background: rgba(255, 255, 255, .25);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 15px;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: white;
+      border-radius: 20px;
+      transition: width .4s ease;
+    }
+
+    /* ===== بخش‌ها ===== */
+    .section {
+      margin-top: 26px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      color: #665580;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .section-count {
+      background: #eee5f7;
+      color: #8472a7;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* ===== کارت‌های تسک ===== */
+    .task,
+    .task-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 18px;
+      margin: 14px 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .08), 0 2px 10px rgba(132, 114, 167, .08);
+      transition: .25s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      animation: slide .35s ease;
+    }
+
+    @keyframes slide {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .task:hover,
+    .task-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, .12);
+    }
+
+    .task:active,
+    .task-card:active {
+      transform: scale(.98);
+    }
+
+    .ripple {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: rgba(255, 255, 255, .6);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: ripple .5s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        width: 400px;
+        height: 400px;
+        opacity: 0;
+      }
+    }
+
+    .task-left,
+    #todayTasks .left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-icon,
+    #todayTasks .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .purple {
+      background: #eee5f7;
+      color: #8472a7;
+    }
+    .blue {
+      background: #e6f1f3;
+      color: #5c9da7;
+    }
+    .orange {
+      background: #f7eadf;
+      color: #c68d5d;
+    }
+    .green {
+      background: #e8f2eb;
+      color: #6b9b7b;
+    }
+    .pink {
+      background: #f8e8f0;
+      color: #c26b92;
+    }
+
+    .task-info,
+    #todayTasks .left div {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-info h4,
+    #todayTasks .left b {
+      color: #55496a;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+
+    .task-info p {
+      color: #8b819a;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .task-meta,
+    #todayTasks .left .time {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+      color: #8472a7;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .time {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .badge.high {
+      background: #fde7e7;
+      color: #c65353;
+    }
+    .badge.medium {
+      background: #fff3d8;
+      color: #b07a00;
+    }
+    .badge.low {
+      background: #e7f6ea;
+      color: #3f8a56;
+    }
+
+    .check-circle,
+    #todayTasks .circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #b8a8d5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all .2s ease;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .check-circle i {
+      display: none;
+      font-size: 13px;
+    }
+
+    .task-card.completed {
+      opacity: .78;
+    }
+
+    .task-card.completed .check-circle {
+      background: #8472a7;
+      border-color: #8472a7;
+      color: #fff;
+    }
+
+    .task-card.completed .check-circle i {
+      display: block;
+    }
+
+    .task-card.completed h4 {
+      text-decoration: line-through;
+    }
+
+    #todayTasks .circle.done {
+      background: #8472a7;
+      border-color: #8472a7;
+      color: #fff;
+      animation: pop .25s;
+    }
+
+    #todayTasks .circle.done::after {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(.8);
+      }
+      70% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      opacity: 0;
+      transition: .2s;
+      flex-shrink: 0;
+    }
+
+    .task:hover .actions,
+    .task-card:hover .actions {
+      opacity: 1;
+    }
+
+    .actions i {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .fa-pen {
+      background: #efe8fb;
+      color: #8472a7;
+    }
+
+    .fa-trash {
+      background: #fdecec;
+      color: #e74c3c;
+    }
+
+    .actions i:hover {
+      transform: scale(1.08);
+    }
+
+    /* ===== ناوبری پایین (ساده و هماهنگ با بقیه صفحات) ===== */
+    .bottom-nav {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #eadfdc;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .nav-item {
+      text-decoration: none;
+      color: #999;
+      font-size: 11px;
+      text-align: center;
+      transition: color 0.2s;
+    }
+
+    .nav-item:hover {
+      color: #8472a7;
+    }
+
+    .nav-item i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .active {
+      color: #8472a7;
+    }
+
+    /* ===== کارت‌های انجام شده ===== */
+    .completed-section .task-card {
+      background: #faf8fc;
+    }
+
+    /* ===== ریسپانسیو ===== */
+    @media(max-width:360px) {
+      .mobile {
+        padding: 16px;
+      }
+      .task-icon,
+      #todayTasks .icon {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+      }
+      .task-info h4,
+      #todayTasks .left b {
+        font-size: 15px;
+      }
+      .section-title {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="mobile">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <a href="home.html" class="back-btn">
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <div>
+          <h2>همه برنامه‌ها</h2>
+          <p>برنامه‌های امروز، فردا و این هفته</p>
+        </div>
+      </div>
+      <a href="add-task.html" class="add-btn">
+        <i class="fa-solid fa-plus"></i>
+      </a>
+    </div>
+
+    <!-- Today summary -->
+    <div class="today-card">
+      <h3>برنامه‌های امروز</h3>
+      <div class="date" id="todayDate"></div>
+      <div class="summary">
+        <div class="summary-item">
+          <b id="doneCount">0</b>
+          <span>انجام شده</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-item">
+          <b id="remainCount">0</b>
+          <span>باقی مانده</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-item">
+          <b id="totalCount">0</b>
+          <span>کل برنامه‌ها</span>
+        </div>
+      </div>
+      <div class="progress">
+        <span id="progressBar" style="width:0%;"></span>
+      </div>
+    </div>
+
+    <!-- Today (dynamic) -->
+    <div class="section">
+      <div class="section-header">
+        <h3 class="section-title">امروز</h3>
+        <span class="section-count" id="todayCount">۰</span>
+      </div>
+      <div id="todayTasks"></div>
+    </div>
+
+    <!-- Tomorrow -->
+    <div class="section">
+      <div class="section-header">
+        <h3 class="section-title">فردا</h3>
+        <span class="section-count">۳ برنامه</span>
+      </div>
+
+      <div class="task-card" data-task="8">
+        <div class="task-left">
+          <div class="task-icon green"><i class="fa-solid fa-user-doctor"></i></div>
+          <div class="task-info">
+            <h4>ویزیت پزشک</h4>
+            <p>بررسی وضعیت و داروها</p>
+            <div class="task-meta">
+              <span class="time"><i class="fa-regular fa-clock"></i>۰۹:۳۰</span>
+              <span class="badge high">مهم</span>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <i class="fa-solid fa-pen" onclick="editStaticTask(8)"></i>
+          <i class="fa-solid fa-trash" onclick="deleteStaticTask(8)"></i>
+        </div>
+        <div class="check-circle"><i class="fa-solid fa-check"></i></div>
+      </div>
+
+      <div class="task-card" data-task="9">
+        <div class="task-left">
+          <div class="task-icon orange"><i class="fa-solid fa-cart-shopping"></i></div>
+          <div class="task-info">
+            <h4>خرید دارو</h4>
+            <p>تهیه داروهای هفته آینده</p>
+            <div class="task-meta">
+              <span class="time"><i class="fa-regular fa-clock"></i>۱۱:۰۰</span>
+              <span class="badge medium">متوسط</span>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <i class="fa-solid fa-pen" onclick="editStaticTask(9)"></i>
+          <i class="fa-solid fa-trash" onclick="deleteStaticTask(9)"></i>
+        </div>
+        <div class="check-circle"><i class="fa-solid fa-check"></i></div>
+      </div>
+
+      <div class="task-card" data-task="10">
+        <div class="task-left">
+          <div class="task-icon blue"><i class="fa-solid fa-phone"></i></div>
+          <div class="task-info">
+            <h4>تماس با خانواده</h4>
+            <p>گفتگوی کوتاه روزانه</p>
+            <div class="task-meta">
+              <span class="time"><i class="fa-regular fa-clock"></i>۱۸:۰۰</span>
+              <span class="badge low">اختیاری</span>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <i class="fa-solid fa-pen" onclick="editStaticTask(10)"></i>
+          <i class="fa-solid fa-trash" onclick="deleteStaticTask(10)"></i>
+        </div>
+        <div class="check-circle"><i class="fa-solid fa-check"></i></div>
+      </div>
+    </div>
+
+    <!-- This week -->
+    <div class="section">
+      <div class="section-header">
+        <h3 class="section-title">این هفته</h3>
+        <span class="section-count">۲ برنامه</span>
+      </div>
+
+      <div class="task-card" data-task="11">
+        <div class="task-left">
+          <div class="task-icon pink"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div class="task-info">
+            <h4>اندازه‌گیری فشار خون</h4>
+            <p>ثبت نتیجه در دفترچه</p>
+            <div class="task-meta">
+              <span class="time"><i class="fa-regular fa-calendar"></i>پنجشنبه</span>
+              <span class="badge high">هفتگی</span>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <i class="fa-solid fa-pen" onclick="editStaticTask(11)"></i>
+          <i class="fa-solid fa-trash" onclick="deleteStaticTask(11)"></i>
+        </div>
+        <div class="check-circle"><i class="fa-solid fa-check"></i></div>
+      </div>
+
+      <div class="task-card" data-task="12">
+        <div class="task-left">
+          <div class="task-icon green"><i class="fa-solid fa-house-medical"></i></div>
+          <div class="task-info">
+            <h4>مرتب کردن داروها</h4>
+            <p>آماده‌سازی برای هفته آینده</p>
+            <div class="task-meta">
+              <span class="time"><i class="fa-regular fa-calendar"></i>جمعه</span>
+              <span class="badge medium">هفتگی</span>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <i class="fa-solid fa-pen" onclick="editStaticTask(12)"></i>
+          <i class="fa-solid fa-trash" onclick="deleteStaticTask(12)"></i>
+        </div>
+        <div class="check-circle"><i class="fa-solid fa-check"></i></div>
+      </div>
+    </div>
+
+    <!-- Completed -->
+    <div class="section completed-section">
+      <div class="section-header">
+        <h3 class="section-title">انجام شده</h3>
+        <span class="section-count">۲ مورد</span>
+      </div>
+
+      <div class="task-card completed" data-task="13">
+        <div class="task-left">
+          <div class="task-icon green"><i class="fa-solid fa-check"></i></div>
+          <div class="task-info">
+            <h4>نوشیدن آب صبحگاهی</h4>
+            <p>انجام شده</p>
+            <div class="task-meta">
+              <span class="time"><i class="fa-regular fa-clock"></i>۰۷:۳۰</span>
+            </div>
+          </div>
+        </div>
+        <div class="check-circle"><i class="fa-solid fa-check"></i></div>
+      </div>
+
+      <div class="task-card completed" data-task="14">
+        <div class="task-left">
+          <div class="task-icon blue"><i class="fa-solid fa-check"></i></div>
+          <div class="task-info">
+            <h4>مرتب کردن تخت</h4>
+            <p>انجام شده</p>
+            <div class="task-meta">
+              <span class="time"><i class="fa-regular fa-clock"></i>۰۸:۱۵</span>
+            </div>
+          </div>
+        </div>
+        <div class="check-circle"><i class="fa-solid fa-check"></i></div>
+      </div>
+    </div>
+
+    <!-- ===== ناوبری پایین (ساده و هماهنگ با بقیه صفحات) ===== -->
+    <div class="bottom-nav">
+      <a href="home.html" class="nav-item">
+        <i class="fa-solid fa-house"></i>
+        خانه
+      </a>
+      <a href="education.html" class="nav-item">
+        <i class="fa-solid fa-book-open"></i>
+        آموزش
+      </a>
+      <a href="chat.html" class="nav-item">
+        <i class="fa-solid fa-comments"></i>
+        چت‌ها
+      </a>
+      <a href="reminder.html" class="nav-item active">
+        <i class="fa-solid fa-bell"></i>
+        یادآورها
+      </a>
+      <a href="daily-care.html" class="nav-item">
+        <i class="fa-solid fa-heart"></i>
+        مراقبت
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    // ===== تاریخ فارسی =====
+    const today = new Date();
+    const formatter = new Intl.DateTimeFormat('fa-IR', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    document.getElementById('todayDate').textContent = formatter.format(today);
+
+    // ===== مدیریت تیک‌ها برای تسک‌های ثابت =====
+    const staticTaskCards = document.querySelectorAll('.task-card:not(#todayTasks .task)');
+
+    function updateStaticCounts() {
+      const total = document.querySelectorAll('.task-card:not(.completed-section .task-card)').length;
+      const done = document.querySelectorAll('.task-card.completed').length;
+      const remain = total - done;
+
+      document.getElementById('doneCount').textContent = done;
+      document.getElementById('remainCount').textContent = remain;
+      document.getElementById('totalCount').textContent = total;
+
+      const progress = total ? (done / total) * 100 : 0;
+      document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    staticTaskCards.forEach((task, index) => {
+      const key = 'task_' + index;
+      if (localStorage.getItem(key) === '1') {
+        task.classList.add('completed');
+      }
+
+      task.addEventListener('click', (e) => {
+        if (e.target.closest('.actions')) return;
+        task.classList.toggle('completed');
+        localStorage.setItem(key, task.classList.contains('completed') ? '1' : '0');
+        updateStaticCounts();
+      });
+    });
+
+    updateStaticCounts();
+
+    // ===== تسک‌های دینامیک امروز =====
+    const container = document.getElementById("todayTasks");
+    const countSpan = document.getElementById("todayCount");
+
+    let todayTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    if (todayTasks.length === 0) {
+      todayTasks = [
+        { title: "داروی صبح", time: "۰۸:۰۰", category: "دارو", color: "#8472a7", completed: false },
+        { title: "صبحانه کامل", time: "۰۸:۳۰", category: "تغذیه", color: "#c68d5d", completed: false },
+        { title: "پیاده‌روی", time: "۱۰:۰۰", category: "پیاده روی", color: "#5c9da7", completed: false },
+        { title: "نوشیدن آب", time: "۱۱:۳۰", category: "تغذیه", color: "#6b9b7b", completed: false },
+        { title: "داروی ظهر", time: "۱۳:۰۰", category: "دارو", color: "#8472a7", completed: false },
+        { title: "ناهار", time: "۱۳:۳۰", category: "تغذیه", color: "#c68d5d", completed: false },
+        { title: "تمرین حافظه", time: "۱۶:۰۰", category: "استراحت", color: "#c26b92", completed: false },
+        { title: "آماده شدن برای خواب", time: "۲۱:۳۰", category: "استراحت", color: "#5c9da7", completed: false }
+      ];
+      localStorage.setItem("tasks", JSON.stringify(todayTasks));
+    }
+
+    function editTask(index) {
+      localStorage.setItem("editTask", index);
+      location.href = "add-task.html?edit=1";
+    }
+
+    function deleteTask(index) {
+      if (confirm("برنامه حذف شود؟")) {
+        todayTasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(todayTasks));
+        renderTasks();
+      }
+    }
+
+    function editStaticTask(id) {
+      alert('ویرایش تسک ثابت با شناسه ' + id);
+    }
+
+    function deleteStaticTask(id) {
+      if (confirm('تسک ثابت با شناسه ' + id + ' حذف شود؟')) {
+        alert('تسک حذف شد (نمادین)');
+      }
+    }
+
+    function renderTasks() {
+      container.innerHTML = "";
+      let completedCount = 0;
+
+      todayTasks.forEach((task, index) => {
+        if (task.completed) completedCount++;
+
+        let icon = "fa-list-check";
+        switch (task.category) {
+          case "دارو": icon = "fa-pills"; break;
+          case "تغذیه": icon = "fa-utensils"; break;
+          case "پیاده روی": icon = "fa-person-walking"; break;
+          case "ورزش": icon = "fa-dumbbell"; break;
+          case "قرار ملاقات": icon = "fa-user-doctor"; break;
+          case "استراحت": icon = "fa-bed"; break;
+        }
+
+        container.innerHTML += `
+          <div class="task">
+            <div class="left">
+              <div class="icon" style="background:${task.color}20; color:${task.color};">
+                <i class="fa-solid ${icon}"></i>
+              </div>
+              <div>
+                <b>${task.title}</b>
+                <div class="time">
+                  <i class="fa-regular fa-clock"></i> ${task.time}
+                </div>
+              </div>
+            </div>
+            <div class="actions">
+              <i class="fa-solid fa-pen" onclick="editTask(${index})"></i>
+              <i class="fa-solid fa-trash" onclick="deleteTask(${index})"></i>
+            </div>
+            <div class="circle ${task.completed ? 'done' : ''}"
+                 onclick="toggleTask(${index})">
+            </div>
+          </div>
+        `;
+      });
+
+      countSpan.textContent = todayTasks.length + ' برنامه';
+      const totalDynamic = todayTasks.length;
+      const doneDynamic = todayTasks.filter(t => t.completed).length;
+      document.getElementById('doneCount').textContent = doneDynamic;
+      document.getElementById('remainCount').textContent = totalDynamic - doneDynamic;
+      document.getElementById('totalCount').textContent = totalDynamic;
+
+      const progress = totalDynamic ? (doneDynamic / totalDynamic) * 100 : 0;
+      document.getElementById('progressBar').style.width = progress + '%';
+
+      document.querySelectorAll('#todayTasks .task').forEach(card => {
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('.actions') || e.target.closest('.circle')) return;
+          createRipple(e, this);
+        });
+      });
+    }
+
+    window.toggleTask = function(index) {
+      todayTasks[index].completed = !todayTasks[index].completed;
+      localStorage.setItem("tasks", JSON.stringify(todayTasks));
+      renderTasks();
+    };
+
+    function createRipple(e, card) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      card.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 500);
+    }
+
+    document.querySelectorAll('.task-card').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.actions') || e.target.closest('.check-circle')) return;
+        createRipple(e, this);
+      });
+    });
+
+    renderTasks();
+  </script>
+
+</body>
+</html>

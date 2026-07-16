@@ -221,8 +221,6 @@
     .btn-group a:active {
       transform: scale(0.98);
     }
-
-    /* ===== دکمه انصراف (اصلاح شده) ===== */
     .btn-cancel {
       background: #e9e1f4;
       color: #8472a7;
@@ -263,7 +261,6 @@
       color: #8472a7;
     }
 
-    /* ===== ریسپانسیو ===== */
     @media(max-width:360px) {
       .mobile {
         padding: 15px;
@@ -297,77 +294,29 @@
 
     <!-- ===== باکس بنفش ===== -->
     <div class="hero">
-      <h3>یادآورهای امروز</h3>
-      <small>۴ فعالیت برنامه‌ریزی شده</small>
+      <h3 id="heroTitle">یادآورهای امروز</h3>
+      <small id="heroCount">۰ فعالیت برنامه‌ریزی شده</small>
     </div>
 
     <!-- ===== فیلترها ===== -->
-    <div class="filters">
-      <div class="chip active">همه</div>
-      <div class="chip">دارو</div>
-      <div class="chip">غذا</div>
-      <div class="chip">ورزش</div>
-      <div class="chip">خواب</div>
+    <div class="filters" id="filterContainer">
+      <div class="chip active" data-filter="all">همه</div>
+      <div class="chip" data-filter="drug">دارو</div>
+      <div class="chip" data-filter="food">غذا</div>
+      <div class="chip" data-filter="sport">ورزش</div>
+      <div class="chip" data-filter="sleep">خواب</div>
     </div>
 
-    <!-- ===== کارت‌های یادآور ===== -->
-    <div class="card">
-      <div class="left">
-        <div class="icon p"><i class="fa-solid fa-pills"></i></div>
-        <div>
-          <div class="title">داروی صبح</div>
-          <div class="sub">بعد از صبحانه</div>
-          <span class="time">08:00</span>
-        </div>
-      </div>
-      <div class="toggle on"></div>
-    </div>
+    <!-- ===== لیست کارت‌ها ===== -->
+    <div id="reminderList"></div>
 
-    <div class="card">
-      <div class="left">
-        <div class="icon o"><i class="fa-solid fa-utensils"></i></div>
-        <div>
-          <div class="title">صبحانه</div>
-          <div class="sub">رژیم پیشنهادی</div>
-          <span class="time">08:30</span>
-        </div>
-      </div>
-      <div class="toggle on"></div>
-    </div>
-
-    <div class="card">
-      <div class="left">
-        <div class="icon g"><i class="fa-solid fa-person-walking"></i></div>
-        <div>
-          <div class="title">پیاده‌روی</div>
-          <div class="sub">۲۰ دقیقه</div>
-          <span class="time">17:00</span>
-        </div>
-      </div>
-      <div class="toggle"></div>
-    </div>
-
-    <div class="card">
-      <div class="left">
-        <div class="icon b"><i class="fa-solid fa-bed"></i></div>
-        <div>
-          <div class="title">خواب شب</div>
-          <div class="sub">آرامش قبل خواب</div>
-          <span class="time">22:30</span>
-        </div>
-      </div>
-      <div class="toggle on"></div>
-    </div>
-
-    <!-- ===== دکمه‌های افزودن و انصراف (ردیف کنار هم) ===== -->
+    <!-- ===== دکمه‌ها ===== -->
     <div class="btn-group">
       <a href="add_reminder.html" class="add-btn">
-        <i class="fa-solid fa-plus"></i>
-        افزودن یادآور
+        <i class="fa-solid fa-plus"></i> افزودن یادآور
       </a>
       <button type="button" class="btn-cancel" onclick="window.location.href='home.html'">
-        <i class="fa-solid fa-xmark"></i>
-        انصراف
+        <i class="fa-solid fa-xmark"></i> انصراف
       </button>
     </div>
 
@@ -382,7 +331,98 @@
   </div>
 
   <script>
-    document.querySelectorAll('.toggle').forEach(t => t.onclick = () => t.classList.toggle('on'));
+    // ===== داده‌های پیش‌فرض (اگر در localStorage نباشد) =====
+    const defaultReminders = [
+      { type: "drug", title: "داروی صبح", desc: "بعد از صبحانه", time: "08:00", done: true },
+      { type: "food", title: "صبحانه", desc: "رژیم پیشنهادی", time: "08:30", done: true },
+      { type: "sport", title: "پیاده‌روی", desc: "۲۰ دقیقه", time: "17:00", done: false },
+      { type: "sleep", title: "خواب شب", desc: "آرامش قبل خواب", time: "22:30", done: true }
+    ];
+
+    // ===== بارگذاری داده‌ها =====
+    let reminders = JSON.parse(localStorage.getItem("reminders"));
+    if (!reminders || !Array.isArray(reminders) || reminders.length === 0) {
+      reminders = defaultReminders;
+      localStorage.setItem("reminders", JSON.stringify(reminders));
+    }
+
+    // ===== آیکون و کلاس برای هر نوع =====
+    const typeMap = {
+      drug: { icon: "fa-solid fa-pills", cls: "p" },
+      food: { icon: "fa-solid fa-utensils", cls: "o" },
+      sport: { icon: "fa-solid fa-person-walking", cls: "g" },
+      sleep: { icon: "fa-solid fa-bed", cls: "b" }
+    };
+
+    // ===== رندر کردن لیست =====
+    const listContainer = document.getElementById("reminderList");
+    const heroTitle = document.getElementById("heroTitle");
+    const heroCount = document.getElementById("heroCount");
+
+    function renderReminders(filter = "all") {
+      let filtered = reminders.filter(r => filter === "all" || r.type === filter);
+      let html = "";
+      filtered.forEach((r, idx) => {
+        const info = typeMap[r.type] || { icon: "fa-solid fa-bell", cls: "p" };
+        const doneClass = r.done ? "on" : "";
+        html += `
+          <div class="card" data-type="${r.type}" data-index="${idx}">
+            <div class="left">
+              <div class="icon ${info.cls}"><i class="${info.icon}"></i></div>
+              <div>
+                <div class="title">${r.title}</div>
+                <div class="sub">${r.desc}</div>
+                <span class="time">${r.time}</span>
+              </div>
+            </div>
+            <div class="toggle ${doneClass}" data-index="${idx}"></div>
+          </div>
+        `;
+      });
+
+      if (filtered.length === 0) {
+        html = `<div class="card" style="justify-content:center;color:#888;">هیچ یادآوری با این فیلتر وجود ندارد</div>`;
+      }
+
+      listContainer.innerHTML = html;
+
+      // ===== به‌روزرسانی تعداد در هدر =====
+      heroTitle.textContent = filter === "all" ? "یادآورهای امروز" : `یادآورهای ${getFilterLabel(filter)}`;
+      heroCount.textContent = `${filtered.length} فعالیت برنامه‌ریزی شده`;
+
+      // ===== اتصال رویداد toggle =====
+      document.querySelectorAll('.toggle').forEach(t => {
+        t.onclick = function(e) {
+          e.stopPropagation();
+          this.classList.toggle('on');
+          const idx = parseInt(this.dataset.index);
+          if (!isNaN(idx) && reminders[idx]) {
+            reminders[idx].done = !reminders[idx].done;
+            localStorage.setItem("reminders", JSON.stringify(reminders));
+            // فقط ظاهر را به‌روز می‌کنیم (بدون رندر مجدد کامل)
+          }
+        };
+      });
+    }
+
+    function getFilterLabel(filter) {
+      const map = { drug: "دارو", food: "غذا", sport: "ورزش", sleep: "خواب" };
+      return map[filter] || filter;
+    }
+
+    // ===== فیلترها =====
+    const chips = document.querySelectorAll('.chip');
+    chips.forEach(chip => {
+      chip.onclick = function() {
+        chips.forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.dataset.filter;
+        renderReminders(filter);
+      };
+    });
+
+    // ===== اجرای اولیه =====
+    renderReminders("all");
   </script>
 </body>
 </html>

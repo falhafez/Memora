@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تمرین آرامش</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Vazirmatn',sans-serif;
+}
+
+
+body{
+
+    min-height:100dvh;
+
+    background:#eee7f3;
+
+    display:flex;
+    justify-content:center;
+
+}
+
+
+
+.mobile{
+
+    width:100%;
+    max-width:480px;
+
+    min-height:100dvh;
+
+    background:#fdf6f4;
+
+    padding:20px;
+
+}
+
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* header */
+
+.header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.back{
+
+    width:42px;
+    height:42px;
+
+    border-radius:15px;
+
+    background:#eee5f7;
+
+    color:#8472a7;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.header h2{
+
+    color:#8472a7;
+
+    font-size:22px;
+
+}
+
+
+
+/* کارت اصلی */
+
+
+.relax-card{
+
+    margin-top:30px;
+
+    background:linear-gradient(
+        135deg,
+        #aa98cf,
+        #8472a7
+    );
+
+    color:white;
+
+    padding:25px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 12px 30px rgba(132,114,167,.25);
+
+}
+
+
+
+.relax-icon{
+
+    width:80px;
+    height:80px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#8472a7;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:35px;
+
+}
+
+
+.relax-card h1{
+
+    margin-top:20px;
+
+    font-size:22px;
+
+}
+
+
+.relax-card p{
+
+    margin-top:12px;
+
+    line-height:2;
+
+    font-size:14px;
+
+}
+
+
+
+/* تایمر */
+
+
+.timer-box{
+
+    margin-top:25px;
+
+    background:#f2f0f6;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+
+.timer{
+
+    font-size:45px;
+
+    color:#665580;
+
+    font-weight:700;
+
+}
+
+
+
+.circle-breath{
+
+    width:130px;
+
+    height:130px;
+
+    margin:25px auto;
+
+    border-radius:50%;
+
+    background:#9fc9cf;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-size:18px;
+
+    animation:breathe 5s infinite;
+
+}
+
+
+
+@keyframes breathe{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.15);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+
+
+/* دکمه */
+
+
+button{
+
+    width:100%;
+
+    border:none;
+
+    background:#8472a7;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:18px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    margin-top:15px;
+
+}
+
+
+
+button:active{
+
+    transform:scale(.98);
+
+}
+
+
+
+
+.steps{
+
+    margin-top:25px;
+
+}
+
+
+
+.steps h3{
+
+    color:#8472a7;
+
+    margin-bottom:12px;
+
+}
+
+
+
+.step{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    margin-bottom:12px;
+
+    color:#555;
+
+    box-shadow:
+    0 5px 15px rgba(132,114,167,.12);
+
+    line-height:1.8;
+
+}
+
+
+
+.step i{
+
+    color:#8472a7;
+
+    margin-left:8px;
+
+}
+
+
+
+/* پایین */
+
+.bottom-nav{
+
+    margin-top:30px;
+
+    padding-top:15px;
+
+    border-top:1px solid #eadfdc;
+
+    display:flex;
+
+    justify-content:space-around;
+
+}
+
+
+
+.nav-item{
+
+    text-align:center;
+
+    font-size:11px;
+
+    color:#999;
+
+}
+
+
+.nav-item i{
+
+    display:block;
+
+    font-size:20px;
+
+    margin-bottom:5px;
+
+}
+
+
+.active{
+
+    color:#8472a7;
+
+}
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<div class="mobile">
+
+
+
+<div class="header">
+
+<a href="article.html" class="back">
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+
+<h2>
+تمرین آرامش
+</h2>
+
+
+</div>
+
+
+
+
+
+
+<div class="relax-card">
+
+
+<div class="relax-icon">
+
+<i class="fa-solid fa-spa"></i>
+
+</div>
+
+
+
+<h1>
+چند دقیقه برای خودت
+</h1>
+
+
+<p>
+با این تمرین کوتاه، ذهن خود را آرام کن
+و انرژی بیشتری برای مراقبت روزانه داشته باش.
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="timer-box">
+
+
+<div class="timer" id="timer">
+02:00
+</div>
+
+
+<div class="circle-breath">
+
+تنفس
+
+</div>
+
+
+<button onclick="startTimer()">
+
+شروع تمرین
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="steps">
+
+
+<h3>
+مراحل تمرین
+</h3>
+
+
+
+<div class="step">
+
+<i class="fa-solid fa-circle-check"></i>
+
+در جای آرام بنشین و شانه‌هایت را رها کن.
+
+</div>
+
+
+
+<div class="step">
+
+<i class="fa-solid fa-circle-check"></i>
+
+چهار ثانیه نفس بکش، چند ثانیه نگه دار،
+سپس آرام بازدم کن.
+
+</div>
+
+
+
+<div class="step">
+
+<i class="fa-solid fa-circle-check"></i>
+
+روی نفس کشیدن تمرکز کن و اجازه بده افکار آرام شوند.
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="bottom-nav">
+
+
+<a href="home.html" class="nav-item">
+
+<i class="fa-solid fa-house"></i>
+
+خانه
+
+</a>
+
+
+
+<a href="education.html" class="nav-item">
+
+<i class="fa-solid fa-book"></i>
+
+آموزش
+
+</a>
+
+
+
+<a href="chat.html" class="nav-item">
+
+<i class="fa-solid fa-comments"></i>
+
+چت‌ها
+
+</a>
+
+
+
+<a href="reminder.html" class="nav-item">
+
+<i class="fa-solid fa-bell"></i>
+
+یادآورها
+
+</a>
+
+
+
+<a href="daily-care.html" class="nav-item active">
+
+<i class="fa-solid fa-heart"></i>
+
+مراقبت
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+let seconds = 120;
+
+let running = false;
+
+
+function startTimer(){
+
+
+if(running) return;
+
+
+running=true;
+
+
+let timer=document.getElementById("timer");
+
+
+
+let interval=setInterval(()=>{
+
+
+let min=Math.floor(seconds/60);
+
+let sec=seconds%60;
+
+
+timer.innerHTML=
+
+String(min).padStart(2,'0')
++
+":"
++
+String(sec).padStart(2,'0');
+
+
+
+seconds--;
+
+
+
+if(seconds<0){
+
+
+clearInterval(interval);
+
+timer.innerHTML="تمام شد 🌿";
+
+running=false;
+
+
+}
+
+
+
+},1000);
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>

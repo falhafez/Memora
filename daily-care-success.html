@@ -1,4 +1,8 @@
-<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <title>ثبت موفق</title>
@@ -18,21 +22,155 @@ button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:12px;fo
 .primary{background:#8472a7;color:#fff}.secondary{background:#fff;border:2px solid #8472a7;color:#8472a7}
 .bottom-nav{margin-top:25px;padding-top:15px;border-top:1px solid #eadfdc;display:flex;justify-content:space-around}
 .nav-item{text-decoration:none;color:#999;font-size:11px;text-align:center}.nav-item i{display:block;font-size:20px;margin-bottom:5px}.active{color:#8472a7}
-</style></head><body><div class="mobile">
-<div class="success"><div class="icon"><i class="fa fa-check"></i></div><h2>مراقبت امروز ثبت شد</h2><p>اطلاعات با موفقیت ذخیره شد.</p></div>
-<div class="card"><div class="title">امتیاز مراقبت امروز</div><div class="score">85%</div><p style="text-align:center">وضعیت امروز خوب است.</p></div>
-<div class="card"><div class="title">خلاصه ثبت</div>
-<div class="row"><span>😊 حال بیمار</span><span>خوب</span></div>
-<div class="row"><span>📋 علائم</span><span>بی‌قراری، فراموشی</span></div>
-<div class="row" style="border:none"><span>📝 یادداشت</span><span>بعد از استراحت آرام‌تر شد.</span></div></div>
-<div class="card tip"><b>💜 پیشنهاد ممورا</b><br>فردا نیز وضعیت خواب و اشتهای بیمار را ثبت کنید.</div>
+</style>
+</head>
+<body>
+<div class="mobile">
+
+<div class="success">
+    <div class="icon"><i class="fa fa-check"></i></div>
+    <h2>مراقبت امروز ثبت شد</h2>
+    <p>اطلاعات با موفقیت ذخیره شد.</p>
+</div>
+
+<div class="card">
+    <div class="title">امتیاز مراقبت امروز</div>
+    <div class="score" id="score">--</div>
+    <p style="text-align:center" id="status">در حال بررسی...</p>
+</div>
+
+<!-- ===== خلاصه جدید ===== -->
+<div class="card">
+    <div class="title">📋 خلاصه مراقبت امروز</div>
+
+    <div class="row">
+        <span>😊 حال کلی</span>
+        <span id="mood">-</span>
+    </div>
+
+    <div class="row">
+        <span>🧠 وضعیت شناختی</span>
+        <span id="memory">-</span>
+    </div>
+
+    <div class="row">
+        <span>💜 رفتار</span>
+        <span id="behavior">-</span>
+    </div>
+
+    <div class="row">
+        <span>🌙 خواب</span>
+        <span id="sleep">-</span>
+    </div>
+
+    <div class="row">
+        <span>🍎 تغذیه</span>
+        <span id="food">-</span>
+    </div>
+
+    <div class="row">
+        <span>💊 دارو</span>
+        <span id="medicine">-</span>
+    </div>
+
+    <div class="row">
+        <span>🚶 فعالیت</span>
+        <span id="activity">-</span>
+    </div>
+
+    <div class="row" style="border:none">
+        <span>📝 یادداشت</span>
+        <span id="note">-</span>
+    </div>
+</div>
+
+<!-- ===== پیشنهاد هوشمند ===== -->
+<div class="card tip" id="tipBox">
+    <b>💜 پیشنهاد ممورا</b><br>
+    <span id="tipText">فردا نیز وضعیت خواب و اشتهای بیمار را ثبت کنید.</span>
+</div>
+
 <button class="primary" onclick="location.href='history.html'">مشاهده سوابق</button>
 <button class="secondary" onclick="location.href='daily-care.html'">ثبت مراقبت جدید</button>
 <button class="primary" onclick="location.href='home.html'">بازگشت به خانه</button>
+
 <div class="bottom-nav">
-<a class="nav-item" href="home.html"><i class="fa-solid fa-house"></i>خانه</a>
-<a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a>
-<a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>چت‌ها</a>
-<a class="nav-item" href="reminder.html"><i class="fa-solid fa-bell"></i>یادآورها</a>
-<a class="nav-item active" href="daily-care.html"><i class="fa-solid fa-heart"></i>مراقبت</a>
-</div></div></body></html>
+    <a class="nav-item" href="home.html"><i class="fa-solid fa-house"></i>خانه</a>
+    <a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a>
+    <a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+    <a class="nav-item" href="reminder.html"><i class="fa-solid fa-bell"></i>یادآورها</a>
+    <a class="nav-item active" href="daily-care.html"><i class="fa-solid fa-heart"></i>مراقبت</a>
+</div>
+
+</div>
+
+<script>
+let history = JSON.parse(localStorage.getItem("careHistory")) || [];
+
+if (history.length) {
+    let last = history[history.length - 1];
+    let symptoms = last.symptoms || [];
+
+    // حال کلی
+    document.getElementById("mood").innerText = last.mood;
+
+    // دسته‌بندی علائم
+    const categories = {
+        memory: ["فراموشی بیشتر", "تکرار سوال", "سردرگمی", "عدم تشخیص افراد", "تمرکز ضعیف"],
+        behavior: ["آرام", "بی‌قرار", "مضطرب", "پرخاشگر", "غمگین", "ترسیده"],
+        sleep: ["خواب خوب", "بیداری شبانه", "خواب زیاد", "بی‌خوابی"],
+        food: ["اشتهای خوب", "کم‌اشتهایی", "آب کم مصرف کرد", "مشکل بلع"],
+        medicine: ["دارو کامل مصرف شد", "دارو فراموش شد", "عارضه دارویی"],
+        activity: ["پیاده‌روی", "فعالیت ذهنی", "صحبت خانوادگی", "نیاز به کمک"]
+    };
+
+    for (let [id, keywords] of Object.entries(categories)) {
+        let matched = symptoms.filter(x => keywords.includes(x));
+        document.getElementById(id).innerText = matched.length ? matched.join("، ") : "-";
+    }
+
+    // یادداشت
+    document.getElementById("note").innerText = last.note || "-";
+
+    // امتیاز بر اساس حال
+    let score = "70%";
+    if (last.mood == "😊") score = "85%";
+    if (last.mood == "😁") score = "95%";
+    if (last.mood == "😣") score = "40%";
+    if (last.mood == "😕") score = "55%";
+
+    document.getElementById("score").innerText = score;
+    document.getElementById("status").innerText = "وضعیت امروز ثبت شد";
+
+    // ===== پیشنهاد هوشمند =====
+    let tip = "فردا نیز وضعیت خواب و اشتهای بیمار را ثبت کنید.";
+
+    // اگر خواب ثبت نشده یا مشکل داشته
+    let sleepItems = symptoms.filter(x => ["خواب خوب", "بیداری شبانه", "خواب زیاد", "بی‌خوابی"].includes(x));
+    if (sleepItems.length === 0 || sleepItems.includes("بی‌خوابی") || sleepItems.includes("بیداری شبانه")) {
+        tip = "🌙 امشب قبل از خواب محیط را آرام کنید و از چای بابونه استفاده کنید.";
+    }
+
+    // اگر تغذیه مشکل داشته
+    let foodItems = symptoms.filter(x => ["کم‌اشتهایی", "آب کم مصرف کرد", "مشکل بلع"].includes(x));
+    if (foodItems.length > 0) {
+        tip = "🍲 وعده‌های غذایی را کوچک‌تر و مایعات را بیشتر کنید. آب میوه و سوپ مفید است.";
+    }
+
+    // اگر رفتار مشکل داشته
+    let behaviorItems = symptoms.filter(x => ["بی‌قرار", "مضطرب", "پرخاشگر", "غمگین", "ترسیده"].includes(x));
+    if (behaviorItems.length > 0) {
+        tip = "💆‍♂️ با موسیقی آرام، ماساژ و صحبت ملایم، اضطراب بیمار را کاهش دهید.";
+    }
+
+    // اگر دارو فراموش شده
+    if (symptoms.includes("دارو فراموش شد")) {
+        tip = "⏰ برای یادآوری دارو از اپلیکیشن یادآور استفاده کنید یا ساعت زنگ‌دار بگذارید.";
+    }
+
+    document.getElementById("tipText").innerText = tip;
+}
+</script>
+
+</body>
+</html>

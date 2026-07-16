@@ -18,15 +18,16 @@ h2{color:#665580}
 .moods{display:flex;justify-content:space-between}
 .mood{width:58px;height:58px;border-radius:18px;background:#f3f0f8;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:.2s}
 .mood.active{background:#eee5f7;outline:3px solid #8472a7}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.chip{padding:12px;border-radius:15px;background:#f3f0f8;text-align:center;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.chip{padding:12px;min-height:45px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:#f3f0f8;text-align:center;cursor:pointer;font-size:13px;line-height:1.5;transition:.2s}
 .chip.active{background:#8472a7;color:#fff}
 textarea{width:100%;height:120px;border:1px solid #eadfdc;border-radius:16px;padding:12px;resize:none}
 .btn-group{display:flex;gap:10px;margin-top:8px}
 .btn-group button{flex:1;padding:14px;border:none;border-radius:16px;font-size:16px;cursor:pointer}
 .btn-cancel{background:#e9e1f4;color:#8472a7;box-shadow:none}
 .btn-save{background:linear-gradient(135deg,#9a87c3,#8472a7);color:#fff}
-/* ناوبری پایین */
+.btn-history{width:100%;padding:14px;border:2px solid #8472a7;background:white;color:#8472a7;border-radius:16px;font-size:16px;cursor:pointer;margin-top:10px}
+.btn-history:hover{background:#f3eefb}
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fdf6f4;border-top:1px solid #eadfdc;padding:10px 0;display:flex;justify-content:space-around;z-index:10}
 .nav-item{text-decoration:none;color:#999;font-size:11px;text-align:center}
 .nav-item i{display:block;font-size:20px;margin-bottom:5px}
@@ -38,47 +39,108 @@ textarea{width:100%;height:120px;border:1px solid #eadfdc;border-radius:16px;pad
     <!-- هدر -->
     <div class="header">
         <a class="back" href="home.html"><i class="fa-solid fa-arrow-right"></i></a>
-        <h2>ثبت مراقبت روزانه</h2>
+        <h2 id="pageTitle">ثبت مراقبت روزانه</h2>
     </div>
 
     <!-- حال امروز -->
     <div class="card">
         <div class="label">حال امروز نرگس</div>
         <div class="moods">
-            <div class="mood">😣</div>
-            <div class="mood">😕</div>
-            <div class="mood active">🙂</div>
-            <div class="mood">😊</div>
-            <div class="mood">😁</div>
+            <div class="mood" data-mood="😣">😣</div>
+            <div class="mood" data-mood="😕">😕</div>
+            <div class="mood active" data-mood="🙂">🙂</div>
+            <div class="mood" data-mood="😊">😊</div>
+            <div class="mood" data-mood="😁">😁</div>
         </div>
     </div>
 
-    <!-- علائم -->
-    <div class="card">
-        <div class="label">علائم مشاهده شده</div>
+    <!-- وضعیت شناختی -->
+    <div class="card" data-group="cognitive">
+        <div class="label">🧠 وضعیت حافظه و شناخت</div>
         <div class="grid">
-            <div class="chip">فراموشی</div>
-            <div class="chip active">بی‌قراری</div>
-            <div class="chip">بی‌اشتهایی</div>
-            <div class="chip">خواب‌آلودگی</div>
-            <div class="chip">پرخاشگری</div>
-            <div class="chip">سایر</div>
+            <div class="chip">فراموشی بیشتر</div>
+            <div class="chip">تکرار سوال</div>
+            <div class="chip">سردرگمی</div>
+            <div class="chip">عدم تشخیص افراد</div>
+            <div class="chip">تمرکز ضعیف</div>
+            <div class="chip">خوب و طبیعی</div>
+        </div>
+    </div>
+
+    <!-- رفتار -->
+    <div class="card" data-group="behavior">
+        <div class="label">💜 رفتار و احساسات</div>
+        <div class="grid">
+            <div class="chip active">آرام</div>
+            <div class="chip">بی‌قرار</div>
+            <div class="chip">مضطرب</div>
+            <div class="chip">پرخاشگر</div>
+            <div class="chip">غمگین</div>
+            <div class="chip">ترسیده</div>
+        </div>
+    </div>
+
+    <!-- خواب -->
+    <div class="card" data-group="sleep">
+        <div class="label">🌙 وضعیت خواب</div>
+        <div class="grid">
+            <div class="chip">خواب خوب</div>
+            <div class="chip">بیداری شبانه</div>
+            <div class="chip">خواب زیاد</div>
+            <div class="chip">بی‌خوابی</div>
+        </div>
+    </div>
+
+    <!-- تغذیه -->
+    <div class="card" data-group="nutrition">
+        <div class="label">🍎 تغذیه و آب</div>
+        <div class="grid">
+            <div class="chip">اشتهای خوب</div>
+            <div class="chip">کم‌اشتهایی</div>
+            <div class="chip">آب کم مصرف کرد</div>
+            <div class="chip">مشکل بلع</div>
+        </div>
+    </div>
+
+    <!-- دارو -->
+    <div class="card" data-group="medication">
+        <div class="label">💊 داروها</div>
+        <div class="grid">
+            <div class="chip">دارو کامل مصرف شد</div>
+            <div class="chip">دارو فراموش شد</div>
+            <div class="chip">عارضه دارویی</div>
+        </div>
+    </div>
+
+    <!-- فعالیت -->
+    <div class="card" data-group="activity">
+        <div class="label">🚶 فعالیت روزانه</div>
+        <div class="grid">
+            <div class="chip">پیاده‌روی</div>
+            <div class="chip">فعالیت ذهنی</div>
+            <div class="chip">صحبت خانوادگی</div>
+            <div class="chip">نیاز به کمک</div>
         </div>
     </div>
 
     <!-- یادداشت -->
     <div class="card">
         <div class="label">یادداشت</div>
-        <textarea placeholder="امروز چه اتفاقی افتاد؟"></textarea>
+        <textarea id="noteInput" placeholder="امروز چه اتفاقی افتاد؟"></textarea>
     </div>
 
-    <!-- دکمه‌ها (اصلاح شده) -->
+    <!-- دکمه‌ها -->
     <div class="btn-group">
         <button class="btn-cancel" onclick="window.location.href='home.html';">انصراف</button>
-        <button class="btn-save" onclick="window.location.href='daily-care-success.html';">ذخیره مراقبت روزانه</button>
+        <button class="btn-save" onclick="saveCare()">ذخیره مراقبت روزانه</button>
     </div>
 
-    <!-- ناوبری پایین (مجزا و کامل) -->
+    <!-- دکمه مشاهده سوابق -->
+    <button class="btn-history" onclick="location.href='history.html'">
+        <i class="fa-solid fa-clock-rotate-left"></i> مشاهده سوابق
+    </button>
+
+    <!-- ناوبری پایین -->
     <div class="bottom-nav">
         <a class="nav-item" href="home.html"><i class="fa-solid fa-house"></i>خانه</a>
         <a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a>
@@ -89,19 +151,93 @@ textarea{width:100%;height:120px;border:1px solid #eadfdc;border-radius:16px;pad
 </div>
 
 <script>
-    // انتخاب حالت (mood)
-    document.querySelectorAll('.mood').forEach(m => {
-        m.onclick = function() {
-            document.querySelectorAll('.mood').forEach(x => x.classList.remove('active'));
+// ===== حالت انتخاب (mood) =====
+let selectedMood = "🙂";
+document.querySelectorAll('.mood').forEach(m => {
+    m.onclick = function(){
+        document.querySelectorAll('.mood').forEach(x=>x.classList.remove('active'));
+        this.classList.add('active');
+        selectedMood = this.innerText;
+    }
+});
+
+// ===== انتخاب چیپ‌ها (هر کارت فقط یکی) =====
+document.querySelectorAll('.card[data-group]').forEach(card => {
+    const chips = card.querySelectorAll('.chip');
+    chips.forEach(chip => {
+        chip.onclick = function() {
+            chips.forEach(c => c.classList.remove('active'));
             this.classList.add('active');
         }
     });
-    // انتخاب علائم (chip)
-    document.querySelectorAll('.chip').forEach(c => {
-        c.onclick = function() {
-            this.classList.toggle('active');
-        }
+});
+
+// ===== ویرایش: بارگذاری داده در صورت وجود ایندکس =====
+let editIndex = localStorage.getItem("editCareIndex");
+
+if (editIndex !== null) {
+    // تغییر عنوان صفحه
+    document.getElementById("pageTitle").innerText = "ویرایش مراقبت روزانه";
+
+    // بارگذاری داده‌های آن رکورد
+    let history = JSON.parse(localStorage.getItem("careHistory")) || [];
+    let item = history[editIndex];
+    if (item) {
+        // تنظیم حالت
+        document.querySelectorAll('.mood').forEach(m => {
+            m.classList.toggle('active', m.innerText === item.mood);
+        });
+        selectedMood = item.mood;
+
+        // تنظیم چیپ‌ها: در هر کارت، چیپ که متن آن در symptoms باشد فعال شود
+        let symptoms = item.symptoms || [];
+        document.querySelectorAll('.card[data-group]').forEach(card => {
+            let chips = card.querySelectorAll('.chip');
+            chips.forEach(chip => {
+                if (symptoms.includes(chip.innerText)) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+        });
+
+        // تنظیم یادداشت
+        document.querySelector('textarea').value = item.note || '';
+    }
+}
+
+// ===== ذخیره (هم برای جدید و هم ویرایش) =====
+function saveCare(){
+    // جمع‌آوری تمام چیپ‌های فعال از همه کارت‌ها
+    let symptoms = [];
+    document.querySelectorAll('.chip.active').forEach(c => {
+        symptoms.push(c.innerText);
     });
+
+    let care = {
+        date: new Date().toLocaleDateString('fa-IR'),
+        time: new Date().toLocaleTimeString('fa-IR'),
+        mood: selectedMood,
+        symptoms: symptoms,
+        note: document.querySelector('textarea').value
+    };
+
+    let history = JSON.parse(localStorage.getItem("careHistory")) || [];
+
+    if (editIndex !== null) {
+        // ویرایش
+        history[editIndex] = care;
+        localStorage.removeItem("editCareIndex");
+    } else {
+        // جدید
+        history.push(care);
+    }
+
+    localStorage.setItem("careHistory", JSON.stringify(history));
+    window.location.href = "daily-care-success.html";
+}
 </script>
+
 </body>
 </html>

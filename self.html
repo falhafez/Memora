@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>استراحت و مراقبت</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Vazirmatn',sans-serif;
+}
+
+
+body{
+
+    min-height:100dvh;
+
+    background:#eee7f3;
+
+    display:flex;
+    justify-content:center;
+
+}
+
+
+.mobile{
+
+    width:100%;
+    max-width:480px;
+
+    min-height:100dvh;
+
+    background:#fdf6f4;
+
+    padding:20px;
+
+}
+
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+
+/* header */
+
+
+.header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.back{
+
+    width:42px;
+    height:42px;
+
+    background:#eee5f7;
+
+    border-radius:15px;
+
+    color:#8472a7;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.header h2{
+
+    color:#8472a7;
+
+    font-size:22px;
+
+}
+
+
+
+
+
+/* کارت اصلی */
+
+
+.hero{
+
+    margin-top:25px;
+
+    background:#9fc9cf;
+
+    border-radius:30px;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+
+.hero-icon{
+
+    width:80px;
+
+    height:80px;
+
+    background:white;
+
+    color:#5c9da7;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:35px;
+
+}
+
+
+
+.hero h1{
+
+    margin-top:18px;
+
+    color:#486b70;
+
+    font-size:22px;
+
+}
+
+
+
+.hero p{
+
+    margin-top:10px;
+
+    color:#555;
+
+    line-height:2;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+
+/* پیشنهادها */
+
+
+.title{
+
+    margin-top:25px;
+
+    color:#8472a7;
+
+    font-size:18px;
+
+}
+
+
+
+.card{
+
+    background:white;
+
+    margin-top:12px;
+
+    padding:16px;
+
+    border-radius:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    box-shadow:
+
+    0 8px 20px rgba(132,114,167,.12);
+
+}
+
+
+
+.icon{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:18px;
+
+    background:#eee5f7;
+
+    color:#8472a7;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:22px;
+
+}
+
+
+
+.card b{
+
+    color:#665580;
+
+    font-size:16px;
+
+}
+
+
+
+.card p{
+
+    color:#666;
+
+    font-size:13px;
+
+    margin-top:5px;
+
+    line-height:1.8;
+
+}
+
+
+
+
+
+
+/* تمرین سریع */
+
+
+.quick{
+
+    margin-top:20px;
+
+    background:#f2f0f6;
+
+    padding:20px;
+
+    border-radius:25px;
+
+}
+
+
+
+.quick h3{
+
+    color:#8472a7;
+
+}
+
+
+
+.quick p{
+
+    color:#555;
+
+    margin-top:10px;
+
+    line-height:1.8;
+
+    font-size:14px;
+
+}
+
+
+.quick a{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    background:#8472a7;
+
+    color:white;
+
+    padding:10px 20px;
+
+    border-radius:15px;
+
+}
+
+
+
+
+
+/* پایین */
+
+
+.bottom-nav{
+
+    margin-top:30px;
+
+    padding-top:15px;
+
+    border-top:1px solid #eadfdc;
+
+    display:flex;
+
+    justify-content:space-around;
+
+}
+
+
+.nav-item{
+
+    text-align:center;
+
+    font-size:11px;
+
+    color:#999;
+
+}
+
+
+
+.nav-item i{
+
+    display:block;
+
+    font-size:20px;
+
+    margin-bottom:5px;
+
+}
+
+
+.active{
+
+    color:#8472a7;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<div class="mobile">
+
+
+
+<div class="header">
+
+
+<a href="home.html" class="back">
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+
+<h2>
+به خودت هم استراحت بده
+</h2>
+
+
+</div>
+
+
+
+
+
+
+<div class="hero">
+
+
+<div class="hero-icon">
+
+<i class="fa-solid fa-heart"></i>
+
+</div>
+
+
+
+<h1>
+مراقب خودت هم باش
+</h1>
+
+
+
+<p>
+مراقبت از دیگری انرژی زیادی می‌گیرد.
+چند دقیقه آرامش می‌تواند به تو کمک کند
+با انرژی بیشتری ادامه بدهی.
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<h3 class="title">
+پیشنهادهای کوتاه برای امروز
+</h3>
+
+
+
+
+<div class="card">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-mug-hot"></i>
+
+</div>
+
+
+<div>
+
+<b>
+یک نوشیدنی آرامش‌بخش
+</b>
+
+
+<p>
+چند دقیقه برای نوشیدن چای یا قهوه بدون عجله وقت بگذار.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-music"></i>
+
+</div>
+
+
+<div>
+
+<b>
+گوش دادن به موسیقی
+</b>
+
+
+<p>
+یک آهنگ آرام انتخاب کن و چند دقیقه استراحت کن.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-person-walking"></i>
+
+</div>
+
+
+<div>
+
+<b>
+کمی حرکت کن
+</b>
+
+
+<p>
+یک پیاده‌روی کوتاه یا چند حرکت کششی انجام بده.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="quick">
+
+
+<h3>
+تمرین آرام‌سازی سریع
+</h3>
+
+
+<p>
+اگر احساس خستگی یا فشار داری، یک تمرین دو دقیقه‌ای تنفس انجام بده.
+</p>
+
+
+<a href="relax.html">
+
+شروع تمرین
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="bottom-nav">
+
+
+<a href="home.html" class="nav-item active">
+
+<i class="fa-solid fa-house"></i>
+
+خانه
+
+</a>
+
+
+
+<a href="education.html" class="nav-item">
+
+<i class="fa-solid fa-book"></i>
+
+آموزش
+
+</a>
+
+
+
+<a href="chat.html" class="nav-item">
+
+<i class="fa-solid fa-comments"></i>
+
+چت‌ها
+
+</a>
+
+
+
+<a href="reminder.html" class="nav-item">
+
+<i class="fa-solid fa-bell"></i>
+
+یادآورها
+
+</a>
+
+
+
+<a href="daily-care.html" class="nav-item">
+
+<i class="fa-solid fa-heart"></i>
+
+مراقبت
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</body>
+
+</html>

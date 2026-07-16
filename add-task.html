@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>افزودن برنامه</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background: #eee7f3;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .mobile {
+            width: 100%;
+            max-width: 480px;
+            background: #fdf6f4;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .back {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(132, 114, 167, .15);
+            color: #8472a7;
+            font-size: 20px;
+        }
+
+        .header-text h2 {
+            font-size: 24px;
+            color: #8472a7;
+            font-weight: 800;
+        }
+
+        .header-text p {
+            font-size: 13px;
+            color: #999;
+            margin-top: 3px;
+        }
+
+        .form-card {
+            background: #fff;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 12px 30px rgba(132, 114, 167, .15);
+            margin-bottom: 18px;
+        }
+
+        .label {
+            display: block;
+            font-size: 14px;
+            color: #665580;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .input {
+            width: 100%;
+            height: 52px;
+            border: none;
+            outline: none;
+            background: #f6f4fb;
+            border-radius: 16px;
+            padding: 0 16px;
+            font-size: 15px;
+            margin-bottom: 18px;
+            transition: .2s;
+        }
+
+        .input:focus {
+            background: #efe9fa;
+            box-shadow: 0 0 0 3px rgba(132, 114, 167, .15);
+        }
+
+        .textarea {
+            width: 100%;
+            height: 120px;
+            border: none;
+            outline: none;
+            background: #f6f4fb;
+            border-radius: 16px;
+            padding: 15px;
+            resize: none;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        select {
+            width: 100%;
+            height: 52px;
+            border: none;
+            background: #f6f4fb;
+            border-radius: 16px;
+            padding: 0 12px;
+            outline: none;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .colors {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .color {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: .2s;
+        }
+
+        .color.active {
+            border-color: #333;
+            transform: scale(1.08);
+        }
+
+        .c1 {
+            background: #8472a7;
+        }
+        .c2 {
+            background: #5c9da7;
+        }
+        .c3 {
+            background: #6b9b7b;
+        }
+        .c4 {
+            background: #d88a5c;
+        }
+        .c5 {
+            background: #d85b83;
+        }
+
+        .save {
+            width: 100%;
+            height: 55px;
+            border: none;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #aa98cf, #8472a7);
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 15px 30px rgba(132, 114, 167, .3);
+            transition: .2s;
+        }
+
+        .save:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mobile">
+
+        <div class="header">
+
+            <a href="tasks.html" class="back">
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <div class="header-text">
+                <h2>افزودن برنامه</h2>
+                <p>یک برنامه جدید برای امروز یا روزهای آینده ثبت کنید</p>
+            </div>
+
+        </div>
+
+
+        <form class="form-card" id="taskForm">
+
+            <label class="label">
+                <i class="fa-solid fa-clipboard-list"></i>
+                عنوان برنامه
+            </label>
+
+            <input id="title" class="input" type="text" placeholder="مثلاً داروی صبح" required>
+
+
+            <label class="label">
+                <i class="fa-solid fa-layer-group"></i>
+                دسته بندی
+            </label>
+
+            <select id="category">
+
+                <option>دارو</option>
+                <option>تغذیه</option>
+                <option>پیاده روی</option>
+                <option>ورزش</option>
+                <option>قرار ملاقات</option>
+                <option>استراحت</option>
+                <option>سایر</option>
+
+            </select>
+
+
+
+            <div class="row">
+
+                <div class="col">
+
+                    <label class="label">
+                        <i class="fa-regular fa-clock"></i>
+                        ساعت
+                    </label>
+
+                    <input id="time" class="input" type="time" required>
+
+                </div>
+
+
+
+                <div class="col">
+
+                    <label class="label">
+                        <i class="fa-regular fa-calendar"></i>
+                        روز
+                    </label>
+
+                    <select id="day">
+
+                        <option value="today">امروز</option>
+                        <option value="tomorrow">فردا</option>
+                        <option value="week">این هفته</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <label class="label">
+                <i class="fa-solid fa-repeat"></i>
+                تکرار
+            </label>
+
+            <select id="repeat">
+
+                <option>بدون تکرار</option>
+                <option>روزانه</option>
+                <option>هفتگی</option>
+                <option>ماهانه</option>
+
+            </select>
+
+
+
+            <label class="label">
+                <i class="fa-solid fa-palette"></i>
+                رنگ کارت
+            </label>
+
+            <div class="colors">
+
+                <div class="color c1 active"></div>
+                <div class="color c2"></div>
+                <div class="color c3"></div>
+                <div class="color c4"></div>
+                <div class="color c5"></div>
+
+            </div>
+
+
+
+            <label class="label">
+                <i class="fa-solid fa-align-left"></i>
+                توضیحات
+            </label>
+
+            <textarea id="note" class="textarea" placeholder="در صورت نیاز توضیحی بنویس..."></textarea>
+
+            <button class="save" type="submit">
+                <i class="fa-solid fa-plus"></i>
+                ذخیره برنامه
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+        // --------------------- مرحله ۱: دریافت عناصر فرم ---------------------
+        const title = document.getElementById("title");
+        const category = document.getElementById("category");
+        const time = document.getElementById("time");
+        const day = document.getElementById("day");
+        const repeat = document.getElementById("repeat");
+        const note = document.getElementById("note");
+
+        // --------------------- مرحله ۲: پارامترهای ویرایش ---------------------
+        const params = new URLSearchParams(location.search);
+        const edit = params.get("edit");
+        let editIndex = null;
+
+        // انتخاب رنگ پیش‌فرض
+        let selectedColor = "#8472a7";
+
+        // رویداد انتخاب رنگ
+        document.querySelectorAll(".color").forEach(item => {
+            item.addEventListener("click", () => {
+                document.querySelectorAll(".color").forEach(c => c.classList.remove("active"));
+                item.classList.add("active");
+                selectedColor = getComputedStyle(item).backgroundColor;
+            });
+        });
+
+        // بارگذاری تسک‌ها از localStorage
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        // --------------------- مرحله ۳: پر کردن فرم در حالت ویرایش ---------------------
+        if (edit) {
+            editIndex = parseInt(localStorage.getItem("editTask")); // اندیس را از localStorage می‌گیریم
+            const task = tasks[editIndex];
+            if (task) {
+                title.value = task.title;
+                category.value = task.category;
+                time.value = task.time;
+                day.value = task.day;
+                repeat.value = task.repeat;
+                note.value = task.note;
+                selectedColor = task.color;
+
+                // همچنین رنگ فعال را به‌روز می‌کنیم
+                document.querySelectorAll(".color").forEach(el => {
+                    const bg = getComputedStyle(el).backgroundColor;
+                    if (bg === task.color) {
+                        el.classList.add("active");
+                    } else {
+                        el.classList.remove("active");
+                    }
+                });
+            }
+        }
+
+        // --------------------- مرحله ۴: مدیریت ذخیره (ایجاد یا ویرایش) ---------------------
+        document.getElementById("taskForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            // ساخت شیء تسک (طبق مرحله ۱)
+            let task = {
+                id: Date.now(),
+                title: title.value,
+                category: category.value,
+                time: time.value,
+                day: day.value,
+                repeat: repeat.value,
+                note: note.value,
+                color: selectedColor,
+                completed: false
+            };
+
+            // ذخیره یا ویرایش
+            if (edit) {
+                // ویرایش
+                task.id = tasks[editIndex].id;
+                task.completed = tasks[editIndex].completed;
+                tasks[editIndex] = task;
+            } else {
+                // جدید
+                tasks.push(task);
+            }
+
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            // پیام موفقیت
+            const btn = document.querySelector(".save");
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> برنامه ذخیره شد';
+            btn.style.background = "#57b36b";
+
+            setTimeout(() => {
+                window.location.href = "tasks.html";
+            }, 900);
+        });
+    </script>
+
+</body>
+
+</html>

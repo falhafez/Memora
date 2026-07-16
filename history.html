@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<title>سوابق مراقبت</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Vazirmatn}
+body{
+    background:#eee7f3;
+    display:flex;
+    justify-content:center;
+    min-height:100dvh;
+}
+.mobile{
+    max-width:480px;
+    width:100%;
+    min-height:100dvh;
+    background:#fdf6f4;
+    padding:20px;
+}
+.header{text-align:center;margin-bottom:20px}
+.header i{width:75px;height:75px;background:#8472a7;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:10px auto;font-size:35px}
+h2{color:#665580;margin:10px 0}
+p{color:#777}
+.card{background:#fff;border-radius:22px;padding:18px;margin-bottom:15px;box-shadow:0 8px 25px rgba(132,114,167,.15)}
+.date{display:flex;justify-content:space-between;align-items:center;color:#665580;font-weight:700;margin-bottom:12px}
+.score{background:#eee5f7;color:#8472a7;padding:6px 15px;border-radius:20px;font-weight:800}
+.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #eee;color:#666}
+.row:last-child{border:none}
+button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:10px;font-size:15px;cursor:pointer}
+.primary{background:#8472a7;color:white}
+.secondary{background:white;border:2px solid #8472a7;color:#8472a7}
+.edit-box{margin-top:15px}
+.edit-btn{width:100%;padding:11px;border:none;border-radius:14px;background:#eee5f7;color:#8472a7;font-size:14px;cursor:pointer;font-weight:700}
+.edit-btn:hover{background:#d8ccef}
+.bottom-nav{margin-top:25px;padding-top:15px;border-top:1px solid #eadfdc;display:flex;justify-content:space-around}
+.nav-item{text-decoration:none;color:#999;font-size:11px;text-align:center}
+.nav-item i{display:block;font-size:20px;margin-bottom:5px}
+.active{color:#8472a7}
+</style>
+</head>
+<body>
+
+<div class="mobile">
+
+    <div class="header">
+        <div><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <h2>سوابق مراقبت</h2>
+        <p>گزارش ثبت‌های قبلی بیمار</p>
+    </div>
+
+    <div id="history"></div>
+
+    <button class="primary" onclick="location.href='daily-care.html'">
+        <i class="fa-solid fa-plus"></i> ثبت مراقبت جدید
+    </button>
+
+    <button class="secondary" onclick="location.href='daily-care-success.html'">
+        بازگشت
+    </button>
+
+    <div class="bottom-nav">
+        <a class="nav-item" href="home.html"><i class="fa-solid fa-house"></i>خانه</a>
+        <a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a>
+        <a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>چت‌ها</a>
+        <a class="nav-item" href="reminder.html"><i class="fa-solid fa-bell"></i>یادآورها</a>
+        <a class="nav-item active" href="daily-care.html"><i class="fa-solid fa-heart"></i>مراقبت</a>
+    </div>
+
+</div>
+
+<script>
+let box = document.getElementById("history");
+let data = JSON.parse(localStorage.getItem("careHistory")) || [];
+
+if (data.length === 0) {
+    box.innerHTML = `
+        <div class="card">
+            <p style="text-align:center">هنوز مراقبتی ثبت نشده است</p>
+        </div>
+    `;
+} else {
+    let reversed = [...data].reverse();
+    reversed.forEach((item, revIndex) => {
+        let originalIndex = data.length - 1 - revIndex;
+        let symptoms = item.symptoms || [];
+
+        let memory = symptoms.filter(x =>
+            ["فراموشی بیشتر","تکرار سوال","سردرگمی","عدم تشخیص افراد","تمرکز ضعیف"].includes(x)
+        );
+        let behavior = symptoms.filter(x =>
+            ["آرام","بی‌قرار","مضطرب","پرخاشگر","غمگین","ترسیده"].includes(x)
+        );
+        let sleep = symptoms.filter(x =>
+            ["خواب خوب","بیداری شبانه","خواب زیاد","بی‌خوابی"].includes(x)
+        );
+        let food = symptoms.filter(x =>
+            ["اشتهای خوب","کم‌اشتهایی","آب کم مصرف کرد","مشکل بلع"].includes(x)
+        );
+        let medicine = symptoms.filter(x =>
+            ["دارو کامل مصرف شد","دارو فراموش شد","عارضه دارویی"].includes(x)
+        );
+        let activity = symptoms.filter(x =>
+            ["پیاده‌روی","فعالیت ذهنی","صحبت خانوادگی","نیاز به کمک"].includes(x)
+        );
+
+        box.innerHTML += `
+            <div class="card">
+                <div class="date">
+                    <span>📅 ${item.date}</span>
+                    <span class="score">${item.mood}</span>
+                </div>
+
+                <div class="row">
+                    <span>😊 حال کلی</span>
+                    <span>${item.mood}</span>
+                </div>
+
+                <div class="row">
+                    <span>🧠 حافظه</span>
+                    <span>${memory.join("، ") || "-"}</span>
+                </div>
+
+                <div class="row">
+                    <span>💜 رفتار</span>
+                    <span>${behavior.join("، ") || "-"}</span>
+                </div>
+
+                <div class="row">
+                    <span>🌙 خواب</span>
+                    <span>${sleep.join("، ") || "-"}</span>
+                </div>
+
+                <div class="row">
+                    <span>🍎 تغذیه</span>
+                    <span>${food.join("، ") || "-"}</span>
+                </div>
+
+                <div class="row">
+                    <span>💊 دارو</span>
+                    <span>${medicine.join("، ") || "-"}</span>
+                </div>
+
+                <div class="row">
+                    <span>🚶 فعالیت</span>
+                    <span>${activity.join("، ") || "-"}</span>
+                </div>
+
+                <div class="row">
+                    <span>🕒 زمان ثبت</span>
+                    <span>${item.time}</span>
+                </div>
+
+                <div class="row" style="border:none">
+                    <span>📝 یادداشت</span>
+                    <span>${item.note || "-"}</span>
+                </div>
+
+                <div class="edit-box">
+                    <button class="edit-btn" onclick="editCare(${originalIndex})">
+                        <i class="fa-solid fa-pen"></i> ویرایش ثبت
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function editCare(index) {
+    localStorage.setItem("editCareIndex", index);
+    location.href = "daily-care.html";
+}
+</script>
+
+</body>
+</html>
