@@ -1,0 +1,144 @@
+<?php
+
+header("Content-Type: application/json; charset=UTF-8");
+
+$apiKey = "sk-87a49fd8b2a236d35a4cc145712a4cbaf25720abc4d37917";
+
+$data = json_decode(file_get_contents("php://input"), true);
+
+$message = trim($data["message"] ?? "");
+
+if ($message == "") {
+    echo json_encode([
+        "answer" => "لطفاً سوال خود را وارد کنید."
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+
+/* =======================
+   خواندن knowledge.json
+======================= */
+
+$knowledge = [];
+
+if(file_exists("knowledge.json")){
+    $knowledge = json_decode(file_get_contents("knowledge.json"), true);
+}
+
+
+/* =======================
+   پیدا کردن مطالب مرتبط
+======================= */
+
+$context = "";
+
+foreach($knowledge as $item){
+
+    foreach($item["keywords"] as $keyword){
+
+        if(mb_stripos($message,$keyword)!==false){
+
+            $context .=
+            $item["title"] . "\n" .
+            $item["content"] . "\n\n";
+
+            break;
+        }
+
+    }
+
+}
+
+
+/* =======================
+   ساخت Prompt
+======================= */
+
+if($context!=""){
+
+$systemPrompt="
+
+تو یک دستیار سلامت سالمندان هستی.
+
+اگر اطلاعات زیر وجود دارد فقط براساس همین اطلاعات پاسخ بده.
+
+اگر سوال خارج از اطلاعات بود
+با دانش عمومی خود پاسخ بده.
+
+منابع:
+
+".$context;
+
+}else{
+
+$systemPrompt="
+
+تو یک دستیار فارسی مودب و متخصص سلامت سالمندان هستی.
+
+به سوال کاربر پاسخ کامل بده.
+
+";
+
+}
+
+
+/* =======================
+   ارسال به OpenAI
+======================= */
+
+$postData=[
+
+"model"=>"gpt-4.1-mini",
+
+"messages"=>[
+
+[
+"role"=>"system",
+"content"=>$systemPrompt
+],
+
+[
+"role"=>"user",
+"content"=>$message
+]
+
+],
+
+"temperature"=>0.4
+
+];
+
+
+
+$ch=curl_init("https://api.openai.com/v1/chat/completions");
+
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+
+curl_setopt($ch,CURLOPT_POST,true);
+
+curl_setopt($ch,CURLOPT_HTTPHEADER,[
+
+"Content-Type: application/json",
+
+"Authorization: Bearer ".$apiKey
+
+]);
+
+curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($postData));
+
+$response=curl_exec($ch);
+
+curl_close($ch);
+
+$result=json_decode($response,true);
+
+
+
+echo json_encode([
+
+"answer"=>$result["choices"][0]["message"]["content"] ?? "خطا در ارتباط با سرور."
+
+],JSON_UNESCAPED_UNICODE);
+
+?>

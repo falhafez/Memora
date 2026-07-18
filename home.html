@@ -440,8 +440,472 @@
 
         }
 
+        /* ===== استایل‌های جدید برای کادر پیشنهاد امروز ===== */
+        .today-suggestion {
+            background: #fff;
+            border-radius: 22px;
+            padding: 22px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .05);
+        }
+
+        .today-suggestion .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #574a73;
+            margin-bottom: 18px;
+        }
+
+        .today-suggestion .card {
+            margin-bottom: 18px;
+        }
+
+        .today-suggestion .card:last-child {
+            margin-bottom: 0;
+        }
 
 
+        /* ===== استایل‌های جدید برای کارت‌های ناوبری ===== */
+        .nav-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px;
+            margin: 18px 0;
+            cursor: pointer;
+            transition: .25s;
+            background: #f9f6fc;
+            border-radius: 22px;
+            box-shadow: 0 4px 12px rgba(132, 114, 167, .08);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+            background: #f5f0fa;
+        }
+
+        .nav-info h3 {
+            margin: 0;
+            color: #574a73;
+            font-size: 20px;
+        }
+
+        .nav-info p {
+            margin-top: 8px;
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .arrow {
+            font-size: 30px;
+            color: #9b8bc0;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+
+
+        /* ===== بخش سوالات و مراکز (حذف شد و با کارت‌های ناوبری جایگزین شد) ===== */
+
+        /* ============================================================= */
+        /* ===== بخش جدید: گروه اشتراک‌گذاری نظرات مراقبین (شبکه اجتماعی) ===== */
+        /* ============================================================= */
+
+        .community-section {
+            margin-top: 28px;
+            border-radius: 25px;
+            background: #f8f5fc;
+            padding: 20px 16px;
+            box-shadow: 0 6px 20px rgba(132, 114, 167, 0.10);
+        }
+
+        .community-section .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #665580;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .community-section .section-title i {
+            color: #8472a7;
+            font-size: 20px;
+        }
+
+        /* ---- بخش ارسال پست جدید ---- */
+        .new-post {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 2px 12px rgba(132, 114, 167, 0.06);
+            margin-bottom: 22px;
+        }
+
+        .new-post .post-input {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .new-post .post-input .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .new-post .post-input .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .new-post .post-input textarea {
+            flex: 1;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 14px;
+            padding: 6px 0;
+            background: transparent;
+            min-height: 60px;
+            color: #3d3648;
+        }
+
+        .new-post .post-input textarea::placeholder {
+            color: #aaa;
+        }
+
+        .new-post .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .new-post .post-actions .left-actions {
+            display: flex;
+            gap: 14px;
+        }
+
+        .new-post .post-actions .left-actions label {
+            color: #8472a7;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .new-post .post-actions .left-actions label:hover {
+            color: #665580;
+        }
+
+        .new-post .post-actions .left-actions input[type="file"] {
+            display: none;
+        }
+
+        .new-post .post-actions .btn-submit {
+            background: #8472a7;
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .new-post .post-actions .btn-submit:hover {
+            background: #6f5a8f;
+        }
+
+        .new-post .preview-image {
+            margin-top: 10px;
+            display: none;
+            position: relative;
+        }
+
+        .new-post .preview-image img {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 16px;
+            border: 1px solid #e8e0ef;
+        }
+
+        .new-post .preview-image .remove-img {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .new-post .preview-image .remove-img:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        /* ---- فید پست‌ها ---- */
+        .post-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 20px;
+            padding: 16px 16px 12px;
+            box-shadow: 0 2px 12px rgba(132, 114, 167, 0.06);
+            transition: box-shadow 0.2s;
+        }
+
+        .post-card:hover {
+            box-shadow: 0 4px 20px rgba(132, 114, 167, 0.10);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .post-header .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .post-header .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-header .post-user {
+            flex: 1;
+        }
+
+        .post-header .post-user .name {
+            font-weight: 700;
+            color: #3d3648;
+            font-size: 14px;
+        }
+
+        .post-header .post-user .time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .post-header .post-more {
+            color: #aaa;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .post-content {
+            margin: 12px 0 10px;
+        }
+
+        .post-content .text {
+            font-size: 14px;
+            color: #3d3648;
+            line-height: 1.8;
+            word-wrap: break-word;
+        }
+
+        .post-content .post-image {
+            margin-top: 10px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .post-content .post-image img {
+            width: 100%;
+            max-height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #888;
+            padding: 6px 0 10px;
+            border-bottom: 1px solid #f0ecf5;
+        }
+
+        .post-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .post-stats span i {
+            font-size: 14px;
+        }
+
+        .post-actions-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 4px;
+        }
+
+        .post-actions-bar .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #777;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 30px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .post-actions-bar .action-btn:hover {
+            background: #f0ecf5;
+        }
+
+        .post-actions-bar .action-btn.liked {
+            color: #e74c6f;
+        }
+
+        .post-actions-bar .action-btn.liked i {
+            font-weight: 900;
+        }
+
+        .post-actions-bar .action-btn i {
+            font-size: 18px;
+        }
+
+        /* ---- بخش کامنت‌ها ---- */
+        .comments-section {
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid #f0ecf5;
+        }
+
+        .comment-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .comment-item .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .comment-item .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comment-item .comment-body {
+            background: #f5f2f9;
+            padding: 8px 14px;
+            border-radius: 16px;
+            flex: 1;
+        }
+
+        .comment-item .comment-body .cname {
+            font-weight: 600;
+            font-size: 12px;
+            color: #3d3648;
+        }
+
+        .comment-item .comment-body .ctext {
+            font-size: 13px;
+            color: #4f4859;
+            margin-top: 2px;
+            line-height: 1.6;
+        }
+
+        .comment-item .comment-body .ctime {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 3px;
+        }
+
+        .comment-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .comment-input input {
+            flex: 1;
+            border: none;
+            background: #f5f2f9;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            outline: none;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .comment-input input::placeholder {
+            color: #aaa;
+        }
+
+        .comment-input button {
+            background: #8472a7;
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+
+        .comment-input button:hover {
+            background: #6f5a8f;
+        }
+
+        /* لینک مشاهده همه نظرات */
+        .view-all-comments {
+            font-size: 12px;
+            color: #8472a7;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 6px;
+            cursor: pointer;
+        }
+
+        .view-all-comments:hover {
+            text-decoration: underline;
+        }
 
 
         /* پایین */
@@ -523,6 +987,22 @@
                 font-size: 20px;
 
             }
+
+            .nav-info h3 {
+                font-size: 17px;
+            }
+
+            .nav-info p {
+                font-size: 13px;
+            }
+
+            .arrow {
+                font-size: 24px;
+            }
+
+            .today-suggestion .section-title {
+                font-size: 17px;
+            }
         }
 
         /* ===== استایل جدید برای تیک زدن تسک‌ها (بدون خط خوردن متن) ===== */
@@ -558,288 +1038,55 @@
         .task.completed .circle::after {
             display: block;
         }
-
-        /* .task.completed span {
-            text-decoration: line-through;
-            opacity: 0.6;
-        } */
     </style>
 
-    <body>
+<body>
 
-        <div class="mobile">
+    <div class="mobile">
 
 
-            <!-- هدر -->
+        <!-- هدر -->
 
-            <div class="header">
+        <div class="header">
 
-                <a href="profile.html" class="profile">
-                    <img src="profile.png" alt="profile">
-                </a>
-
-                <div class="header-text">
-                    <h2 id="welcomeName">سلام</h2>
-                    <p>خوش آمدی</p>
-                </div>
-
-            </div>
-
-
-
-
-
-            <!-- برنامه امروز -->
-
-            <div class="today">
-
-
-                <h3>
-                    برنامه امروز
-                </h3>
-
-
-                <div class="date" id="todayDate"></div>
-
-
-
-
-                <div class="task">
-
-                    <span>
-                        داروی صبح
-                    </span>
-
-
-                    <div class="circle"></div>
-
-
-                </div>
-
-
-
-
-                <div class="task">
-
-                    <span>
-                        صبحانه
-                    </span>
-
-
-                    <div class="circle"></div>
-
-
-                </div>
-
-
-
-
-                <div class="task">
-
-                    <span>
-                        پیاده‌روی
-                    </span>
-
-
-                    <div class="circle"></div>
-
-
-                </div>
-
-
-
-                <a href="tasks.html" class="more">
-
-                    مشاهده همه
-
-                </a>
-
-
-
-            </div>
-
-
-
-
-
-
-
-            <!-- منوی چهارگانه -->
-
-
-            <div class="menu">
-
-
-
-                <a href="education.html" class="menu-item">
-
-
-                    <div class="icon">
-
-                        <i class="fa-solid fa-book-open-reader"></i>
-
-                    </div>
-
-
-                    آموزش
-
-
-                </a>
-
-
-
-
-
-                <a href="chat.html" class="menu-item">
-
-
-                    <div class="icon">
-
-                        <i class="fa-solid fa-comments"></i>
-
-                    </div>
-
-
-                    چت‌ها
-
-
-                </a>
-
-
-
-
-
-                <a href="reminder.html" class="menu-item">
-
-
-                    <div class="icon">
-
-                        <i class="fa-solid fa-bell"></i>
-
-                    </div>
-
-
-                    یادآورها
-
-
-                </a>
-
-
-
-
-
-                <a href="daily-care.html" class="menu-item">
-
-
-                    <div class="icon">
-
-                        <i class="fa-solid fa-heart-pulse"></i>
-
-                    </div>
-
-
-                    مراقبت
-
-
-                </a>
-
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <!-- کارت مقاله -->
-
-
-            <a href="article.html" class="card article">
-
-
-
-                <div class="card-image">
-
-
-                    <img src="art.png" alt="article">
-
-
-                </div>
-
-
-
-
-                <div>
-
-
-                    <b>
-                        مقاله پیشنهادی برای شما
-                    </b>
-
-
-                    <p>
-                        مدیریت بی‌قراری در آلزایمر
-                    </p>
-
-
-
-                </div>
-
-
-
+            <a href="profile.html" class="profile">
+                <img src="profile.png" alt="profile">
             </a>
 
+            <div class="header-text">
+                <h2 id="welcomeName">سلام</h2>
+                <p>خوش آمدی</p>
+            </div>
+
+        </div>
 
 
 
 
 
+        <!-- برنامه امروز -->
+
+        <div class="today">
 
 
-
-            <!-- کارت استراحت -->
-
-
-            <div class="card relax">
+            <h3>
+                برنامه امروز
+            </h3>
 
 
-
-                <div class="card-image">
-
-
-                    <img src="rest.png" alt="rest">
-
-                </div>
+            <div class="date" id="todayDate"></div>
 
 
 
 
-                <div>
+            <div class="task">
+
+                <span>
+                    داروی صبح
+                </span>
 
 
-                    <b>
-                        به خودت هم استراحت بده
-                    </b>
-
-
-                    <p>
-                        برای مراقبت بهتر، مراقب خودت هم باش
-                    </p>
-
-
-
-                    <a href="relax.html" class="btn">
-                        تمرین آرامش بخش
-                    </a>
-
-
-                </div>
-
+                <div class="circle"></div>
 
 
             </div>
@@ -847,77 +1094,40 @@
 
 
 
+            <div class="task">
+
+                <span>
+                    صبحانه
+                </span>
 
 
-
-
-
-            <!-- ناوبری پایین -->
-
-
-            <div class="bottom-nav">
-
-
-
-                <a href="home.html" class="nav-item active">
-
-                    <i class="fa-solid fa-house"></i>
-
-                    خانه
-
-                </a>
-
-
-
-
-
-                <a href="education.html" class="nav-item">
-
-                    <i class="fa-solid fa-book-open"></i>
-
-                    آموزش
-
-                </a>
-
-
-
-
-
-                <a href="chat.html" class="nav-item">
-
-                    <i class="fa-solid fa-comments"></i>
-
-                    چت‌ها
-
-                </a>
-
-
-
-
-
-                <a href="reminder.html" class="nav-item">
-
-                    <i class="fa-solid fa-bell"></i>
-
-                    یادآورها
-
-                </a>
-
-
-
-
-
-                <a href="daily-care.html" class="nav-item">
-
-                    <i class="fa-solid fa-heart"></i>
-
-                    مراقبت
-
-                </a>
-
+                <div class="circle"></div>
 
 
             </div>
+
+
+
+
+            <div class="task">
+
+                <span>
+                    پیاده‌روی
+                </span>
+
+
+                <div class="circle"></div>
+
+
+            </div>
+
+
+
+            <a href="tasks.html" class="more">
+
+                مشاهده همه
+
+            </a>
 
 
 
@@ -927,73 +1137,338 @@
 
 
 
-        <script>
-            
-let profile = JSON.parse(localStorage.getItem("patientProfile"));
 
-if(profile && profile.caregiverName){
 
-    document.getElementById("welcomeName").textContent =
-        "سلام " + profile.caregiverName;
+        <!-- منوی چهارگانه -->
 
-}else{
 
-    document.getElementById("welcomeName").textContent =
-        "سلام";
-
-}
-
-function gregorianToJalali(gy, gm, gd) {
-
-    let g_d_m = [
-        0, 31, 59, 90, 120, 151,
-        181, 212, 243, 273,
-        304, 334
-    ];
-
-    let jy = (gy <= 1600) ? 0 : 979;
-
-    gy -= (gy <= 1600) ? 621 : 1600;
-
-    let gy2 = (gm > 2) ? (gy + 1) : gy;
-
-    let days =
-        (365 * gy) +
-        Math.floor((gy2 + 3) / 4) -
-        Math.floor((gy2 + 99) / 100) +
-        Math.floor((gy2 + 399) / 400) -
-        80 +
-        gd +
-        g_d_m[gm - 1];
-
-    jy += 33 * Math.floor(days / 12053);
-    days %= 12053;
-
-    jy += 4 * Math.floor(days / 1461);
-    days %= 1461;
-
-    if (days > 365) {
-        jy += Math.floor((days - 1) / 365);
-        days = (days - 1) % 365;
-    }
-
-    let jm;
-    let jd;
-
-    if (days < 186) {
-        jm = 1 + Math.floor(days / 31);
-        jd = 1 + (days % 31);
-    } else {
-        jm = 7 + Math.floor((days - 186) / 30);
-        jd = 1 + ((days - 186) % 30);
-    }
-
-    return [jy, jm, jd];
-}
-        </script>
+        <div class="menu">
 
 
 
-    </body>
+            <a href="education.html" class="menu-item">
+
+
+                <div class="icon">
+
+                    <i class="fa-solid fa-book-open-reader"></i>
+
+                </div>
+
+
+                آموزش
+
+
+            </a>
+
+
+
+
+
+            <a href="chat.html" class="menu-item">
+
+
+                <div class="icon">
+
+                    <i class="fa-solid fa-comments"></i>
+
+                </div>
+
+
+                چت‌ها
+
+
+            </a>
+
+
+
+
+
+            <a href="reminder.html" class="menu-item">
+
+
+                <div class="icon">
+
+                    <i class="fa-solid fa-bell"></i>
+
+                </div>
+
+
+                یادآورها
+
+
+            </a>
+
+
+
+
+
+            <a href="daily-care.html" class="menu-item">
+
+
+                <div class="icon">
+
+                    <i class="fa-solid fa-heart-pulse"></i>
+
+                </div>
+
+
+                مراقبت
+
+
+            </a>
+
+
+
+
+        </div>
+
+
+
+
+
+        <!-- ========================================================== -->
+        <!-- ===== کادر پیشنهاد امروز ===== -->
+        <!-- ========================================================== -->
+
+        <div class="today-suggestion">
+
+            <div class="section-title">
+                 پیشنهاد امروز
+            </div>
+
+            <!-- کارت مقاله -->
+            <a href="article.html" class="card article">
+
+                <div class="card-image">
+                    <img src="art.png" alt="article">
+                </div>
+
+                <div>
+                    <b>مقاله پیشنهادی برای شما</b>
+                    <p>مدیریت بی‌قراری در آلزایمر</p>
+                </div>
+
+            </a>
+
+            <!-- کارت استراحت -->
+            <div class="card relax">
+
+                <div class="card-image">
+                    <img src="rest.png" alt="rest">
+                </div>
+
+                <div>
+                    <b>به خودت هم استراحت بده</b>
+                    <p>برای مراقبت بهتر، مراقب خودت هم باش</p>
+                    <a href="relax.html" class="btn">تمرین آرامش بخش</a>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ===== پایان کادر پیشنهاد امروز ===== -->
+
+
+
+        <!-- ============================================================ -->
+        <!-- ===== بخش سوالات متداول، مراکز درمانی و جامعه مراقبین (کارت‌های ناوبری) ===== -->
+        <!-- ============================================================ -->
+
+        <!-- سوالات متداول -->
+        <div class="card nav-card" onclick="location.href='frq.html'">
+            <div class="nav-info">
+                <h3>❓ سوالات متداول</h3>
+                <p>پاسخ سوالات رایج درباره آلزایمر و مراقبت از بیمار</p>
+            </div>
+            <span class="arrow">›</span>
+        </div>
+
+        <!-- مراکز درمانی -->
+        <div class="card nav-card" onclick="location.href='centers.html'">
+            <div class="nav-info">
+                <h3> مراکز درمانی</h3>
+                <p>مشاهده پزشکان و مراکز تخصصی آلزایمر</p>
+            </div>
+            <span class="arrow">›</span>
+        </div>
+
+        <!-- جامعه مراقبین -->
+        <div class="card nav-card" onclick="location.href='com.html'">
+            <div class="nav-info">
+                <h3> جامعه مراقبین</h3>
+                <p>تجربه‌های خود را به اشتراک بگذارید و با سایر مراقبین گفتگو کنید.</p>
+            </div>
+            <span class="arrow">›</span>
+        </div>
+
+
+
+        <!-- ناوبری پایین -->
+
+
+        <div class="bottom-nav">
+
+
+
+            <a href="home.html" class="nav-item active">
+
+                <i class="fa-solid fa-house"></i>
+
+                خانه
+
+            </a>
+
+
+
+
+
+            <a href="education.html" class="nav-item">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                آموزش
+
+            </a>
+
+
+
+
+
+            <a href="chat.html" class="nav-item">
+
+                <i class="fa-solid fa-comments"></i>
+
+                چت‌ها
+
+            </a>
+
+
+
+
+
+            <a href="reminder.html" class="nav-item">
+
+                <i class="fa-solid fa-bell"></i>
+
+                یادآورها
+
+            </a>
+
+
+
+
+
+            <a href="daily-care.html" class="nav-item">
+
+                <i class="fa-solid fa-heart"></i>
+
+                مراقبت
+
+            </a>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <script>
+        // ===== تغییر نام کاربر =====
+        let profile = JSON.parse(localStorage.getItem("patientProfile"));
+
+        if (profile && profile.caregiverName) {
+
+            document.getElementById("welcomeName").textContent =
+                "سلام " + profile.caregiverName;
+
+        } else {
+
+            document.getElementById("welcomeName").textContent =
+                "سلام";
+
+        }
+
+        // ===== تاریخ شمسی =====
+        function gregorianToJalali(gy, gm, gd) {
+
+            let g_d_m = [
+                0, 31, 59, 90, 120, 151,
+                181, 212, 243, 273,
+                304, 334
+            ];
+
+            let jy = (gy <= 1600) ? 0 : 979;
+
+            gy -= (gy <= 1600) ? 621 : 1600;
+
+            let gy2 = (gm > 2) ? (gy + 1) : gy;
+
+            let days =
+                (365 * gy) +
+                Math.floor((gy2 + 3) / 4) -
+                Math.floor((gy2 + 99) / 100) +
+                Math.floor((gy2 + 399) / 400) -
+                80 +
+                gd +
+                g_d_m[gm - 1];
+
+            jy += 33 * Math.floor(days / 12053);
+            days %= 12053;
+
+            jy += 4 * Math.floor(days / 1461);
+            days %= 1461;
+
+            if (days > 365) {
+                jy += Math.floor((days - 1) / 365);
+                days = (days - 1) % 365;
+            }
+
+            let jm;
+            let jd;
+
+            if (days < 186) {
+                jm = 1 + Math.floor(days / 31);
+                jd = 1 + (days % 31);
+            } else {
+                jm = 7 + Math.floor((days - 186) / 30);
+                jd = 1 + ((days - 186) % 30);
+            }
+
+            return [jy, jm, jd];
+        }
+
+        const now = new Date();
+        const [jy, jm, jd] = gregorianToJalali(
+            now.getFullYear(),
+            now.getMonth() + 1,
+            now.getDate()
+        );
+
+        const monthNames = [
+            "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
+            "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
+        ];
+
+        document.getElementById("todayDate").textContent =
+            jd + " " + monthNames[jm - 1] + " " + jy;
+
+        // ===== تیک زدن تسک‌ها =====
+        document.querySelectorAll('.task').forEach(task => {
+            task.addEventListener('click', function() {
+                this.classList.toggle('completed');
+            });
+        });
+    </script>
+
+
+
+</body>
 
 </html>

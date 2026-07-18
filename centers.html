@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراکز درمانی | ممورا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ===== reset & base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            min-height: 100dvh;
+            background: #eee7f3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mobile {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100dvh;
+            background: #fdf6f4;
+            padding: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            background: #8472a7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 22px;
+            box-shadow: 0 8px 20px rgba(132, 114, 167, .22);
+            transition: .3s;
+            flex-shrink: 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .header-text h2 {
+            color: #665580;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .header-text p {
+            font-size: 14px;
+            color: #8472a7;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        /* ===== Search ===== */
+        .search-box {
+            background: white;
+            border-radius: 30px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(132, 114, 167, .08);
+        }
+
+        .search-box i {
+            color: #8472a7;
+            font-size: 20px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            flex: 1;
+            padding: 12px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .search-box input::placeholder {
+            color: #aaa;
+        }
+
+        /* ===== Filter Chips ===== */
+        .filter-group {
+            margin-bottom: 10px;
+        }
+
+        .filter-group-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #665580;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+
+        .chip {
+            background: #f2eef9;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #665580;
+            cursor: pointer;
+            transition: .2s;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+
+        .chip.active {
+            background: #8472a7;
+            color: white;
+            border-color: #8472a7;
+        }
+
+        .chip:hover {
+            background: #d9cff0;
+        }
+
+        .chip.active:hover {
+            background: #6f5a8f;
+        }
+
+        /* ===== Center Cards ===== */
+        .center-card {
+            background: white;
+            border-radius: 22px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 22px rgba(132, 114, 167, .10);
+            transition: .25s;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .center-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(132, 114, 167, .16);
+        }
+
+        .center-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: #eee5f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #8472a7;
+            flex-shrink: 0;
+        }
+
+        .center-info {
+            flex: 1;
+        }
+
+        .center-info h3 {
+            font-size: 16px;
+            color: #574a73;
+            margin-bottom: 4px;
+        }
+
+        .center-info .specialty {
+            font-size: 13px;
+            color: #8472a7;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .center-info .detail {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.7;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .center-info .detail i {
+            width: 18px;
+            color: #8472a7;
+            font-size: 14px;
+        }
+
+        .center-info .action-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .center-info .action-row a {
+            font-size: 13px;
+            background: #f5f0fa;
+            padding: 6px 16px;
+            border-radius: 30px;
+            color: #574a73;
+            transition: .2s;
+            font-weight: 500;
+        }
+
+        .center-info .action-row a:hover {
+            background: #8472a7;
+            color: white;
+        }
+
+        /* ===== Bottom Nav ===== */
+        .bottom-nav {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eadfdc;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+        }
+
+        .nav-item i {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active {
+            color: #8472a7;
+        }
+
+        /* ===== Responsive ===== */
+        @media(max-width:360px) {
+            .mobile {
+                padding: 15px;
+            }
+            .header-text h2 {
+                font-size: 18px;
+            }
+            .back-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+            .center-info h3 {
+                font-size: 14px;
+            }
+            .center-icon {
+                width: 46px;
+                height: 46px;
+                font-size: 20px;
+            }
+            .chip {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mobile">
+
+        <!-- ===== Header ===== -->
+        <div class="header">
+            <a href="home.html" class="back-btn">
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <div class="header-text">
+                <h2>مراکز درمانی</h2>
+                <p>پزشکان و مراکز تخصصی آلزایمر</p>
+            </div>
+        </div>
+
+        <!-- ===== Search ===== -->
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="جستجوی مرکز یا پزشک ..." id="searchInput">
+        </div>
+
+        <!-- ===== Filter: تخصص ===== -->
+        <div class="filter-group">
+            <span class="filter-group-label">تخصص</span>
+            <div class="filter-chips" id="specialtyFilter">
+                <span class="chip active" data-filter="all">همه</span>
+                <span class="chip" data-filter="neurologist">متخصص مغز و اعصاب</span>
+                <span class="chip" data-filter="geriatric">پزشک سالمندان</span>
+                <span class="chip" data-filter="clinic">کلینیک تخصصی</span>
+                <span class="chip" data-filter="hospital">بیمارستان</span>
+            </div>
+        </div>
+
+        <!-- ===== Filter: شهر ===== -->
+        <div class="filter-group">
+            <span class="filter-group-label">شهر</span>
+            <div class="filter-chips" id="cityFilter">
+                <span class="chip active" data-city="all">همه</span>
+                <span class="chip" data-city="tehran">تهران</span>
+                <span class="chip" data-city="isfahan">اصفهان</span>
+                <span class="chip" data-city="shiraz">شیراز</span>
+                <span class="chip" data-city="mashhad">مشهد</span>
+            </div>
+        </div>
+
+        <!-- ===== Centers List ===== -->
+        <div id="centersContainer">
+
+            <!-- تهران - متخصص مغز و اعصاب -->
+            <div class="center-card" data-type="neurologist" data-city="tehran">
+                <div class="center-icon"><i class="fa-solid fa-brain"></i></div>
+                <div class="center-info">
+                    <h3>دکتر سارا محمدی</h3>
+                    <div class="specialty">متخصص مغز و اعصاب</div>
+                    <div class="detail"><i class="fa-solid fa-location-dot"></i> تهران، خیابان ولیعصر، پلاک ۱۲</div>
+                    <div class="detail"><i class="fa-solid fa-phone"></i> ۰۲۱-۲۲۳۳۴۴۵۵</div>
+                    <div class="action-row">
+                        <a href="tel:02122334455"><i class="fa-solid fa-phone"></i> تماس</a>
+                        <a href="#"><i class="fa-regular fa-calendar"></i> نوبت‌دهی</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اصفهان - پزشک سالمندان -->
+            <div class="center-card" data-type="geriatric" data-city="isfahan">
+                <div class="center-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                <div class="center-info">
+                    <h3>دکتر احمد رضایی</h3>
+                    <div class="specialty">پزشک سالمندان (گریریاتر)</div>
+                    <div class="detail"><i class="fa-solid fa-location-dot"></i> اصفهان، خیابان شمس، مرکز تخصصی سالمندان</div>
+                    <div class="detail"><i class="fa-solid fa-phone"></i> ۰۳۱-۵۵۴۴۳۳۲۲</div>
+                    <div class="action-row">
+                        <a href="tel:03155443322"><i class="fa-solid fa-phone"></i> تماس</a>
+                        <a href="#"><i class="fa-regular fa-calendar"></i> نوبت‌دهی</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شیراز - کلینیک تخصصی -->
+            <div class="center-card" data-type="clinic" data-city="shiraz">
+                <div class="center-icon"><i class="fa-solid fa-hospital"></i></div>
+                <div class="center-info">
+                    <h3>کلینیک تخصصی آلزایمر</h3>
+                    <div class="specialty">کلینیک تخصصی تشخیص و درمان</div>
+                    <div class="detail"><i class="fa-solid fa-location-dot"></i> شیراز، بلوار میرزای شیرازی، کلینیک مهر</div>
+                    <div class="detail"><i class="fa-solid fa-phone"></i> ۰۷۱-۳۶۶۵۵۴۴</div>
+                    <div class="action-row">
+                        <a href="tel:0713665544"><i class="fa-solid fa-phone"></i> تماس</a>
+                        <a href="#"><i class="fa-regular fa-calendar"></i> نوبت‌دهی</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مشهد - بیمارستان -->
+            <div class="center-card" data-type="hospital" data-city="mashhad">
+                <div class="center-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="center-info">
+                    <h3>بیمارستان میلاد</h3>
+                    <div class="specialty">بیمارستان فوق تخصصی</div>
+                    <div class="detail"><i class="fa-solid fa-location-dot"></i> مشهد، بلوار وکیل‌آباد، بیمارستان میلاد</div>
+                    <div class="detail"><i class="fa-solid fa-phone"></i> ۰۵۱-۳۷۶۵۲۱۴</div>
+                    <div class="action-row">
+                        <a href="tel:0513765214"><i class="fa-solid fa-phone"></i> تماس</a>
+                        <a href="#"><i class="fa-regular fa-calendar"></i> نوبت‌دهی</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تهران - متخصص مغز و اعصاب (دوم) -->
+            <div class="center-card" data-type="neurologist" data-city="tehran">
+                <div class="center-icon"><i class="fa-solid fa-brain"></i></div>
+                <div class="center-info">
+                    <h3>دکتر مریم کریمی</h3>
+                    <div class="specialty">متخصص مغز و اعصاب و حافظه</div>
+                    <div class="detail"><i class="fa-solid fa-location-dot"></i> تهران، خیابان انقلاب، کلینیک بهار</div>
+                    <div class="detail"><i class="fa-solid fa-phone"></i> ۰۲۱-۶۶۴۲۱۷۸</div>
+                    <div class="action-row">
+                        <a href="tel:0216642178"><i class="fa-solid fa-phone"></i> تماس</a>
+                        <a href="#"><i class="fa-regular fa-calendar"></i> نوبت‌دهی</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اصفهان - کلینیک (نمونه اضافی) -->
+            <div class="center-card" data-type="clinic" data-city="isfahan">
+                <div class="center-icon"><i class="fa-solid fa-hospital"></i></div>
+                <div class="center-info">
+                    <h3>مرکز تخصصی حافظه اصفهان</h3>
+                    <div class="specialty">کلینیک تخصصی اختلالات حافظه</div>
+                    <div class="detail"><i class="fa-solid fa-location-dot"></i> اصفهان، خیابان چهارباغ، پلاک ۸۹</div>
+                    <div class="detail"><i class="fa-solid fa-phone"></i> ۰۳۱-۳۲۳۴۵۶۷</div>
+                    <div class="action-row">
+                        <a href="tel:0313234567"><i class="fa-solid fa-phone"></i> تماس</a>
+                        <a href="#"><i class="fa-regular fa-calendar"></i> نوبت‌دهی</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== Bottom Navigation ===== -->
+        <div class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                خانه
+            </a>
+            <a href="education.html" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                آموزش
+            </a>
+            <a href="chat.html" class="nav-item">
+                <i class="fa-solid fa-comments"></i>
+                چت‌ها
+            </a>
+            <a href="reminder.html" class="nav-item">
+                <i class="fa-solid fa-bell"></i>
+                یادآورها
+            </a>
+            <a href="daily-care.html" class="nav-item active">
+                <i class="fa-solid fa-heart"></i>
+                مراقبت
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        // ===== فیلتر بر اساس تخصص =====
+        const specialtyChips = document.querySelectorAll('#specialtyFilter .chip');
+        const cityChips = document.querySelectorAll('#cityFilter .chip');
+        const centerCards = document.querySelectorAll('.center-card');
+        const searchInput = document.getElementById('searchInput');
+
+        let activeSpecialty = 'all';
+        let activeCity = 'all';
+
+        // ===== رویداد چیپ‌های تخصص =====
+        specialtyChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                specialtyChips.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                activeSpecialty = this.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        // ===== رویداد چیپ‌های شهر =====
+        cityChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                cityChips.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                activeCity = this.dataset.city;
+                applyFilters();
+            });
+        });
+
+        // ===== جستجو =====
+        searchInput.addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            const query = searchInput.value.trim().toLowerCase();
+
+            centerCards.forEach(card => {
+                const type = card.dataset.type;
+                const city = card.dataset.city;
+                const text = card.textContent.toLowerCase();
+
+                const matchesSpecialty = activeSpecialty === 'all' || type === activeSpecialty;
+                const matchesCity = activeCity === 'all' || city === activeCity;
+                const matchesSearch = text.includes(query);
+
+                if (matchesSpecialty && matchesCity && matchesSearch) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // اعمال اولیه (همه موارد نمایش داده شوند)
+        applyFilters();
+    </script>
+
+</body>
+
+</html>

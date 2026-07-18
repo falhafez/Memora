@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جامعه مراقبین | ممورا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ===== reset & base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            min-height: 100dvh;
+            background: #eee7f3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mobile {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100dvh;
+            background: #fdf6f4;
+            padding: 20px;
+            padding-bottom: 100px;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .back-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            background: #8472a7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 22px;
+            box-shadow: 0 8px 20px rgba(132, 114, 167, .22);
+            transition: .3s;
+            flex-shrink: 0;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .header-text h2 {
+            color: #665580;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .header-text p {
+            font-size: 14px;
+            color: #8472a7;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        /* ===== تب‌های جامعه ===== */
+        .community-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 18px;
+            background: #f2eef9;
+            border-radius: 18px;
+            padding: 5px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #665580;
+            cursor: pointer;
+            transition: .25s;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #8472a7;
+            box-shadow: 0 4px 12px rgba(132, 114, 167, .15);
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ===== بخش ارسال پست جدید ===== */
+        .new-post {
+            background: white;
+            border-radius: 22px;
+            padding: 16px;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 22px rgba(132, 114, 167, .10);
+        }
+
+        .new-post .post-input {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .new-post .post-input .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .new-post .post-input .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .new-post .post-input textarea {
+            flex: 1;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 14px;
+            padding: 6px 0;
+            background: transparent;
+            min-height: 60px;
+            color: #3d3648;
+        }
+
+        .new-post .post-input textarea::placeholder {
+            color: #aaa;
+        }
+
+        .new-post .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .new-post .post-actions .left-actions {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .new-post .post-actions .left-actions label {
+            color: #8472a7;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .new-post .post-actions .left-actions label:hover {
+            color: #665580;
+        }
+
+        .new-post .post-actions .left-actions input[type="file"] {
+            display: none;
+        }
+
+        .new-post .post-actions .left-actions select {
+            border: none;
+            background: #f5f2f9;
+            padding: 6px 12px;
+            border-radius: 30px;
+            color: #665580;
+            font-size: 13px;
+            outline: none;
+            font-family: 'Vazirmatn', sans-serif;
+            cursor: pointer;
+        }
+
+        .new-post .post-actions .btn-submit {
+            background: #8472a7;
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .new-post .post-actions .btn-submit:hover {
+            background: #6f5a8f;
+        }
+
+        .new-post .preview-image {
+            margin-top: 10px;
+            display: none;
+            position: relative;
+        }
+
+        .new-post .preview-image img {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 16px;
+            border: 1px solid #e8e0ef;
+        }
+
+        .new-post .preview-image .remove-img {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .new-post .preview-image .remove-img:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        /* ===== فید پست‌ها ===== */
+        .post-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 22px;
+            padding: 16px 16px 12px;
+            box-shadow: 0 8px 22px rgba(132, 114, 167, .10);
+            transition: box-shadow 0.2s;
+            position: relative;
+        }
+
+        .post-card:hover {
+            box-shadow: 0 12px 28px rgba(132, 114, 167, .16);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .post-header .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .post-header .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-header .post-user {
+            flex: 1;
+        }
+
+        .post-header .post-user .name {
+            font-weight: 700;
+            color: #3d3648;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .post-header .post-user .badge {
+            font-size: 11px;
+            background: #eee5f7;
+            color: #8472a7;
+            padding: 2px 10px;
+            border-radius: 30px;
+            margin-right: 6px;
+            font-weight: 500;
+        }
+
+        .post-header .post-user .time {
+            font-size: 12px;
+            color: #999;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .post-header .post-more {
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px 8px;
+            border-radius: 30px;
+            transition: background 0.2s;
+            position: relative;
+            user-select: none;
+        }
+
+        .post-header .post-more:hover {
+            background: #f0ecf5;
+        }
+
+        /* ===== منوی dropdown ===== */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .15);
+            min-width: 150px;
+            padding: 6px 0;
+            z-index: 50;
+            display: none;
+            margin-top: 4px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            font-size: 14px;
+            color: #3d3648;
+            cursor: pointer;
+            transition: background 0.15s;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: right;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: #f5f0fa;
+        }
+
+        .dropdown-menu .dropdown-item.danger {
+            color: #e74c6f;
+        }
+
+        .dropdown-menu .dropdown-item.danger:hover {
+            background: #fde8ed;
+        }
+
+        .dropdown-menu .dropdown-item i {
+            width: 20px;
+            color: #8472a7;
+        }
+
+        .dropdown-menu .dropdown-item.danger i {
+            color: #e74c6f;
+        }
+
+        /* ===== محتوای پست ===== */
+        .post-content {
+            margin: 12px 0 10px;
+        }
+
+        .post-content .text {
+            font-size: 14px;
+            color: #3d3648;
+            line-height: 1.8;
+            word-wrap: break-word;
+        }
+
+        .post-content .post-image {
+            margin-top: 10px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .post-content .post-image img {
+            width: 100%;
+            max-height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #888;
+            padding: 6px 0 10px;
+            border-bottom: 1px solid #f0ecf5;
+        }
+
+        .post-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .post-stats span i {
+            font-size: 14px;
+        }
+
+        .post-actions-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 4px;
+        }
+
+        .post-actions-bar .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #777;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 30px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .post-actions-bar .action-btn:hover {
+            background: #f0ecf5;
+        }
+
+        .post-actions-bar .action-btn.liked {
+            color: #e74c6f;
+        }
+
+        .post-actions-bar .action-btn.liked i {
+            font-weight: 900;
+        }
+
+        .post-actions-bar .action-btn i {
+            font-size: 18px;
+        }
+
+        /* ===== کامنت‌ها ===== */
+        .comments-section {
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid #f0ecf5;
+        }
+
+        .comment-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .comment-item .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .comment-item .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comment-item .comment-body {
+            background: #f5f2f9;
+            padding: 8px 14px;
+            border-radius: 16px;
+            flex: 1;
+        }
+
+        .comment-item .comment-body .cname {
+            font-weight: 600;
+            font-size: 12px;
+            color: #3d3648;
+            cursor: pointer;
+        }
+
+        .comment-item .comment-body .ctext {
+            font-size: 13px;
+            color: #4f4859;
+            margin-top: 2px;
+            line-height: 1.6;
+        }
+
+        .comment-item .comment-body .ctime {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 3px;
+        }
+
+        .comment-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .comment-input input {
+            flex: 1;
+            border: none;
+            background: #f5f2f9;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            outline: none;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .comment-input input::placeholder {
+            color: #aaa;
+        }
+
+        .comment-input button {
+            background: #8472a7;
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+
+        .comment-input button:hover {
+            background: #6f5a8f;
+        }
+
+        .view-all-comments {
+            font-size: 12px;
+            color: #8472a7;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 6px;
+            cursor: pointer;
+        }
+
+        .view-all-comments:hover {
+            text-decoration: underline;
+        }
+
+        /* ====================================================== */
+        /* ===== بخش گفتگو (چت) ===== */
+        /* ====================================================== */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chat-list {
+            background: white;
+            border-radius: 22px;
+            padding: 6px 0;
+            box-shadow: 0 8px 22px rgba(132, 114, 167, .10);
+        }
+
+        .chat-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 12px;
+            margin: 2px 6px;
+        }
+
+        .chat-item:hover {
+            background: #f5f0fa;
+        }
+
+        .chat-item .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .chat-item .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .chat-item .avatar .online-dot {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            background: #52b96d;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .chat-item .chat-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chat-item .chat-info .cname {
+            font-weight: 700;
+            color: #3d3648;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chat-item .chat-info .cname .time {
+            font-weight: 400;
+            font-size: 11px;
+            color: #999;
+        }
+
+        .chat-item .chat-info .last-msg {
+            font-size: 13px;
+            color: #888;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 3px;
+        }
+
+        .chat-item .chat-info .last-msg .sender {
+            color: #8472a7;
+            font-weight: 500;
+        }
+
+        .chat-item .unread-badge {
+            background: #e74c6f;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+        }
+
+        .chat-window {
+            background: white;
+            border-radius: 22px;
+            box-shadow: 0 8px 22px rgba(132, 114, 167, .10);
+            display: none;
+            flex-direction: column;
+            max-height: 450px;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-bottom: 1px solid #f0ecf5;
+            flex-shrink: 0;
+        }
+
+        .chat-header .back-chat {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #8472a7;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .chat-header .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .chat-header .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .chat-header .chat-user-info {
+            flex: 1;
+        }
+
+        .chat-header .chat-user-info .cname {
+            font-weight: 700;
+            color: #3d3648;
+            font-size: 15px;
+        }
+
+        .chat-header .chat-user-info .status {
+            font-size: 12px;
+            color: #52b96d;
+        }
+
+        .chat-messages {
+            padding: 16px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 300px;
+            min-height: 200px;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 10px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.7;
+            word-wrap: break-word;
+            position: relative;
+        }
+
+        .msg.sent {
+            align-self: flex-end;
+            background: #8472a7;
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+
+        .msg.received {
+            align-self: flex-start;
+            background: #f5f2f9;
+            color: #3d3648;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg .msg-time {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .msg.sent .msg-time {
+            text-align: left;
+        }
+
+        .msg.received .msg-time {
+            text-align: right;
+        }
+
+        .chat-input-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-top: 1px solid #f0ecf5;
+            flex-shrink: 0;
+            background: #faf8fc;
+            border-radius: 0 0 22px 22px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            border: none;
+            background: white;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            outline: none;
+            font-family: 'Vazirmatn', sans-serif;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+        }
+
+        .chat-input-area input::placeholder {
+            color: #aaa;
+        }
+
+        .chat-input-area button {
+            background: #8472a7;
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-input-area button:hover {
+            background: #6f5a8f;
+        }
+
+        /* ===== Bottom Nav ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid #eadfdc;
+            box-shadow: 0 -6px 20px rgba(0, 0, 0, .06);
+            z-index: 100;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+        }
+
+        .nav-item i {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: #8472a7;
+        }
+
+        /* ===== مودال ویرایش ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 28px;
+            max-width: 420px;
+            width: 100%;
+            padding: 28px 24px;
+            animation: zoom 0.3s;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes zoom {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-box h3 {
+            color: #665580;
+            font-size: 20px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .modal-box label {
+            display: block;
+            font-weight: 600;
+            color: #574a73;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .modal-box select,
+        .modal-box textarea {
+            width: 100%;
+            border: none;
+            background: #f7f4fb;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            outline: none;
+            font-family: 'Vazirmatn', sans-serif;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .modal-box textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        .modal-actions button {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .modal-actions .btn-cancel {
+            background: #f0ecf5;
+            color: #665580;
+        }
+
+        .modal-actions .btn-cancel:hover {
+            background: #e4def0;
+        }
+
+        .modal-actions .btn-save {
+            background: #8472a7;
+            color: white;
+        }
+
+        .modal-actions .btn-save:hover {
+            background: #6f5a8f;
+        }
+
+        /* ===== Responsive ===== */
+        @media(max-width:360px) {
+            .mobile {
+                padding: 15px;
+                padding-bottom: 90px;
+            }
+            .header-text h2 {
+                font-size: 18px;
+            }
+            .back-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+            .chat-item .avatar {
+                width: 42px;
+                height: 42px;
+            }
+            .msg {
+                max-width: 90%;
+                font-size: 13px;
+            }
+            .modal-box {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mobile">
+
+        <!-- ===== Header ===== -->
+        <div class="header">
+            <a href="home.html" class="back-btn">
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <div class="header-text">
+                <h2>جامعه مراقبین</h2>
+                <p>تجربه‌ها، پرسش‌ها و گفتگو</p>
+            </div>
+        </div>
+
+        <!-- ===== تب‌ها ===== -->
+        <div class="community-tabs">
+            <button class="tab-btn active" data-tab="posts"><i class="fa-regular fa-newspaper"></i> پست‌ها</button>
+            <button class="tab-btn" data-tab="chat"><i class="fa-regular fa-comments"></i> گفتگو</button>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- ===== تب اول: پست‌ها ===== -->
+        <!-- ========================================================= -->
+        <div class="tab-content active" id="tab-posts">
+
+            <!-- بخش ارسال پست جدید -->
+            <div class="new-post">
+                <div class="post-input">
+                    <div class="avatar">
+                        <img src="profile.png" alt="profile" id="myAvatar">
+                    </div>
+                    <textarea placeholder="تجربه، پرسش یا نکته خود را با جامعه به اشتراک بگذارید..." id="postText"></textarea>
+                </div>
+                <div class="preview-image" id="previewContainer">
+                    <img id="previewImg" src="#" alt="preview">
+                    <button class="remove-img" id="removeImgBtn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="post-actions">
+                    <div class="left-actions">
+                        <label for="imageUpload"><i class="fa-solid fa-image"></i></label>
+                        <input type="file" accept="image/*" id="imageUpload">
+                        <select id="categorySelect">
+                            <option value="experience">تجربه</option>
+                            <option value="question">پرسش</option>
+                            <option value="tip">نکته</option>
+                            <option value="support">حمایت عاطفی</option>
+                        </select>
+                    </div>
+                    <button class="btn-submit" id="submitPostBtn"><i class="fa-solid fa-paper-plane"></i> ارسال</button>
+                </div>
+            </div>
+
+            <!-- فید پست‌ها -->
+            <div class="post-feed" id="postFeed">
+                <!-- پست‌ها به صورت داینامیک از localStorage بارگذاری می‌شوند -->
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- ===== تب دوم: گفتگو (چت) ===== -->
+        <!-- ========================================================= -->
+        <div class="tab-content" id="tab-chat">
+            <div class="chat-container">
+
+                <!-- لیست مکالمات -->
+                <div class="chat-list" id="chatList">
+                    <!-- آیتم‌های چت توسط js ساخته می‌شوند -->
+                </div>
+
+                <!-- پنجره چت -->
+                <div class="chat-window" id="chatWindow">
+                    <div class="chat-header">
+                        <button class="back-chat" id="closeChat"><i class="fa-solid fa-arrow-right"></i></button>
+                        <div class="avatar"><img src="profile.png" alt="user" id="chatAvatar"></div>
+                        <div class="chat-user-info">
+                            <div class="cname" id="chatUserName">نام کاربر</div>
+                            <div class="status" id="chatStatus">آنلاین</div>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- پیام‌ها در js قرار می‌گیرند -->
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" placeholder="پیام خود را بنویسید..." id="chatInput">
+                        <button id="sendMsgBtn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== مودال ویرایش پست ===== -->
+        <div class="modal-overlay" id="editModal">
+            <div class="modal-box">
+                <h3>ویرایش پست</h3>
+                <label>دسته‌بندی</label>
+                <select id="editCategory">
+                    <option value="experience">تجربه</option>
+                    <option value="question">پرسش</option>
+                    <option value="tip">نکته</option>
+                    <option value="support">حمایت عاطفی</option>
+                </select>
+                <label>متن</label>
+                <textarea id="editText" rows="4"></textarea>
+                <div class="modal-actions">
+                    <button class="btn-cancel" id="editCancel">لغو</button>
+                    <button class="btn-save" id="editSave">ذخیره</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Bottom Navigation ===== -->
+        <div class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                خانه
+            </a>
+            <a href="education.html" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                آموزش
+            </a>
+            <a href="chat.html" class="nav-item">
+                <i class="fa-solid fa-comments"></i>
+                چت‌ها
+            </a>
+            <a href="reminder.html" class="nav-item">
+                <i class="fa-solid fa-bell"></i>
+                یادآورها
+            </a>
+            <a href="daily-care.html" class="nav-item active">
+                <i class="fa-solid fa-heart"></i>
+                مراقبت
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        // ================================================================
+        // ===== دریافت اطلاعات کاربر از localStorage =====
+        // ================================================================
+        let myName = 'شما';
+        let myAvatar = 'profile.png';
+        try {
+            const profile = JSON.parse(localStorage.getItem('patientProfile'));
+            if (profile && profile.caregiverName) {
+                myName = profile.caregiverName;
+            }
+            if (profile && profile.avatar) {
+                myAvatar = profile.avatar;
+            }
+        } catch (e) {}
+
+        document.getElementById('myAvatar').src = myAvatar;
+
+        // ================================================================
+        // ===== مدیریت تب‌ها =====
+        // ================================================================
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = {
+            posts: document.getElementById('tab-posts'),
+            chat: document.getElementById('tab-chat')
+        };
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const tab = this.dataset.tab;
+                Object.keys(tabContents).forEach(key => {
+                    tabContents[key].classList.toggle('active', key === tab);
+                });
+                if (tab === 'chat') {
+                    document.getElementById('chatWindow').classList.remove('active');
+                }
+            });
+        });
+
+        // ================================================================
+        // ===== ذخیره و بازیابی پست‌ها در localStorage =====
+        // ================================================================
+        const STORAGE_KEY = 'community_posts';
+
+        function loadPosts() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function savePosts(posts) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+        }
+
+        let posts = loadPosts();
+
+        // ================================================================
+        // ===== رندر پست‌ها =====
+        // ================================================================
+        const postFeed = document.getElementById('postFeed');
+        let activeDropdown = null;
+
+        function renderPosts() {
+            postFeed.innerHTML = '';
+            if (posts.length === 0) {
+                postFeed.innerHTML =
+                    `<div style="text-align:center; padding:40px 20px; color:#999; background:white; border-radius:22px;">
+                        <i class="fa-regular fa-message" style="font-size:40px; color:#ccc; display:block; margin-bottom:12px;"></i>
+                        <p style="font-size:15px;">هنوز هیچ پستی وجود ندارد.</p>
+                        <p style="font-size:13px; margin-top:6px;">اولین تجربه یا پرسش خود را به اشتراک بگذارید.</p>
+                    </div>`;
+                return;
+            }
+
+            const sorted = [...posts].sort((a, b) => b.timestamp - a.timestamp);
+            sorted.forEach(post => {
+                const card = createPostCard(post);
+                postFeed.appendChild(card);
+            });
+
+            attachAllEvents();
+        }
+
+        function createPostCard(post) {
+            const card = document.createElement('div');
+            card.className = 'post-card';
+            card.dataset.postId = post.id;
+
+            const categoryLabel = {
+                'experience': 'تجربه',
+                'question': 'پرسش',
+                'tip': 'نکته',
+                'support': 'حمایت عاطفی'
+            };
+
+            const timeStr = getTimeAgo(post.timestamp);
+            const isMine = post.author === myName;
+
+            card.innerHTML = `
+                    <div class="post-header">
+                        <div class="avatar"><img src="${post.avatar || 'profile.png'}" alt="user"></div>
+                        <div class="post-user">
+                            <span class="name">${post.author}</span>
+                            <span class="badge">${categoryLabel[post.category] || 'عمومی'}</span>
+                            <span class="time">${timeStr}</span>
+                        </div>
+                        ${isMine ? `<span class="post-more" data-postid="${post.id}"><i class="fa-solid fa-ellipsis-vertical"></i></span>` : ''}
+                    </div>
+                    <div class="post-content">
+                        <div class="text">${post.text}</div>
+                        ${post.image ? `<div class="post-image"><img src="${post.image}" alt="post image"></div>` : ''}
+                    </div>
+                    <div class="post-stats">
+                        <span><i class="${post.liked ? 'fa-solid' : 'fa-regular'} fa-heart"></i> ${post.likes || 0}</span>
+                        <span><i class="fa-regular fa-comment"></i> ${(post.comments || []).length}</span>
+                    </div>
+                    <div class="post-actions-bar">
+                        <button class="action-btn like-btn ${post.liked ? 'liked' : ''}"><i class="${post.liked ? 'fa-solid' : 'fa-regular'} fa-heart"></i> پسندیدن</button>
+                        <button class="action-btn comment-toggle"><i class="fa-regular fa-comment"></i> نظر</button>
+                        <button class="action-btn"><i class="fa-regular fa-share-from-square"></i> اشتراک</button>
+                    </div>
+                    <div class="comments-section" style="display:none;">
+                        ${(post.comments || []).map(c => `
+                            <div class="comment-item">
+                                <div class="avatar"><img src="${c.avatar || 'profile.png'}" alt="user"></div>
+                                <div class="comment-body">
+                                    <span class="cname">${c.author}</span>
+                                    <div class="ctext">${c.text}</div>
+                                    <div class="ctime">${getTimeAgo(c.timestamp)}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="comment-input">
+                            <input type="text" placeholder="نظر خود را بنویسید..." class="comment-input-field">
+                            <button class="comment-submit-btn">ارسال</button>
+                        </div>
+                    </div>
+                `;
+
+            // اگر پست متعلق به خود کاربر است، منوی dropdown را اضافه می‌کنیم
+            if (isMine) {
+                const moreBtn = card.querySelector('.post-more');
+                const dropdown = document.createElement('div');
+                dropdown.className = 'dropdown-menu';
+                dropdown.dataset.postid = post.id;
+                dropdown.innerHTML = `
+                        <button class="dropdown-item edit-post"><i class="fa-regular fa-pen-to-square"></i> ویرایش</button>
+                        <button class="dropdown-item danger delete-post"><i class="fa-regular fa-trash-can"></i> حذف</button>
+                    `;
+                moreBtn.parentElement.style.position = 'relative';
+                moreBtn.parentElement.appendChild(dropdown);
+
+                // باز/بستن منو
+                moreBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dd = this.parentElement.querySelector('.dropdown-menu');
+                    const isOpen = dd.classList.contains('show');
+                    // بستن همه منوهای باز
+                    document.querySelectorAll('.dropdown-menu.show').forEach(m => m.classList.remove('show'));
+                    if (!isOpen) {
+                        dd.classList.toggle('show');
+                        activeDropdown = dd;
+                    } else {
+                        activeDropdown = null;
+                    }
+                });
+
+                // ویرایش
+                dropdown.querySelector('.edit-post').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const postId = parseInt(this.closest('.dropdown-menu').dataset.postid);
+                    openEditModal(postId);
+                    this.closest('.dropdown-menu').classList.remove('show');
+                    activeDropdown = null;
+                });
+
+                // حذف
+                dropdown.querySelector('.delete-post').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const postId = parseInt(this.closest('.dropdown-menu').dataset.postid);
+                    if (confirm('آیا از حذف این پست مطمئن هستید؟')) {
+                        deletePost(postId);
+                    }
+                    this.closest('.dropdown-menu').classList.remove('show');
+                    activeDropdown = null;
+                });
+            }
+
+            return card;
+        }
+
+        // بستن منو با کلیک بیرون
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown-menu.show').forEach(m => m.classList.remove('show'));
+            activeDropdown = null;
+        });
+
+        // ================================================================
+        // ===== ویرایش و حذف =====
+        // ================================================================
+        const editModal = document.getElementById('editModal');
+        const editText = document.getElementById('editText');
+        const editCategory = document.getElementById('editCategory');
+        const editSave = document.getElementById('editSave');
+        const editCancel = document.getElementById('editCancel');
+        let editingPostId = null;
+
+        function openEditModal(postId) {
+            const post = posts.find(p => p.id === postId);
+            if (!post || post.author !== myName) return;
+            editingPostId = postId;
+            editText.value = post.text;
+            editCategory.value = post.category;
+            editModal.classList.add('active');
+        }
+
+        function closeEditModal() {
+            editModal.classList.remove('active');
+            editingPostId = null;
+        }
+
+        editCancel.addEventListener('click', closeEditModal);
+        editModal.addEventListener('click', function(e) {
+            if (e.target === this) closeEditModal();
+        });
+
+        editSave.addEventListener('click', function() {
+            if (editingPostId === null) return;
+            const post = posts.find(p => p.id === editingPostId);
+            if (!post) return;
+            const newText = editText.value.trim();
+            if (!newText) {
+                alert('متن پست نمی‌تواند خالی باشد.');
+                return;
+            }
+            post.text = newText;
+            post.category = editCategory.value;
+            savePosts(posts);
+            renderPosts();
+            closeEditModal();
+        });
+
+        function deletePost(postId) {
+            posts = posts.filter(p => p.id !== postId);
+            savePosts(posts);
+            renderPosts();
+        }
+
+        // ================================================================
+        // ===== توابع کمکی =====
+        // ================================================================
+        function getTimeAgo(timestamp) {
+            const diff = Date.now() - timestamp;
+            const minutes = Math.floor(diff / 60000);
+            if (minutes < 1) return 'همین الان';
+            if (minutes < 60) return minutes + ' دقیقه پیش';
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return hours + ' ساعت پیش';
+            const days = Math.floor(hours / 24);
+            if (days < 7) return days + ' روز پیش';
+            return new Date(timestamp).toLocaleDateString('fa-IR');
+        }
+
+        // ================================================================
+        // ===== ارسال پست جدید =====
+        // ================================================================
+        const submitBtn = document.getElementById('submitPostBtn');
+        const postText = document.getElementById('postText');
+        const categorySelect = document.getElementById('categorySelect');
+        const imageUpload = document.getElementById('imageUpload');
+        const previewContainer = document.getElementById('previewContainer');
+        const previewImg = document.getElementById('previewImg');
+        const removeImgBtn = document.getElementById('removeImgBtn');
+        let uploadedImage = null;
+
+        imageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    previewImg.src = ev.target.result;
+                    previewContainer.style.display = 'block';
+                    uploadedImage = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        removeImgBtn.addEventListener('click', function() {
+            previewContainer.style.display = 'none';
+            imageUpload.value = '';
+            uploadedImage = null;
+        });
+
+        submitBtn.addEventListener('click', function() {
+            const text = postText.value.trim();
+            if (!text) {
+                alert('لطفاً متن پست را وارد کنید.');
+                return;
+            }
+            const newPost = {
+                id: Date.now(),
+                author: myName,
+                avatar: myAvatar,
+                category: categorySelect.value,
+                text: text,
+                image: uploadedImage,
+                timestamp: Date.now(),
+                likes: 0,
+                liked: false,
+                comments: []
+            };
+            posts.push(newPost);
+            savePosts(posts);
+            renderPosts();
+            postText.value = '';
+            previewContainer.style.display = 'none';
+            imageUpload.value = '';
+            uploadedImage = null;
+            categorySelect.value = 'experience';
+            postFeed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // ================================================================
+        // ===== اتصال رویدادهای لایک و کامنت =====
+        // ================================================================
+        function attachAllEvents() {
+            document.querySelectorAll('.post-card').forEach(card => {
+                const postId = parseInt(card.dataset.postId);
+                const post = posts.find(p => p.id === postId);
+                if (!post) return;
+
+                // لایک
+                const likeBtn = card.querySelector('.like-btn');
+                const statsSpan = card.querySelector('.post-stats span:first-child');
+                if (likeBtn && statsSpan) {
+                    likeBtn.addEventListener('click', function() {
+                        post.liked = !post.liked;
+                        post.likes += post.liked ? 1 : -1;
+                        savePosts(posts);
+                        const icon = this.querySelector('i');
+                        icon.className = post.liked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+                        this.classList.toggle('liked');
+                        statsSpan.innerHTML =
+                            `<i class="${post.liked ? 'fa-solid' : 'fa-regular'} fa-heart"></i> ${post.likes}`;
+                    });
+                }
+
+                // تاگل کامنت
+                const toggleBtn = card.querySelector('.comment-toggle');
+                const commentsSection = card.querySelector('.comments-section');
+                if (toggleBtn && commentsSection) {
+                    toggleBtn.addEventListener('click', function() {
+                        const isHidden = commentsSection.style.display === 'none';
+                        commentsSection.style.display = isHidden ? 'block' : 'none';
+                        if (isHidden) {
+                            const input = commentsSection.querySelector('.comment-input-field');
+                            if (input) setTimeout(() => input.focus(), 300);
+                        }
+                    });
+                }
+
+                // ارسال کامنت
+                const commentSubmit = card.querySelector('.comment-submit-btn');
+                const commentInput = card.querySelector('.comment-input-field');
+                if (commentSubmit && commentInput) {
+                    commentSubmit.addEventListener('click', function() {
+                        const text = commentInput.value.trim();
+                        if (!text) return;
+                        const newComment = {
+                            author: myName,
+                            avatar: myAvatar,
+                            text: text,
+                            timestamp: Date.now()
+                        };
+                        post.comments.push(newComment);
+                        savePosts(posts);
+                        const commentItem = document.createElement('div');
+                        commentItem.className = 'comment-item';
+                        commentItem.innerHTML = `
+                                <div class="avatar"><img src="${myAvatar}" alt="user"></div>
+                                <div class="comment-body">
+                                    <span class="cname">${myName}</span>
+                                    <div class="ctext">${text}</div>
+                                    <div class="ctime">همین الان</div>
+                                </div>
+                            `;
+                        const inputWrap = commentsSection.querySelector('.comment-input');
+                        commentsSection.insertBefore(commentItem, inputWrap);
+                        commentInput.value = '';
+                        const statsComments = card.querySelector('.post-stats span:last-child');
+                        if (statsComments) {
+                            statsComments.innerHTML =
+                                `<i class="fa-regular fa-comment"></i> ${post.comments.length}`;
+                        }
+                    });
+                    commentInput.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            commentSubmit.click();
+                        }
+                    });
+                }
+            });
+        }
+
+        // ================================================================
+        // ===== بخش چت =====
+        // ================================================================
+        const chatUsers = [{
+            id: 1,
+            name: 'زهرا رضایی',
+            avatar: 'profile.png',
+            online: true,
+            lastMsg: 'ممنون از کمکت 🙏',
+            time: '۱۰:۳۰',
+            unread: 0
+        }, {
+            id: 2,
+            name: 'محمد کریمی',
+            avatar: 'profile.png',
+            online: true,
+            lastMsg: 'چطور می‌تونم کمک کنم؟',
+            time: 'دیروز',
+            unread: 0
+        }, {
+            id: 3,
+            name: 'سارا احمدی',
+            avatar: 'profile.png',
+            online: false,
+            lastMsg: 'حتماً امتحان می‌کنم',
+            time: 'دیروز',
+            unread: 0
+        }, {
+            id: 4,
+            name: 'نرگس حسینی',
+            avatar: 'profile.png',
+            online: true,
+            lastMsg: 'واقعاً عالی بود!',
+            time: '۲ روز پیش',
+            unread: 0
+        }];
+
+        const CHAT_STORAGE_KEY = 'community_chat_history';
+        let chatHistory = {};
+
+        function loadChatHistory() {
+            try {
+                const data = localStorage.getItem(CHAT_STORAGE_KEY);
+                if (data) chatHistory = JSON.parse(data);
+                chatUsers.forEach(u => {
+                    if (!chatHistory[u.id]) chatHistory[u.id] = [];
+                });
+            } catch {
+                chatHistory = {};
+                chatUsers.forEach(u => {
+                    chatHistory[u.id] = [];
+                });
+            }
+        }
+
+        function saveChatHistory() {
+            localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatHistory));
+        }
+
+        loadChatHistory();
+
+        const chatList = document.getElementById('chatList');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendMsgBtn = document.getElementById('sendMsgBtn');
+        const closeChatBtn = document.getElementById('closeChat');
+        const chatUserName = document.getElementById('chatUserName');
+        const chatStatus = document.getElementById('chatStatus');
+        const chatAvatar = document.getElementById('chatAvatar');
+        let currentChatId = null;
+
+        function renderChatList() {
+            chatList.innerHTML = '';
+            chatUsers.forEach(user => {
+                const history = chatHistory[user.id] || [];
+                const lastMsg = history.length > 0 ? history[history.length - 1] : { sender: 'receiver',
+                    text: 'شروع گفتگو' };
+                const isSender = lastMsg.sender === 'sender';
+                const item = document.createElement('div');
+                item.className = 'chat-item';
+                item.innerHTML = `
+                        <div class="avatar">
+                            <img src="${user.avatar}" alt="avatar">
+                            ${user.online ? '<span class="online-dot"></span>' : ''}
+                        </div>
+                        <div class="chat-info">
+                            <div class="cname">
+                                ${user.name}
+                                <span class="time">${user.time}</span>
+                            </div>
+                            <div class="last-msg">
+                                ${isSender ? '<span class="sender">شما: </span>' : ''}
+                                ${lastMsg.text}
+                            </div>
+                        </div>
+                        ${user.unread > 0 ? `<div class="unread-badge">${user.unread}</div>` : ''}
+                    `;
+                item.addEventListener('click', () => openChat(user.id));
+                chatList.appendChild(item);
+            });
+        }
+
+        function openChat(userId) {
+            const user = chatUsers.find(u => u.id === userId);
+            if (!user) return;
+            currentChatId = userId;
+            chatUserName.textContent = user.name;
+            chatStatus.textContent = user.online ? 'آنلاین' : 'آفلاین';
+            chatAvatar.src = user.avatar;
+            chatWindow.classList.add('active');
+            const history = chatHistory[userId] || [];
+            chatMessages.innerHTML = '';
+            history.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = `msg ${msg.sender === 'sender' ? 'sent' : 'received'}`;
+                div.innerHTML = `
+                        ${msg.text}
+                        <span class="msg-time">${msg.time}</span>
+                    `;
+                chatMessages.appendChild(div);
+            });
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            user.unread = 0;
+            renderChatList();
+            setTimeout(() => chatInput.focus(), 300);
+        }
+
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text || currentChatId === null) return;
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' +
+                now.getMinutes().toString().padStart(2, '0');
+            if (!chatHistory[currentChatId]) chatHistory[currentChatId] = [];
+            chatHistory[currentChatId].push({ sender: 'sender', text: text, time: timeStr });
+            saveChatHistory();
+            const user = chatUsers.find(u => u.id === currentChatId);
+            if (user) {
+                user.lastMsg = text;
+                user.time = 'همین الان';
+            }
+            renderChatList();
+            const div = document.createElement('div');
+            div.className = 'msg sent';
+            div.innerHTML = `
+                    ${text}
+                    <span class="msg-time">${timeStr}</span>
+                `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            chatInput.value = '';
+            setTimeout(() => {
+                if (currentChatId === null) return;
+                const replyTexts = [
+                    'ممنون از پیامتون 🙏', 'حتماً کمک می‌کنم.',
+                    'خیلی خوبه که به اشتراک گذاشتید.',
+                    'چطور می‌تونم بیشتر کمکتون کنم؟',
+                    'واقعاً عالی بود!', 'متشکرم از شما.',
+                    'حتماً امتحان می‌کنم.', 'مرسی از راهنماییتون.'
+                ];
+                const reply = replyTexts[Math.floor(Math.random() * replyTexts.length)];
+                const replyTime = new Date();
+                const replyTimeStr = replyTime.getHours().toString().padStart(2, '0') + ':' +
+                    replyTime.getMinutes().toString().padStart(2, '0');
+                chatHistory[currentChatId].push({ sender: 'receiver', text: reply, time: replyTimeStr });
+                saveChatHistory();
+                const replyDiv = document.createElement('div');
+                replyDiv.className = 'msg received';
+                replyDiv.innerHTML = `
+                        ${reply}
+                        <span class="msg-time">${replyTimeStr}</span>
+                    `;
+                chatMessages.appendChild(replyDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                const user2 = chatUsers.find(u => u.id === currentChatId);
+                if (user2) {
+                    user2.lastMsg = reply;
+                    user2.time = 'همین الان';
+                }
+                renderChatList();
+            }, 1200);
+        }
+
+        sendMsgBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        closeChatBtn.addEventListener('click', function() {
+            chatWindow.classList.remove('active');
+            currentChatId = null;
+        });
+
+        // کلیک روی نام کاربر در پست‌ها برای چت
+        document.addEventListener('click', function(e) {
+            const nameEl = e.target.closest('.post-user .name');
+            if (nameEl) {
+                const userName = nameEl.textContent.trim();
+                const user = chatUsers.find(u => u.name === userName);
+                if (user && userName !== myName) {
+                    document.querySelector('.tab-btn[data-tab="chat"]').click();
+                    setTimeout(() => openChat(user.id), 200);
+                }
+            }
+        });
+
+        // ================================================================
+        // ===== مقداردهی اولیه =====
+        // ================================================================
+        renderPosts();
+        renderChatList();
+
+        console.log('✅ جامعه مراقبین با ویرایش و حذف واقعی بارگذاری شد.');
+        console.log('👤 کاربر:', myName);
+        console.log('📦 تعداد پست‌ها:', posts.length);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پرسیدن سوال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== reset & base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background: #eee7f3;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .mobile {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background: #fdf6f4;
+            padding: 20px 20px 110px;
+            position: relative;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .back {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            background: #8472a7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 22px;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(132, 114, 167, .22);
+            transition: .3s;
+        }
+
+        .back:hover {
+            transform: translateY(-2px);
+        }
+
+        .header-text h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #665580;
+        }
+
+        .header-text p {
+            font-size: 14px;
+            color: #9b8bbd;
+            margin-top: 3px;
+        }
+
+        /* ===== Cards ===== */
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 22px rgba(132, 114, 167, .12);
+        }
+
+        .card label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #665580;
+            margin-bottom: 15px;
+        }
+
+        .card label i {
+            color: #8472a7;
+            font-size: 20px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: #f7f4fb;
+            padding: 15px;
+            border-radius: 18px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        textarea {
+            resize: none;
+            line-height: 2;
+        }
+
+        /* ===== Upload ===== */
+        .upload-box {
+            background: #f7f4fb;
+            border: 2px dashed #cdbde8;
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .upload-box:hover {
+            background: #f2eef9;
+        }
+
+        .upload-box i {
+            font-size: 40px;
+            color: #8472a7;
+            margin-bottom: 12px;
+        }
+
+        .upload-box p {
+            color: #777;
+        }
+
+        #preview {
+            margin-top: 15px;
+        }
+
+        #preview img {
+            width: 100%;
+            border-radius: 18px;
+        }
+
+        /* ===== Warning ===== */
+        .warning {
+            background: #fff8dd;
+            border-right: 5px solid #f7bf34;
+            padding: 18px;
+            border-radius: 22px;
+            display: flex;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .warning i {
+            font-size: 24px;
+            color: #d89b00;
+            margin-top: 3px;
+        }
+
+        .warning h3 {
+            color: #8a6800;
+            margin-bottom: 8px;
+        }
+
+        .warning p {
+            line-height: 2;
+            color: #6d5c1b;
+            font-size: 14px;
+        }
+
+        /* ===== Submit Button ===== */
+        .submit-btn {
+            width: 100%;
+            border: none;
+            padding: 17px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #aa98cf, #8472a7);
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 22px rgba(132, 114, 167, .25);
+            transition: .3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ===== Success Sheet (مرحله اول - بارگذاری) ===== */
+        #successSheet {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .45);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+            z-index: 9999;
+        }
+
+        #successSheet.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sheet {
+            width: 90%;
+            max-width: 360px;
+            background: #fff;
+            border-radius: 28px;
+            padding: 35px 25px;
+            text-align: center;
+            animation: zoom .35s;
+        }
+
+        @keyframes zoom {
+            from {
+                opacity: 0;
+                transform: scale(.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon i {
+            font-size: 70px;
+            color: #52b96d;
+            margin-bottom: 18px;
+        }
+
+        .sheet h3 {
+            color: #665580;
+            margin-bottom: 10px;
+        }
+
+        .sheet p {
+            color: #666;
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: #ece6f5;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: #8472a7;
+            animation: loading 2s linear forwards;
+        }
+
+        @keyframes loading {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        /* ===== Final Sheet (مرحله دوم - با دکمه بازگشت) ===== */
+        #finalSheet {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .45);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+            z-index: 10000;
+        }
+
+        #finalSheet.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #finalSheet .sheet {
+            animation: zoom .35s;
+        }
+
+        .btn-home {
+            display: inline-block;
+            background: #8472a7;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(132, 114, 167, .3);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            background: #6f5b94;
+        }
+
+        /* ===== Bottom Navigation ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 14px 0;
+            border-top: 1px solid #ece6f5;
+            box-shadow: 0 -6px 20px rgba(0, 0, 0, .08);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            font-size: 11px;
+            color: #999;
+            transition: .3s;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-item:hover {
+            color: #8472a7;
+        }
+
+        .nav-item.active {
+            color: #8472a7;
+            font-weight: 700;
+        }
+
+        /* ===== Responsive ===== */
+        @media(max-width:360px) {
+            .mobile {
+                padding: 15px 15px 100px;
+            }
+            .header-text h2 {
+                font-size: 21px;
+            }
+            .card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mobile">
+
+        <!-- Header -->
+        <div class="header">
+            <a href="faq.html" class="back">
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <div class="header-text">
+                <h2>پرسیدن سوال</h2>
+                <p>سوال خود را ثبت کنید تا مشاوران پاسخ دهند.</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form id="questionForm">
+
+            <!-- Subject -->
+            <div class="card">
+                <label>
+                    <i class="fa-solid fa-folder-open"></i>
+                    موضوع سوال
+                </label>
+                <select required>
+                    <option value="">انتخاب کنید</option>
+                    <option>داروها</option>
+                    <option>رفتار بیمار</option>
+                    <option>تغذیه</option>
+                    <option>خواب</option>
+                    <option>مراقبت روزانه</option>
+                    <option>فراموشی</option>
+                    <option>سایر</option>
+                </select>
+            </div>
+
+            <!-- Title -->
+            <div class="card">
+                <label>
+                    <i class="fa-solid fa-heading"></i>
+                    عنوان سوال
+                </label>
+                <input type="text" placeholder="مثلاً بیمار شب‌ها بی‌قرار است" required>
+            </div>
+
+            <!-- Description -->
+            <div class="card">
+                <label>
+                    <i class="fa-solid fa-file-lines"></i>
+                    توضیحات
+                </label>
+                <textarea rows="7" placeholder="شرح کامل مشکل بیمار را بنویسید..." required></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="card upload-card">
+                <label>
+                    <i class="fa-solid fa-camera"></i>
+                    تصویر (اختیاری)
+                </label>
+                <div class="upload-box">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p>برای انتخاب عکس لمس کنید</p>
+                    <input type="file" accept="image/*" id="imageInput" hidden>
+                </div>
+                <div id="preview"></div>
+            </div>
+
+            <!-- Warning -->
+            <div class="warning">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <div>
+                    <h3>نکته مهم</h3>
+                    <p>
+                        اگر بیمار دچار کاهش هوشیاری، تشنج،
+                        سختی تنفس یا درد شدید شد،
+                        فوراً به اورژانس مراجعه کنید.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button class="submit-btn">
+                <i class="fa-solid fa-paper-plane"></i>
+                ثبت سوال
+            </button>
+
+        </form>
+
+        <!-- ===== Sheet مرحله اول: بارگذاری ===== -->
+        <div id="successSheet">
+            <div class="sheet">
+                <div class="success-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3>در حال ارسال ...</h3>
+                <p>لطفاً منتظر بمانید</p>
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Sheet مرحله دوم: نهایی با دکمه بازگشت ===== -->
+        <div id="finalSheet">
+            <div class="sheet">
+                <div class="success-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3>پیام با موفقیت ارسال شد</h3>
+                <p>
+                    سوال شما ثبت شد و به زودی توسط مشاور بررسی خواهد شد.
+                </p>
+                <a href="home.html" class="btn-home">
+                    <i class="fa-solid fa-house"></i>
+                    بازگشت به خانه
+                </a>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>خانه</span>
+            </a>
+            <a href="education.html" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                <span>آموزش</span>
+            </a>
+            <a href="chat.html" class="nav-item">
+                <i class="fa-solid fa-comments"></i>
+                <span>چت‌ها</span>
+            </a>
+            <a href="reminder.html" class="nav-item">
+                <i class="fa-solid fa-bell"></i>
+                <span>یادآورها</span>
+            </a>
+            <a href="daily-care.html" class="nav-item active">
+                <i class="fa-solid fa-heart"></i>
+                <span>مراقبت</span>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        // ===== Image Upload =====
+        const uploadBox = document.querySelector('.upload-box');
+        const imageInput = document.getElementById('imageInput');
+        const preview = document.getElementById('preview');
+
+        uploadBox.addEventListener('click', () => imageInput.click());
+
+        imageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.innerHTML = `<img src="${e.target.result}">`;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // ===== Form Submission =====
+        const form = document.getElementById('questionForm');
+        const successSheet = document.getElementById('successSheet');
+        const finalSheet = document.getElementById('finalSheet');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // نمایش sheet اول (بارگذاری)
+            successSheet.classList.add('show');
+
+            // بعد از ۲.۵ ثانیه (زمان انیمیشن progress bar + کمی تاخیر)
+            setTimeout(() => {
+                // بستن sheet اول
+                successSheet.classList.remove('show');
+
+                // با تاخیر ۳۰۰ میلی‌ثانیه برای اجازه به انیمیشن خروج، sheet دوم را نمایش می‌دهیم
+                setTimeout(() => {
+                    finalSheet.classList.add('show');
+                }, 300);
+
+            }, 2500); // ۲.۵ ثانیه
+        });
+
+        // ===== بستن sheet دوم با کلیک روی backdrop =====
+        finalSheet.addEventListener('click', function(e) {
+            if (e.target === finalSheet) {
+                finalSheet.classList.remove('show');
+            }
+        });
+
+        // ===== Animate cards on scroll =====
+        const cards = document.querySelectorAll('.card, .warning');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.animate(
+                        [
+                            { opacity: 0, transform: 'translateY(30px)' },
+                            { opacity: 1, transform: 'translateY(0)' }
+                        ], {
+                            duration: 500,
+                            fill: 'forwards'
+                        }
+                    );
+                }
+            });
+        });
+        cards.forEach(card => observer.observe(card));
+    </script>
+
+</body>
+
+</html>

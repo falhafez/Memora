@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>سوالات متداول</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Vazirmatn',sans-serif;
+}
+
+body{
+
+background:#eee7f3;
+display:flex;
+justify-content:center;
+min-height:100vh;
+
+}
+
+.mobile{
+
+width:100%;
+max-width:480px;
+background:#fdf6f4;
+min-height:100vh;
+padding:20px 20px 95px;
+
+}
+
+/* ================= Header ================= */
+
+.header{
+
+display:flex;
+align-items:center;
+gap:14px;
+margin-bottom:22px;
+
+}
+
+.back{
+
+width:50px;
+height:50px;
+border-radius:18px;
+
+background:#8472a7;
+color:white;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:22px;
+text-decoration:none;
+
+box-shadow:0 10px 20px rgba(132,114,167,.25);
+
+transition:.25s;
+
+}
+
+.back:hover{
+
+transform:translateY(-2px);
+background:#705c97;
+
+}
+
+.header-text h2{
+
+font-size:24px;
+font-weight:800;
+color:#665580;
+
+}
+
+.header-text p{
+
+margin-top:4px;
+font-size:14px;
+color:#8f84a0;
+
+}
+
+/* ================= Search ================= */
+
+.search{
+
+margin:22px 0;
+
+position:relative;
+
+}
+
+.search input{
+
+width:100%;
+padding:16px 20px 16px 52px;
+
+border:none;
+outline:none;
+
+background:white;
+
+border-radius:22px;
+
+font-size:15px;
+
+box-shadow:0 6px 18px rgba(132,114,167,.10);
+
+}
+
+.search i{
+
+position:absolute;
+
+left:20px;
+top:50%;
+
+transform:translateY(-50%);
+
+color:#8472a7;
+font-size:18px;
+
+}
+
+/* ================= FAQ Card ================= */
+
+.faq{
+
+background:white;
+
+border-radius:24px;
+
+margin-bottom:16px;
+
+overflow:hidden;
+
+box-shadow:0 8px 25px rgba(132,114,167,.12);
+
+transition:.25s;
+
+}
+
+.faq:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 12px 28px rgba(132,114,167,.18);
+
+}
+
+.question{
+
+padding:20px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+cursor:pointer;
+
+}
+
+.q-left{
+
+display:flex;
+
+gap:15px;
+
+align-items:center;
+
+}
+
+.q-icon{
+
+width:46px;
+height:46px;
+
+border-radius:16px;
+
+background:#eee5f7;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+color:#8472a7;
+
+font-size:20px;
+
+flex-shrink:0;
+
+}
+
+.q-title{
+
+font-size:16px;
+
+font-weight:700;
+
+color:#574a73;
+
+line-height:1.8;
+
+}
+
+.arrow{
+
+font-size:22px;
+
+color:#9c8cc1;
+
+transition:.3s;
+
+}
+.answer{
+
+max-height:0;
+overflow:hidden;
+
+transition:max-height .45s ease;
+
+background:#faf8fd;
+
+}
+
+.answer p{
+
+padding:0 22px 22px;
+
+color:#666;
+
+font-size:14px;
+
+line-height:2;
+
+}
+
+.faq.active .answer{
+
+max-height:260px;
+
+}
+
+.faq.active .arrow{
+
+transform:rotate(180deg);
+
+color:#8472a7;
+
+}
+
+/*==========================
+کارت تماس با مشاور
+==========================*/
+
+.support{
+
+margin-top:28px;
+
+padding:22px;
+
+border-radius:25px;
+
+background:linear-gradient(135deg,#aa98cf,#8472a7);
+
+color:white;
+
+box-shadow:0 12px 30px rgba(132,114,167,.28);
+
+}
+
+.support h3{
+
+font-size:20px;
+
+margin-bottom:10px;
+
+}
+
+.support p{
+
+font-size:14px;
+
+line-height:2;
+
+opacity:.95;
+
+}
+
+.support a{
+
+display:inline-block;
+
+margin-top:18px;
+
+background:white;
+
+color:#8472a7;
+
+padding:12px 24px;
+
+border-radius:16px;
+
+font-weight:700;
+
+text-decoration:none;
+
+transition:.25s;
+
+}
+
+.support a:hover{
+
+transform:translateY(-2px);
+
+}
+
+/*==========================
+کارت نکته
+==========================*/
+
+.tip{
+
+margin-top:20px;
+
+padding:20px;
+
+background:#f4effa;
+
+border-radius:24px;
+
+display:flex;
+
+gap:15px;
+
+align-items:flex-start;
+
+box-shadow:0 8px 20px rgba(132,114,167,.08);
+
+}
+
+.tip i{
+
+width:48px;
+height:48px;
+
+border-radius:16px;
+
+background:white;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+color:#8472a7;
+
+font-size:22px;
+
+flex-shrink:0;
+
+}
+
+.tip h4{
+
+color:#665580;
+
+font-size:17px;
+
+margin-bottom:8px;
+
+}
+
+.tip p{
+
+font-size:14px;
+
+line-height:2;
+
+color:#666;
+
+}
+
+/*==========================
+Bottom Navigation
+==========================*/
+
+.bottom-nav{
+
+position:fixed;
+
+bottom:0;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:100%;
+max-width:480px;
+
+background:white;
+
+padding:14px 0;
+
+display:flex;
+
+justify-content:space-around;
+
+border-top:1px solid #eee;
+
+box-shadow:0 -5px 20px rgba(0,0,0,.06);
+
+z-index:999;
+
+}
+
+.nav-item{
+
+text-align:center;
+
+font-size:11px;
+
+color:#999;
+
+text-decoration:none;
+
+transition:.25s;
+
+}
+
+.nav-item i{
+
+display:block;
+
+font-size:21px;
+
+margin-bottom:6px;
+
+}
+
+.nav-item.active{
+
+color:#8472a7;
+
+}
+
+.nav-item:hover{
+
+color:#8472a7;
+
+}
+
+/*==========================
+Responsive
+==========================*/
+
+@media(max-width:360px){
+
+.mobile{
+
+padding:15px 15px 90px;
+
+}
+
+.header-text h2{
+
+font-size:21px;
+
+}
+
+.q-title{
+
+font-size:14px;
+
+}
+
+.support h3{
+
+font-size:18px;
+
+}
+
+.tip h4{
+
+font-size:15px;
+
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="mobile">
+
+    <!-- Header -->
+    <div class="header">
+
+        <a href="home.html" class="back">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+        <div class="header-text">
+            <h2>سوالات متداول</h2>
+            <p>پاسخ سوالات رایج مراقبین بیماران آلزایمر</p>
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="search">
+
+        <input
+        type="text"
+        id="searchInput"
+        placeholder="جستجوی سوالات...">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+    </div>
+
+
+    <!-- FAQ -->
+
+
+    <div class="faq">
+
+        <div class="question">
+
+            <div class="q-left">
+
+                <div class="q-icon">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+
+                <div class="q-title">
+                    آلزایمر چیست؟
+                </div>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+        </div>
+
+        <div class="answer">
+
+            <p>
+
+آلزایمر نوعی بیماری پیشرونده مغز است که باعث اختلال در حافظه، تفکر، یادگیری و انجام فعالیت‌های روزمره می‌شود.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="faq">
+
+        <div class="question">
+
+            <div class="q-left">
+
+                <div class="q-icon">
+                    <i class="fa-solid fa-pills"></i>
+                </div>
+
+                <div class="q-title">
+                    اگر بیمار دارویش را فراموش کرد چه کنم؟
+                </div>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+        </div>
+
+        <div class="answer">
+
+            <p>
+
+بدون مشورت پزشک دوز بعدی را دو برابر نکنید. اگر زمان زیادی نگذشته است طبق توصیه پزشک عمل کنید.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="faq">
+
+        <div class="question">
+
+            <div class="q-left">
+
+                <div class="q-icon">
+                    <i class="fa-solid fa-face-angry"></i>
+                </div>
+
+                <div class="q-title">
+                    چرا بیمار پرخاشگر می‌شود؟
+                </div>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+        </div>
+
+        <div class="answer">
+
+            <p>
+
+پرخاشگری معمولاً به دلیل اضطراب، درد، گرسنگی، خستگی یا سردرگمی ایجاد می‌شود. ابتدا علت را پیدا کنید.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="faq">
+
+        <div class="question">
+
+            <div class="q-left">
+
+                <div class="q-icon">
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+
+                <div class="q-title">
+                    اگر بیمار شب‌ها خواب نداشت؟
+                </div>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+        </div>
+
+        <div class="answer">
+
+            <p>
+
+فعالیت بدنی سبک در روز، کاهش خواب عصر و ثابت بودن ساعت خواب می‌تواند به تنظیم خواب کمک کند.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="faq">
+
+        <div class="question">
+
+            <div class="q-left">
+
+                <div class="q-icon">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+
+                <div class="q-title">
+                    بیمار غذا نمی‌خورد، چه کنم؟
+                </div>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+        </div>
+
+        <div class="answer">
+
+            <p>
+
+غذا را در وعده‌های کوچک سرو کنید و از غذاهای مورد علاقه بیمار استفاده کنید.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="faq">
+
+        <div class="question">
+
+            <div class="q-left">
+
+                <div class="q-icon">
+                    <i class="fa-solid fa-person-walking"></i>
+                </div>
+
+                <div class="q-title">
+                    چگونه از گم شدن بیمار جلوگیری کنیم؟
+                </div>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+        </div>
+
+        <div class="answer">
+
+            <p>
+
+از دستبند شناسایی، قفل ایمن درها و همراه داشتن اطلاعات تماس استفاده کنید.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Tip Card -->
+
+    <div class="tip">
+
+        <i class="fa-solid fa-lightbulb"></i>
+
+        <div>
+
+            <h4>نکته مهم</h4>
+
+            <p>
+
+همیشه با آرامش صحبت کنید، تماس چشمی برقرار کنید و از جملات کوتاه و واضح استفاده کنید.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Support -->
+
+    <div class="support">
+
+        <h3>
+
+            پاسخ خود را پیدا نکردید؟
+
+        </h3>
+
+        <p>
+
+سؤال خود را از مشاوران ممورا بپرسید تا در کوتاه‌ترین زمان پاسخ دریافت کنید.
+
+        </p>
+
+        <a href="ask.html">
+
+            پرسیدن سؤال
+
+        </a>
+
+    </div>
+    <!-- Bottom Navigation -->
+
+    <div class="bottom-nav">
+
+        <a href="home.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            خانه
+        </a>
+
+        <a href="education.html" class="nav-item">
+            <i class="fa-solid fa-book-open"></i>
+            آموزش
+        </a>
+
+        <a href="chat.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            چت‌ها
+        </a>
+
+        <a href="reminder.html" class="nav-item">
+            <i class="fa-solid fa-bell"></i>
+            یادآورها
+        </a>
+
+        <a href="daily-care.html" class="nav-item active">
+            <i class="fa-solid fa-heart"></i>
+            مراقبت
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+// باز و بسته شدن کارت‌ها
+document.querySelectorAll(".faq").forEach(card=>{
+
+    card.querySelector(".question").onclick=function(){
+
+        card.classList.toggle("active");
+
+    }
+
+});
+
+
+// جستجوی سوالات
+
+const search=document.getElementById("searchInput");
+
+search.addEventListener("keyup",function(){
+
+    let value=this.value.toLowerCase();
+
+    document.querySelectorAll(".faq").forEach(card=>{
+
+        let text=card.innerText.toLowerCase();
+
+        if(text.indexOf(value)>-1){
+
+            card.style.display="block";
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+});
+
+
+// انیمیشن ظاهر شدن کارت‌ها
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.animate([
+
+{
+opacity:0,
+transform:"translateY(30px)"
+},
+
+{
+opacity:1,
+transform:"translateY(0)"
+}
+
+],{
+
+duration:500,
+fill:"forwards"
+
+});
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".faq,.tip,.support").forEach(el=>{
+
+observer.observe(el);
+
+});
+
+</script>
+
+</body>
+
+</html>

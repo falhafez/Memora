@@ -502,9 +502,10 @@
             removeTyping();
             showBot(data.answer);
         })
-        .catch(() => {
+        .catch(error => {
             removeTyping();
-            showBot("خطا در برقراری ارتباط با سرور.");
+            showBot("❌ ارتباط با سرور برقرار نشد.");
+            console.log(error);
         });
     }
 
