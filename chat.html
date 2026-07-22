@@ -194,14 +194,15 @@
             gap: 8px;
         }
 
+        /* تغییرات اعمال‌شده برای RTL */
         .message.user {
-            flex-direction: row-reverse;
+            flex-direction: row;
             justify-content: flex-start;
         }
 
         .message.bot {
-            flex-direction: row;
-            justify-content: flex-start;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
         }
 
         .avatar {
@@ -855,11 +856,11 @@
             if (s) s.remove();
             chat.innerHTML += `
                 <div class="message user">
+                    <div class="avatar user-avatar">😊</div>
                     <div class="bubble">
                         ${text}
                         <div class="time">${currentTime()}</div>
                     </div>
-                    <div class="avatar user-avatar">😊</div>
                 </div>
             `;
             chat.style.justifyContent = 'flex-start';
@@ -869,12 +870,12 @@
         function showTyping() {
             const html = `
                 <div class="message bot" id="typing">
-                    <div class="avatar bot-avatar">🤖</div>
                     <div class="typing">
                         <div class="dot"></div>
                         <div class="dot"></div>
                         <div class="dot"></div>
                     </div>
+                    <div class="avatar bot-avatar">🤖</div>
                 </div>
             `;
             chat.insertAdjacentHTML('beforeend', html);
@@ -898,7 +899,6 @@
 
             chat.innerHTML += `
                 <div class="message bot">
-                    <div class="avatar bot-avatar">🤖</div>
                     <div class="bubble">
                         ${answer}
                         ${sourceText}
@@ -907,6 +907,7 @@
                         </div>
                         <div class="time">${currentTime()}</div>
                     </div>
+                    <div class="avatar bot-avatar">🤖</div>
                 </div>
             `;
             saveChat();
@@ -966,12 +967,12 @@
         }
 
         // =========================================================
-        //  فراخوانی API هوش مصنوعی (با آدرس محلی و پرامپت سیستمی)
+        //  فراخوانی API هوش مصنوعی (با آدرس اصلاح‌شده)
         // =========================================================
         async function getAIAnswer(question) {
             showTyping();
-            // ===== تغییر آدرس API به لوکال هاست =====
-            const API_URL = "http://localhost:3000/chat";
+            // ===== آدرس API تغییر داده شده به Render =====
+            const API_URL = "https://memora-2-hic1.onrender.com/chat";
 
             try {
                 const response = await fetch(API_URL, {
@@ -1135,13 +1136,13 @@
                 const url = URL.createObjectURL(file);
                 chat.innerHTML += `
                     <div class="message user">
+                        <div class="avatar user-avatar">😊</div>
                         <div class="bubble">
                             <img src="${url}" 
                                  style="max-width:180px; border-radius:15px; display:block; margin-bottom:8px;">
                             <b>${file.name}</b>
                             <div class="time">${currentTime()}</div>
                         </div>
-                        <div class="avatar user-avatar">😊</div>
                     </div>
                 `;
             } else {
@@ -1149,11 +1150,11 @@
                 if (file.type === 'application/pdf') icon = '📕';
                 chat.innerHTML += `
                     <div class="message user">
+                        <div class="avatar user-avatar">😊</div>
                         <div class="bubble">
                             ${icon} <b>${file.name}</b>
                             <div class="time">${currentTime()}</div>
                         </div>
-                        <div class="avatar user-avatar">😊</div>
                     </div>
                 `;
             }
