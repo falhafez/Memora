@@ -16,7 +16,6 @@
             font-family: 'Vazirmatn', sans-serif;
         }
 
-        /* ===== بدنه با فلکس برای وسط‌چین کردن ===== */
         html,
         body {
             width: 100%;
@@ -32,7 +31,6 @@
             margin: 0;
         }
 
-        /* ===== کانتینر اصلی (همان موبایل) ===== */
         .mobile {
             width: 100%;
             max-width: 480px;
@@ -41,7 +39,6 @@
             flex-direction: column;
             background: #fdf6f4;
             overflow: hidden;
-            /* دیگر نیازی به margin:auto نیست چون بدنه فلکس است */
         }
 
         /* ===== هدر ===== */
@@ -50,17 +47,23 @@
             padding: 12px 16px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             background: rgba(255, 255, 255, .85);
             backdrop-filter: blur(18px);
             flex-shrink: 0;
             border-bottom: 1px solid rgba(255, 255, 255, .5);
-            justify-content: space-between;
         }
 
         .left {
             display: flex;
             align-items: center;
             gap: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .back {
@@ -76,6 +79,26 @@
             font-size: 18px;
             text-decoration: none !important;
             border: none;
+        }
+
+        .new-chat,
+        .history-btn {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 14px;
+            background: #f2eef9;
+            color: #8472a7;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .2s;
+        }
+        .new-chat:hover,
+        .history-btn:hover {
+            background: #e5def5;
         }
 
         .ai-avatar {
@@ -133,28 +156,22 @@
             display: none;
         }
 
-        /* ===== پیام‌ها ===== */
+        /* ===== پیام‌ها (اصلاح‌شده) ===== */
         .message {
             width: 100%;
             display: flex;
             align-items: flex-end;
-            gap: 10px;
-            animation: message .35s ease;
-        }
-
-        @keyframes message {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            gap: 8px;
         }
 
         .message.user {
-            justify-content: flex-end;
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+        }
+
+        .message.bot {
+            flex-direction: row;
+            justify-content: flex-start;
         }
 
         .avatar {
@@ -190,18 +207,18 @@
             transition: .25s;
         }
 
-        .bot .bubble {
-            background: white;
-            color: #444;
-            border-radius: 22px 22px 22px 6px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
-        }
-
         .user .bubble {
             background: linear-gradient(135deg, #8472a7, #a996d1);
             color: white;
             border-radius: 22px 22px 6px 22px;
             box-shadow: 0 12px 30px rgba(132, 114, 167, .25);
+        }
+
+        .bot .bubble {
+            background: white;
+            color: #444;
+            border-radius: 22px 22px 22px 6px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
         }
 
         .time {
@@ -310,7 +327,7 @@
             color: white;
         }
 
-        /* ===== ناحیه ورودی (ترتیب RTL) ===== */
+        /* ===== ناحیه ورودی ===== */
         .chat-input {
             display: flex;
             align-items: center;
@@ -449,7 +466,67 @@
             font-weight: 700;
         }
 
-        /* ===== واکنش‌گرایی برای موبایل‌های کوچک ===== */
+        /* ===== جعبه تاریخچه ===== */
+        .history-box {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .4);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            padding: 30px;
+        }
+        .history-box>div {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            max-height: 70vh;
+            border-radius: 24px;
+            padding: 24px;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .2);
+        }
+        .history-box h3 {
+            color: #5e4b82;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .history-box .history-item {
+            padding: 12px 16px;
+            border-radius: 14px;
+            background: #f6f4fb;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: .2s;
+            border: 1px solid transparent;
+        }
+        .history-box .history-item:hover {
+            background: #ede7f7;
+            border-color: #8472a7;
+        }
+        .history-box .history-item small {
+            display: block;
+            color: #888;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+        .history-box .close-history {
+            margin-top: 12px;
+            background: #eee;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        /* ===== واکنش‌گرایی ===== */
         @media (max-width: 360px) {
             .ai-avatar {
                 width: 45px;
@@ -479,6 +556,12 @@
                 width: 40px;
                 height: 40px;
             }
+            .new-chat,
+            .history-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 15px;
+            }
         }
     </style>
 </head>
@@ -487,7 +570,7 @@
 
     <div class="mobile">
 
-        <!-- Header -->
+        <!-- Header with new buttons -->
         <div class="header">
             <div class="left">
                 <a href="home.html" class="back">
@@ -503,6 +586,14 @@
                         آنلاین
                     </div>
                 </div>
+            </div>
+            <div class="header-actions">
+                <button class="history-btn" onclick="showHistory()">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </button>
+                <button class="new-chat" onclick="newChat()">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </div>
         </div>
 
@@ -606,8 +697,96 @@
                 d.getMinutes().toString().padStart(2, "0");
         }
 
+        // ========== مدیریت تاریخچه چندگانه ==========
+        function saveChat() {
+            let chats = JSON.parse(localStorage.getItem("chats")) || [];
+            // فقط ذخیره کن اگر پیامی وجود داشته باشد
+            if (chat.querySelectorAll('.message').length === 0) return;
+
+            // از ذخیره تکراری جلوگیری کن (آخرین چت)
+            const last = chats[chats.length - 1];
+            if (last && last.content === chat.innerHTML) return;
+
+            const current = {
+                id: Date.now(),
+                date: new Date().toLocaleString("fa-IR"),
+                content: chat.innerHTML
+            };
+            chats.push(current);
+            localStorage.setItem("chats", JSON.stringify(chats));
+        }
+
+        function loadChat(id) {
+            let chats = JSON.parse(localStorage.getItem("chats")) || [];
+            let selected = chats.find(c => c.id === id);
+            if (selected) {
+                chat.innerHTML = selected.content;
+                chat.style.justifyContent = 'flex-start';
+                // حذف گرینگ اگر وجود داشته باشد
+                const g = chat.querySelector('.greeting');
+                if (g) g.remove();
+                scrollToBottom();
+                // بستن باکس تاریخچه
+                document.querySelector(".history-box")?.remove();
+            }
+        }
+
+        function showHistory() {
+            let chats = JSON.parse(localStorage.getItem("chats")) || [];
+            if (chats.length === 0) {
+                alert("تاریخچه‌ای وجود ندارد.");
+                return;
+            }
+
+            // حذف باکس قبلی
+            document.querySelector(".history-box")?.remove();
+
+            let list = '';
+            // نمایش از جدید به قدیم
+            const reversed = [...chats].reverse();
+            reversed.forEach((c, index) => {
+                const num = chats.length - index;
+                list += `
+                    <div class="history-item" onclick="loadChat(${c.id})">
+                        🗨️ چت ${num}
+                        <small>${c.date}</small>
+                    </div>
+                `;
+            });
+
+            const box = document.createElement('div');
+            box.className = 'history-box';
+            box.innerHTML = `
+                <div>
+                    <h3>تاریخچه گفتگوها</h3>
+                    ${list}
+                    <button class="close-history" onclick="this.closest('.history-box').remove()">بستن</button>
+                </div>
+            `;
+            document.body.appendChild(box);
+        }
+
+        function newChat() {
+            // ذخیره چت فعلی
+            saveChat();
+
+            // ریست کردن چت
+            chat.innerHTML = `
+                <div class="greeting">
+                    سلام 👋<br>
+                    هر سوالی دارید بپرسید.
+                </div>
+            `;
+            chat.style.justifyContent = 'center';
+            // حذف هر باکس تاریخچه
+            document.querySelector(".history-box")?.remove();
+            scrollToBottom();
+        }
+
+        // ========== توابع پیام ==========
         function addUserMessage(text) {
-            if (greeting) greeting.remove();
+            const g = chat.querySelector('.greeting');
+            if (g) g.remove();
             chat.innerHTML += `
             <div class="message user">
                 <div class="bubble">
@@ -751,27 +930,21 @@
             setTimeout(() => ripple.remove(), 600);
         });
 
-        // ========== ذخیره و بازیابی تاریخچه ==========
-        function saveChat() {
-            const messages = chat.querySelectorAll('.message');
-            if (messages.length > 0) {
-                localStorage.setItem("chatHistory", chat.innerHTML);
-            } else {
-                localStorage.removeItem("chatHistory");
-            }
-        }
-
+        // ========== بارگذاری اولیه ==========
         window.onload = function() {
-            const data = localStorage.getItem("chatHistory");
-            if (data) {
-                chat.innerHTML = data;
+            const chats = JSON.parse(localStorage.getItem("chats")) || [];
+            if (chats.length > 0) {
+                // آخرین چت را بارگذاری کن
+                const last = chats[chats.length - 1];
+                chat.innerHTML = last.content;
                 chat.style.justifyContent = 'flex-start';
                 const g = chat.querySelector('.greeting');
                 if (g) g.remove();
+                scrollToBottom();
             }
-            scrollToBottom();
         };
 
+        // ========== دکمه اسکرول ==========
         chat.addEventListener("scroll", () => {
             const btn = document.getElementById("scrollBottom");
             if (chat.scrollTop < chat.scrollHeight - 700) {
@@ -796,7 +969,8 @@
         });
 
         function addUserFileMessage(file) {
-            if (greeting) greeting.remove();
+            const g = chat.querySelector('.greeting');
+            if (g) g.remove();
 
             if (file.type.startsWith("image/")) {
                 const url = URL.createObjectURL(file);
@@ -825,6 +999,7 @@
             `;
             }
 
+            chat.style.justifyContent = 'flex-start';
             saveChat();
             scrollToBottom();
         }
