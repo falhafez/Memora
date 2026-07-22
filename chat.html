@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>دستیار سلامت</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -39,6 +39,7 @@
             flex-direction: column;
             background: #fdf6f4;
             overflow: hidden;
+            position: relative;
         }
 
         /* ===== هدر ===== */
@@ -570,7 +571,7 @@
 
     <div class="mobile">
 
-        <!-- Header with new buttons -->
+        <!-- ===== هدر با دکمه‌های چت جدید و تاریخچه ===== -->
         <div class="header">
             <div class="left">
                 <a href="home.html" class="back">
@@ -597,7 +598,7 @@
             </div>
         </div>
 
-        <!-- Chat Area -->
+        <!-- ===== ناحیه چت ===== -->
         <div class="chat" id="chat">
             <div class="greeting">
                 سلام 👋<br>
@@ -605,12 +606,12 @@
             </div>
         </div>
 
-        <!-- Scroll Down -->
+        <!-- ===== دکمه اسکرول به پایین ===== -->
         <button class="scroll-bottom" id="scrollBottom" onclick="scrollToBottom()">
             <i class="fa-solid fa-angle-down"></i>
         </button>
 
-        <!-- Input Area -->
+        <!-- ===== ناحیه ورودی ===== -->
         <div class="chat-input">
             <button class="send" onclick="sendMessage()">
                 <i class="fa-solid fa-paper-plane"></i>
@@ -638,7 +639,7 @@
             </button>
         </div>
 
-        <!-- Bottom Navigation -->
+        <!-- ===== ناوبری پایین ===== -->
         <div class="bottom-nav">
             <a href="home.html" class="nav-item">
                 <i class="fa-solid fa-house"></i>
@@ -665,27 +666,33 @@
     </div>
 
     <script>
-        // ========== عناصر DOM ==========
-        const chat = document.getElementById("chat");
-        const input = document.getElementById("messageInput");
-        const greeting = document.querySelector(".greeting");
+        // =========================================================
+        //  عناصر DOM
+        // =========================================================
+        const chat = document.getElementById('chat');
+        const input = document.getElementById('messageInput');
+        const greeting = document.querySelector('.greeting');
 
-        // ========== دانش پایه ==========
+        // =========================================================
+        //  دانش پایه (بارگذاری از فایل JSON)
+        // =========================================================
         let knowledge = [];
         let knowledgeLoaded = false;
 
-        fetch("knowledge.json")
+        fetch('knowledge.json')
             .then(res => res.json())
             .then(data => {
                 knowledge = data;
                 knowledgeLoaded = true;
-                console.log("دانش با موفقیت بارگذاری شد.");
+                console.log('دانش با موفقیت بارگذاری شد.');
             })
             .catch(err => {
-                console.warn("بارگذاری knowledge.json ناموفق:", err);
+                console.warn('بارگذاری knowledge.json ناموفق:', err);
             });
 
-        // ========== توابع کمکی ==========
+        // =========================================================
+        //  توابع کمکی
+        // =========================================================
         function scrollToBottom() {
             chat.scrollTop = chat.scrollHeight;
         }
@@ -693,53 +700,55 @@
 
         function currentTime() {
             const d = new Date();
-            return d.getHours().toString().padStart(2, "0") + ":" +
-                d.getMinutes().toString().padStart(2, "0");
+            return d.getHours().toString().padStart(2, '0') + ':' +
+                d.getMinutes().toString().padStart(2, '0');
         }
 
-        // ========== مدیریت تاریخچه چندگانه ==========
+        // =========================================================
+        //  مدیریت تاریخچه چندگانه (ذخیره، بارگذاری، نمایش)
+        // =========================================================
         function saveChat() {
-            let chats = JSON.parse(localStorage.getItem("chats")) || [];
-            // فقط ذخیره کن اگر پیامی وجود داشته باشد
-            if (chat.querySelectorAll('.message').length === 0) return;
+            const messages = chat.querySelectorAll('.message');
+            if (messages.length === 0) return; // چیزی برای ذخیره نیست
 
-            // از ذخیره تکراری جلوگیری کن (آخرین چت)
+            let chats = JSON.parse(localStorage.getItem('chats')) || [];
+            // جلوگیری از ذخیره تکراری (اگر آخرین چت دقیقاً مشابه است)
             const last = chats[chats.length - 1];
             if (last && last.content === chat.innerHTML) return;
 
             const current = {
                 id: Date.now(),
-                date: new Date().toLocaleString("fa-IR"),
+                date: new Date().toLocaleString('fa-IR'),
                 content: chat.innerHTML
             };
             chats.push(current);
-            localStorage.setItem("chats", JSON.stringify(chats));
+            localStorage.setItem('chats', JSON.stringify(chats));
         }
 
         function loadChat(id) {
-            let chats = JSON.parse(localStorage.getItem("chats")) || [];
-            let selected = chats.find(c => c.id === id);
+            let chats = JSON.parse(localStorage.getItem('chats')) || [];
+            const selected = chats.find(c => c.id === id);
             if (selected) {
                 chat.innerHTML = selected.content;
                 chat.style.justifyContent = 'flex-start';
-                // حذف گرینگ اگر وجود داشته باشد
+                // اگر گرینگ وجود داشت حذفش کن
                 const g = chat.querySelector('.greeting');
                 if (g) g.remove();
                 scrollToBottom();
-                // بستن باکس تاریخچه
-                document.querySelector(".history-box")?.remove();
+                // بستن پنجره تاریخچه
+                document.querySelector('.history-box')?.remove();
             }
         }
 
         function showHistory() {
-            let chats = JSON.parse(localStorage.getItem("chats")) || [];
+            let chats = JSON.parse(localStorage.getItem('chats')) || [];
             if (chats.length === 0) {
-                alert("تاریخچه‌ای وجود ندارد.");
+                alert('تاریخچه‌ای وجود ندارد.');
                 return;
             }
 
-            // حذف باکس قبلی
-            document.querySelector(".history-box")?.remove();
+            // حذف باکس قبلی (اگر هست)
+            document.querySelector('.history-box')?.remove();
 
             let list = '';
             // نمایش از جدید به قدیم
@@ -767,10 +776,10 @@
         }
 
         function newChat() {
-            // ذخیره چت فعلی
+            // ذخیره چت فعلی (اگر پیامی داشته باشد)
             saveChat();
 
-            // ریست کردن چت
+            // ریست کردن چت به حالت اولیه
             chat.innerHTML = `
                 <div class="greeting">
                     سلام 👋<br>
@@ -778,71 +787,75 @@
                 </div>
             `;
             chat.style.justifyContent = 'center';
-            // حذف هر باکس تاریخچه
-            document.querySelector(".history-box")?.remove();
+            // بستن پنجره تاریخچه اگر باز باشد
+            document.querySelector('.history-box')?.remove();
             scrollToBottom();
         }
 
-        // ========== توابع پیام ==========
+        // =========================================================
+        //  توابع پیام‌رسانی
+        // =========================================================
         function addUserMessage(text) {
             const g = chat.querySelector('.greeting');
             if (g) g.remove();
             chat.innerHTML += `
-            <div class="message user">
-                <div class="bubble">
-                    ${text}
-                    <div class="time">${currentTime()}</div>
+                <div class="message user">
+                    <div class="bubble">
+                        ${text}
+                        <div class="time">${currentTime()}</div>
+                    </div>
+                    <div class="avatar user-avatar">😊</div>
                 </div>
-                <div class="avatar user-avatar">😊</div>
-            </div>
-        `;
+            `;
             chat.style.justifyContent = 'flex-start';
             scrollToBottom();
         }
 
         function showTyping() {
             const html = `
-            <div class="message bot" id="typing">
-                <div class="avatar bot-avatar">🤖</div>
-                <div class="typing">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
+                <div class="message bot" id="typing">
+                    <div class="avatar bot-avatar">🤖</div>
+                    <div class="typing">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                 </div>
-            </div>
-        `;
-            chat.insertAdjacentHTML("beforeend", html);
+            `;
+            chat.insertAdjacentHTML('beforeend', html);
             scrollToBottom();
         }
 
         function removeTyping() {
-            const t = document.getElementById("typing");
+            const t = document.getElementById('typing');
             if (t) t.remove();
         }
 
         function showBot(answer) {
             chat.innerHTML += `
-            <div class="message bot">
-                <div class="avatar bot-avatar">🤖</div>
-                <div class="bubble">
-                    ${answer}
-                    <div class="copy-btn" onclick="copyText(this)">
-                        <i class="fa-regular fa-copy"></i> کپی
+                <div class="message bot">
+                    <div class="avatar bot-avatar">🤖</div>
+                    <div class="bubble">
+                        ${answer}
+                        <div class="copy-btn" onclick="copyText(this)">
+                            <i class="fa-regular fa-copy"></i> کپی
+                        </div>
+                        <div class="time">${currentTime()}</div>
                     </div>
-                    <div class="time">${currentTime()}</div>
                 </div>
-            </div>
-        `;
-            saveChat();
+            `;
+            saveChat(); // بعد از هر پاسخ ربات، چت ذخیره شود
             scrollToBottom();
         }
 
-        // ========== جستجو در دانش ==========
+        // =========================================================
+        //  جستجو در دانش محلی
+        // =========================================================
         function getAnswer(question) {
-            question = question.toLowerCase();
+            const q = question.toLowerCase();
             for (let item of knowledge) {
                 for (let keyword of item.keywords) {
-                    if (question.includes(keyword)) {
+                    if (q.includes(keyword)) {
                         return item.content;
                     }
                 }
@@ -850,44 +863,48 @@
             return null;
         }
 
-        // ========== فراخوانی API ==========
+        // =========================================================
+        //  فراخوانی API هوش مصنوعی (در صورت عدم وجود پاسخ محلی)
+        // =========================================================
         async function getAIAnswer(question) {
             showTyping();
-            const API_URL = "https://api.example.com/chat"; // ← جایگزین کن
+            const API_URL = 'https://api.example.com/chat'; // ← این را با URL واقعی جایگزین کن
 
             try {
-                let response = await fetch(API_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: question })
                 });
 
-                if (!response.ok) throw new Error("خطا در ارتباط با سرور");
+                if (!response.ok) throw new Error('خطا در ارتباط با سرور');
 
-                let data = await response.json();
+                const data = await response.json();
                 removeTyping();
                 showBot(data.answer);
             } catch (error) {
-                console.error("خطا در دریافت پاسخ از AI:", error);
+                console.error('خطا در دریافت پاسخ از AI:', error);
                 removeTyping();
-                showBot("متأسفم، در حال حاضر قادر به اتصال به سرور هوش مصنوعی نیستم. لطفاً بعداً دوباره تلاش کنید.");
+                showBot('متأسفم، در حال حاضر قادر به اتصال به سرور هوش مصنوعی نیستم. لطفاً بعداً دوباره تلاش کنید.');
             }
         }
 
-        // ========== ارسال پیام ==========
+        // =========================================================
+        //  ارسال پیام (نقطه ورود اصلی)
+        // =========================================================
         function sendMessage() {
             const text = input.value.trim();
-            if (text === "") return;
+            if (text === '') return;
 
             if (!knowledgeLoaded) {
-                showBot("⏳ لطفاً چند لحظه صبر کنید، در حال آماده‌سازی اطلاعات هستم.");
+                showBot('⏳ لطفاً چند لحظه صبر کنید، در حال آماده‌سازی اطلاعات هستم.');
                 return;
             }
 
             addUserMessage(text);
-            input.value = "";
+            input.value = '';
 
-            let answer = getAnswer(text);
+            const answer = getAnswer(text);
             if (answer) {
                 showBot(answer);
             } else {
@@ -895,46 +912,55 @@
             }
         }
 
-        input.addEventListener("keypress", function(e) {
-            if (e.key === "Enter") {
+        // ارسال با کلید Enter
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
                 e.preventDefault();
                 sendMessage();
             }
         });
 
-        // ========== کپی متن ==========
+        // =========================================================
+        //  کپی متن
+        // =========================================================
         function copyText(btn) {
             const text = btn.parentElement.innerText.trim();
-            navigator.clipboard.writeText(text).then(() => {
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> کپی شد';
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> کپی';
-                }, 1500);
-            }).catch(() => {
-                alert("کپی ناموفق بود.");
-            });
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> کپی شد';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="fa-regular fa-copy"></i> کپی';
+                    }, 1500);
+                })
+                .catch(() => {
+                    alert('کپی ناموفق بود.');
+                });
         }
 
-        // ========== ریپل ==========
-        document.addEventListener("click", function(e) {
-            const bubble = e.target.closest(".bubble");
+        // =========================================================
+        //  افکت ریپل روی حباب‌ها
+        // =========================================================
+        document.addEventListener('click', function(e) {
+            const bubble = e.target.closest('.bubble');
             if (!bubble) return;
             const rect = bubble.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            const ripple = document.createElement("span");
-            ripple.className = "ripple";
-            ripple.style.left = x + "px";
-            ripple.style.top = y + "px";
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
             bubble.appendChild(ripple);
             setTimeout(() => ripple.remove(), 600);
         });
 
-        // ========== بارگذاری اولیه ==========
+        // =========================================================
+        //  بارگذاری اولیه صفحه (آخرین چت یا خوش‌آمدگویی)
+        // =========================================================
         window.onload = function() {
-            const chats = JSON.parse(localStorage.getItem("chats")) || [];
+            const chats = JSON.parse(localStorage.getItem('chats')) || [];
             if (chats.length > 0) {
-                // آخرین چت را بارگذاری کن
+                // آخرین چت را نمایش بده
                 const last = chats[chats.length - 1];
                 chat.innerHTML = last.content;
                 chat.style.justifyContent = 'flex-start';
@@ -942,61 +968,66 @@
                 if (g) g.remove();
                 scrollToBottom();
             }
+            // در غیر این صورت همان گرینگ پیش‌فرض باقی می‌ماند
         };
 
-        // ========== دکمه اسکرول ==========
-        chat.addEventListener("scroll", () => {
-            const btn = document.getElementById("scrollBottom");
+        // =========================================================
+        //  نمایش دکمه اسکرول به پایین
+        // =========================================================
+        chat.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollBottom');
             if (chat.scrollTop < chat.scrollHeight - 700) {
-                btn.style.display = "block";
+                btn.style.display = 'block';
             } else {
-                btn.style.display = "none";
+                btn.style.display = 'none';
             }
         });
 
-        // ========== Attach File ==========
-        const fileInput = document.getElementById("fileInput");
+        // =========================================================
+        //  آپلود فایل (دکمه پیوست)
+        // =========================================================
+        const fileInput = document.getElementById('fileInput');
 
         function openFilePicker() {
             fileInput.click();
         }
 
-        fileInput.addEventListener("change", function() {
+        fileInput.addEventListener('change', function() {
             const file = this.files[0];
             if (!file) return;
             addUserFileMessage(file);
-            this.value = "";
+            this.value = ''; // اجازه انتخاب مجدد
         });
 
         function addUserFileMessage(file) {
             const g = chat.querySelector('.greeting');
             if (g) g.remove();
 
-            if (file.type.startsWith("image/")) {
+            if (file.type.startsWith('image/')) {
                 const url = URL.createObjectURL(file);
                 chat.innerHTML += `
-                <div class="message user">
-                    <div class="bubble">
-                        <img src="${url}" 
-                             style="max-width:180px; border-radius:15px; display:block; margin-bottom:8px;">
-                        <b>${file.name}</b>
-                        <div class="time">${currentTime()}</div>
+                    <div class="message user">
+                        <div class="bubble">
+                            <img src="${url}" 
+                                 style="max-width:180px; border-radius:15px; display:block; margin-bottom:8px;">
+                            <b>${file.name}</b>
+                            <div class="time">${currentTime()}</div>
+                        </div>
+                        <div class="avatar user-avatar">😊</div>
                     </div>
-                    <div class="avatar user-avatar">😊</div>
-                </div>
-            `;
+                `;
             } else {
-                let icon = "📄";
-                if (file.type === "application/pdf") icon = "📕";
+                let icon = '📄';
+                if (file.type === 'application/pdf') icon = '📕';
                 chat.innerHTML += `
-                <div class="message user">
-                    <div class="bubble">
-                        ${icon} <b>${file.name}</b>
-                        <div class="time">${currentTime()}</div>
+                    <div class="message user">
+                        <div class="bubble">
+                            ${icon} <b>${file.name}</b>
+                            <div class="time">${currentTime()}</div>
+                        </div>
+                        <div class="avatar user-avatar">😊</div>
                     </div>
-                    <div class="avatar user-avatar">😊</div>
-                </div>
-            `;
+                `;
             }
 
             chat.style.justifyContent = 'flex-start';
