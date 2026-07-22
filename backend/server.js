@@ -50,7 +50,7 @@ app.post("/chat", async (req, res) => {
         const response = await client.chat.completions.create({
 
             // مدل بهتر برای فارسی
-            model: "meta-llama/llama-3.2-3b-instruct:free"
+            model: "openrouter/free"
 
 
             messages: [
