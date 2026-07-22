@@ -44,7 +44,7 @@ app.post("/chat", async (req, res) => {
         const response = await client.chat.completions.create({
 
             // مدل OpenRouter
-            model: "openai/gpt-4.1-mini",
+            model: "meta-llama/llama-3.1-8b-instruct",
 
             messages: [
 
