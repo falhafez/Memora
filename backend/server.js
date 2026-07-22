@@ -10,9 +10,10 @@ app.use(cors());
 app.use(express.json());
 
 
-// اتصال به OpenAI
+// اتصال به OpenRouter
 const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
+    apiKey: process.env.OPENROUTER_API_KEY,
+    baseURL: "https://openrouter.ai/api/v1"
 });
 
 
@@ -42,7 +43,8 @@ app.post("/chat", async (req, res) => {
 
         const response = await client.chat.completions.create({
 
-            model: "gpt-4.1-mini",
+            // مدل OpenRouter
+            model: "meta-llama/llama-3.1-8b-instruct",
 
             messages: [
 
@@ -55,10 +57,10 @@ app.post("/chat", async (req, res) => {
 - پاسخ‌ها باید ساده، دوستانه و قابل فهم باشند.
 - تشخیص پزشکی انجام نده.
 - دارو یا تغییر دوز دارو پیشنهاد نکن.
-- در موارد تخصصی پزشکی، کاربر را به پزشک یا متخصص ارجاع بده.
-- اطلاعات عمومی درباره مراقبت، حمایت روانی، سبک زندگی و آموزش ارائه کن.
-- اگر سوال خارج از حوزه سلامت بود، پاسخ کوتاه و دوستانه بده.
-                    `
+- اگر موضوع تخصصی پزشکی، تشخیص یا درمان بود، کاربر را به پزشک یا متخصص ارجاع بده.
+- درباره مراقبت از بیمار آلزایمر، حمایت روانی، سبک زندگی و آموزش اطلاعات عمومی ارائه کن.
+- اگر سوال خارج از حوزه سلامت بود، کوتاه و دوستانه پاسخ بده.
+`
                 },
 
                 {
@@ -73,8 +75,7 @@ app.post("/chat", async (req, res) => {
         });
 
 
-        const answer =
-            response.choices[0].message.content;
+        const answer = response.choices[0].message.content;
 
 
         res.json({
@@ -84,7 +85,7 @@ app.post("/chat", async (req, res) => {
 
     } catch (error) {
 
-        console.error("OpenAI Error:", error);
+        console.error("OpenRouter Error:", error);
 
 
         res.status(500).json({
@@ -97,7 +98,6 @@ app.post("/chat", async (req, res) => {
     }
 
 });
-
 
 
 // اجرای سرور
