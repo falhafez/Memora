@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const app = express();
 
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -17,16 +18,18 @@ const client = new OpenAI({
 });
 
 
-// تست فعال بودن سرور
+// تست سرور
 app.get("/", (req, res) => {
+
     res.json({
         status: "online",
         message: "Memora AI Server is running"
     });
+
 });
 
 
-// مسیر چت هوش مصنوعی
+// مسیر چت
 app.post("/chat", async (req, res) => {
 
     try {
@@ -35,60 +38,98 @@ app.post("/chat", async (req, res) => {
 
 
         if (!question) {
+
             return res.status(400).json({
                 error: "پیام خالی است"
             });
+
         }
+
 
 
         const response = await client.chat.completions.create({
 
-            // مدل OpenRouter
-            model: "meta-llama/llama-3.1-8b-instruct",
+            // مدل بهتر برای فارسی
+            model: "google/gemini-2.0-flash-001",
+
 
             messages: [
 
                 {
                     role: "system",
+
                     content: `
-"لطفاً پاسخ را به زبان فارسی روان بده.\n\n" + question
+تو دستیار هوشمند سلامت اپلیکیشن «ممورا» هستی.
 
-کاربر اصلی تو مراقب بیمار مبتلا به آلزایمر است.
+مخاطب تو مراقبین و خانواده بیماران مبتلا به آلزایمر هستند.
 
-وظیفه:
-- توضیح ساده و قابل فهم درباره مراقبت روزانه بده.
-- با لحن همدلانه پاسخ بده.
-- از اصطلاحات پیچیده پزشکی بدون توضیح استفاده نکن.
-- هرگز تشخیص قطعی نده.
-- داروی جدید یا تغییر مقدار دارو پیشنهاد نکن.
-- اگر کاربر درباره علائم خطر، درمان، تشخیص یا دارو پرسید، توصیه کن با پزشک مشورت کند.
-- پاسخ‌ها کوتاه، کاربردی و مناسب مراقبین خانواده باشند.
+وظایف:
+- به زبان فارسی روان، طبیعی و قابل فهم پاسخ بده.
+- لحن تو مهربان، آرام و حمایت‌کننده باشد.
+- پاسخ‌ها را کوتاه و کاربردی بنویس.
+- از جملات رباتی و ترجمه ماشینی استفاده نکن.
+- اگر اصطلاح پزشکی استفاده کردی، آن را ساده توضیح بده.
+
+محدودیت‌ها:
+- تشخیص پزشکی قطعی انجام نده.
+- داروی جدید پیشنهاد نکن.
+- مقدار یا دوز دارو را تغییر نده.
+- در مسائل مربوط به درمان، تشخیص یا شرایط خطرناک، کاربر را به پزشک ارجاع بده.
+
+موضوعات اصلی:
+- مراقبت روزانه بیمار آلزایمر
+- مدیریت رفتارهای دشوار
+- حمایت روانی مراقب
+- تغذیه، خواب، فعالیت و ایمنی بیمار
+
+اگر سوال خارج از حوزه سلامت بود، کوتاه و دوستانه پاسخ بده.
 `
                 },
 
+
                 {
                     role: "user",
-                    content: question
+
+                    content: `
+لطفاً پاسخ را به فارسی روان ارائه کن.
+
+سوال کاربر:
+${question}
+`
                 }
 
             ],
 
-            temperature: 0.7
+
+            temperature: 0.4,
+
+
+            max_tokens: 500
 
         });
 
 
-        const answer = response.choices[0].message.content;
+
+        const answer =
+            response.choices[0].message.content;
+
 
 
         res.json({
+
             answer: answer
+
         });
+
 
 
     } catch (error) {
 
-        console.error("OpenRouter Error:", error);
+
+        console.error(
+            "OpenRouter Error:",
+            error
+        );
 
 
         res.status(500).json({
@@ -98,9 +139,12 @@ app.post("/chat", async (req, res) => {
 
         });
 
+
     }
 
+
 });
+
 
 
 // اجرای سرور
