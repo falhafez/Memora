@@ -8,53 +8,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        /* ===== تمام استایل‌های قبلی (بدون تغییر) ===== */
+        /* ===== ریست و پایه ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Vazirmatn', sans-serif;
         }
+
+        /* ===== بدنه با فلکس برای وسط‌چین کردن ===== */
+        html,
         body {
-            background: linear-gradient(180deg, #efe9fa, #fdf6f4);
-            min-height: 100vh;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
             display: flex;
             justify-content: center;
+            align-items: center;
+            background: linear-gradient(180deg, #efe9fa, #fdf6f4);
             overflow: hidden;
-            animation: fadePage .4s ease;
+            margin: 0;
         }
-        @keyframes fadePage {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: none; }
-        }
+
+        /* ===== کانتینر اصلی (همان موبایل) ===== */
         .mobile {
             width: 100%;
             max-width: 480px;
-            height: 100vh;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow: hidden;
             background: #fdf6f4;
+            overflow: hidden;
+            /* دیگر نیازی به margin:auto نیست چون بدنه فلکس است */
         }
+
+        /* ===== هدر ===== */
         .header {
-            position: sticky;
-            top: 0;
-            padding: 18px;
+            height: 78px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            background: rgba(255,255,255,.72);
-            backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(255,255,255,.5);
-            z-index: 100;
+            background: rgba(255, 255, 255, .85);
+            backdrop-filter: blur(18px);
             flex-shrink: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .5);
+            justify-content: space-between;
         }
+
         .left {
             display: flex;
             align-items: center;
             gap: 14px;
         }
+
         .back {
             width: 46px;
             height: 46px;
@@ -63,12 +71,13 @@
             justify-content: center;
             align-items: center;
             background: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
             color: #8472a7;
             font-size: 18px;
             text-decoration: none !important;
             border: none;
         }
+
         .ai-avatar {
             width: 54px;
             height: 54px;
@@ -79,27 +88,33 @@
             align-items: center;
             color: white;
             font-size: 24px;
-            box-shadow: 0 10px 25px rgba(132,114,167,.3);
+            box-shadow: 0 10px 25px rgba(132, 114, 167, .3);
         }
+
         .info h2 {
             font-size: 18px;
             color: #5e4b82;
         }
+
         .status {
             font-size: 12px;
             color: #47b56b;
             margin-top: 4px;
         }
+
+        /* ===== ناحیه چت ===== */
         .chat {
             flex: 1;
             overflow-y: auto;
-            padding: 18px;
+            padding: 16px 14px;
+            gap: 12px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            scroll-behavior: smooth;
             justify-content: center;
             align-items: center;
         }
+
         .greeting {
             font-size: 22px;
             color: #8472a7;
@@ -110,26 +125,38 @@
             user-select: none;
             padding: 20px;
         }
+
         .chat:has(.message) {
             justify-content: flex-start;
         }
         .chat:has(.message) .greeting {
             display: none;
         }
+
+        /* ===== پیام‌ها ===== */
         .message {
+            width: 100%;
             display: flex;
             align-items: flex-end;
             gap: 10px;
             animation: message .35s ease;
-            width: 100%;
         }
+
         @keyframes message {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .message.user {
             justify-content: flex-end;
         }
+
         .avatar {
             width: 42px;
             height: 42px;
@@ -140,45 +167,53 @@
             font-size: 18px;
             flex-shrink: 0;
         }
+
         .bot-avatar {
             background: linear-gradient(135deg, #8472a7, #a995d2);
             color: white;
-            box-shadow: 0 8px 18px rgba(132,114,167,.3);
+            box-shadow: 0 8px 18px rgba(132, 114, 167, .3);
         }
+
         .user-avatar {
             background: #ece8f8;
             color: #8472a7;
         }
+
         .bubble {
-            max-width: 78%;
-            padding: 14px 18px;
-            border-radius: 22px;
-            line-height: 1.9;
+            max-width: 82%;
             font-size: 14px;
+            padding: 12px 15px;
+            line-height: 1.8;
+            border-radius: 22px;
             position: relative;
             word-break: break-word;
             transition: .25s;
         }
+
         .bot .bubble {
             background: white;
             color: #444;
             border-radius: 22px 22px 22px 6px;
-            box-shadow: 0 12px 30px rgba(0,0,0,.08);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
         }
+
         .user .bubble {
             background: linear-gradient(135deg, #8472a7, #a996d1);
             color: white;
             border-radius: 22px 22px 6px 22px;
-            box-shadow: 0 12px 30px rgba(132,114,167,.25);
+            box-shadow: 0 12px 30px rgba(132, 114, 167, .25);
         }
+
         .time {
             margin-top: 8px;
             font-size: 11px;
             opacity: .7;
         }
+
         .bubble:hover {
             transform: translateY(-2px);
         }
+
         .typing {
             display: flex;
             align-items: center;
@@ -187,8 +222,9 @@
             background: white;
             border-radius: 22px 22px 22px 6px;
             width: 75px;
-            box-shadow: 0 12px 25px rgba(0,0,0,.08);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, .08);
         }
+
         .dot {
             width: 8px;
             height: 8px;
@@ -196,13 +232,28 @@
             background: #8472a7;
             animation: typing 1.2s infinite;
         }
-        .dot:nth-child(2) { animation-delay: .2s; }
-        .dot:nth-child(3) { animation-delay: .4s; }
-        @keyframes typing {
-            0% { transform: translateY(0); opacity: .4; }
-            50% { transform: translateY(-6px); opacity: 1; }
-            100% { transform: translateY(0); opacity: .4; }
+        .dot:nth-child(2) {
+            animation-delay: .2s;
         }
+        .dot:nth-child(3) {
+            animation-delay: .4s;
+        }
+
+        @keyframes typing {
+            0% {
+                transform: translateY(0);
+                opacity: .4;
+            }
+            50% {
+                transform: translateY(-6px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: .4;
+            }
+        }
+
         .task-card {
             margin-top: 12px;
             padding: 14px;
@@ -219,19 +270,28 @@
             font-size: 13px;
             color: #666;
         }
+
         .ripple {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255,255,255,.45);
-            transform: translate(-50%,-50%);
+            background: rgba(255, 255, 255, .45);
+            transform: translate(-50%, -50%);
             animation: ripple .6s linear;
             pointer-events: none;
         }
         @keyframes ripple {
-            from { width: 10px; height: 10px; opacity: .6; }
-            to { width: 350px; height: 350px; opacity: 0; }
+            from {
+                width: 10px;
+                height: 10px;
+                opacity: .6;
+            }
+            to {
+                width: 350px;
+                height: 350px;
+                opacity: 0;
+            }
         }
-        .bubble { overflow: hidden; }
+
         .copy-btn {
             margin-top: 10px;
             display: inline-flex;
@@ -249,72 +309,97 @@
             background: #8472a7;
             color: white;
         }
+
+        /* ===== ناحیه ورودی (ترتیب RTL) ===== */
         .chat-input {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 18px;
-            background: rgba(255,255,255,.92);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(0,0,0,.05);
+            gap: 8px;
+            padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, .05);
             flex-shrink: 0;
+            direction: rtl;
         }
-        .chat-input input {
-            flex: 1;
-            border: none;
-            outline: none;
-            background: #f6f4fb;
-            border-radius: 28px;
-            padding: 12px 18px;
-            font-size: 15px;
-            color: #444;
-        }
-        .chat-input button {
+
+        .send {
+            order: 1;
             width: 46px;
             height: 46px;
+            flex-shrink: 0;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            transition: .25s;
+            background: linear-gradient(135deg, #8472a7, #a996d1);
+            color: white;
+            box-shadow: 0 10px 25px rgba(132, 114, 167, .35);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 18px;
+            transition: .25s;
         }
-        .attach { background: #f3eefb; color: #8472a7; }
-        .mic { background: #f3eefb; color: #8472a7; }
-        .send {
-            background: linear-gradient(135deg, #8472a7, #a996d1);
-            color: white;
-            box-shadow: 0 10px 25px rgba(132,114,167,.35);
+        .send:hover {
+            transform: scale(1.05);
         }
-        .send:hover { transform: scale(1.05); }
-        .send:active { transform: scale(.92); }
-        .bottom-nav {
-            margin-top: 0;
-            padding: 12px 0 10px;
-            border-top: 1px solid #eadfdc;
-            display: flex;
-            justify-content: space-around;
-            background: #fdf6f4;
+        .send:active {
+            transform: scale(.92);
+        }
+
+        .chat-input input {
+            order: 2;
+            height: 46px;
+            flex: 1;
+            background: #f5f2fb;
+            border: none;
+            outline: none;
+            border-radius: 25px;
+            padding: 0 18px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .mic {
+            order: 3;
+            width: 42px;
+            height: 42px;
             flex-shrink: 0;
-        }
-        .nav-item {
-            text-align: center;
-            font-size: 11px;
-            color: #999;
-            text-decoration: none;
-            transition: .2s;
-        }
-        .nav-item i {
-            display: block;
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-        .nav-item.active {
+            border: none;
+            border-radius: 50%;
+            background: #f3eefb;
             color: #8472a7;
-            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: .25s;
         }
+        .mic:hover {
+            background: #e8e0f5;
+        }
+
+        .attach {
+            order: 4;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 50%;
+            background: #f3eefb;
+            color: #8472a7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: .25s;
+        }
+        .attach:hover {
+            background: #e8e0f5;
+        }
+
+        /* ===== دکمه اسکرول ===== */
         .scroll-bottom {
             position: fixed;
             bottom: 170px;
@@ -324,7 +409,7 @@
             border: none;
             border-radius: 50%;
             background: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,.12);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
             cursor: pointer;
             display: none;
             color: #8472a7;
@@ -332,103 +417,198 @@
             transition: .25s;
             z-index: 50;
         }
-        .scroll-bottom:hover { transform: scale(1.1); }
+        .scroll-bottom:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== ناوبری پایین ===== */
+        .bottom-nav {
+            height: 70px;
+            padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+            display: flex;
+            justify-content: space-around;
+            background: #fff;
+            border-top: 1px solid #eee;
+            flex-shrink: 0;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            text-decoration: none;
+            transition: .2s;
+        }
+        .nav-item i {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .nav-item.active {
+            color: #8472a7;
+            font-weight: 700;
+        }
+
+        /* ===== واکنش‌گرایی برای موبایل‌های کوچک ===== */
+        @media (max-width: 360px) {
+            .ai-avatar {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            .bubble {
+                max-width: 85%;
+                font-size: 13px;
+                padding: 10px 12px;
+            }
+            .chat-input button {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+            .chat-input input {
+                height: 38px;
+                font-size: 13px;
+                padding: 0 14px;
+            }
+            .header {
+                height: 68px;
+                padding: 10px 12px;
+            }
+            .back {
+                width: 40px;
+                height: 40px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-<div class="mobile">
+    <div class="mobile">
 
-    <!-- Header -->
-    <div class="header">
-        <div class="left">
-            <a href="home.html" class="back">
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-            <div class="ai-avatar">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-            <div class="info">
-                <h2>دستیار سلامت</h2>
-                <div class="status">
-                    <i class="fa-solid fa-circle"></i>
-                    آنلاین
+        <!-- Header -->
+        <div class="header">
+            <div class="left">
+                <a href="home.html" class="back">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <div class="ai-avatar">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="info">
+                    <h2>دستیار سلامت</h2>
+                    <div class="status">
+                        <i class="fa-solid fa-circle"></i>
+                        آنلاین
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Chat Area -->
-    <div class="chat" id="chat">
-        <div class="greeting">
-            سلام 👋<br>
-            هر سوالی دارید بپرسید.
+        <!-- Chat Area -->
+        <div class="chat" id="chat">
+            <div class="greeting">
+                سلام 👋<br>
+                هر سوالی دارید بپرسید.
+            </div>
         </div>
-    </div>
 
-    <!-- Scroll Down -->
-    <button class="scroll-bottom" id="scrollBottom" onclick="scrollToBottom()">
-        <i class="fa-solid fa-angle-down"></i>
-    </button>
-
-    <!-- Input Area -->
-    <div class="chat-input">
-        <button class="attach"><i class="fa-solid fa-paperclip"></i></button>
-        <input type="text" id="messageInput" placeholder="پیام خود را بنویسید..." autocomplete="off">
-        <button class="mic"><i class="fa-solid fa-microphone"></i></button>
-        <button class="send" onclick="sendMessage()">
-            <i class="fa-solid fa-paper-plane"></i>
+        <!-- Scroll Down -->
+        <button class="scroll-bottom" id="scrollBottom" onclick="scrollToBottom()">
+            <i class="fa-solid fa-angle-down"></i>
         </button>
+
+        <!-- Input Area -->
+        <div class="chat-input">
+            <button class="send" onclick="sendMessage()">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+
+            <input
+            type="text"
+            id="messageInput"
+            placeholder="پیام خود را بنویسید..."
+            autocomplete="off"
+            >
+
+            <button class="mic">
+                <i class="fa-solid fa-microphone"></i>
+            </button>
+
+            <input
+            type="file"
+            id="fileInput"
+            hidden
+            accept="image/*,.pdf,.doc,.docx,.txt"
+            >
+            <button class="attach" onclick="openFilePicker()">
+                <i class="fa-solid fa-paperclip"></i>
+            </button>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                خانه
+            </a>
+            <a href="education.html" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                آموزش
+            </a>
+            <a href="chat.html" class="nav-item active">
+                <i class="fa-solid fa-comments"></i>
+                چت‌ها
+            </a>
+            <a href="reminder.html" class="nav-item">
+                <i class="fa-solid fa-bell"></i>
+                یادآورها
+            </a>
+            <a href="daily-care.html" class="nav-item">
+                <i class="fa-solid fa-heart"></i>
+                مراقبت
+            </a>
+        </div>
+
     </div>
 
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fa-solid fa-house"></i>
-            خانه
-        </a>
-        <a href="education.html" class="nav-item">
-            <i class="fa-solid fa-book-open"></i>
-            آموزش
-        </a>
-        <a href="chat.html" class="nav-item active">
-            <i class="fa-solid fa-comments"></i>
-            چت‌ها
-        </a>
-        <a href="reminder.html" class="nav-item">
-            <i class="fa-solid fa-bell"></i>
-            یادآورها
-        </a>
-        <a href="daily-care.html" class="nav-item">
-            <i class="fa-solid fa-heart"></i>
-            مراقبت
-        </a>
-    </div>
+    <script>
+        // ========== عناصر DOM ==========
+        const chat = document.getElementById("chat");
+        const input = document.getElementById("messageInput");
+        const greeting = document.querySelector(".greeting");
 
-</div>
+        // ========== دانش پایه ==========
+        let knowledge = [];
+        let knowledgeLoaded = false;
 
-<script>
-    // ========== عناصر DOM ==========
-    const chat = document.getElementById("chat");
-    const input = document.getElementById("messageInput");
-    const greeting = document.querySelector(".greeting");
+        fetch("knowledge.json")
+            .then(res => res.json())
+            .then(data => {
+                knowledge = data;
+                knowledgeLoaded = true;
+                console.log("دانش با موفقیت بارگذاری شد.");
+            })
+            .catch(err => {
+                console.warn("بارگذاری knowledge.json ناموفق:", err);
+            });
 
-    // ========== توابع کمکی ==========
-    function scrollToBottom() {
-        chat.scrollTop = chat.scrollHeight;
-    }
-    scrollToBottom();
+        // ========== توابع کمکی ==========
+        function scrollToBottom() {
+            chat.scrollTop = chat.scrollHeight;
+        }
+        scrollToBottom();
 
-    function currentTime() {
-        const d = new Date();
-        return d.getHours().toString().padStart(2, "0") + ":" +
-               d.getMinutes().toString().padStart(2, "0");
-    }
+        function currentTime() {
+            const d = new Date();
+            return d.getHours().toString().padStart(2, "0") + ":" +
+                d.getMinutes().toString().padStart(2, "0");
+        }
 
-    function addUserMessage(text) {
-        if (greeting) greeting.remove();
-        chat.innerHTML += `
+        function addUserMessage(text) {
+            if (greeting) greeting.remove();
+            chat.innerHTML += `
             <div class="message user">
                 <div class="bubble">
                     ${text}
@@ -437,12 +617,12 @@
                 <div class="avatar user-avatar">😊</div>
             </div>
         `;
-        chat.style.justifyContent = 'flex-start';
-        scrollToBottom();
-    }
+            chat.style.justifyContent = 'flex-start';
+            scrollToBottom();
+        }
 
-    function showTyping() {
-        const html = `
+        function showTyping() {
+            const html = `
             <div class="message bot" id="typing">
                 <div class="avatar bot-avatar">🤖</div>
                 <div class="typing">
@@ -452,18 +632,17 @@
                 </div>
             </div>
         `;
-        chat.insertAdjacentHTML("beforeend", html);
-        scrollToBottom();
-    }
+            chat.insertAdjacentHTML("beforeend", html);
+            scrollToBottom();
+        }
 
-    function removeTyping() {
-        const t = document.getElementById("typing");
-        if (t) t.remove();
-    }
+        function removeTyping() {
+            const t = document.getElementById("typing");
+            if (t) t.remove();
+        }
 
-    // ========== نمایش پاسخ ربات (تابع جدید) ==========
-    function showBot(answer) {
-        chat.innerHTML += `
+        function showBot(answer) {
+            chat.innerHTML += `
             <div class="message bot">
                 <div class="avatar bot-avatar">🤖</div>
                 <div class="bubble">
@@ -475,107 +654,182 @@
                 </div>
             </div>
         `;
-        saveChat();
-        scrollToBottom();
-    }
+            saveChat();
+            scrollToBottom();
+        }
 
-    // ========== ارسال پیام (نسخه اصلاح‌شده) ==========
-    function sendMessage() {
-        const text = input.value.trim();
-        if (text === "") return;
+        // ========== جستجو در دانش ==========
+        function getAnswer(question) {
+            question = question.toLowerCase();
+            for (let item of knowledge) {
+                for (let keyword of item.keywords) {
+                    if (question.includes(keyword)) {
+                        return item.content;
+                    }
+                }
+            }
+            return null;
+        }
 
-        addUserMessage(text);
-        input.value = "";
-        showTyping();
+        // ========== فراخوانی API ==========
+        async function getAIAnswer(question) {
+            showTyping();
+            const API_URL = "https://api.example.com/chat"; // ← جایگزین کن
 
-        fetch("chat.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: text
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            removeTyping();
-            showBot(data.answer);
-        })
-        .catch(error => {
-            removeTyping();
-            showBot("❌ ارتباط با سرور برقرار نشد.");
-            console.log(error);
+            try {
+                let response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: question })
+                });
+
+                if (!response.ok) throw new Error("خطا در ارتباط با سرور");
+
+                let data = await response.json();
+                removeTyping();
+                showBot(data.answer);
+            } catch (error) {
+                console.error("خطا در دریافت پاسخ از AI:", error);
+                removeTyping();
+                showBot("متأسفم، در حال حاضر قادر به اتصال به سرور هوش مصنوعی نیستم. لطفاً بعداً دوباره تلاش کنید.");
+            }
+        }
+
+        // ========== ارسال پیام ==========
+        function sendMessage() {
+            const text = input.value.trim();
+            if (text === "") return;
+
+            if (!knowledgeLoaded) {
+                showBot("⏳ لطفاً چند لحظه صبر کنید، در حال آماده‌سازی اطلاعات هستم.");
+                return;
+            }
+
+            addUserMessage(text);
+            input.value = "";
+
+            let answer = getAnswer(text);
+            if (answer) {
+                showBot(answer);
+            } else {
+                getAIAnswer(text);
+            }
+        }
+
+        input.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                sendMessage();
+            }
         });
-    }
 
-    input.addEventListener("keypress", function(e) {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            sendMessage();
+        // ========== کپی متن ==========
+        function copyText(btn) {
+            const text = btn.parentElement.innerText.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> کپی شد';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> کپی';
+                }, 1500);
+            }).catch(() => {
+                alert("کپی ناموفق بود.");
+            });
         }
-    });
 
-    // ========== کپی متن ==========
-    function copyText(btn) {
-        const text = btn.parentElement.innerText.trim();
-        navigator.clipboard.writeText(text).then(() => {
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> کپی شد';
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fa-regular fa-copy"></i> کپی';
-            }, 1500);
-        }).catch(() => {
-            alert("کپی ناموفق بود.");
+        // ========== ریپل ==========
+        document.addEventListener("click", function(e) {
+            const bubble = e.target.closest(".bubble");
+            if (!bubble) return;
+            const rect = bubble.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const ripple = document.createElement("span");
+            ripple.className = "ripple";
+            ripple.style.left = x + "px";
+            ripple.style.top = y + "px";
+            bubble.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
         });
-    }
 
-    // ========== اثر ریپل ==========
-    document.addEventListener("click", function(e) {
-        const bubble = e.target.closest(".bubble");
-        if (!bubble) return;
-        const rect = bubble.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const ripple = document.createElement("span");
-        ripple.className = "ripple";
-        ripple.style.left = x + "px";
-        ripple.style.top = y + "px";
-        bubble.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-    });
-
-    // ========== ذخیره تاریخچه چت ==========
-    function saveChat() {
-        const messages = chat.querySelectorAll('.message');
-        if (messages.length > 0) {
-            localStorage.setItem("chatHistory", chat.innerHTML);
-        } else {
-            localStorage.removeItem("chatHistory");
+        // ========== ذخیره و بازیابی تاریخچه ==========
+        function saveChat() {
+            const messages = chat.querySelectorAll('.message');
+            if (messages.length > 0) {
+                localStorage.setItem("chatHistory", chat.innerHTML);
+            } else {
+                localStorage.removeItem("chatHistory");
+            }
         }
-    }
 
-    // ========== بازیابی تاریخچه در بارگذاری صفحه ==========
-    window.onload = function() {
-        const data = localStorage.getItem("chatHistory");
-        if (data) {
-            chat.innerHTML = data;
-            chat.style.justifyContent = 'flex-start';
-            const g = chat.querySelector('.greeting');
-            if (g) g.remove();
-        }
-        scrollToBottom();
-    };
+        window.onload = function() {
+            const data = localStorage.getItem("chatHistory");
+            if (data) {
+                chat.innerHTML = data;
+                chat.style.justifyContent = 'flex-start';
+                const g = chat.querySelector('.greeting');
+                if (g) g.remove();
+            }
+            scrollToBottom();
+        };
 
-    // ========== نمایش دکمه اسکرول ==========
-    chat.addEventListener("scroll", () => {
-        const btn = document.getElementById("scrollBottom");
-        if (chat.scrollTop < chat.scrollHeight - 700) {
-            btn.style.display = "block";
-        } else {
-            btn.style.display = "none";
+        chat.addEventListener("scroll", () => {
+            const btn = document.getElementById("scrollBottom");
+            if (chat.scrollTop < chat.scrollHeight - 700) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        });
+
+        // ========== Attach File ==========
+        const fileInput = document.getElementById("fileInput");
+
+        function openFilePicker() {
+            fileInput.click();
         }
-    });
-</script>
+
+        fileInput.addEventListener("change", function() {
+            const file = this.files[0];
+            if (!file) return;
+            addUserFileMessage(file);
+            this.value = "";
+        });
+
+        function addUserFileMessage(file) {
+            if (greeting) greeting.remove();
+
+            if (file.type.startsWith("image/")) {
+                const url = URL.createObjectURL(file);
+                chat.innerHTML += `
+                <div class="message user">
+                    <div class="bubble">
+                        <img src="${url}" 
+                             style="max-width:180px; border-radius:15px; display:block; margin-bottom:8px;">
+                        <b>${file.name}</b>
+                        <div class="time">${currentTime()}</div>
+                    </div>
+                    <div class="avatar user-avatar">😊</div>
+                </div>
+            `;
+            } else {
+                let icon = "📄";
+                if (file.type === "application/pdf") icon = "📕";
+                chat.innerHTML += `
+                <div class="message user">
+                    <div class="bubble">
+                        ${icon} <b>${file.name}</b>
+                        <div class="time">${currentTime()}</div>
+                    </div>
+                    <div class="avatar user-avatar">😊</div>
+                </div>
+            `;
+            }
+
+            saveChat();
+            scrollToBottom();
+        }
+    </script>
 
 </body>
+
 </html>
