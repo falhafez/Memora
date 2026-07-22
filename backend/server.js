@@ -50,7 +50,7 @@ app.post("/chat", async (req, res) => {
         const response = await client.chat.completions.create({
 
             // مدل بهتر برای فارسی
-            model: "google/gemini-2.0-flash-001",
+            model: "google/gemma-4-31b-it:free"
 
 
             messages: [
@@ -59,7 +59,7 @@ app.post("/chat", async (req, res) => {
                     role: "system",
 
                     content: `
-تو دستیار هوشمند سلامت اپلیکیشن «ممورا» هستی.
+تو دستیار هوشمند سلامت اپلیکیشن «همیار» هستی.
 
 مخاطب تو مراقبین و خانواده بیماران مبتلا به آلزایمر هستند.
 
