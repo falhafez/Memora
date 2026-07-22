@@ -44,7 +44,7 @@ app.post("/chat", async (req, res) => {
         const response = await client.chat.completions.create({
 
             // مدل OpenRouter
-            model: "google/gemini-2.0-flash-001",
+            model: "openai/gpt-4.1-mini",
 
             messages: [
 
