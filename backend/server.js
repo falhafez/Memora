@@ -1,28 +1,43 @@
 const express = require("express");
 const cors = require("cors");
 const OpenAI = require("openai");
-
+require("dotenv").config();
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
 
-// کلید API اینجا قرار می‌گیرد
-require("dotenv").config();
-
+// اتصال به OpenAI
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
 
+// تست فعال بودن سرور
+app.get("/", (req, res) => {
+    res.json({
+        status: "online",
+        message: "Memora AI Server is running"
+    });
+});
 
+
+// مسیر چت هوش مصنوعی
 app.post("/chat", async (req, res) => {
 
     try {
 
         const question = req.body.message;
+
+
+        if (!question) {
+            return res.status(400).json({
+                error: "پیام خالی است"
+            });
+        }
 
 
         const response = await client.chat.completions.create({
@@ -33,13 +48,16 @@ app.post("/chat", async (req, res) => {
 
                 {
                     role: "system",
-                    content:
-                    `
-                    تو یک دستیار سلامت برای مراقبین بیماران آلزایمر هستی.
-                    پاسخ‌های عمومی و دوستانه بده.
-                    تشخیص پزشکی انجام نده.
-                    دارو تجویز نکن.
-                    اگر سوال تخصصی پزشکی بود کاربر را به پزشک ارجاع بده.
+                    content: `
+تو یک دستیار سلامت برای مراقبین بیماران مبتلا به آلزایمر هستی.
+
+قوانین:
+- پاسخ‌ها باید ساده، دوستانه و قابل فهم باشند.
+- تشخیص پزشکی انجام نده.
+- دارو یا تغییر دوز دارو پیشنهاد نکن.
+- در موارد تخصصی پزشکی، کاربر را به پزشک یا متخصص ارجاع بده.
+- اطلاعات عمومی درباره مراقبت، حمایت روانی، سبک زندگی و آموزش ارائه کن.
+- اگر سوال خارج از حوزه سلامت بود، پاسخ کوتاه و دوستانه بده.
                     `
                 },
 
@@ -48,26 +66,31 @@ app.post("/chat", async (req, res) => {
                     content: question
                 }
 
-            ]
+            ],
+
+            temperature: 0.7
 
         });
+
+
+        const answer =
+            response.choices[0].message.content;
 
 
         res.json({
-
-            answer:
-            response.choices[0].message.content
-
+            answer: answer
         });
 
 
-    } catch(error) {
+    } catch (error) {
 
-        console.log(error);
+        console.error("OpenAI Error:", error);
+
 
         res.status(500).json({
 
-            error:"خطا در ارتباط با هوش مصنوعی"
+            answer:
+            "متأسفانه در حال حاضر امکان دریافت پاسخ هوشمند وجود ندارد. لطفاً دوباره تلاش کنید."
 
         });
 
@@ -77,8 +100,14 @@ app.post("/chat", async (req, res) => {
 
 
 
-app.listen(3000, () => {
+// اجرای سرور
+const PORT = process.env.PORT || 3000;
 
-    console.log("AI Server running on port 3000");
+
+app.listen(PORT, () => {
+
+    console.log(
+        `AI Server running on port ${PORT}`
+    );
 
 });
