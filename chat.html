@@ -150,14 +150,43 @@
             padding: 20px;
         }
 
-        .chat:has(.message) {
-            justify-content: flex-start;
-        }
         .chat:has(.message) .greeting {
             display: none;
         }
+        .chat:has(.message) .suggestions {
+            display: none;
+        }
+        .chat:has(.message) {
+            justify-content: flex-start;
+        }
 
-        /* ===== پیام‌ها (اصلاح‌شده) ===== */
+        /* ===== سوالات پیشنهادی ===== */
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+            width: 100%;
+        }
+        .suggestions button {
+            border: none;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 20px;
+            color: #8472a7;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+            cursor: pointer;
+            font-size: 13px;
+            transition: .2s;
+        }
+        .suggestions button:hover {
+            background: #f5f0fc;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+        }
+
+        /* ===== پیام‌ها ===== */
         .message {
             width: 100%;
             display: flex;
@@ -222,6 +251,14 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
         }
 
+        .source {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #8472a7;
+            padding-top: 8px;
+            border-top: 1px solid #eee;
+        }
+
         .time {
             margin-top: 8px;
             font-size: 11px;
@@ -269,44 +306,6 @@
             100% {
                 transform: translateY(0);
                 opacity: .4;
-            }
-        }
-
-        .task-card {
-            margin-top: 12px;
-            padding: 14px;
-            border-radius: 18px;
-            background: #f6f4fb;
-            border: 1px solid #ebe5f7;
-        }
-        .task-card h4 {
-            font-size: 14px;
-            color: #6b5b88;
-            margin-bottom: 8px;
-        }
-        .task-card p {
-            font-size: 13px;
-            color: #666;
-        }
-
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, .45);
-            transform: translate(-50%, -50%);
-            animation: ripple .6s linear;
-            pointer-events: none;
-        }
-        @keyframes ripple {
-            from {
-                width: 10px;
-                height: 10px;
-                opacity: .6;
-            }
-            to {
-                width: 350px;
-                height: 350px;
-                opacity: 0;
             }
         }
 
@@ -525,6 +524,22 @@
             border-radius: 20px;
             cursor: pointer;
             color: #555;
+            margin-left: 8px;
+        }
+        .history-box .clear-history {
+            margin-top: 12px;
+            background: #fee;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: #c0392b;
+        }
+        .history-box .history-actions {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         /* ===== واکنش‌گرایی ===== */
@@ -563,6 +578,10 @@
                 height: 36px;
                 font-size: 15px;
             }
+            .suggestions button {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
@@ -571,7 +590,7 @@
 
     <div class="mobile">
 
-        <!-- ===== هدر با دکمه‌های چت جدید و تاریخچه ===== -->
+        <!-- هدر با دکمه‌های چت جدید و تاریخچه -->
         <div class="header">
             <div class="left">
                 <a href="home.html" class="back">
@@ -598,20 +617,34 @@
             </div>
         </div>
 
-        <!-- ===== ناحیه چت ===== -->
+        <!-- ناحیه چت -->
         <div class="chat" id="chat">
             <div class="greeting">
                 سلام 👋<br>
                 هر سوالی دارید بپرسید.
             </div>
+            <div class="suggestions">
+                <button onclick="quickQuestion('علائم آلزایمر چیست؟')">
+                    🧠 علائم آلزایمر
+                </button>
+                <button onclick="quickQuestion('مشکلات خواب بیمار آلزایمر')">
+                    😴 خواب
+                </button>
+                <button onclick="quickQuestion('مدیریت داروهای بیمار')">
+                    💊 دارو
+                </button>
+                <button onclick="quickQuestion('تغذیه بیمار آلزایمر')">
+                    🍎 تغذیه
+                </button>
+            </div>
         </div>
 
-        <!-- ===== دکمه اسکرول به پایین ===== -->
+        <!-- دکمه اسکرول به پایین -->
         <button class="scroll-bottom" id="scrollBottom" onclick="scrollToBottom()">
             <i class="fa-solid fa-angle-down"></i>
         </button>
 
-        <!-- ===== ناحیه ورودی ===== -->
+        <!-- ناحیه ورودی -->
         <div class="chat-input">
             <button class="send" onclick="sendMessage()">
                 <i class="fa-solid fa-paper-plane"></i>
@@ -639,7 +672,7 @@
             </button>
         </div>
 
-        <!-- ===== ناوبری پایین ===== -->
+        <!-- ناوبری پایین -->
         <div class="bottom-nav">
             <a href="home.html" class="nav-item">
                 <i class="fa-solid fa-house"></i>
@@ -705,17 +738,14 @@
         }
 
         // =========================================================
-        //  مدیریت تاریخچه چندگانه (ذخیره، بارگذاری، نمایش)
+        //  مدیریت تاریخچه چندگانه
         // =========================================================
         function saveChat() {
             const messages = chat.querySelectorAll('.message');
-            if (messages.length === 0) return; // چیزی برای ذخیره نیست
-
+            if (messages.length === 0) return;
             let chats = JSON.parse(localStorage.getItem('chats')) || [];
-            // جلوگیری از ذخیره تکراری (اگر آخرین چت دقیقاً مشابه است)
             const last = chats[chats.length - 1];
             if (last && last.content === chat.innerHTML) return;
-
             const current = {
                 id: Date.now(),
                 date: new Date().toLocaleString('fa-IR'),
@@ -731,11 +761,9 @@
             if (selected) {
                 chat.innerHTML = selected.content;
                 chat.style.justifyContent = 'flex-start';
-                // اگر گرینگ وجود داشت حذفش کن
                 const g = chat.querySelector('.greeting');
                 if (g) g.remove();
                 scrollToBottom();
-                // بستن پنجره تاریخچه
                 document.querySelector('.history-box')?.remove();
             }
         }
@@ -746,12 +774,8 @@
                 alert('تاریخچه‌ای وجود ندارد.');
                 return;
             }
-
-            // حذف باکس قبلی (اگر هست)
             document.querySelector('.history-box')?.remove();
-
             let list = '';
-            // نمایش از جدید به قدیم
             const reversed = [...chats].reverse();
             reversed.forEach((c, index) => {
                 const num = chats.length - index;
@@ -762,42 +786,73 @@
                     </div>
                 `;
             });
-
             const box = document.createElement('div');
             box.className = 'history-box';
             box.innerHTML = `
                 <div>
                     <h3>تاریخچه گفتگوها</h3>
                     ${list}
-                    <button class="close-history" onclick="this.closest('.history-box').remove()">بستن</button>
+                    <div class="history-actions">
+                        <button class="close-history" onclick="this.closest('.history-box').remove()">بستن</button>
+                        <button class="clear-history" onclick="clearHistory()">🗑 حذف تاریخچه</button>
+                    </div>
                 </div>
             `;
             document.body.appendChild(box);
         }
 
-        function newChat() {
-            // ذخیره چت فعلی (اگر پیامی داشته باشد)
-            saveChat();
+        function clearHistory() {
+            if (confirm('آیا مطمئن هستید که تمام تاریخچه چت‌ها حذف شود؟')) {
+                localStorage.removeItem('chats');
+                alert('تاریخچه با موفقیت حذف شد.');
+                document.querySelector('.history-box')?.remove();
+                newChat();
+            }
+        }
 
-            // ریست کردن چت به حالت اولیه
+        function newChat() {
+            saveChat();
             chat.innerHTML = `
                 <div class="greeting">
                     سلام 👋<br>
                     هر سوالی دارید بپرسید.
                 </div>
+                <div class="suggestions">
+                    <button onclick="quickQuestion('علائم آلزایمر چیست؟')">
+                        🧠 علائم آلزایمر
+                    </button>
+                    <button onclick="quickQuestion('مشکلات خواب بیمار آلزایمر')">
+                        😴 خواب
+                    </button>
+                    <button onclick="quickQuestion('مدیریت داروهای بیمار')">
+                        💊 دارو
+                    </button>
+                    <button onclick="quickQuestion('تغذیه بیمار آلزایمر')">
+                        🍎 تغذیه
+                    </button>
+                </div>
             `;
             chat.style.justifyContent = 'center';
-            // بستن پنجره تاریخچه اگر باز باشد
             document.querySelector('.history-box')?.remove();
             scrollToBottom();
         }
 
         // =========================================================
-        //  توابع پیام‌رسانی
+        //  سوالات پیشنهادی
+        // =========================================================
+        function quickQuestion(text) {
+            input.value = text;
+            sendMessage();
+        }
+
+        // =========================================================
+        //  توابع پیام‌رسانی (با منبع پاسخ)
         // =========================================================
         function addUserMessage(text) {
             const g = chat.querySelector('.greeting');
             if (g) g.remove();
+            const s = chat.querySelector('.suggestions');
+            if (s) s.remove();
             chat.innerHTML += `
                 <div class="message user">
                     <div class="bubble">
@@ -831,12 +886,22 @@
             if (t) t.remove();
         }
 
-        function showBot(answer) {
+        function showBot(answer, source = false) {
+            let sourceText = '';
+            if (source) {
+                sourceText = `
+                    <div class="source">
+                        ✓ منبع: پایگاه دانش مراقبت آلزایمر
+                    </div>
+                `;
+            }
+
             chat.innerHTML += `
                 <div class="message bot">
                     <div class="avatar bot-avatar">🤖</div>
                     <div class="bubble">
                         ${answer}
+                        ${sourceText}
                         <div class="copy-btn" onclick="copyText(this)">
                             <i class="fa-regular fa-copy"></i> کپی
                         </div>
@@ -844,7 +909,7 @@
                     </div>
                 </div>
             `;
-            saveChat(); // بعد از هر پاسخ ربات، چت ذخیره شود
+            saveChat();
             scrollToBottom();
         }
 
@@ -864,17 +929,65 @@
         }
 
         // =========================================================
-        //  فراخوانی API هوش مصنوعی (در صورت عدم وجود پاسخ محلی)
+        //  توابع تشخیص موضوع
+        // =========================================================
+        function isCareTopic(question) {
+            const keywords = [
+                "آلزایمر",
+                "فراموشی",
+                "حافظه",
+                "مراقبت",
+                "بیمار",
+                "دارو",
+                "بی قراری",
+                "خواب",
+                "رفتار",
+                "غذا",
+                "حمام",
+                "پرستاری"
+            ];
+            return keywords.some(k => question.includes(k));
+        }
+
+        function isMedicalQuestion(question) {
+            const words = [
+                "تشخیص",
+                "درمان",
+                "دوز",
+                "قرص",
+                "دارو",
+                "علائم",
+                "بیماری",
+                "تزریق",
+                "فشار خون",
+                "قند"
+            ];
+            return words.some(w => question.includes(w));
+        }
+
+        // =========================================================
+        //  فراخوانی API هوش مصنوعی (با آدرس محلی و پرامپت سیستمی)
         // =========================================================
         async function getAIAnswer(question) {
             showTyping();
-            const API_URL = 'https://api.example.com/chat'; // ← این را با URL واقعی جایگزین کن
+            // ===== تغییر آدرس API به لوکال هاست =====
+            const API_URL = "http://localhost:3000/chat";
 
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: question })
+                    body: JSON.stringify({
+                        message: `
+                            تو یک دستیار سلامت برای مراقبین بیماران آلزایمر هستی.
+                            پاسخ‌های پزشکی قطعی نده.
+                            دارو تجویز نکن.
+                            در مسائل تخصصی کاربر را به پزشک ارجاع بده.
+
+                            سؤال کاربر:
+                            ${question}
+                        `
+                    })
                 });
 
                 if (!response.ok) throw new Error('خطا در ارتباط با سرور');
@@ -890,7 +1003,7 @@
         }
 
         // =========================================================
-        //  ارسال پیام (نقطه ورود اصلی)
+        //  ارسال پیام (منطق کامل با منبع و تشخیص‌ها)
         // =========================================================
         function sendMessage() {
             const text = input.value.trim();
@@ -904,10 +1017,23 @@
             addUserMessage(text);
             input.value = '';
 
-            const answer = getAnswer(text);
+            let answer = getAnswer(text);
+
             if (answer) {
-                showBot(answer);
+                // پاسخ از دانش با منبع
+                showBot(answer, true);
+            } else if (isCareTopic(text)) {
+                // موضوع مرتبط ولی جوابی در دانش نیست
+                showBot(`
+                    من پاسخ دقیقی برای این موضوع در پایگاه دانش مراقبت آلزایمر پیدا نکردم.
+                    <br><br>
+                    برای مسائل تخصصی پزشکی، دارویی یا تشخیصی بهتر است با پزشک یا متخصص مربوطه مشورت کنید.
+                `);
+            } else if (isMedicalQuestion(text)) {
+                // سؤال پزشکی خارج از دانش
+                showBot('من نمی‌توانم درباره این موضوع تشخیص یا توصیه پزشکی قطعی ارائه کنم. لطفاً برای دریافت راهنمایی دقیق‌تر با پزشک یا فرد متخصص مشورت کنید.');
             } else {
+                // مکالمات معمولی → API
                 getAIAnswer(text);
             }
         }
@@ -938,7 +1064,7 @@
         }
 
         // =========================================================
-        //  افکت ریپل روی حباب‌ها
+        //  افکت ریپل
         // =========================================================
         document.addEventListener('click', function(e) {
             const bubble = e.target.closest('.bubble');
@@ -955,24 +1081,24 @@
         });
 
         // =========================================================
-        //  بارگذاری اولیه صفحه (آخرین چت یا خوش‌آمدگویی)
+        //  بارگذاری اولیه
         // =========================================================
         window.onload = function() {
             const chats = JSON.parse(localStorage.getItem('chats')) || [];
             if (chats.length > 0) {
-                // آخرین چت را نمایش بده
                 const last = chats[chats.length - 1];
                 chat.innerHTML = last.content;
                 chat.style.justifyContent = 'flex-start';
                 const g = chat.querySelector('.greeting');
                 if (g) g.remove();
+                const s = chat.querySelector('.suggestions');
+                if (s) s.remove();
                 scrollToBottom();
             }
-            // در غیر این صورت همان گرینگ پیش‌فرض باقی می‌ماند
         };
 
         // =========================================================
-        //  نمایش دکمه اسکرول به پایین
+        //  دکمه اسکرول
         // =========================================================
         chat.addEventListener('scroll', () => {
             const btn = document.getElementById('scrollBottom');
@@ -984,7 +1110,7 @@
         });
 
         // =========================================================
-        //  آپلود فایل (دکمه پیوست)
+        //  آپلود فایل
         // =========================================================
         const fileInput = document.getElementById('fileInput');
 
@@ -996,12 +1122,14 @@
             const file = this.files[0];
             if (!file) return;
             addUserFileMessage(file);
-            this.value = ''; // اجازه انتخاب مجدد
+            this.value = '';
         });
 
         function addUserFileMessage(file) {
             const g = chat.querySelector('.greeting');
             if (g) g.remove();
+            const s = chat.querySelector('.suggestions');
+            if (s) s.remove();
 
             if (file.type.startsWith('image/')) {
                 const url = URL.createObjectURL(file);
