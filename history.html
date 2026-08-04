@@ -36,6 +36,7 @@ button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:10px;fo
 .edit-box{margin-top:15px}
 .edit-btn{width:100%;padding:11px;border:none;border-radius:14px;background:#eee5f7;color:#8472a7;font-size:14px;cursor:pointer;font-weight:700}
 .edit-btn:hover{background:#d8ccef}
+.edit-btn:disabled{background:#f5f5f5;color:#999;cursor:not-allowed}
 .bottom-nav{margin-top:25px;padding-top:15px;border-top:1px solid #eadfdc;display:flex;justify-content:space-around}
 .nav-item{text-decoration:none;color:#999;font-size:11px;text-align:center}
 .nav-item i{display:block;font-size:20px;margin-bottom:5px}
@@ -74,8 +75,34 @@ button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:10px;fo
 
 <script>
 let box = document.getElementById("history");
+
 let data = JSON.parse(localStorage.getItem("careHistory")) || [];
 
+// ===== حذف ثبت‌های تکراری در یک تاریخ (نگه‌داشتن آخرین ثبت) =====
+let uniqueData = [];
+
+data.forEach(item => {
+    let index = uniqueData.findIndex(x => x.dateISO === item.dateISO);
+    if (index !== -1) {
+        uniqueData[index] = item; // جایگزین با ثبت جدیدتر
+    } else {
+        uniqueData.push(item);
+    }
+});
+
+data = uniqueData;
+
+// ذخیره نسخه پاک‌سازی‌شده در localStorage
+localStorage.setItem("careHistory", JSON.stringify(data));
+
+// ===== مرتب‌سازی از جدیدترین تاریخ به قدیمی‌ترین =====
+data.sort((a, b) => {
+    let dateA = new Date(a.dateISO + " " + (a.time || "00:00"));
+    let dateB = new Date(b.dateISO + " " + (b.time || "00:00"));
+    return dateB - dateA;
+});
+
+// ===== نمایش =====
 if (data.length === 0) {
     box.innerHTML = `
         <div class="card">
@@ -83,9 +110,12 @@ if (data.length === 0) {
         </div>
     `;
 } else {
-    let reversed = [...data].reverse();
-    reversed.forEach((item, revIndex) => {
-        let originalIndex = data.length - 1 - revIndex;
+    let today = new Date();
+    let todayISO = today.getFullYear() + "-" +
+        String(today.getMonth() + 1).padStart(2, "0") + "-" +
+        String(today.getDate()).padStart(2, "0");
+
+    data.forEach((item, index) => {
         let symptoms = item.symptoms || [];
 
         let memory = symptoms.filter(x =>
@@ -107,10 +137,31 @@ if (data.length === 0) {
             ["پیاده‌روی","فعالیت ذهنی","صحبت خانوادگی","نیاز به کمک"].includes(x)
         );
 
+        // ===== دکمه ویرایش فقط برای امروز =====
+        let editButton = "";
+        if (item.dateISO === todayISO) {
+            editButton = `
+            <div class="edit-box">
+                <button class="edit-btn" onclick="editCare(${index})">
+                    <i class="fa-solid fa-pen"></i> ویرایش ثبت امروز
+                </button>
+            </div>`;
+        } else {
+            editButton = `
+            <div class="edit-box">
+                <button class="edit-btn" disabled>
+                    <i class="fa-solid fa-lock"></i> امکان ویرایش ثبت‌های قبلی وجود ندارد
+                </button>
+            </div>`;
+        }
+
         box.innerHTML += `
             <div class="card">
                 <div class="date">
-                    <span>📅 ${item.date}</span>
+                    <span>
+                        📅 ${item.date}
+                        ${item.dateISO === todayISO ? " • امروز" : ""}
+                    </span>
                     <span class="score">${item.mood}</span>
                 </div>
 
@@ -159,11 +210,7 @@ if (data.length === 0) {
                     <span>${item.note || "-"}</span>
                 </div>
 
-                <div class="edit-box">
-                    <button class="edit-btn" onclick="editCare(${originalIndex})">
-                        <i class="fa-solid fa-pen"></i> ویرایش ثبت
-                    </button>
-                </div>
+                ${editButton}
             </div>
         `;
     });

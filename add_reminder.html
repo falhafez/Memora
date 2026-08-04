@@ -29,35 +29,33 @@
       justify-content: center;
     }
 
-    /* ===== محفظه موبایل (همانند کد اول) ===== */
     .mobile {
       width: 100%;
       max-width: 480px;
       min-height: 100dvh;
       background: #fdf6f4;
-      padding: 20px;               /* ← مثل کد اول */
-      /* padding-bottom حذف شد تا نوار پایین در انتهای محتوا قرار بگیرد */
+      padding: 20px;
     }
 
-    /* ===== هدر (همانند کد اول) ===== */
+    /* ===== هدر ===== */
     .header {
       display: flex;
       align-items: center;
-      gap: 12px;                   /* ← مثل کد اول */
-      margin-bottom: 25px;         /* ← برای فاصله با فرم (مشابه فاصلهٔ .today تا منو در کد اول) */
+      gap: 12px;
+      margin-bottom: 25px;
     }
 
     .back {
-      width: 48px;                 /* ← هماهنگ با اندازهٔ آیکون‌های منو (55px نیست، ولی 48 مناسب است) */
+      width: 48px;
       height: 48px;
       background: #eee5f7;
       color: #8472a7;
-      border-radius: 14px;         /* ← مثل border-radius آیکون‌های منو */
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      font-size: 22px;             /* ← هماهنگ با سایز آیکون‌های منو */
+      font-size: 22px;
       transition: 0.2s;
       flex-shrink: 0;
     }
@@ -67,40 +65,45 @@
     }
 
     .header h2 {
-      color: #8472a7;              /* ← مثل کد اول */
-      font-size: 22px;             /* ← مثل کد اول */
-      font-weight: 700;            /* ← مثل کد اول */
+      color: #8472a7;
+      font-size: 22px;
+      font-weight: 700;
     }
 
-    /* ===== فرم (با استایل مشابه باکس «برنامه امروز») ===== */
+    /* ===== فرم ===== */
     .form-container {
-      background: white;           /* ← مثل پس‌زمینهٔ تسک‌ها */
-      border-radius: 25px;         /* ← مثل .today */
-      padding: 20px;               /* ← مثل .today */
-      box-shadow: 0 10px 25px rgba(132, 114, 167, 0.25); /* ← مثل سایهٔ .today */
-      margin-bottom: 25px;         /* ← فاصله تا نوار پایین */
+      background: white;
+      border-radius: 25px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(132, 114, 167, 0.25);
+      margin-bottom: 25px;
     }
 
     .form-group {
-      margin-bottom: 20px;         /* ← مثل فاصلهٔ بین تسک‌ها (margin-bottom:10px بود، ولی برای فرم 20 مناسب است) */
+      margin-bottom: 20px;
     }
 
     .form-group label {
       display: block;
       font-weight: 500;
-      color: #665580;              /* ← رنگ مشابه عنوان کارت‌ها */
+      color: #665580;
       margin-bottom: 8px;
-      font-size: 14px;             /* ← مثل توضیحات کارت */
+      font-size: 14px;
+    }
+
+    .form-group label i {
+      margin-left: 6px;
+      color: #8472a7;
     }
 
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 12px 16px;          /* ← مثل padding تسک‌ها (13px بود، نزدیک) */
+      padding: 12px 16px;
       border: 2px solid #eee7f3;
-      border-radius: 15px;         /* ← مثل border-radius تسک‌ها */
-      font-size: 15px;             /* ← کمی بزرگتر از 14px کد اول، اما برای ورودی مناسب است */
+      border-radius: 15px;
+      font-size: 15px;
       color: #665580;
       background: #faf8fc;
       transition: 0.25s;
@@ -136,15 +139,163 @@
       gap: 12px;
     }
 
-    /* ===== دکمه‌ها با استایل مشابه دکمهٔ «تمرین آرامش‌بخش» ===== */
+    /* ===== استایل فیلد زمان ===== */
+    #time {
+      direction: rtl;
+      text-align: center;
+      font-family: 'Vazirmatn';
+      font-size: 16px;
+      font-weight: 700;
+      color: #665580;
+      background: #faf8fc;
+      cursor: pointer;
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #eee7f3;
+      border-radius: 15px;
+      outline: none;
+      transition: 0.25s;
+      letter-spacing: 1px;
+    }
+
+    #time:focus {
+      border-color: #8472a7;
+      box-shadow: 0 0 0 4px rgba(132, 114, 167, 0.1);
+      background: #fff;
+    }
+
+    #time::placeholder {
+      color: #aaa;
+      font-weight: 400;
+    }
+
+    /* ===== مودال انتخاب ساعت ===== */
+    .time-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: fadeIn 0.25s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .time-box {
+      background: white;
+      width: 300px;
+      border-radius: 25px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px) scale(0.95); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .time-box h3 {
+      color: #8472a7;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .time-box h3 i {
+      margin-left: 8px;
+    }
+
+    .time-select {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      direction: ltr;
+    }
+
+    .time-select select {
+      width: 80px;
+      height: 50px;
+      border-radius: 15px;
+      border: 2px solid #eee7f3;
+      font-size: 20px;
+      font-family: 'Vazirmatn';
+      text-align: center;
+      color: #665580;
+      background: #faf8fc;
+      cursor: pointer;
+      transition: 0.2s;
+      appearance: none;
+      padding: 0 10px;
+      font-weight: 700;
+      direction: ltr;
+    }
+
+    .time-select select:focus {
+      border-color: #8472a7;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(132, 114, 167, 0.15);
+    }
+
+    .time-select select option {
+      text-align: center;
+      font-weight: 700;
+      direction: ltr;
+      font-family: 'Vazirmatn';
+    }
+
+    .time-select span {
+      font-size: 28px;
+      color: #8472a7;
+      font-weight: 700;
+    }
+
+    #saveTime {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      border: 0;
+      border-radius: 15px;
+      background: #8472a7;
+      color: white;
+      font-family: 'Vazirmatn';
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #saveTime:hover {
+      background: #6f5a8f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(132, 114, 167, 0.3);
+    }
+
+    #saveTime:active {
+      transform: scale(0.98);
+    }
+
+    .time-select select {
+      font-feature-settings: "ss02";
+    }
+
+    /* ===== دکمه‌ها ===== */
     .btn-submit {
       width: 100%;
       background: #8472a7;
       color: white;
       border: none;
-      border-radius: 15px;         /* ← مثل دکمهٔ آرامش */
-      padding: 14px 18px;          /* ← نزدیک به 9px 18px ولی برای دکمهٔ بزرگ‌تر */
-      font-size: 16px;             /* ← مثل font-size عنوان کارت */
+      border-radius: 15px;
+      padding: 14px 18px;
+      font-size: 16px;
       font-weight: 700;
       box-shadow: 0 10px 25px rgba(132, 114, 167, 0.35);
       cursor: pointer;
@@ -153,7 +304,7 @@
       font-family: 'Vazirmatn', sans-serif;
     }
     .btn-submit:hover {
-      background: #6f5a8f;         /* ← مثل هاور دکمهٔ آرامش */
+      background: #6f5a8f;
       transform: translateY(-2px);
     }
     .btn-submit:active {
@@ -202,7 +353,7 @@
       transform: none;
     }
 
-    /* ===== Toggle (هماهنگ با رنگ‌های کلی) ===== */
+    /* ===== Toggle ===== */
     .toggle-wrapper {
       display: flex;
       align-items: center;
@@ -241,7 +392,7 @@
       right: 25px;
     }
 
-    /* ===== نوار پایین (دقیقاً مشابه کد اول) ===== */
+    /* ===== نوار پایین ===== */
     .bottom-nav {
       margin-top: 25px;
       padding-top: 15px;
@@ -267,7 +418,6 @@
       color: #8472a7;
     }
 
-    /* ===== واکنش‌گرایی (همانند کد اول) ===== */
     @media (max-width: 360px) {
       .mobile {
         padding: 15px;
@@ -283,26 +433,35 @@
       .form-container {
         padding: 15px;
       }
+      #time {
+        font-size: 14px;
+        padding: 10px 12px;
+      }
+      .time-box {
+        width: 280px;
+        padding: 20px;
+      }
+      .time-select select {
+        width: 70px;
+        height: 45px;
+        font-size: 18px;
+      }
     }
 
-    /* جلوگیری از زوم آیفون */
     @media (max-width: 480px) {
-      .form-group input[type="date"],
-      .form-group input[type="time"] {
-        font-size: 16px;
+      #time {
+        font-size: 15px;
       }
     }
   </style>
 </head>
 <body>
   <div class="mobile">
-    <!-- ===== هدر با دکمه برگشت ===== -->
     <div class="header">
       <a href="reminder.html" class="back"><i class="fa-solid fa-arrow-right"></i></a>
-      <h2>افزودن یادآور جدید</h2>
+      <h2 id="pageTitle">افزودن یادآور جدید</h2>
     </div>
 
-    <!-- ===== فرم ===== -->
     <div class="form-container">
       <form id="reminderForm">
         <!-- عنوان -->
@@ -333,10 +492,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="time">زمان</label>
-            <div class="input-icon-wrapper">
+            <label for="time">
               <i class="fa-solid fa-clock"></i>
-              <input type="time" id="time" required />
+              زمان یادآور
+            </label>
+            <div class="input-icon-wrapper">
+              <input 
+                type="text" 
+                id="time"
+                placeholder="انتخاب ساعت"
+                readonly
+                required
+              />
+              <i class="fa-solid fa-clock"></i>
             </div>
           </div>
         </div>
@@ -365,8 +533,7 @@
           </div>
         </div>
 
-        <!-- دکمه‌ها -->
-        <button type="submit" class="btn-submit">
+        <button type="submit" class="btn-submit" id="submitBtn">
           <i class="fa-solid fa-plus"></i>
           افزودن یادآور
         </button>
@@ -376,22 +543,32 @@
       </form>
     </div>
 
-    <!-- ===== نوار پایین (دقیقاً مشابه کد اول) ===== -->
     <div class="bottom-nav">
       <a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
       <a href="education.html" class="nav-item"><i class="fa-solid fa-book-open"></i>آموزش</a>
       <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
       <a href="reminders.html" class="nav-item active"><i class="fa-solid fa-bell"></i>یادآورها</a>
-      <a href="care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
+      <a href="daily-care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
     </div>
   </div>
 
   <script>
+    // ===== دریافت شاخص ویرایش =====
+    let editIndex = localStorage.getItem("editReminderIndex");
+
     // ===== تغییر وضعیت Toggle =====
     function toggleSwitch(element) {
       element.classList.toggle('on');
       const label = document.getElementById('statusLabel');
       label.textContent = element.classList.contains('on') ? 'فعال' : 'غیرفعال';
+    }
+
+    // ===== تبدیل عدد انگلیسی به فارسی =====
+    function toPersianNumber(num) {
+      const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+      return String(num).replace(/\d/g, function(d) {
+        return persianDigits[parseInt(d)];
+      });
     }
 
     // ===== مقداردهی اولیه تاریخ شمسی =====
@@ -403,40 +580,212 @@
       });
     });
 
-    // ===== تنظیم زمان پیش‌فرض =====
+    // ===== تنظیم زمان پیش‌فرض و بارگذاری داده‌های ویرایش =====
     document.addEventListener('DOMContentLoaded', function () {
       const now = new Date();
-      // تاریخ شمسی امروز (توسط persian-datepicker مقداردهی می‌شود، اما برای اطمینان)
+      
+      // تاریخ شمسی امروز
       const today = new persianDate(now).format('YYYY/MM/DD');
       document.getElementById('date').value = today;
 
-      // زمان (نزدیک‌ترین ربع ساعت)
+      // زمان به فرمت ۲۴ ساعته با اعداد فارسی
       const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(Math.floor(now.getMinutes() / 15) * 15).padStart(2, '0');
-      document.getElementById('time').value = hours + ':' + minutes;
+      const minutes = String(Math.floor(now.getMinutes() / 5) * 5).padStart(2, '0');
+      document.getElementById('time').value = toPersianNumber(hours) + ':' + toPersianNumber(minutes);
+
+      // ===== اگر حالت ویرایش است اطلاعات قبلی را بیاور =====
+      if (editIndex !== null) {
+        let reminders = JSON.parse(localStorage.getItem("reminders")) || [];
+        let item = reminders[editIndex];
+
+        if (item) {
+          document.getElementById("title").value = item.title || '';
+          document.getElementById("description").value = item.desc || '';
+          
+          // تبدیل زمان به فارسی
+          if (item.time && item.time.includes(':')) {
+            let parts = item.time.split(':');
+            document.getElementById("time").value = toPersianNumber(parts[0]) + ':' + toPersianNumber(parts[1]);
+          }
+          
+          // ===== مقداردهی تاریخ =====
+          document.getElementById("date").value = item.date || today;
+
+          let categoryMap = {
+            drug: "دارو",
+            food: "غذا",
+            sport: "ورزش",
+            sleep: "خواب",
+            other: "سایر"
+          };
+
+          document.getElementById("category").value = categoryMap[item.type] || "سایر";
+
+          // تغییر عنوان هدر
+          document.getElementById("pageTitle").textContent = "ویرایش یادآور";
+
+          // تغییر دکمه ارسال
+          document.getElementById("submitBtn").innerHTML =
+            '<i class="fa-solid fa-check"></i> ذخیره تغییرات';
+        }
+      }
     });
+
+    // ===== مودال انتخاب ساعت =====
+    $(document).ready(function() {
+      $("#time").on("click", function() {
+        let picker = document.createElement("div");
+        picker.className = "time-modal";
+
+        let hourOptions = '';
+        for (let i = 0; i < 24; i++) {
+          let hour = String(i).padStart(2, '0');
+          let persianHour = toPersianNumber(hour);
+          hourOptions += `<option value="${hour}">${persianHour}</option>`;
+        }
+
+        let minuteOptions = '';
+        for (let i = 0; i < 60; i++) {
+          let minute = String(i).padStart(2, '0');
+          let persianMinute = toPersianNumber(minute);
+          minuteOptions += `<option value="${minute}">${persianMinute}</option>`;
+        }
+
+        picker.innerHTML = `
+          <div class="time-box">
+            <h3>
+              <i class="fa-solid fa-clock"></i>
+              انتخاب ساعت
+            </h3>
+            <div class="time-select">
+              <select id="hourSelect">
+                ${hourOptions}
+              </select>
+              <span>:</span>
+              <select id="minuteSelect">
+                ${minuteOptions}
+              </select>
+            </div>
+            <button id="saveTime">تایید</button>
+          </div>
+        `;
+
+        document.body.appendChild(picker);
+
+        let currentTime = $("#time").val();
+        if (currentTime && currentTime.includes(':')) {
+          let parts = currentTime.split(':');
+          let hourEn = parts[0].replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function(d) {
+            return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d);
+          });
+          let minuteEn = parts[1].replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function(d) {
+            return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d);
+          });
+          $("#hourSelect", picker).val(hourEn.padStart(2, '0'));
+          $("#minuteSelect", picker).val(minuteEn.padStart(2, '0'));
+        }
+
+        $("#saveTime", picker).click(function() {
+          let h = $("#hourSelect", picker).val();
+          let m = $("#minuteSelect", picker).val();
+          $("#time").val(toPersianNumber(h) + ":" + toPersianNumber(m));
+          $(".time-modal").remove();
+        });
+
+        picker.addEventListener('click', function(e) {
+          if (e.target === this) {
+            this.remove();
+          }
+        });
+
+        picker.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            this.remove();
+          }
+        });
+      });
+    });
+
+    // ===== توابع کمکی =====
+    function getCategoryType(category) {
+      switch (category) {
+        case "دارو": return "drug";
+        case "غذا": return "food";
+        case "ورزش": return "sport";
+        case "خواب": return "sleep";
+        default: return "other";
+      }
+    }
+
+    function toEnglishNumber(str) {
+      const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+      return String(str).replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function(d) {
+        return persianDigits.indexOf(d);
+      });
+    }
 
     // ===== ارسال فرم =====
     document.getElementById('reminderForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const title = document.getElementById('title').value;
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
 
-      // تبدیل به تاریخ فارسی برای نمایش
-      const dateObj = new Date(date + 'T' + time);
-      const persianDate = dateObj.toLocaleDateString('fa-IR', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-      const persianTime = dateObj.toLocaleTimeString('fa-IR', {
-        hour: '2-digit',
-        minute: '2-digit'
-      });
+      const title = document.getElementById('title').value.trim();
+      if (!title) {
+        alert('لطفاً عنوان یادآور را وارد کنید.');
+        return;
+      }
 
-      alert('✅ یادآور "' + title + '" با موفقیت افزوده شد!\n📅 تاریخ: ' + persianDate + '\n🕐 زمان: ' + persianTime);
-      window.location.href = 'reminders.html';
+      let timePersian = document.getElementById('time').value;
+      let timeEnglish = toEnglishNumber(timePersian);
+      
+      const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+      if (!timeRegex.test(timeEnglish)) {
+        alert("لطفاً ساعت را به فرمت ۲۴ ساعته انتخاب کنید");
+        return;
+      }
+
+      const date = document.getElementById('date').value;  // ← تاریخ انتخاب‌شده
+      const description = document.getElementById('description').value.trim() || 'بدون توضیح';
+      const category = document.getElementById('category').value;
+
+      let reminders = JSON.parse(localStorage.getItem('reminders')) || [];
+
+      // ===== ساخت شیء یادآور با تمام فیلدهای تاریخ =====
+      const newReminder = {
+        title: title,
+        desc: description,
+        time: timeEnglish,
+        date: date,                    // ← تاریخ ذخیره می‌شود
+        type: getCategoryType(category),
+        done: false,
+        completedDate: null,           // ← برای ثبت تاریخ تکمیل
+        completedAt: null,             // ← برای ثبت ساعت تکمیل
+        userActive: true               // ← وضعیت فعال/غیرفعال (دستی)
+      };
+
+      // ===== حالت ویرایش یا افزودن =====
+      const isEditing =
+        editIndex !== null &&
+        reminders[Number(editIndex)] !== undefined;
+
+      if (isEditing) {
+        reminders[editIndex] = {
+          ...reminders[editIndex],
+          ...newReminder,
+          id: reminders[editIndex].id
+        };
+        localStorage.removeItem("editReminderIndex");
+        alert('✅ یادآور با موفقیت ویرایش شد');
+      } else {
+        newReminder.id = Date.now();
+        reminders.push(newReminder);
+        alert('✅ یادآور با موفقیت اضافه شد');
+      }
+
+      localStorage.setItem('reminders', JSON.stringify(reminders));
+
+      setTimeout(() => {
+        window.location.href = "reminder.html";
+      }, 500);
     });
   </script>
 </body>

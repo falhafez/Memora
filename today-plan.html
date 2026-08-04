@@ -1,0 +1,404 @@
+<body>
+
+<div class="mobile">
+
+
+<!-- هدر -->
+
+<div class="header">
+
+<a href="home.html" class="back">
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+<div>
+<h2>برنامه امروز</h2>
+<p id="welcomeText">خلاصه مراقبت امروز</p>
+</div>
+
+</div>
+
+
+
+<!-- کارت اصلی -->
+
+<div class="hero">
+
+<h3 id="heroGreeting">
+سلام 🌱
+</h3>
+
+<p id="patientText">
+خلاصه فعالیت‌های امروز بیمار
+</p>
+
+
+<div class="summary">
+
+<div>
+<b id="totalCount">0</b>
+<span>فعالیت</span>
+</div>
+
+
+<div>
+<b id="doneCount">0</b>
+<span>انجام شده</span>
+</div>
+
+
+<div>
+<b id="remainCount">0</b>
+<span>باقی مانده</span>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+<!-- یادآورها -->
+
+<div class="card">
+
+<div class="title">
+⏰ برنامه‌های امروز
+</div>
+
+
+<div id="reminderBox"></div>
+
+
+</div>
+
+
+
+
+
+<!-- مراقبت -->
+
+<div class="card">
+
+<div class="title">
+💜 وضعیت بیمار
+</div>
+
+
+<div id="careBox">
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- پیشنهاد -->
+
+<div class="card suggestion">
+
+<div class="title">
+✨ پیشنهاد همیار
+</div>
+
+
+<p id="suggestion">
+برای مراقبت بهتر، امروز زمانی را برای گفت‌وگو و آرام‌سازی بیمار اختصاص دهید.
+</p>
+
+
+<div class="action-btn">
+
+<a href="daily-care.html" class="primary">
+ثبت مراقبت
+</a>
+
+
+<a href="reminder.html" class="secondary">
+یادآورها
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- پایین -->
+
+<div class="bottom-nav">
+
+
+<a href="home.html" class="nav-item">
+<i class="fa-solid fa-house"></i>
+خانه
+</a>
+
+
+<a href="education.html" class="nav-item">
+<i class="fa-solid fa-book"></i>
+آموزش
+</a>
+
+
+<a href="chat.html" class="nav-item">
+<i class="fa-solid fa-comments"></i>
+چت
+</a>
+
+
+<a href="reminder.html" class="nav-item">
+<i class="fa-solid fa-bell"></i>
+یادآور
+</a>
+
+
+<a href="daily-care.html" class="nav-item active">
+<i class="fa-solid fa-heart"></i>
+مراقبت
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+// ===== پروفایل =====
+
+
+let profile =
+JSON.parse(localStorage.getItem("patientProfile")) || {};
+
+
+let caregiver =
+profile.caregiverName || "";
+
+
+let patient =
+profile.patientName || "";
+
+
+
+if(caregiver){
+
+document.getElementById("heroGreeting").innerHTML =
+"سلام " + caregiver + " 🌱";
+
+}
+
+
+if(patient){
+
+document.getElementById("patientText").innerHTML =
+"امروز مراقبت از " + patient;
+
+}
+
+
+
+
+// ===== یادآورها =====
+
+
+let reminders =
+JSON.parse(localStorage.getItem("reminders")) || [];
+
+
+let reminderBox =
+document.getElementById("reminderBox");
+
+
+
+let done=0;
+
+
+if(reminders.length===0){
+
+
+reminderBox.innerHTML =
+`
+<p style="color:#888">
+امروز یادآوری ثبت نشده است
+</p>
+`;
+
+}
+
+else{
+
+
+reminders.forEach(r=>{
+
+
+if(r.done)
+done++;
+
+
+reminderBox.innerHTML += `
+
+
+<div class="item">
+
+
+<div class="item-left">
+
+
+<div class="icon">
+
+<i class="fa-solid fa-bell"></i>
+
+</div>
+
+
+<div>
+
+<b>${r.title}</b>
+
+<small>${r.time || ""}</small>
+
+</div>
+
+
+</div>
+
+
+<div class="${r.done?'done':'pending'}">
+
+${r.done?'✓ انجام شد':'○ باقی مانده'}
+
+</div>
+
+
+</div>
+
+
+`;
+
+
+});
+
+
+}
+
+
+
+document.getElementById("totalCount").innerText =
+reminders.length;
+
+
+document.getElementById("doneCount").innerText =
+done;
+
+
+document.getElementById("remainCount").innerText =
+reminders.length-done;
+
+
+
+
+
+// ===== آخرین مراقبت =====
+
+
+let history =
+JSON.parse(localStorage.getItem("careHistory")) || [];
+
+
+let careBox =
+document.getElementById("careBox");
+
+
+
+if(history.length===0){
+
+
+careBox.innerHTML =
+`
+<p style="color:#888">
+هنوز مراقبت روزانه ثبت نشده است
+</p>
+`;
+
+
+}
+
+else{
+
+
+let last =
+history[history.length-1];
+
+
+careBox.innerHTML = `
+
+
+<div class="mood">
+
+${last.mood || "🙂"}
+
+</div>
+
+
+<div class="tags">
+
+${(last.symptoms || [])
+.map(x=>`
+
+<div class="tag">
+${x}
+</div>
+
+`).join("")}
+
+
+</div>
+
+
+
+${last.note ?
+
+`
+<div class="note">
+${last.note}
+</div>
+`
+
+:""}
+
+
+`;
+
+
+
+}
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

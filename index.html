@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>همیار</title>
+<title>همیار | مراقبت از سالمندان مبتلا به آلزایمر</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -44,12 +44,11 @@ body{
     position:relative;
     z-index:2;
     min-height:100vh;
-    padding:4px 20px 20px;  /* پدینگ بالا بسیار کم شد */
+    padding:4px 20px 20px;
     display:flex;
     flex-direction:column;
 }
 
-/* لوگو کوچک‌تر */
 .logo{
     width:100%;
     display:flex;
@@ -57,41 +56,50 @@ body{
     margin-bottom:0;
 }
 .logo img{
-    width:130px;  /* از 170 به 130 کاهش یافت */
+    width:130px;
 }
 
 .subtitle{
-    margin-top:0;  /* فاصله صفر با لوگو */
+    margin-top:0;
     text-align:center;
     font-size:20px;
-    line-height:1.3;
-    color:#555;
+    line-height:1.4;
+    color:#2d2a4e;
+    font-weight:500;
+}
+.subtitle span {
+    display:inline-block;
+    color:#6b58c5;
+    font-weight:700;
 }
 
-/* لیست دو ستونی با آیتم‌های وسط‌چین */
 .list{
-    margin-top:8px;  /* فاصله کمتر با زیرنویس */
+    margin-top:12px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:8px 12px;
+    gap:6px 16px;
+    align-items:start;
 }
 .item{
     display:flex;
     align-items:center;
-    justify-content:center;
-    gap:4px;
+    justify-content:flex-start;
+    gap:6px;
+    padding:2px 0;
 }
 .item i{
     color:#6b58c5;
     font-size:15px;
-    width:18px;
+    width:20px;
     text-align:center;
+    flex-shrink:0;
 }
 .item span{
     font-size:13px;
-    color:#444;
+    color:#2d2a4e;
     line-height:1.4;
-    text-align:center;
+    text-align:right;
+    font-weight:500;
 }
 
 .start{
@@ -112,6 +120,8 @@ body{
     font-weight:700;
     cursor:pointer;
     box-shadow:0 5px 15px rgba(115,89,217,.3);
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
 }
 .start button:active{
     transform:scale(.97);
@@ -119,14 +129,14 @@ body{
 
 @media(max-width:360px){
     .logo img{
-        width:110px;  /* در موبایل کوچک‌تر */
+        width:110px;
     }
     .subtitle{
-        font-size:15px;
+        font-size:16px;
     }
     .list{
-        margin-top:6px;
-        gap:6px 8px;
+        margin-top:8px;
+        gap:4px 10px;
     }
     .item span{
         font-size:11px;
@@ -134,50 +144,51 @@ body{
     .start button{
         width:80%;
         height:52px;
+        font-size:18px;
     }
 }
 </style>
 </head>
 <body>
 <div class="mobile">
-<img class="bg" src="bg.png">
+<img class="bg" src="bg.png" alt="background">
 <div class="overlay"></div>
 <div class="content">
 <div class="logo">
-    <img src="logo.png">
+    <img src="logo.png" alt="همیار">
 </div>
 <div class="subtitle">
-    همیار، همراه و یاریگر شما<br>
-    در مسیر مراقبت از عزیزان
+    همیار، همراه مراقبان<br>
+    <span>سالمندان مبتلا به آلزایمر</span>
 </div>
 <div class="list">
 <div class="item">
-<i class="fa-regular fa-book-open"></i>
-<span>آموزش کاربردی و قابل اعتماد</span>
+<i class="fa-solid fa-brain"></i>
+<span>آموزش مراقبت از سالمندان مبتلا به آلزایمر</span>
 </div>
 <div class="item">
 <i class="fa-regular fa-comments"></i>
-<span>پشتیبانی هوشمند و همدلانه</span>
+<span>دستیار هوشمند پاسخگوی سوالات مراقب</span>
 </div>
 <div class="item">
 <i class="fa-regular fa-calendar-days"></i>
-<span>مدیریت آسان مراقبت روزانه</span>
+<span>ثبت و مدیریت مراقبت‌های روزانه</span>
 </div>
 <div class="item">
 <i class="fa-regular fa-heart"></i>
-<span>حمایت از خود مراقب</span>
+<span>حمایت از سلامت و آرامش مراقب</span>
 </div>
 <div class="item">
 <i class="fa-regular fa-bell"></i>
-<span>یادآورهای هوشمند</span>
+<span>یادآوری دارو، ویزیت و فعالیت‌ها</span>
 </div>
 <div class="item">
-<i class="fa-solid fa-headset"></i>
-<span>ارتباط و راهنمایی سریع</span>
+<i class="fa-solid fa-user-group"></i>
+<span>راهنمایی برای مدیریت رفتارهای بیمار</span>
 </div>
 </div>
 <div class="start">
-<button onclick="location.href='login.html'">شروع</button>
+<button onclick="location.href='login.html'">ورود به همیار</button>
 </div>
 </div>
 </div>

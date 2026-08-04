@@ -44,7 +44,7 @@ textarea{width:100%;height:120px;border:1px solid #eadfdc;border-radius:16px;pad
 
     <!-- حال امروز -->
     <div class="card">
-        <div class="label">حال امروز نرگس</div>
+        <div class="label" id="todayMoodTitle">حال امروز</div>
         <div class="moods">
             <div class="mood" data-mood="😣">😣</div>
             <div class="mood" data-mood="😕">😕</div>
@@ -71,7 +71,7 @@ textarea{width:100%;height:120px;border:1px solid #eadfdc;border-radius:16px;pad
     <div class="card" data-group="behavior">
         <div class="label">💜 رفتار و احساسات</div>
         <div class="grid">
-            <div class="chip active">آرام</div>
+            <div class="chip">آرام</div>  <!-- حذف active -->
             <div class="chip">بی‌قرار</div>
             <div class="chip">مضطرب</div>
             <div class="chip">پرخاشگر</div>
@@ -151,6 +151,18 @@ textarea{width:100%;height:120px;border:1px solid #eadfdc;border-radius:16px;pad
 </div>
 
 <script>
+// ===== دریافت نام بیمار از پروفایل =====
+let username = localStorage.getItem("currentUser");
+let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+let patientName = "بیمار";
+let profile = profiles[username];
+if (profile && profile.patientName) {
+    patientName = profile.patientName;
+}
+
+// نمایش نام بیمار فقط در بخش حال امروز (هم در حالت عادی و هم ویرایش)
+document.getElementById("todayMoodTitle").innerText = `حال امروز ${patientName}`;
+
 // ===== حالت انتخاب (mood) =====
 let selectedMood = "🙂";
 document.querySelectorAll('.mood').forEach(m => {
@@ -176,8 +188,9 @@ document.querySelectorAll('.card[data-group]').forEach(card => {
 let editIndex = localStorage.getItem("editCareIndex");
 
 if (editIndex !== null) {
-    // تغییر عنوان صفحه
+    // تغییر عنوان صفحه (بدون تغییر نام بیمار، فقط ویرایش)
     document.getElementById("pageTitle").innerText = "ویرایش مراقبت روزانه";
+    // (نام بیمار قبلاً در todayMoodTitle درج شده است)
 
     // بارگذاری داده‌های آن رکورد
     let history = JSON.parse(localStorage.getItem("careHistory")) || [];
@@ -207,7 +220,7 @@ if (editIndex !== null) {
     }
 }
 
-// ===== ذخیره (هم برای جدید و هم ویرایش) =====
+// ===== ذخیره (هم برای جدید و هم ویرایش) با dateISO و جلوگیری از ثبت دوباره در یک تاریخ =====
 function saveCare(){
     // جمع‌آوری تمام چیپ‌های فعال از همه کارت‌ها
     let symptoms = [];
@@ -215,9 +228,17 @@ function saveCare(){
         symptoms.push(c.innerText);
     });
 
+    const now = new Date();
+
+    // dateISO با تاریخ محلی
+    let dateISO = now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
+
     let care = {
-        date: new Date().toLocaleDateString('fa-IR'),
-        time: new Date().toLocaleTimeString('fa-IR'),
+        date: now.toLocaleDateString('fa-IR'),
+        dateISO: dateISO,
+        time: now.toLocaleTimeString('fa-IR'),
         mood: selectedMood,
         symptoms: symptoms,
         note: document.querySelector('textarea').value
@@ -225,12 +246,18 @@ function saveCare(){
 
     let history = JSON.parse(localStorage.getItem("careHistory")) || [];
 
+    // ===== تغییر اصلی: بررسی وجود رکورد برای تاریخ امروز =====
+    let existingIndex = history.findIndex(item => item.dateISO === dateISO);
+
     if (editIndex !== null) {
-        // ویرایش
+        // ویرایش یک رکورد خاص
         history[editIndex] = care;
         localStorage.removeItem("editCareIndex");
+    } else if (existingIndex !== -1) {
+        // اگر امروز قبلاً ثبت شده، همان رکورد آپدیت شود
+        history[existingIndex] = care;
     } else {
-        // جدید
+        // اگر اولین ثبت امروز است
         history.push(care);
     }
 

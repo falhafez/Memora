@@ -13,26 +13,41 @@
       box-sizing: border-box;
       font-family: Vazirmatn, sans-serif;
     }
+
     body {
+      margin: 0;
       background: #eee7f3;
+      font-family: Vazirmatn, sans-serif;
       display: flex;
       justify-content: center;
-      min-height: 100dvh;
+      align-items: center;
+      min-height: 100vh;
     }
+
     .mobile {
       width: 100%;
       max-width: 480px;
-      min-height: 100dvh;
+      height: 100vh;
+      margin: auto;
       background: #fdf6f4;
-      padding: 20px;
       position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .12);
     }
-    
+
+    .content {
+      height: calc(100vh - 74px);
+      overflow-y: auto;
+      padding: 20px 20px 20px;
+    }
+
     /* ===== هدر ===== */
     .header {
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-bottom: 20px;
     }
     .back {
       width: 42px;
@@ -58,7 +73,7 @@
 
     /* ===== باکس بنفش ===== */
     .hero {
-      margin: 25px 0 20px 0;
+      margin: 0 0 20px 0;
       background: linear-gradient(135deg, #aa98cf, #8472a7);
       border-radius: 25px;
       padding: 20px;
@@ -93,6 +108,8 @@
       font-size: 13px;
       cursor: pointer;
       transition: 0.2s;
+      border: none;
+      font-family: inherit;
     }
     .chip.active {
       background: #8472a7;
@@ -113,14 +130,26 @@
       margin-bottom: 14px;
       box-shadow: 0 8px 20px rgba(132, 114, 167, .12);
       transition: transform 0.2s;
+      border-right: 5px solid transparent;
+      position: relative;
+      cursor: pointer; /* اضافه شده برای نشان دادن کلیک‌پذیری */
     }
     .card:hover {
       transform: translateY(-2px);
     }
+    .card.active-card {
+      border-right-color: #6b9b7b;
+    }
+    .card.inactive-card {
+      border-right-color: #ccc;
+      background: #f9f9f9;
+    }
+
     .left {
       display: flex;
       gap: 14px;
       align-items: center;
+      flex: 1;
     }
     .icon {
       width: 58px;
@@ -141,6 +170,10 @@
       font-weight: 700;
       color: #665580;
       font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
     .sub {
       font-size: 13px;
@@ -157,6 +190,62 @@
       font-size: 12px;
     }
 
+    /* ===== برچسب وضعیت ===== */
+    .status-badge {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 500;
+      display: inline-block;
+    }
+    .status-badge.active {
+      background: #e8f2eb;
+      color: #2e7d32;
+    }
+    .status-badge.inactive {
+      background: #f5f5f5;
+      color: #888;
+    }
+    .status-badge.done {
+      background: #e8f2eb;
+      color: #2e7d32;
+    }
+
+    /* ===== دکمه‌های عملیات ===== */
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .actions button {
+      width: 34px;
+      height: 34px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    .actions button:hover {
+      transform: scale(1.1);
+    }
+    .edit-btn {
+      background: #eee5f7;
+      color: #8472a7;
+    }
+    .edit-btn:hover {
+      background: #e0d5ed;
+    }
+    .delete-btn {
+      background: #fde8ed;
+      color: #e74c6f;
+    }
+    .delete-btn:hover {
+      background: #fcd0d8;
+    }
+
     /* ===== دکمه‌ی toggle ===== */
     .toggle {
       width: 48px;
@@ -165,8 +254,9 @@
       background: #ddd;
       position: relative;
       cursor: pointer;
-      transition: .2s;
       flex-shrink: 0;
+      margin-left: 0;
+      transition: .2s;
     }
     .toggle:before {
       content: '';
@@ -186,7 +276,7 @@
       right: 25px;
     }
 
-    /* ===== دکمه‌ها (افزودن + انصراف) ===== */
+    /* ===== دکمه‌ها ===== */
     .btn-group {
       display: flex;
       gap: 10px;
@@ -234,36 +324,44 @@
       transform: scale(0.98);
     }
 
-    /* ===== نوار پایین ===== */
+    /* ===== منوی پایین ===== */
     .bottom-nav {
-      margin-top: 25px;
-      padding-top: 15px;
-      border-top: 1px solid #eadfdc;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 74px;
+      background: #fff;
+      border-top: 1px solid #e6e0eb;
       display: flex;
       justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -5px 18px rgba(0, 0, 0, .08);
+      border-radius: 0 0 28px 28px;
     }
     .nav-item {
-      text-align: center;
-      font-size: 11px;
-      color: #999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-decoration: none;
-      transition: color 0.2s;
+      color: #999;
+      font-size: 11px;
+      transition: .2s;
+    }
+    .nav-item i {
+      font-size: 21px;
+      margin-bottom: 5px;
+    }
+    .nav-item.active {
+      color: #8472a7;
     }
     .nav-item:hover {
       color: #8472a7;
     }
-    .nav-item i {
-      display: block;
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
-    .active {
-      color: #8472a7;
-    }
 
     @media(max-width:360px) {
-      .mobile {
-        padding: 15px;
+      .content {
+        padding: 15px 15px 20px;
       }
       .header h2 {
         font-size: 18px;
@@ -281,72 +379,98 @@
         font-size: 14px;
         padding: 12px 8px;
       }
+      .title {
+        font-size: 14px;
+      }
+      .status-badge {
+        font-size: 10px;
+        padding: 2px 8px;
+      }
+      .actions button {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+      }
+      .toggle {
+        width: 40px;
+        height: 22px;
+      }
+      .toggle:before {
+        width: 16px;
+        height: 16px;
+      }
+      .toggle.on:before {
+        right: 21px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="mobile">
-    <!-- ===== هدر ===== -->
-    <div class="header">
-      <a href="home.html" class="back"><i class="fa-solid fa-arrow-right"></i></a>
-      <h2>یادآورها</h2>
+    <div class="content">
+      <div class="header">
+        <a href="home.html" class="back"><i class="fa-solid fa-arrow-right"></i></a>
+        <h2>یادآورها</h2>
+      </div>
+
+      <div class="hero">
+        <h3 id="heroTitle">یادآورهای امروز</h3>
+        <small id="heroCount">۰ فعالیت برنامه‌ریزی شده</small>
+      </div>
+
+      <div class="filters" id="filterContainer">
+        <div class="chip active" data-filter="all">همه</div>
+        <div class="chip" data-filter="drug">دارو</div>
+        <div class="chip" data-filter="food">غذا</div>
+        <div class="chip" data-filter="sport">ورزش</div>
+        <div class="chip" data-filter="sleep">خواب</div>
+        <div class="chip" data-filter="inactive">غیرفعال</div>
+      </div>
+
+      <div id="reminderList"></div>
+
+      <div class="btn-group">
+        <a href="add_reminder.html" class="add-btn">
+          <i class="fa-solid fa-plus"></i> افزودن یادآور
+        </a>
+        <button type="button" class="btn-cancel" onclick="window.location.href='home.html'">
+          <i class="fa-solid fa-xmark"></i> انصراف
+        </button>
+      </div>
     </div>
 
-    <!-- ===== باکس بنفش ===== -->
-    <div class="hero">
-      <h3 id="heroTitle">یادآورهای امروز</h3>
-      <small id="heroCount">۰ فعالیت برنامه‌ریزی شده</small>
-    </div>
-
-    <!-- ===== فیلترها ===== -->
-    <div class="filters" id="filterContainer">
-      <div class="chip active" data-filter="all">همه</div>
-      <div class="chip" data-filter="drug">دارو</div>
-      <div class="chip" data-filter="food">غذا</div>
-      <div class="chip" data-filter="sport">ورزش</div>
-      <div class="chip" data-filter="sleep">خواب</div>
-    </div>
-
-    <!-- ===== لیست کارت‌ها ===== -->
-    <div id="reminderList"></div>
-
-    <!-- ===== دکمه‌ها ===== -->
-    <div class="btn-group">
-      <a href="add_reminder.html" class="add-btn">
-        <i class="fa-solid fa-plus"></i> افزودن یادآور
-      </a>
-      <button type="button" class="btn-cancel" onclick="window.location.href='home.html'">
-        <i class="fa-solid fa-xmark"></i> انصراف
-      </button>
-    </div>
-
-    <!-- ===== نوار پایین ===== -->
     <div class="bottom-nav">
       <a href="home.html" class="nav-item"><i class="fa-solid fa-house"></i>خانه</a>
       <a href="education.html" class="nav-item"><i class="fa-solid fa-book-open"></i>آموزش</a>
       <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i>چت‌ها</a>
       <a href="#" class="nav-item active"><i class="fa-solid fa-bell"></i>یادآورها</a>
-      <a href="care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
+      <a href="daily-care.html" class="nav-item"><i class="fa-solid fa-heart"></i>مراقبت</a>
     </div>
   </div>
 
   <script>
-    // ===== داده‌های پیش‌فرض (اگر در localStorage نباشد) =====
-    const defaultReminders = [
-      { type: "drug", title: "داروی صبح", desc: "بعد از صبحانه", time: "08:00", done: true },
-      { type: "food", title: "صبحانه", desc: "رژیم پیشنهادی", time: "08:30", done: true },
-      { type: "sport", title: "پیاده‌روی", desc: "۲۰ دقیقه", time: "17:00", done: false },
-      { type: "sleep", title: "خواب شب", desc: "آرامش قبل خواب", time: "22:30", done: true }
-    ];
+    // =============================================================
+    // بارگذاری داده‌ها از localStorage
+    // =============================================================
+    let reminders = JSON.parse(localStorage.getItem("reminders")) || [];
 
-    // ===== بارگذاری داده‌ها =====
-    let reminders = JSON.parse(localStorage.getItem("reminders"));
-    if (!reminders || !Array.isArray(reminders) || reminders.length === 0) {
-      reminders = defaultReminders;
-      localStorage.setItem("reminders", JSON.stringify(reminders));
+    // =============================================================
+    // تابع محاسبه فعال بودن (اصلاح‌شده)
+    // =============================================================
+    function isReminderActive(item) {
+      if (item.userActive === false) return false;
+      if (item.done) return false; // انجام شده = غیرفعال
+
+      const now = new Date();
+      const [h, m] = item.time.split(":");
+      const reminderTime = new Date();
+      reminderTime.setHours(Number(h), Number(m), 0, 0);
+      return reminderTime > now;
     }
 
-    // ===== آیکون و کلاس برای هر نوع =====
+    // =============================================================
+    // آیکون و کلاس برای هر نوع
+    // =============================================================
     const typeMap = {
       drug: { icon: "fa-solid fa-pills", cls: "p" },
       food: { icon: "fa-solid fa-utensils", cls: "o" },
@@ -354,55 +478,112 @@
       sleep: { icon: "fa-solid fa-bed", cls: "b" }
     };
 
-    // ===== رندر کردن لیست =====
+    // =============================================================
+    // رندر کردن لیست
+    // =============================================================
     const listContainer = document.getElementById("reminderList");
     const heroTitle = document.getElementById("heroTitle");
     const heroCount = document.getElementById("heroCount");
 
     function renderReminders(filter = "all") {
-      let filtered = reminders.filter(r => filter === "all" || r.type === filter);
+      // ۱. اطمینان از وجود userActive برای داده‌های قدیمی
+      reminders = reminders.map(r => {
+        if (typeof r.userActive === 'undefined') {
+          r.userActive = true;
+        }
+        return r;
+      });
+      localStorage.setItem("reminders", JSON.stringify(reminders));
+
+      // ۲. اگر لیست خالی است
+      if (reminders.length === 0) {
+        listContainer.innerHTML = `
+          <div class="card" style="justify-content:center;text-align:center;color:#888;border-right-color:transparent;cursor:default;">
+            <div>
+              <i class="fa-solid fa-bell-slash" style="font-size:30px;color:#8472a7;display:block;margin-bottom:12px;"></i>
+              هنوز یادآوری ثبت نشده است
+            </div>
+          </div>
+        `;
+        heroCount.textContent = "۰ یادآور";
+        heroTitle.textContent = "یادآورهای امروز";
+        return;
+      }
+
+      // ۳. آماده‌سازی داده با اندیس اصلی و وضعیت فعال محاسبه‌شده
+      const dataWithIndex = reminders.map((r, idx) => ({
+        ...r,
+        originalIndex: idx,
+        active: isReminderActive(r)
+      }));
+
+      // ۴. اعمال فیلتر
+      let filtered = dataWithIndex;
+      if (filter === "inactive") {
+        filtered = filtered.filter(r => !r.active);
+      } else if (filter !== "all") {
+        filtered = filtered.filter(r => r.type === filter);
+      }
+
+      // ۵. ساخت کارت‌ها
       let html = "";
-      filtered.forEach((r, idx) => {
+      filtered.forEach((r) => {
         const info = typeMap[r.type] || { icon: "fa-solid fa-bell", cls: "p" };
-        const doneClass = r.done ? "on" : "";
+        const activeClass = r.active ? "active-card" : "inactive-card";
+        const toggleClass = r.active ? "on" : "";
+
+        // ===== تعیین برچسب وضعیت =====
+        let badgeText = "";
+        let badgeClass = "";
+        if (r.done) {
+          badgeText = "انجام شد";
+          badgeClass = "done";
+        } else if (r.active) {
+          badgeText = "در انتظار";
+          badgeClass = "active";
+        } else {
+          badgeText = "عقب افتاده";
+          badgeClass = "inactive";
+        }
+
         html += `
-          <div class="card" data-type="${r.type}" data-index="${idx}">
+          <div class="card ${activeClass}" data-type="${r.type}" data-index="${r.originalIndex}" onclick="completeReminder(${r.originalIndex})">
             <div class="left">
               <div class="icon ${info.cls}"><i class="${info.icon}"></i></div>
               <div>
-                <div class="title">${r.title}</div>
-                <div class="sub">${r.desc}</div>
+                <div class="title">
+                  ${r.title}
+                  <span class="status-badge ${badgeClass}">${badgeText}</span>
+                </div>
+                <div class="sub">${r.desc || ''}</div>
                 <span class="time">${r.time}</span>
               </div>
             </div>
-            <div class="toggle ${doneClass}" data-index="${idx}"></div>
+            <div class="actions">
+              <button class="edit-btn" onclick="event.stopPropagation(); editReminder(${r.originalIndex})">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="delete-btn" onclick="event.stopPropagation(); deleteReminder(${r.originalIndex})">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+              <div class="toggle ${toggleClass}" data-index="${r.originalIndex}" onclick="event.stopPropagation(); toggleReminder(${r.originalIndex})"></div>
+            </div>
           </div>
         `;
       });
 
       if (filtered.length === 0) {
-        html = `<div class="card" style="justify-content:center;color:#888;">هیچ یادآوری با این فیلتر وجود ندارد</div>`;
+        html = `<div class="card" style="justify-content:center;color:#888;border-right-color:transparent;cursor:default;">هیچ یادآوری با این فیلتر وجود ندارد</div>`;
       }
 
       listContainer.innerHTML = html;
 
-      // ===== به‌روزرسانی تعداد در هدر =====
-      heroTitle.textContent = filter === "all" ? "یادآورهای امروز" : `یادآورهای ${getFilterLabel(filter)}`;
+      // ۶. به‌روزرسانی هدر
+      let filterLabel = filter === "all" ? "یادآورهای امروز" :
+                        filter === "inactive" ? "یادآورهای غیرفعال" :
+                        getFilterLabel(filter);
+      heroTitle.textContent = filterLabel;
       heroCount.textContent = `${filtered.length} فعالیت برنامه‌ریزی شده`;
-
-      // ===== اتصال رویداد toggle =====
-      document.querySelectorAll('.toggle').forEach(t => {
-        t.onclick = function(e) {
-          e.stopPropagation();
-          this.classList.toggle('on');
-          const idx = parseInt(this.dataset.index);
-          if (!isNaN(idx) && reminders[idx]) {
-            reminders[idx].done = !reminders[idx].done;
-            localStorage.setItem("reminders", JSON.stringify(reminders));
-            // فقط ظاهر را به‌روز می‌کنیم (بدون رندر مجدد کامل)
-          }
-        };
-      });
     }
 
     function getFilterLabel(filter) {
@@ -410,7 +591,53 @@
       return map[filter] || filter;
     }
 
-    // ===== فیلترها =====
+    // =============================================================
+    // ویرایش، حذف و تغییر وضعیت دستی (Toggle)
+    // =============================================================
+    function editReminder(index) {
+      localStorage.setItem("editReminderIndex", index);
+      window.location.href = "add_reminder.html";
+    }
+
+    function deleteReminder(index) {
+      if (confirm("آیا از حذف این یادآور مطمئن هستید؟")) {
+        reminders.splice(index, 1);
+        localStorage.setItem("reminders", JSON.stringify(reminders));
+        const activeChip = document.querySelector('.chip.active');
+        if (activeChip) {
+          renderReminders(activeChip.dataset.filter);
+        } else {
+          renderReminders("all");
+        }
+      }
+    }
+
+    function toggleReminder(index) {
+      // تغییر وضعیت دستی کاربر (userActive)
+      reminders[index].userActive = !reminders[index].userActive;
+      localStorage.setItem("reminders", JSON.stringify(reminders));
+      const activeChip = document.querySelector('.chip.active');
+      const currentFilter = activeChip ? activeChip.dataset.filter : "all";
+      renderReminders(currentFilter);
+    }
+
+    // =============================================================
+    // انجام شدن یادآور (کلیک روی کارت)
+    // =============================================================
+    function completeReminder(index) {
+      if (!confirm("آیا این یادآور انجام شده است؟")) return;
+
+      reminders[index].done = true;
+      reminders[index].completedDate = new Date().toLocaleDateString("fa-IR");
+      localStorage.setItem("reminders", JSON.stringify(reminders));
+
+      const activeChip = document.querySelector(".chip.active");
+      renderReminders(activeChip ? activeChip.dataset.filter : "all");
+    }
+
+    // =============================================================
+    // فیلترها
+    // =============================================================
     const chips = document.querySelectorAll('.chip');
     chips.forEach(chip => {
       chip.onclick = function() {
@@ -421,8 +648,22 @@
       };
     });
 
-    // ===== اجرای اولیه =====
+    // =============================================================
+    // اجرای اولیه
+    // =============================================================
     renderReminders("all");
+
+    // =============================================================
+    // به‌روزرسانی خودکار هر ۳۰ ثانیه
+    // =============================================================
+    setInterval(() => {
+      const activeChip = document.querySelector('.chip.active');
+      if (activeChip) {
+        renderReminders(activeChip.dataset.filter);
+      } else {
+        renderReminders("all");
+      }
+    }, 30000);
   </script>
 </body>
 </html>

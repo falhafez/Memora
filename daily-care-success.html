@@ -86,7 +86,7 @@ button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:12px;fo
 
 <!-- ===== پیشنهاد هوشمند ===== -->
 <div class="card tip" id="tipBox">
-    <b>💜 پیشنهاد ممورا</b><br>
+    <b>💜 پیشنهاد همیار</b><br>
     <span id="tipText">فردا نیز وضعیت خواب و اشتهای بیمار را ثبت کنید.</span>
 </div>
 
@@ -107,8 +107,30 @@ button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:12px;fo
 <script>
 let history = JSON.parse(localStorage.getItem("careHistory")) || [];
 
-if (history.length) {
-    let last = history[history.length - 1];
+// ===== دریافت نام بیمار از پروفایل =====
+let username = localStorage.getItem("currentUser");
+let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+
+let patientName = "بیمار";
+
+if (profiles[username] && profiles[username].patientName) {
+    patientName = profiles[username].patientName;
+}
+
+// نمایش نام بیمار در عنوان موفقیت
+document.querySelector(".success h2").innerText =
+    `مراقبت امروز ${patientName} ثبت شد`;
+
+// ===== دریافت رکورد امروز =====
+let today = new Date();
+let todayISO = today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+
+let last = history.find(item => item.dateISO === todayISO);
+
+// اگر رکورد امروز وجود داشت، نمایش داده شود
+if (last) {
     let symptoms = last.symptoms || [];
 
     // حال کلی
@@ -126,49 +148,134 @@ if (history.length) {
 
     for (let [id, keywords] of Object.entries(categories)) {
         let matched = symptoms.filter(x => keywords.includes(x));
-        document.getElementById(id).innerText = matched.length ? matched.join("، ") : "-";
+        // اگر علامت "آرام" در رفتار وجود دارد، با یک نشانه مثبت نمایش بده
+        if (id === "behavior" && matched.includes("آرام")) {
+            let display = matched.map(x => x === "آرام" ? "آرام ✅" : x).join("، ");
+            document.getElementById(id).innerText = display || "-";
+        } else {
+            document.getElementById(id).innerText = matched.length ? matched.join("، ") : "-";
+        }
     }
 
     // یادداشت
     document.getElementById("note").innerText = last.note || "-";
 
-    // امتیاز بر اساس حال
-    let score = "70%";
-    if (last.mood == "😊") score = "85%";
-    if (last.mood == "😁") score = "95%";
-    if (last.mood == "😣") score = "40%";
-    if (last.mood == "😕") score = "55%";
+    // ===== محاسبه درصد واقعی بر اساس تکمیل بخش‌ها =====
+    let totalSections = 7;
+    let completedSections = 0;
 
-    document.getElementById("score").innerText = score;
-    document.getElementById("status").innerText = "وضعیت امروز ثبت شد";
+    // حال بیمار
+    if (last.mood) {
+        completedSections++;
+    }
+
+    // هر دسته علائم
+    let sectionCheck = {
+        cognitive: [
+            "فراموشی بیشتر",
+            "تکرار سوال",
+            "سردرگمی",
+            "عدم تشخیص افراد",
+            "تمرکز ضعیف",
+            "خوب و طبیعی"
+        ],
+        behavior: [
+            "آرام",
+            "بی‌قرار",
+            "مضطرب",
+            "پرخاشگر",
+            "غمگین",
+            "ترسیده"
+        ],
+        sleep: [
+            "خواب خوب",
+            "بیداری شبانه",
+            "خواب زیاد",
+            "بی‌خوابی"
+        ],
+        nutrition: [
+            "اشتهای خوب",
+            "کم‌اشتهایی",
+            "آب کم مصرف کرد",
+            "مشکل بلع"
+        ],
+        medication: [
+            "دارو کامل مصرف شد",
+            "دارو فراموش شد",
+            "عارضه دارویی"
+        ],
+        activity: [
+            "پیاده‌روی",
+            "فعالیت ذهنی",
+            "صحبت خانوادگی",
+            "نیاز به کمک"
+        ]
+    };
+
+    Object.values(sectionCheck).forEach(group => {
+        if (last.symptoms.some(x => group.includes(x))) {
+            completedSections++;
+        }
+    });
+
+    // یادداشت اختیاری
+    if (last.note && last.note.trim() !== "") {
+        completedSections++;
+        totalSections++;
+    }
+
+    let percent = Math.round((completedSections / totalSections) * 100);
+
+    document.getElementById("score").innerText = percent + "%";
+
+    let statusText = "نیاز به تکمیل بیشتر";
+    if (percent >= 85) {
+        statusText = "🌟 مراقبت کامل ثبت شده است";
+    } else if (percent >= 60) {
+        statusText = "👍 بیشتر اطلاعات ثبت شده است";
+    } else {
+        statusText = "📝 بخش‌هایی هنوز تکمیل نشده";
+    }
+
+    document.getElementById("status").innerText = statusText;
 
     // ===== پیشنهاد هوشمند =====
     let tip = "فردا نیز وضعیت خواب و اشتهای بیمار را ثبت کنید.";
 
-    // اگر خواب ثبت نشده یا مشکل داشته
-    let sleepItems = symptoms.filter(x => ["خواب خوب", "بیداری شبانه", "خواب زیاد", "بی‌خوابی"].includes(x));
-    if (sleepItems.length === 0 || sleepItems.includes("بی‌خوابی") || sleepItems.includes("بیداری شبانه")) {
+    // بررسی وضعیت کلی
+    let hasSleepIssue = symptoms.some(x => ["بی‌خوابی", "بیداری شبانه"].includes(x));
+    let hasFoodIssue = symptoms.some(x => ["کم‌اشتهایی", "آب کم مصرف کرد", "مشکل بلع"].includes(x));
+    let hasBehaviorIssue = symptoms.some(x => ["بی‌قرار", "مضطرب", "پرخاشگر", "غمگین", "ترسیده"].includes(x));
+    let hasMedicineIssue = symptoms.includes("دارو فراموش شد");
+
+    // اگر همه چیز خوب است و فقط "آرام" در رفتار ثبت شده
+    if (!hasSleepIssue && !hasFoodIssue && !hasBehaviorIssue && !hasMedicineIssue && symptoms.includes("آرام")) {
+        tip = "💚 وضعیت رفتاری بیمار آرام و پایدار است. این نشانه خوبی است. به مراقبت‌های روزانه ادامه دهید.";
+    }
+    // اگر مشکل خواب دارد
+    else if (hasSleepIssue) {
         tip = "🌙 امشب قبل از خواب محیط را آرام کنید و از چای بابونه استفاده کنید.";
     }
-
-    // اگر تغذیه مشکل داشته
-    let foodItems = symptoms.filter(x => ["کم‌اشتهایی", "آب کم مصرف کرد", "مشکل بلع"].includes(x));
-    if (foodItems.length > 0) {
+    // اگر مشکل تغذیه دارد
+    else if (hasFoodIssue) {
         tip = "🍲 وعده‌های غذایی را کوچک‌تر و مایعات را بیشتر کنید. آب میوه و سوپ مفید است.";
     }
-
-    // اگر رفتار مشکل داشته
-    let behaviorItems = symptoms.filter(x => ["بی‌قرار", "مضطرب", "پرخاشگر", "غمگین", "ترسیده"].includes(x));
-    if (behaviorItems.length > 0) {
+    // اگر مشکل رفتاری دارد (غیر از آرام)
+    else if (hasBehaviorIssue) {
         tip = "💆‍♂️ با موسیقی آرام، ماساژ و صحبت ملایم، اضطراب بیمار را کاهش دهید.";
     }
-
     // اگر دارو فراموش شده
-    if (symptoms.includes("دارو فراموش شد")) {
+    else if (hasMedicineIssue) {
         tip = "⏰ برای یادآوری دارو از اپلیکیشن یادآور استفاده کنید یا ساعت زنگ‌دار بگذارید.";
     }
 
     document.getElementById("tipText").innerText = tip;
+
+} else {
+    // در صورتی که رکوردی برای امروز یافت نشد
+    document.getElementById("score").innerText = "۰%";
+    document.getElementById("status").innerText = "⚠️ داده‌ای برای امروز یافت نشد";
+    document.getElementById("tipText").innerText = "لطفاً مراقبت امروز را ثبت کنید.";
 }
 </script>
 
