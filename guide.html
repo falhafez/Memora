@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>راهنمای برنامه | همیار</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', sans-serif;
+}
+
+body {
+    min-height: 100dvh;
+    background: #eee7f3;
+    display: flex;
+    justify-content: center;
+}
+
+.mobile {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100dvh;
+    background: #fdf6f4;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ===== هدر ===== */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 25px;
+}
+
+.back-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: #eee5f7;
+    color: #8472a7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+}
+
+.page-title h2 {
+    color: #574a73;
+    font-size: 22px;
+}
+
+.page-title p {
+    color: #888;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+
+/* ===== معرفی ===== */
+
+.intro-box {
+    background: linear-gradient(135deg, #eee5f7, #f8f5fc);
+    border-radius: 22px;
+    padding: 22px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.intro-box i {
+    font-size: 38px;
+    color: #8472a7;
+    margin-bottom: 10px;
+}
+
+.intro-box h3 {
+    color: #574a73;
+    font-size: 19px;
+}
+
+.intro-box p {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.9;
+    margin-top: 8px;
+}
+
+
+/* ===== بخش‌ها ===== */
+
+.section-title {
+    color: #8472a7;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 8px 10px;
+}
+
+.guide-card {
+    background: white;
+    border-radius: 20px;
+    padding: 17px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 15px rgba(132,114,167,.08);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.guide-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+    background: #eee5f7;
+    color: #8472a7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    flex-shrink: 0;
+}
+
+.guide-content {
+    flex: 1;
+}
+
+.guide-content h3 {
+    color: #4f465d;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.guide-content p {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+
+/* ===== نکته ===== */
+
+.tip-box {
+    background: #fff8ea;
+    border-right: 4px solid #f39c12;
+    border-radius: 16px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.tip-box strong {
+    color: #a96b00;
+    font-size: 14px;
+}
+
+.tip-box p {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-top: 6px;
+}
+
+
+/* ===== پایین ===== */
+
+.bottom-nav {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eadfdc;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-item {
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+}
+
+.nav-item i {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="mobile">
+
+
+    <!-- هدر -->
+
+    <div class="page-header">
+
+        <a href="settings.html" class="back-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+        <div class="page-title">
+
+            <h2>راهنمای برنامه</h2>
+
+            <p>آشنایی با بخش‌های مختلف همیار</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- معرفی -->
+
+    <div class="intro-box">
+
+        <i class="fa-solid fa-heart-pulse"></i>
+
+        <h3>به راهنمای همیار خوش آمدید</h3>
+
+        <p>
+            در این بخش می‌توانید با امکانات مختلف برنامه
+            و نحوه استفاده از آن‌ها آشنا شوید.
+        </p>
+
+    </div>
+
+
+    <!-- بخش‌های برنامه -->
+
+    <div class="section-title">
+        بخش‌های اصلی برنامه
+    </div>
+
+
+    <div class="guide-card">
+
+        <div class="guide-icon">
+            <i class="fa-solid fa-house"></i>
+        </div>
+
+        <div class="guide-content">
+
+            <h3>خانه</h3>
+
+            <p>
+                در صفحه خانه می‌توانید وضعیت مراقبت امروز،
+                پیشنهادهای آموزشی و دسترسی سریع به بخش‌های مختلف
+                برنامه را مشاهده کنید.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="guide-card">
+
+        <div class="guide-icon">
+            <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+
+        <div class="guide-content">
+
+            <h3>مراقبت روزانه</h3>
+
+            <p>
+                وضعیت روزانه بیمار مانند حافظه، رفتار، خواب،
+                تغذیه، دارو و فعالیت را ثبت کنید.
+                سوابق ثبت‌شده نیز از همین بخش قابل مشاهده است.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="guide-card">
+
+        <div class="guide-icon">
+            <i class="fa-solid fa-bell"></i>
+        </div>
+
+        <div class="guide-content">
+
+            <h3>یادآورها</h3>
+
+            <p>
+                برای کارهای مهم مانند مصرف دارو، غذا، ورزش
+                یا سایر فعالیت‌ها یادآور ایجاد کنید.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="guide-card">
+
+        <div class="guide-icon">
+            <i class="fa-solid fa-book-open-reader"></i>
+        </div>
+
+        <div class="guide-content">
+
+            <h3>آموزش</h3>
+
+            <p>
+                مطالب آموزشی مرتبط با مراقبت از بیمار و
+                مدیریت شرایط مختلف را مطالعه کنید.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="guide-card">
+
+        <div class="guide-icon">
+            <i class="fa-solid fa-comments"></i>
+        </div>
+
+        <div class="guide-content">
+
+            <h3>چت‌ها</h3>
+
+            <p>
+                برای دریافت راهنمایی و پاسخ به پرسش‌های عمومی
+                مراقبتی می‌توانید از بخش گفتگو استفاده کنید.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="guide-card">
+
+        <div class="guide-icon">
+            <i class="fa-solid fa-people-group"></i>
+        </div>
+
+        <div class="guide-content">
+
+            <h3>جامعه مراقبین</h3>
+
+            <p>
+                تجربه‌ها و مطالب خود را با سایر مراقبین
+                به اشتراک بگذارید و از تجربه‌های آنان استفاده کنید.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- نکته -->
+
+    <div class="tip-box">
+
+        <strong>
+            <i class="fa-solid fa-lightbulb"></i>
+            نکته مهم
+        </strong>
+
+        <p>
+            ثبت منظم وضعیت روزانه بیمار به شما کمک می‌کند
+            تغییرات وضعیت او را بهتر دنبال کنید.
+        </p>
+
+    </div>
+
+
+    <!-- ناوبری -->
+
+    <div class="bottom-nav">
+
+        <a href="home.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            خانه
+        </a>
+
+        <a href="education.html" class="nav-item">
+            <i class="fa-solid fa-book-open"></i>
+            آموزش
+        </a>
+
+        <a href="chat.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            چت‌ها
+        </a>
+
+        <a href="reminder.html" class="nav-item">
+            <i class="fa-solid fa-bell"></i>
+            یادآورها
+        </a>
+
+        <a href="daily-care.html" class="nav-item">
+            <i class="fa-solid fa-heart"></i>
+            مراقبت
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

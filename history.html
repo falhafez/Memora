@@ -33,14 +33,74 @@ p{color:#777}
 button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:10px;font-size:15px;cursor:pointer}
 .primary{background:#8472a7;color:white}
 .secondary{background:white;border:2px solid #8472a7;color:#8472a7}
-.edit-box{margin-top:15px}
-.edit-btn{width:100%;padding:11px;border:none;border-radius:14px;background:#eee5f7;color:#8472a7;font-size:14px;cursor:pointer;font-weight:700}
-.edit-btn:hover{background:#d8ccef}
-.edit-btn:disabled{background:#f5f5f5;color:#999;cursor:not-allowed}
 .bottom-nav{margin-top:25px;padding-top:15px;border-top:1px solid #eadfdc;display:flex;justify-content:space-around}
 .nav-item{text-decoration:none;color:#999;font-size:11px;text-align:center}
 .nav-item i{display:block;font-size:20px;margin-bottom:5px}
 .active{color:#8472a7}
+
+/* استایل‌های جدید برای تاریخچه */
+.empty-history{
+    background:#fff;
+    border-radius:22px;
+    padding:40px 20px;
+    text-align:center;
+    color:#999;
+    box-shadow:0 8px 25px rgba(132,114,167,.15);
+}
+.history-card{
+    background:#fff;
+    border-radius:22px;
+    padding:18px;
+    margin-bottom:15px;
+    box-shadow:0 8px 25px rgba(132,114,167,.15);
+}
+.history-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+    color:#665580;
+    font-weight:700;
+}
+.today-badge{
+    background:#eee5f7;
+    color:#8472a7;
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:800;
+}
+.history-summary{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    background:#f9f6fc;
+    padding:10px;
+    border-radius:16px;
+    margin-bottom:12px;
+}
+.history-summary span{
+    background:#fff;
+    padding:4px 12px;
+    border-radius:30px;
+    font-size:13px;
+    color:#555;
+}
+.view-care{
+    background:#eee5f7;
+    color:#8472a7;
+    padding:10px;
+    border:none;
+    border-radius:14px;
+    width:100%;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.2s;
+}
+.view-care:hover{
+    background:#d8ccef;
+}
 </style>
 </head>
 <body>
@@ -55,11 +115,8 @@ button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:10px;fo
 
     <div id="history"></div>
 
-    <button class="primary" onclick="location.href='daily-care.html'">
-        <i class="fa-solid fa-plus"></i> ثبت مراقبت جدید
-    </button>
-
-    <button class="secondary" onclick="location.href='daily-care-success.html'">
+    <!-- دکمه بازگشت به daily-care.html -->
+    <button class="secondary" onclick="location.href='daily-care.html'">
         بازگشت
     </button>
 
@@ -74,152 +131,92 @@ button{width:100%;padding:14px;border:none;border-radius:16px;margin-top:10px;fo
 </div>
 
 <script>
-let box = document.getElementById("history");
+// ============================================================
+// توابع کمکی
+// ============================================================
 
-let data = JSON.parse(localStorage.getItem("careHistory")) || [];
+function getCareHistory() {
+    return JSON.parse(localStorage.getItem("careHistory")) || [];
+}
 
-// ===== حذف ثبت‌های تکراری در یک تاریخ (نگه‌داشتن آخرین ثبت) =====
-let uniqueData = [];
+function getToday() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
 
-data.forEach(item => {
-    let index = uniqueData.findIndex(x => x.dateISO === item.dateISO);
-    if (index !== -1) {
-        uniqueData[index] = item; // جایگزین با ثبت جدیدتر
-    } else {
-        uniqueData.push(item);
+function formatDate(dateString) {
+    const parts = dateString.split("-");
+    if (parts.length !== 3) {
+        return dateString;
     }
-});
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
 
-data = uniqueData;
+// ============================================================
+// باز کردن جزئیات یک سابقه
+// ============================================================
 
-// ذخیره نسخه پاک‌سازی‌شده در localStorage
-localStorage.setItem("careHistory", JSON.stringify(data));
+function openCare(id) {
+    localStorage.setItem("selectedCareId", String(id));
+    location.href = "daily-care-success.html";
+}
 
-// ===== مرتب‌سازی از جدیدترین تاریخ به قدیمی‌ترین =====
-data.sort((a, b) => {
-    let dateA = new Date(a.dateISO + " " + (a.time || "00:00"));
-    let dateB = new Date(b.dateISO + " " + (b.time || "00:00"));
-    return dateB - dateA;
-});
+// ============================================================
+// رندر کردن تاریخچه
+// ============================================================
 
-// ===== نمایش =====
-if (data.length === 0) {
-    box.innerHTML = `
-        <div class="card">
-            <p style="text-align:center">هنوز مراقبتی ثبت نشده است</p>
-        </div>
-    `;
-} else {
-    let today = new Date();
-    let todayISO = today.getFullYear() + "-" +
-        String(today.getMonth() + 1).padStart(2, "0") + "-" +
-        String(today.getDate()).padStart(2, "0");
+function renderHistory() {
+    const container = document.getElementById("history");
+    let history = getCareHistory();
 
-    data.forEach((item, index) => {
-        let symptoms = item.symptoms || [];
-
-        let memory = symptoms.filter(x =>
-            ["فراموشی بیشتر","تکرار سوال","سردرگمی","عدم تشخیص افراد","تمرکز ضعیف"].includes(x)
-        );
-        let behavior = symptoms.filter(x =>
-            ["آرام","بی‌قرار","مضطرب","پرخاشگر","غمگین","ترسیده"].includes(x)
-        );
-        let sleep = symptoms.filter(x =>
-            ["خواب خوب","بیداری شبانه","خواب زیاد","بی‌خوابی"].includes(x)
-        );
-        let food = symptoms.filter(x =>
-            ["اشتهای خوب","کم‌اشتهایی","آب کم مصرف کرد","مشکل بلع"].includes(x)
-        );
-        let medicine = symptoms.filter(x =>
-            ["دارو کامل مصرف شد","دارو فراموش شد","عارضه دارویی"].includes(x)
-        );
-        let activity = symptoms.filter(x =>
-            ["پیاده‌روی","فعالیت ذهنی","صحبت خانوادگی","نیاز به کمک"].includes(x)
-        );
-
-        // ===== دکمه ویرایش فقط برای امروز =====
-        let editButton = "";
-        if (item.dateISO === todayISO) {
-            editButton = `
-            <div class="edit-box">
-                <button class="edit-btn" onclick="editCare(${index})">
-                    <i class="fa-solid fa-pen"></i> ویرایش ثبت امروز
-                </button>
-            </div>`;
-        } else {
-            editButton = `
-            <div class="edit-box">
-                <button class="edit-btn" disabled>
-                    <i class="fa-solid fa-lock"></i> امکان ویرایش ثبت‌های قبلی وجود ندارد
-                </button>
-            </div>`;
-        }
-
-        box.innerHTML += `
-            <div class="card">
-                <div class="date">
-                    <span>
-                        📅 ${item.date}
-                        ${item.dateISO === todayISO ? " • امروز" : ""}
-                    </span>
-                    <span class="score">${item.mood}</span>
-                </div>
-
-                <div class="row">
-                    <span>😊 حال کلی</span>
-                    <span>${item.mood}</span>
-                </div>
-
-                <div class="row">
-                    <span>🧠 حافظه</span>
-                    <span>${memory.join("، ") || "-"}</span>
-                </div>
-
-                <div class="row">
-                    <span>💜 رفتار</span>
-                    <span>${behavior.join("، ") || "-"}</span>
-                </div>
-
-                <div class="row">
-                    <span>🌙 خواب</span>
-                    <span>${sleep.join("، ") || "-"}</span>
-                </div>
-
-                <div class="row">
-                    <span>🍎 تغذیه</span>
-                    <span>${food.join("، ") || "-"}</span>
-                </div>
-
-                <div class="row">
-                    <span>💊 دارو</span>
-                    <span>${medicine.join("، ") || "-"}</span>
-                </div>
-
-                <div class="row">
-                    <span>🚶 فعالیت</span>
-                    <span>${activity.join("، ") || "-"}</span>
-                </div>
-
-                <div class="row">
-                    <span>🕒 زمان ثبت</span>
-                    <span>${item.time}</span>
-                </div>
-
-                <div class="row" style="border:none">
-                    <span>📝 یادداشت</span>
-                    <span>${item.note || "-"}</span>
-                </div>
-
-                ${editButton}
+    if (history.length === 0) {
+        container.innerHTML = `
+            <div class="empty-history">
+                هنوز سابقه مراقبتی ثبت نشده است.
             </div>
         `;
-    });
+        return;
+    }
+
+    // مرتب‌سازی بر اساس تاریخ (جدیدترین اول)
+    history.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const today = getToday();
+
+    container.innerHTML = history.map(care => {
+        const isToday = care.date === today;
+
+        return `
+            <div class="history-card">
+                <div class="history-header">
+                    <strong>
+                        ${isToday ? "امروز" : formatDate(care.date)}
+                    </strong>
+                    ${isToday ? `<span class="today-badge">امروز</span>` : ""}
+                </div>
+
+                <div class="history-summary">
+                    <span>😊 ${care.mood || "-"}</span>
+                    <span>🧠 ${care.memory || "-"}</span>
+                    <span>💜 ${care.behavior || "-"}</span>
+                </div>
+
+                <button class="view-care" onclick="openCare('${care.id}')">
+                    مشاهده جزئیات
+                </button>
+            </div>
+        `;
+    }).join("");
 }
 
-function editCare(index) {
-    localStorage.setItem("editCareIndex", index);
-    location.href = "daily-care.html";
-}
+// ============================================================
+// اجرا پس از بارگذاری صفحه
+// ============================================================
+
+document.addEventListener("DOMContentLoaded", renderHistory);
 </script>
 
 </body>

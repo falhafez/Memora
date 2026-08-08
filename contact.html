@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ارتباط با تیم همیار</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', sans-serif;
+}
+
+body {
+    min-height: 100dvh;
+    background: #eee7f3;
+    display: flex;
+    justify-content: center;
+}
+
+.mobile {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100dvh;
+    background: #fdf6f4;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ===== هدر ===== */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 25px;
+}
+
+.back-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: #eee5f7;
+    color: #8472a7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+}
+
+.page-title h2 {
+    color: #574a73;
+    font-size: 22px;
+}
+
+.page-title p {
+    color: #888;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+
+/* ===== معرفی ===== */
+
+.contact-intro {
+    background: #f8f5fc;
+    border-radius: 22px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.contact-intro i {
+    font-size: 35px;
+    color: #8472a7;
+    margin-bottom: 10px;
+}
+
+.contact-intro h3 {
+    color: #574a73;
+    font-size: 18px;
+}
+
+.contact-intro p {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.9;
+    margin-top: 7px;
+}
+
+
+/* ===== فرم ===== */
+
+.form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 4px 15px rgba(132,114,167,.08);
+}
+
+label {
+    display: block;
+    color: #574a73;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+select,
+input,
+textarea {
+    width: 100%;
+    border: 1px solid #e6dfeb;
+    background: #faf8fc;
+    border-radius: 14px;
+    padding: 12px 13px;
+    outline: none;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px;
+    color: #4f465d;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.8;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+    border-color: #8472a7;
+    background: white;
+}
+
+
+/* ===== دکمه ===== */
+
+.submit-btn {
+    width: 100%;
+    border: none;
+    background: #8472a7;
+    color: white;
+    padding: 12px;
+    border-radius: 14px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #6f5a8f;
+}
+
+
+/* ===== پیام موفقیت ===== */
+
+.success-message {
+    display: none;
+    margin-top: 15px;
+    padding: 13px;
+    background: #e8f2eb;
+    color: #2e7d32;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 13px;
+}
+
+
+/* ===== پایین ===== */
+
+.bottom-nav {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eadfdc;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-item {
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+}
+
+.nav-item i {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="mobile">
+
+
+    <!-- هدر -->
+
+    <div class="page-header">
+
+        <a href="settings.html" class="back-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+        <div class="page-title">
+
+            <h2>ارتباط با تیم همیار</h2>
+
+            <p>
+                ما آماده شنیدن پیام شما هستیم
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- معرفی -->
+
+    <div class="contact-intro">
+
+        <i class="fa-solid fa-headset"></i>
+
+        <h3>چطور می‌توانیم کمک کنیم؟</h3>
+
+        <p>
+            اگر درباره برنامه سؤال، پیشنهاد یا مشکلی دارید،
+            پیام خود را برای تیم همیار ارسال کنید.
+        </p>
+
+    </div>
+
+
+    <!-- فرم -->
+
+    <div class="form-card">
+
+        <div class="form-group">
+
+            <label for="contactType">
+                موضوع پیام
+            </label>
+
+            <select id="contactType">
+
+                <option value="support">
+                    درخواست پشتیبانی
+                </option>
+
+                <option value="problem">
+                    گزارش مشکل
+                </option>
+
+                <option value="suggestion">
+                    پیشنهاد و انتقاد
+                </option>
+
+                <option value="other">
+                    سایر
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="contactName">
+                نام
+            </label>
+
+            <input
+                id="contactName"
+                type="text"
+                placeholder="نام خود را وارد کنید"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="contactMessage">
+                پیام شما
+            </label>
+
+            <textarea
+                id="contactMessage"
+                placeholder="پیام خود را بنویسید..."
+            ></textarea>
+
+        </div>
+
+
+        <button
+            class="submit-btn"
+            onclick="sendMessage()">
+
+            <i class="fa-solid fa-paper-plane"></i>
+            ارسال پیام
+
+        </button>
+
+
+        <div
+            class="success-message"
+            id="successMessage">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            پیام شما با موفقیت ثبت شد.
+
+        </div>
+
+    </div>
+
+
+    <!-- ناوبری -->
+
+    <div class="bottom-nav">
+
+        <a href="home.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            خانه
+        </a>
+
+        <a href="education.html" class="nav-item">
+            <i class="fa-solid fa-book-open"></i>
+            آموزش
+        </a>
+
+        <a href="chat.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            چت‌ها
+        </a>
+
+        <a href="reminder.html" class="nav-item">
+            <i class="fa-solid fa-bell"></i>
+            یادآورها
+        </a>
+
+        <a href="daily-care.html" class="nav-item">
+            <i class="fa-solid fa-heart"></i>
+            مراقبت
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function sendMessage() {
+
+    const type =
+        document.getElementById("contactType").value;
+
+    const name =
+        document.getElementById("contactName").value.trim();
+
+    const message =
+        document.getElementById("contactMessage").value.trim();
+
+
+    if (name === "" || message === "") {
+
+        alert("لطفاً نام و متن پیام را وارد کنید.");
+
+        return;
+    }
+
+
+    const messages =
+        JSON.parse(
+            localStorage.getItem("contactMessages")
+        ) || [];
+
+
+    messages.push({
+
+        id: Date.now(),
+
+        type: type,
+
+        name: name,
+
+        message: message,
+
+        date: new Date().toISOString()
+
+    });
+
+
+    localStorage.setItem(
+        "contactMessages",
+        JSON.stringify(messages)
+    );
+
+
+    document.getElementById(
+        "successMessage"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "contactMessage"
+    ).value = "";
+
+}
+
+</script>
+
+</body>
+</html>
+

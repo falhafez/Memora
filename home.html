@@ -57,15 +57,13 @@
 
 
 
-        /* هدر */
-
+        /* ===== هدر (با تغییرات جدید) ===== */
 
         .header {
-
             display: flex;
             align-items: center;
             gap: 12px;
-
+            position: relative;
         }
 
 
@@ -119,6 +117,31 @@
         }
 
 
+        /* ===== دکمه تنظیمات هدر ===== */
+        .settings-btn {
+            width: 44px;
+            height: 44px;
+            margin-right: auto;
+
+            border-radius: 14px;
+
+            background: #f0eaf7;
+            color: #8472a7;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+
+            transition: .2s;
+        }
+
+        .settings-btn:hover {
+            background: #e5dbf0;
+            color: #6f5a8f;
+            transform: rotate(20deg);
+        }
 
 
         /* ===== بخش جدید وضعیت امروز ===== */
@@ -1142,8 +1165,7 @@
     <div class="mobile">
 
 
-        <!-- هدر -->
-
+        <!-- ===== هدر با تغییرات جدید ===== -->
         <div class="header">
 
             <a href="profile.html" class="profile">
@@ -1154,6 +1176,11 @@
                 <h2 id="welcomeName">سلام</h2>
                 <p>به همیار خوش آمدی</p>
             </div>
+
+            <!-- تنظیمات -->
+            <a href="settings.html" class="settings-btn" aria-label="تنظیمات">
+                <i class="fa-solid fa-gear"></i>
+            </a>
 
         </div>
 
@@ -1170,7 +1197,7 @@
 
 
         <!-- ========================================================== -->
-        <!-- ===== منوی چهارگانه ===== -->
+        <!-- ===== منوی چهارگانه (بدون تغییر) ===== -->
         <!-- ========================================================== -->
 
         <div class="menu">
@@ -1404,144 +1431,288 @@
 
 
         // =============================================================
-        // ۳. تابع نمایش خلاصه وضعیت امروز (فقط مراقبت و هشدارها)
+        // ۳. تابع نمایش خلاصه وضعیت امروز (فقط مراقبت و هشدارها) – نسخه جدید
         // =============================================================
+
         function renderTodaySummary() {
 
-            let care = JSON.parse(localStorage.getItem("careHistory")) || [];
+            // ===============================
+            // دریافت سوابق مراقبت
+            // ===============================
 
-            // ===== تغییر اصلی: dateISO با تاریخ محلی =====
-            let today = new Date();
-            let todayISO =
-                today.getFullYear() + "-" +
-                String(today.getMonth() + 1).padStart(2, "0") + "-" +
-                String(today.getDate()).padStart(2, "0");
+            let careHistory =
+                JSON.parse(localStorage.getItem("careHistory")) || [];
 
-            // فقط مراقبت ثبت شده امروز
-            let todayCare = care.find(item => item.dateISO === todayISO);
+
+            // ===============================
+            // تاریخ امروز
+            // ===============================
+
+            const now = new Date();
+
+            const todayISO =
+                now.getFullYear() + "-" +
+                String(now.getMonth() + 1).padStart(2, "0") + "-" +
+                String(now.getDate()).padStart(2, "0");
+
+
+            // ===============================
+            // پیدا کردن مراقبت امروز (با کلید `dateISO`)
+            // ===============================
+
+            const todayCare =
+                careHistory.find(item => item.dateISO === todayISO);
+
 
             let careHTML = "";
             let alertHTML = "";
 
 
+            // ===============================
+            // هشدارهای مراقبتی
+            // ===============================
+
             const alertMap = [
+
                 {
                     condition: "بی‌خوابی",
-                    text: "امروز بی‌خوابی ثبت شده است. بهتر است توصیه‌های مربوط به بهداشت خواب را مطالعه کنید.",
+
+                    text:
+                        "امروز بی‌خوابی ثبت شده است. بهتر است توصیه‌های مربوط به بهداشت خواب را مطالعه کنید.",
+
                     link: "care-guide.html"
                 },
+
                 {
                     condition: "کم‌اشتهایی",
-                    text: "امروز کم‌اشتهایی ثبت شده است. توصیه‌های تغذیه بیماران آلزایمر را مرور کنید.",
+
+                    text:
+                        "امروز کم‌اشتهایی ثبت شده است. توصیه‌های تغذیه بیماران آلزایمر را مرور کنید.",
+
                     link: "care.html"
                 },
+
                 {
                     condition: "دارو فراموش شد",
-                    text: "مصرف دارو کامل انجام نشده است. راهکارهای یادآوری دارو را بررسی کنید.",
+
+                    text:
+                        "مصرف دارو کامل انجام نشده است. راهکارهای یادآوری دارو را بررسی کنید.",
+
                     link: "care.html"
                 },
+
                 {
                     condition: "پرخاشگر",
-                    text: "رفتار بیمار نیاز به مدیریت و آرام‌سازی دارد. تکنیک‌های کاهش پرخاشگری را مطالعه کنید.",
+
+                    text:
+                        "رفتار بیمار نیاز به مدیریت و آرام‌سازی دارد. تکنیک‌های کاهش پرخاشگری را مطالعه کنید.",
+
                     link: "care-guide.html"
                 },
+
                 {
                     condition: "بی‌قرار",
-                    text: "بی‌قراری بیمار بیشتر از حد معمول بوده است. روش‌های کاهش بی‌قراری را مرور کنید.",
+
+                    text:
+                        "بی‌قراری بیمار بیشتر از حد معمول بوده است. روش‌های کاهش بی‌قراری را مرور کنید.",
+
                     link: "care-guide.html"
                 },
+
                 {
                     condition: "مشکل بلع",
-                    text: "مشکل بلع نیاز به توجه دارد. توصیه‌های تغذیه ایمن را مطالعه کنید.",
+
+                    text:
+                        "مشکل بلع نیاز به توجه دارد. توصیه‌های تغذیه ایمن را مطالعه کنید.",
+
                     link: "care.html"
                 },
+
                 {
                     condition: "نیاز به کمک",
-                    text: "بیمار در انجام فعالیت‌ها به کمک بیشتری نیاز دارد. راهنمای مراقبت روزانه را ببینید.",
+
+                    text:
+                        "بیمار در انجام فعالیت‌ها به کمک بیشتری نیاز دارد. راهنمای مراقبت روزانه را ببینید.",
+
                     link: "imen.html"
                 }
             ];
 
 
-            // اگر امروز مراقبتی ثبت نشده
+            // =================================================
+            // اگر امروز هنوز مراقبت ثبت نشده
+            // =================================================
+
             if (!todayCare) {
 
                 careHTML = `
-                <div class="summary-row" style="flex-direction:column; align-items:stretch; gap:8px;">
-                    <span>💜 مراقبت امروز</span>
 
-                    <span style="font-size:13px; color:#777;">
+                <div class="summary-row"
+                     style="
+                     flex-direction:column;
+                     align-items:stretch;
+                     gap:8px;
+                     ">
+
+                    <span>
+                        💜 مراقبت امروز
+                    </span>
+
+                    <span style="
+                        font-size:13px;
+                        color:#777;
+                    ">
                         وضعیت امروز بیمار هنوز ثبت نشده است.
                     </span>
 
                     <a href="daily-care.html"
-                    style="
-                    display:inline-block;
-                    padding:8px 16px;
-                    background:#8472a7;
-                    color:#fff;
-                    border-radius:12px;
-                    text-align:center;
-                    font-weight:500;
-                    align-self:flex-start;">
-                    ثبت مراقبت
+                       style="
+                       display:inline-block;
+                       padding:8px 16px;
+                       background:#8472a7;
+                       color:#fff;
+                       border-radius:12px;
+                       text-align:center;
+                       font-weight:500;
+                       align-self:flex-start;
+                       ">
+
+                        <i class="fa-solid fa-plus"></i>
+                        ثبت مراقبت جدید
+
                     </a>
 
                 </div>
+
                 `;
 
-            } else {
+            }
+
+
+            // =================================================
+            // اگر امروز مراقبت ثبت شده
+            // =================================================
+
+            else {
+
+                // ---------------------------------------------
+                // جمع‌آوری همه علائم از هر دو ساختار (قدیمی و جدید)
+                // ---------------------------------------------
 
                 let symptoms = todayCare.symptoms || [];
 
-                let found = false;
+                const currentConditions = [
+
+                    todayCare.memory,
+                    todayCare.behavior,
+                    todayCare.sleep,
+                    todayCare.food,
+                    todayCare.medicine,
+                    todayCare.activity
+
+                ].filter(Boolean);
+
+
+                const allConditions = [
+                    ...symptoms,
+                    ...currentConditions
+                ];
+
+
+                let foundAlert = null;
+
 
                 for (const item of alertMap) {
 
-                    if (symptoms.includes(item.condition)) {
+                    if (allConditions.includes(item.condition)) {
 
-                        alertHTML = `
-                        <div class="alert-box">
+                        foundAlert = item;
 
-                            <b>🔶 نیاز به توجه</b>
-
-                            <p>
-                            ⚠️ ${item.text}
-                            </p>
-
-                            <a href="${item.link}">
-                            مشاهده آموزش
-                            </a>
-
-                        </div>
-                        `;
-
-                        found = true;
                         break;
                     }
                 }
 
-                if (!found) {
 
-                    // ===== کارت جدید وضعیت ثبت شده با طراحی care-status =====
-                    careHTML = `
-                    <div class="care-status">
+                // ---------------------------------------------
+                // اگر نیاز به توجه وجود داشته باشد
+                // ---------------------------------------------
 
-                        <div class="status-icon">
-                            <i class="fa-solid fa-circle-check"></i>
-                        </div>
+                if (foundAlert) {
 
-                        <div>
-                            <strong>مراقبت امروز</strong>
-                            <p>وضعیت بیمار با موفقیت ثبت شده است</p>
-                        </div>
+                    alertHTML = `
+
+                    <div class="alert-box">
+
+                        <b>
+                            🔶 نیاز به توجه
+                        </b>
+
+                        <p>
+                            ⚠️ ${foundAlert.text}
+                        </p>
+
+                        <a href="${foundAlert.link}">
+                            مشاهده آموزش
+                        </a>
 
                     </div>
+
                     `;
+
                 }
 
+
+                // ---------------------------------------------
+                // کارت مراقبت ثبت شده (با دکمه ویرایش)
+                // ---------------------------------------------
+
+                careHTML = `
+
+                <div class="care-status">
+
+                    <div class="status-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <div style="flex:1;">
+
+                        <strong>
+                            مراقبت امروز ثبت شده
+                        </strong>
+
+                        <p>
+                            وضعیت بیمار با موفقیت ثبت شده است
+                        </p>
+
+                    </div>
+
+
+                    <a href="daily-care.html"
+                       style="
+                       color:#8472a7;
+                       font-size:13px;
+                       font-weight:700;
+                       text-decoration:none;
+                       white-space:nowrap;
+                       ">
+
+                        <i class="fa-solid fa-pen"></i>
+                        ویرایش
+
+                    </a>
+
+                </div>
+
+                `;
             }
 
+
+            // =================================================
+            // نمایش نهایی
+            // =================================================
 
             document.getElementById("todaySummary").innerHTML = `
 
@@ -1576,7 +1747,6 @@
             let reminders = JSON.parse(localStorage.getItem("reminders")) || [];
             let now = new Date();
 
-            // ===== تغییر مشابه برای todayString =====
             let todayString =
                 now.getFullYear() + "/" +
                 String(now.getMonth() + 1).padStart(2, "0") + "/" +
