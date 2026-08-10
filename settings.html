@@ -1,488 +1,445 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>تنظیمات | همیار</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Vazirmatn', sans-serif;
-}
-
-body {
-    min-height: 100dvh;
-    background: #eee7f3;
-    display: flex;
-    justify-content: center;
-}
-
-.mobile {
-    width: 100%;
-    max-width: 480px;
-    min-height: 100dvh;
-    background: #fdf6f4;
-    padding: 20px;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-
-/* ===== هدر ===== */
-
-.page-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 25px;
-}
-
-.back-btn {
-    width: 42px;
-    height: 42px;
-
-    border-radius: 14px;
-
-    background: #eee5f7;
-    color: #8472a7;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 19px;
-}
-
-.page-title h2 {
-    color: #574a73;
-    font-size: 22px;
-}
-
-.page-title p {
-    color: #888;
-    font-size: 13px;
-    margin-top: 3px;
-}
-
-
-/* ===== بخش تنظیمات ===== */
-
-.settings-section {
-    margin-bottom: 25px;
-}
-
-.section-title {
-    color: #8472a7;
-    font-size: 14px;
-    font-weight: 700;
-    margin: 0 8px 10px;
-}
-
-
-/* ===== آیتم تنظیمات ===== */
-
-.settings-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-
-    box-shadow:
-        0 4px 15px rgba(132, 114, 167, .08);
-}
-
-.settings-item {
-    display: flex;
-    align-items: center;
-
-    padding: 17px 16px;
-
-    border-bottom: 1px solid #f1edf4;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-.settings-item:last-child {
-    border-bottom: none;
-}
-
-.settings-item:hover {
-    background: #faf8fc;
-}
-
-.settings-icon {
-    width: 44px;
-    height: 44px;
-
-    border-radius: 14px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-left: 13px;
-
-    font-size: 19px;
-
-    flex-shrink: 0;
-}
-
-.icon-purple {
-    background: #eee5f7;
-    color: #8472a7;
-}
-
-.icon-green {
-    background: #e8f2eb;
-    color: #6b9b7b;
-}
-
-.icon-orange {
-    background: #f7eadf;
-    color: #c68d5d;
-}
-
-.icon-blue {
-    background: #e6f1f3;
-    color: #5c9da7;
-}
-
-.icon-red {
-    background: #fde8ed;
-    color: #e74c6f;
-}
-
-.settings-info {
-    flex: 1;
-}
-
-.settings-info h3 {
-    color: #4f465d;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.settings-info p {
-    color: #999;
-    font-size: 12px;
-    margin-top: 4px;
-    line-height: 1.6;
-}
-
-.settings-arrow {
-    color: #b2a5bd;
-    font-size: 16px;
-}
-
-
-/* ===== درباره همیار ===== */
-
-.about-box {
-    background: #f8f5fc;
-    border-radius: 20px;
-
-    padding: 18px;
-
-    text-align: center;
-
-    margin-top: 10px;
-}
-
-.about-box i {
-    font-size: 28px;
-    color: #8472a7;
-    margin-bottom: 8px;
-}
-
-.about-box h3 {
-    color: #574a73;
-    font-size: 16px;
-}
-
-.about-box p {
-    color: #888;
-    font-size: 12px;
-    margin-top: 6px;
-    line-height: 1.8;
-}
-
-
-/* ===== پایین ===== */
-
-.bottom-nav {
-    margin-top: 30px;
-
-    padding-top: 15px;
-
-    border-top: 1px solid #eadfdc;
-
-    display: flex;
-
-    justify-content: space-around;
-}
-
-.nav-item {
-    text-align: center;
-
-    font-size: 11px;
-
-    color: #999;
-}
-
-.nav-item i {
-    display: block;
-
-    font-size: 20px;
-
-    margin-bottom: 5px;
-}
-
-.nav-item.active {
-    color: #8472a7;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تنظیمات | همیار</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            min-height: 100dvh;
+            background: #eee7f3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mobile {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100dvh;
+            background: #fdf6f4;
+            padding: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== هدر ===== */
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: #eee5f7;
+            color: #8472a7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .page-title h2 {
+            color: #574a73;
+            font-size: 22px;
+        }
+
+        .page-title p {
+            color: #888;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        /* ===== بخش تنظیمات ===== */
+        .settings-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: #8472a7;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 0 8px 10px;
+        }
+
+        /* ===== آیتم تنظیمات ===== */
+        .settings-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(132, 114, 167, .08);
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: 17px 16px;
+            border-bottom: 1px solid #f1edf4;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-item:hover {
+            background: #faf8fc;
+        }
+
+        .settings-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 13px;
+            font-size: 19px;
+            flex-shrink: 0;
+        }
+
+        .icon-purple {
+            background: #eee5f7;
+            color: #8472a7;
+        }
+        .icon-green {
+            background: #e8f2eb;
+            color: #6b9b7b;
+        }
+        .icon-orange {
+            background: #f7eadf;
+            color: #c68d5d;
+        }
+        .icon-blue {
+            background: #e6f1f3;
+            color: #5c9da7;
+        }
+        .icon-red {
+            background: #fde8ed;
+            color: #e74c6f;
+        }
+
+        .settings-info {
+            flex: 1;
+        }
+
+        .settings-info h3 {
+            color: #4f465d;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .settings-info p {
+            color: #999;
+            font-size: 12px;
+            margin-top: 4px;
+            line-height: 1.6;
+        }
+
+        .settings-arrow {
+            color: #b2a5bd;
+            font-size: 16px;
+        }
+
+        /* ===== درباره همیار ===== */
+        .about-box {
+            background: #f8f5fc;
+            border-radius: 20px;
+            padding: 18px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .about-box i {
+            font-size: 28px;
+            color: #8472a7;
+            margin-bottom: 8px;
+        }
+
+        .about-box h3 {
+            color: #574a73;
+            font-size: 16px;
+        }
+
+        .about-box p {
+            color: #888;
+            font-size: 12px;
+            margin-top: 6px;
+            line-height: 1.8;
+        }
+
+        /* ===== پایین ===== */
+        .bottom-nav {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eadfdc;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+        }
+
+        .nav-item i {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active {
+            color: #8472a7;
+        }
+    </style>
 
 </head>
 
-
 <body>
 
-<div class="mobile">
+    <div class="mobile">
 
+        <!-- ===== هدر ===== -->
+        <div class="page-header">
 
-    <!-- ===== هدر ===== -->
+            <a href="home.html" class="back-btn">
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
 
-    <div class="page-header">
-
-        <a href="home.html" class="back-btn">
-            <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-        <div class="page-title">
-
-            <h2>تنظیمات</h2>
-
-            <p>
-                مدیریت اطلاعات و دسترسی به امکانات همیار
-            </p>
+            <div class="page-title">
+                <h2>تنظیمات</h2>
+                <p>مدیریت اطلاعات و دسترسی به امکانات همیار</p>
+            </div>
 
         </div>
 
-    </div>
+        <!-- ================================================= -->
+        <!-- ===== اطلاعات کاربر ===== -->
+        <!-- ================================================= -->
+        <div class="settings-section">
 
+            <div class="section-title">
+                حساب کاربری
+            </div>
 
-    <!-- ================================================= -->
-    <!-- ===== اطلاعات کاربر ===== -->
-    <!-- ================================================= -->
+            <div class="settings-card">
 
-    <div class="settings-section">
+                <a href="patient-profile.html" class="settings-item">
 
-        <div class="section-title">
-            حساب کاربری
+                    <div class="settings-icon icon-purple">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+
+                    <div class="settings-info">
+                        <h3>اطلاعات مراقب و بیمار</h3>
+                        <p>مشاهده و ویرایش اطلاعات مراقب و بیمار</p>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+                </a>
+
+            </div>
+
         </div>
 
-        <div class="settings-card">
+        <!-- ================================================= -->
+        <!-- ===== راهنما و پشتیبانی ===== -->
+        <!-- ================================================= -->
+        <div class="settings-section">
 
-            <a href="patient-profile.html" class="settings-item">
+            <div class="section-title">
+                راهنما و پشتیبانی
+            </div>
 
-                <div class="settings-icon icon-purple">
-                    <i class="fa-solid fa-user-group"></i>
+            <div class="settings-card">
+
+                <a href="guide.html" class="settings-item">
+
+                    <div class="settings-icon icon-green">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <div class="settings-info">
+                        <h3>راهنمای برنامه</h3>
+                        <p>آشنایی با بخش‌ها و نحوه استفاده از همیار</p>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+                </a>
+
+                <a href="contact.html" class="settings-item">
+
+                    <div class="settings-icon icon-blue">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+
+                    <div class="settings-info">
+                        <h3>ارتباط با تیم همیار</h3>
+                        <p>ارسال پیام، پیشنهاد یا گزارش مشکل به تیم همیار</p>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- ================================================= -->
+        <!-- ===== حریم خصوصی ===== -->
+        <!-- ================================================= -->
+        <div class="settings-section">
+
+            <div class="section-title">
+                حریم خصوصی
+            </div>
+
+            <div class="settings-card">
+
+                <a href="privacy.html" class="settings-item">
+
+                    <div class="settings-icon icon-purple">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div class="settings-info">
+                        <h3>حریم خصوصی</h3>
+                        <p>اطلاعات مربوط به حریم خصوصی و داده‌های شما</p>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- ================================================= -->
+        <!-- ===== خروج از حساب ===== (دقیقاً مطابق خواسته شما) -->
+        <!-- ================================================= -->
+        <div class="settings-section">
+
+            <div class="section-title">
+                حساب کاربری
+            </div>
+
+            <div class="settings-card">
+
+                <div class="settings-item" onclick="logoutUser()">
+
+                    <div class="settings-icon icon-red">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+
+                    <div class="settings-info">
+                        <h3 style="color:#e74c6f;">خروج از حساب کاربری</h3>
+                        <p>خروج از حساب کاربری همیار</p>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
                 </div>
 
-                <div class="settings-info">
+            </div>
 
-                    <h3>اطلاعات مراقب و بیمار</h3>
+        </div>
 
-                    <p>
-                        مشاهده و ویرایش اطلاعات مراقب و بیمار
-                    </p>
+        <!-- ================================================= -->
+        <!-- ===== درباره همیار ===== -->
+        <!-- ================================================= -->
+        <div class="about-box">
 
-                </div>
+            <i class="fa-solid fa-heart-pulse"></i>
+            <h3>همیار</h3>
+            <p>همراه شما برای مراقبت بهتر از بیماران مبتلا به آلزایمر</p>
+            <p>نسخه 1.0</p>
 
-                <i class="fa-solid fa-chevron-left settings-arrow"></i>
+        </div>
 
+        <!-- ================================================= -->
+        <!-- ===== ناوبری پایین ===== -->
+        <!-- ================================================= -->
+        <div class="bottom-nav">
+
+            <a href="home.html" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                خانه
+            </a>
+
+            <a href="education.html" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                آموزش
+            </a>
+
+            <a href="chat.html" class="nav-item">
+                <i class="fa-solid fa-comments"></i>
+                چت‌ها
+            </a>
+
+            <a href="reminder.html" class="nav-item">
+                <i class="fa-solid fa-bell"></i>
+                یادآورها
+            </a>
+
+            <a href="daily-care.html" class="nav-item">
+                <i class="fa-solid fa-heart"></i>
+                مراقبت
             </a>
 
         </div>
 
     </div>
 
+    <!-- ===== اسکریپت خروج از حساب ===== -->
+    <script>
+        function logoutUser() {
 
-    <!-- ================================================= -->
-    <!-- ===== راهنما و پشتیبانی ===== -->
-    <!-- ================================================= -->
+            const confirmLogout = confirm(
+                "آیا مطمئن هستید که می‌خواهید از حساب کاربری خارج شوید؟"
+            );
 
-    <div class="settings-section">
+            if (!confirmLogout) {
+                return;
+            }
 
-        <div class="section-title">
-            راهنما و پشتیبانی
-        </div>
+            // خروج از حساب فعلی
+            localStorage.removeItem("currentUser");
 
-        <div class="settings-card">
+            // وضعیت ورود فعلی پاک شود
+            localStorage.removeItem("profileCompleted");
 
-
-            <!-- راهنمای برنامه -->
-
-            <a href="guide.html" class="settings-item">
-
-                <div class="settings-icon icon-green">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-
-                <div class="settings-info">
-
-                    <h3>راهنمای برنامه</h3>
-
-                    <p>
-                        آشنایی با بخش‌ها و نحوه استفاده از همیار
-                    </p>
-
-                </div>
-
-                <i class="fa-solid fa-chevron-left settings-arrow"></i>
-
-            </a>
-
-
-            <!-- ارتباط با تیم -->
-
-            <a href="contact.html" class="settings-item">
-
-                <div class="settings-icon icon-blue">
-                    <i class="fa-solid fa-headset"></i>
-                </div>
-
-                <div class="settings-info">
-
-                    <h3>ارتباط با تیم همیار</h3>
-
-                    <p>
-                        ارسال پیام، پیشنهاد یا گزارش مشکل به تیم همیار
-                    </p>
-
-                </div>
-
-                <i class="fa-solid fa-chevron-left settings-arrow"></i>
-
-            </a>
-
-
-        </div>
-
-    </div>
-
-
-    <!-- ================================================= -->
-    <!-- ===== حریم خصوصی ===== -->
-    <!-- ================================================= -->
-
-    <div class="settings-section">
-
-        <div class="section-title">
-            حریم خصوصی
-        </div>
-
-        <div class="settings-card">
-
-            <a href="privacy.html" class="settings-item">
-
-                <div class="settings-icon icon-purple">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-
-                <div class="settings-info">
-
-                    <h3>حریم خصوصی</h3>
-
-                    <p>
-                        اطلاعات مربوط به حریم خصوصی و داده‌های شما
-                    </p>
-
-                </div>
-
-                <i class="fa-solid fa-chevron-left settings-arrow"></i>
-
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <!-- ================================================= -->
-    <!-- ===== درباره همیار ===== -->
-    <!-- ================================================= -->
-
-    <div class="about-box">
-
-        <i class="fa-solid fa-heart-pulse"></i>
-
-        <h3>همیار</h3>
-
-        <p>
-            همراه شما برای مراقبت بهتر از بیماران مبتلا به آلزایمر
-        </p>
-
-        <p>
-            نسخه 1.0
-        </p>
-
-    </div>
-
-
-    <!-- ================================================= -->
-    <!-- ===== ناوبری پایین ===== -->
-    <!-- ================================================= -->
-
-    <div class="bottom-nav">
-
-        <a href="home.html" class="nav-item active">
-            <i class="fa-solid fa-house"></i>
-            خانه
-        </a>
-
-        <a href="education.html" class="nav-item">
-            <i class="fa-solid fa-book-open"></i>
-            آموزش
-        </a>
-
-        <a href="chat.html" class="nav-item">
-            <i class="fa-solid fa-comments"></i>
-            چت‌ها
-        </a>
-
-        <a href="reminder.html" class="nav-item">
-            <i class="fa-solid fa-bell"></i>
-            یادآورها
-        </a>
-
-        <a href="daily-care.html" class="nav-item">
-            <i class="fa-solid fa-heart"></i>
-            مراقبت
-        </a>
-
-    </div>
-
-</div>
+            // انتقال به صفحه ورود
+            window.location.href = "login.html";
+        }
+    </script>
 
 </body>
-</html>
 
+</html>
