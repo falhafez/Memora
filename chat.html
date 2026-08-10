@@ -714,7 +714,10 @@
         let knowledgeLoaded = false;
 
         fetch('knowledge.json')
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error('فایل پیدا نشد');
+                return res.json();
+            })
             .then(data => {
                 knowledge = data;
                 knowledgeLoaded = true;
@@ -722,6 +725,7 @@
             })
             .catch(err => {
                 console.warn('بارگذاری knowledge.json ناموفق:', err);
+                // دانش بارگذاری نشد، اما برنامه به کار ادامه می‌دهد (از API استفاده می‌کند)
             });
 
         // =========================================================
@@ -854,31 +858,55 @@
             if (g) g.remove();
             const s = chat.querySelector('.suggestions');
             if (s) s.remove();
-            chat.innerHTML += `
-                <div class="message user">
-                    <div class="avatar user-avatar">😊</div>
-                    <div class="bubble">
-                        ${text}
-                        <div class="time">${currentTime()}</div>
-                    </div>
-                </div>
-            `;
+
+            // ایجاد المان پیام با textContent برای امنیت
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message user';
+
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar user-avatar';
+            avatar.textContent = '😊';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+
+            const textSpan = document.createElement('span');
+            textSpan.textContent = text;  // ایمن در برابر XSS
+
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'time';
+            timeDiv.textContent = currentTime();
+
+            bubble.appendChild(textSpan);
+            bubble.appendChild(timeDiv);
+            msgDiv.appendChild(avatar);
+            msgDiv.appendChild(bubble);
+
+            chat.appendChild(msgDiv);
             chat.style.justifyContent = 'flex-start';
             scrollToBottom();
         }
 
         function showTyping() {
-            const html = `
-                <div class="message bot" id="typing">
-                    <div class="typing">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                    </div>
-                    <div class="avatar bot-avatar">🤖</div>
-                </div>
-            `;
-            chat.insertAdjacentHTML('beforeend', html);
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'typing';
+
+            const dots = document.createElement('div');
+            dots.className = 'typing';
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dots.appendChild(dot);
+            }
+
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar bot-avatar';
+            avatar.textContent = '🤖';
+
+            typingDiv.appendChild(dots);
+            typingDiv.appendChild(avatar);
+            chat.appendChild(typingDiv);
             scrollToBottom();
         }
 
@@ -888,28 +916,41 @@
         }
 
         function showBot(answer, source = false) {
-            let sourceText = '';
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message bot';
+
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar bot-avatar';
+            avatar.textContent = '🤖';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+
+            // پاسخ API ممکن است HTML داشته باشد، اما از سرور قابل اعتماد است
+            bubble.innerHTML = answer;
+
             if (source) {
-                sourceText = `
-                    <div class="source">
-                        ✓ منبع: پایگاه دانش مراقبت آلزایمر
-                    </div>
-                `;
+                const src = document.createElement('div');
+                src.className = 'source';
+                src.textContent = '✓ منبع: پایگاه دانش مراقبت آلزایمر';
+                bubble.appendChild(src);
             }
 
-            chat.innerHTML += `
-                <div class="message bot">
-                    <div class="bubble">
-                        ${answer}
-                        ${sourceText}
-                        <div class="copy-btn" onclick="copyText(this)">
-                            <i class="fa-regular fa-copy"></i> کپی
-                        </div>
-                        <div class="time">${currentTime()}</div>
-                    </div>
-                    <div class="avatar bot-avatar">🤖</div>
-                </div>
-            `;
+            const copyBtn = document.createElement('div');
+            copyBtn.className = 'copy-btn';
+            copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> کپی';
+            copyBtn.onclick = function() { copyText(this); };
+            bubble.appendChild(copyBtn);
+
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'time';
+            timeDiv.textContent = currentTime();
+            bubble.appendChild(timeDiv);
+
+            msgDiv.appendChild(bubble);
+            msgDiv.appendChild(avatar);
+
+            chat.appendChild(msgDiv);
             saveChat();
             scrollToBottom();
         }
@@ -971,7 +1012,6 @@
         // =========================================================
         async function getAIAnswer(question) {
             showTyping();
-            // ===== آدرس API تغییر داده شده به Render =====
             const API_URL = "https://memora-2-hic1.onrender.com/chat";
 
             try {
@@ -1010,14 +1050,18 @@
             const text = input.value.trim();
             if (text === '') return;
 
-            if (!knowledgeLoaded) {
-                showBot('⏳ لطفاً چند لحظه صبر کنید، در حال آماده‌سازی اطلاعات هستم.');
-                return;
-            }
-
+            // 1. نمایش پیام کاربر و پاک کردن input (حتی قبل از بررسی دانش)
             addUserMessage(text);
             input.value = '';
 
+            // 2. بررسی اینکه دانش بارگذاری شده یا نه
+            if (!knowledgeLoaded) {
+                // اگر دانش موجود نیست، مستقیماً به API برو
+                getAIAnswer(text);
+                return;
+            }
+
+            // 3. جستجو در دانش
             let answer = getAnswer(text);
 
             if (answer) {
@@ -1132,32 +1176,40 @@
             const s = chat.querySelector('.suggestions');
             if (s) s.remove();
 
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message user';
+
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar user-avatar';
+            avatar.textContent = '😊';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+
             if (file.type.startsWith('image/')) {
-                const url = URL.createObjectURL(file);
-                chat.innerHTML += `
-                    <div class="message user">
-                        <div class="avatar user-avatar">😊</div>
-                        <div class="bubble">
-                            <img src="${url}" 
-                                 style="max-width:180px; border-radius:15px; display:block; margin-bottom:8px;">
-                            <b>${file.name}</b>
-                            <div class="time">${currentTime()}</div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                let icon = '📄';
-                if (file.type === 'application/pdf') icon = '📕';
-                chat.innerHTML += `
-                    <div class="message user">
-                        <div class="avatar user-avatar">😊</div>
-                        <div class="bubble">
-                            ${icon} <b>${file.name}</b>
-                            <div class="time">${currentTime()}</div>
-                        </div>
-                    </div>
-                `;
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.style.maxWidth = '180px';
+                img.style.borderRadius = '15px';
+                img.style.display = 'block';
+                img.style.marginBottom = '8px';
+                bubble.appendChild(img);
             }
+
+            const nameSpan = document.createElement('span');
+            let icon = '📄';
+            if (file.type === 'application/pdf') icon = '📕';
+            nameSpan.textContent = `${icon} ${file.name}`;
+            bubble.appendChild(nameSpan);
+
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'time';
+            timeDiv.textContent = currentTime();
+            bubble.appendChild(timeDiv);
+
+            msgDiv.appendChild(avatar);
+            msgDiv.appendChild(bubble);
+            chat.appendChild(msgDiv);
 
             chat.style.justifyContent = 'flex-start';
             saveChat();
