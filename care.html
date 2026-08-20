@@ -147,6 +147,137 @@ margin-bottom:5px;
 .extra-content.show {
     display:block;
 }
+
+/* ============================================================ */
+/* ===== استایل‌های قبلی اندازه متن (text-*) ===== */
+/* ============================================================ */
+
+body.text-small {
+    font-size: 14px;
+}
+
+body.text-medium {
+    font-size: 16px;
+}
+
+body.text-large {
+    font-size: 19px;
+}
+
+/* اندازه متن‌های اصلی مقاله */
+body.text-small p,
+body.text-small li {
+    font-size: 13px;
+}
+
+body.text-medium p,
+body.text-medium li {
+    font-size: 16px;
+}
+
+body.text-large p,
+body.text-large li {
+    font-size: 19px;
+    line-height: 2.2;
+}
+
+body.text-large h1 {
+    font-size: 28px;
+}
+
+body.text-large .section-title {
+    font-size: 21px;
+}
+
+body.text-large .meta {
+    font-size: 14px;
+}
+
+body.text-large .badge {
+    font-size: 14px;
+}
+
+body.text-large .read-more-btn {
+    font-size: 16px;
+}
+
+body.text-large .btn {
+    font-size: 16px;
+}
+
+body.text-large .nav-item {
+    font-size: 13px;
+}
+
+/* ============================================================ */
+/* ===== تغییر اول: استایل‌های جدید اندازه متن (font-*) ===== */
+/* ============================================================ */
+
+body.font-large li {
+    font-size: 18px;
+}
+
+body.font-large h1 {
+    font-size: 27px;
+}
+
+body.font-large h2 {
+    font-size: 24px;
+}
+
+body.font-large h3,
+body.font-large .section-title {
+    font-size: 21px;
+}
+
+body.font-large .badge,
+body.font-large .meta {
+    font-size: 14px;
+}
+
+body.font-large .read-more-btn,
+body.font-large .btn {
+    font-size: 16px;
+}
+
+body.font-large .nav-item {
+    font-size: 13px;
+}
+
+/* ===== خیلی بزرگ ===== */
+
+body.font-extra-large p,
+body.font-extra-large li {
+    font-size: 20px;
+}
+
+body.font-extra-large h1 {
+    font-size: 30px;
+}
+
+body.font-extra-large h2 {
+    font-size: 27px;
+}
+
+body.font-extra-large h3,
+body.font-extra-large .section-title {
+    font-size: 23px;
+}
+
+body.font-extra-large .badge,
+body.font-extra-large .meta {
+    font-size: 16px;
+}
+
+body.font-extra-large .read-more-btn,
+body.font-extra-large .btn {
+    font-size: 18px;
+}
+
+body.font-extra-large .nav-item {
+    font-size: 15px;
+}
+
 </style>
 </head>
 
@@ -248,6 +379,31 @@ margin-bottom:5px;
 </div>
 
 <script>
+
+    // =============================================================
+    // اعمال اندازه متن از سیستم قبلی (text-*)
+    // =============================================================
+
+    function applyTextSize() {
+
+        const textSize = localStorage.getItem("textSize") || "medium";
+
+        document.body.classList.remove(
+            "text-small",
+            "text-medium",
+            "text-large"
+        );
+
+        document.body.classList.add("text-" + textSize);
+    }
+
+    applyTextSize();
+
+
+    // =============================================================
+    // مطالعه بیشتر / کمتر
+    // =============================================================
+
     const readMoreBtn = document.getElementById('readMoreBtn');
     const extraContent = document.getElementById('extraContent');
     let expanded = false;
@@ -262,6 +418,35 @@ margin-bottom:5px;
             readMoreBtn.innerHTML = 'مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i>';
         }
     });
+
+
+    // =============================================================
+    // ===== تغییر دوم: اعمال اندازه فونت از سیستم جدید (font-*) =====
+    // =============================================================
+
+    function loadFontSize() {
+
+        const fontSize =
+            localStorage.getItem("fontSize") || "standard";
+
+        document.body.classList.remove(
+            "font-large",
+            "font-extra-large"
+        );
+
+        if (fontSize === "large") {
+            document.body.classList.add("font-large");
+        }
+
+        if (fontSize === "extra-large") {
+            document.body.classList.add("font-extra-large");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        loadFontSize();
+    });
+
 </script>
 
 </body>

@@ -194,7 +194,6 @@
             gap: 8px;
         }
 
-        /* تغییرات اعمال‌شده برای RTL */
         .message.user {
             flex-direction: row;
             justify-content: flex-start;
@@ -322,10 +321,32 @@
             font-size: 12px;
             cursor: pointer;
             transition: .2s;
+            border: none;
         }
         .copy-btn:hover {
             background: #8472a7;
             color: white;
+        }
+
+        /* ===== افکت Ripple ===== */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(132, 114, 167, 0.2);
+            transform: scale(0);
+            animation: rippleAnim 0.6s ease-out;
+            pointer-events: none;
+            width: 100px;
+            height: 100px;
+            margin-left: -50px;
+            margin-top: -50px;
+        }
+
+        @keyframes rippleAnim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
 
         /* ===== ناحیه ورودی ===== */
@@ -622,7 +643,7 @@
         <div class="chat" id="chat">
             <div class="greeting">
                 سلام 👋<br>
-                اگر سوالی دارید بپرسید.
+                هر سوالی دارید بپرسید.
             </div>
             <div class="suggestions">
                 <button onclick="quickQuestion('علائم آلزایمر چیست؟')">
@@ -658,7 +679,7 @@
             autocomplete="off"
             >
 
-            <button class="mic">
+            <button class="mic" onclick="alert('قابلیت ضبط صدا در حال توسعه است.')">
                 <i class="fa-solid fa-microphone"></i>
             </button>
 
@@ -705,27 +726,22 @@
         // =========================================================
         const chat = document.getElementById('chat');
         const input = document.getElementById('messageInput');
-        const greeting = document.querySelector('.greeting');
 
         // =========================================================
-        //  دانش پایه (بارگذاری از فایل JSON)
+        //  دانش پایه (بارگذاری از فایل JSON با Promise)
         // =========================================================
         let knowledge = [];
-        let knowledgeLoaded = false;
-
-        fetch('knowledge.json')
+        let knowledgePromise = fetch('knowledge.json')
             .then(res => {
                 if (!res.ok) throw new Error('فایل پیدا نشد');
                 return res.json();
             })
             .then(data => {
                 knowledge = data;
-                knowledgeLoaded = true;
                 console.log('دانش با موفقیت بارگذاری شد.');
             })
             .catch(err => {
                 console.warn('بارگذاری knowledge.json ناموفق:', err);
-                // دانش بارگذاری نشد، اما برنامه به کار ادامه می‌دهد (از API استفاده می‌کند)
             });
 
         // =========================================================
@@ -743,22 +759,45 @@
         }
 
         // =========================================================
-        //  مدیریت تاریخچه چندگانه
+        //  مدیریت تاریخچه (به‌روزرسانی آخرین چت)
         // =========================================================
+        let isSaving = false;
+
         function saveChat() {
+            if (isSaving) return;
             const messages = chat.querySelectorAll('.message');
             if (messages.length === 0) return;
+
             let chats = JSON.parse(localStorage.getItem('chats')) || [];
+            const currentContent = chat.innerHTML;
             const last = chats[chats.length - 1];
-            if (last && last.content === chat.innerHTML) return;
-            const current = {
-                id: Date.now(),
-                date: new Date().toLocaleString('fa-IR'),
-                content: chat.innerHTML
-            };
-            chats.push(current);
+
+            // اگر همین محتوا قبلاً ذخیره شده، کاری نکن
+            if (last && last.content === currentContent) return;
+
+            isSaving = true;
+
+            if (last) {
+                // به‌روزرسانی آخرین چت
+                last.content = currentContent;
+                last.date = new Date().toLocaleString('fa-IR');
+            } else {
+                // ایجاد اولین چت
+                chats.push({
+                    id: Date.now(),
+                    date: new Date().toLocaleString('fa-IR'),
+                    content: currentContent
+                });
+            }
+
             localStorage.setItem('chats', JSON.stringify(chats));
+            setTimeout(() => { isSaving = false; }, 100);
         }
+
+        // ذخیره چت هنگام خروج از صفحه
+        window.addEventListener('beforeunload', function() {
+            saveChat();
+        });
 
         function loadChat(id) {
             let chats = JSON.parse(localStorage.getItem('chats')) || [];
@@ -851,7 +890,7 @@
         }
 
         // =========================================================
-        //  توابع پیام‌رسانی (با منبع پاسخ)
+        //  توابع پیام‌رسانی
         // =========================================================
         function addUserMessage(text) {
             const g = chat.querySelector('.greeting');
@@ -859,7 +898,6 @@
             const s = chat.querySelector('.suggestions');
             if (s) s.remove();
 
-            // ایجاد المان پیام با textContent برای امنیت
             const msgDiv = document.createElement('div');
             msgDiv.className = 'message user';
 
@@ -871,7 +909,7 @@
             bubble.className = 'bubble';
 
             const textSpan = document.createElement('span');
-            textSpan.textContent = text;  // ایمن در برابر XSS
+            textSpan.textContent = text;
 
             const timeDiv = document.createElement('div');
             timeDiv.className = 'time';
@@ -926,7 +964,6 @@
             const bubble = document.createElement('div');
             bubble.className = 'bubble';
 
-            // پاسخ API ممکن است HTML داشته باشد، اما از سرور قابل اعتماد است
             bubble.innerHTML = answer;
 
             if (source) {
@@ -936,10 +973,13 @@
                 bubble.appendChild(src);
             }
 
+            // دکمه کپی با دریافت مستقیم متن پاسخ
             const copyBtn = document.createElement('div');
             copyBtn.className = 'copy-btn';
             copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> کپی';
-            copyBtn.onclick = function() { copyText(this); };
+            copyBtn.onclick = function() {
+                copyText(answer, this);
+            };
             bubble.appendChild(copyBtn);
 
             const timeDiv = document.createElement('div');
@@ -951,151 +991,14 @@
             msgDiv.appendChild(avatar);
 
             chat.appendChild(msgDiv);
-            saveChat();
+            // saveChat() در اینجا حذف شد (فقط در newChat و beforeunload ذخیره می‌شود)
             scrollToBottom();
         }
 
         // =========================================================
-        //  جستجو در دانش محلی
+        //  تابع copyText اصلاح‌شده (دریافت متن پاسخ)
         // =========================================================
-        function getAnswer(question) {
-            const q = question.toLowerCase();
-            for (let item of knowledge) {
-                for (let keyword of item.keywords) {
-                    if (q.includes(keyword)) {
-                        return item.content;
-                    }
-                }
-            }
-            return null;
-        }
-
-        // =========================================================
-        //  توابع تشخیص موضوع
-        // =========================================================
-        function isCareTopic(question) {
-            const keywords = [
-                "آلزایمر",
-                "فراموشی",
-                "حافظه",
-                "مراقبت",
-                "بیمار",
-                "دارو",
-                "بی قراری",
-                "خواب",
-                "رفتار",
-                "غذا",
-                "حمام",
-                "پرستاری"
-            ];
-            return keywords.some(k => question.includes(k));
-        }
-
-        function isMedicalQuestion(question) {
-            const words = [
-                "تشخیص",
-                "درمان",
-                "دوز",
-                "قرص",
-                "دارو",
-                "علائم",
-                "بیماری",
-                "تزریق",
-                "فشار خون",
-                "قند"
-            ];
-            return words.some(w => question.includes(w));
-        }
-
-        // =========================================================
-        //  فراخوانی API هوش مصنوعی (با آدرس اصلاح‌شده)
-        // =========================================================
-        async function getAIAnswer(question) {
-            showTyping();
-            const API_URL = "https://memora-2-hic1.onrender.com/chat";
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: `
-                            تو یک دستیار سلامت برای مراقبین بیماران آلزایمر هستی.
-                            پاسخ‌های پزشکی قطعی نده.
-                            دارو تجویز نکن.
-                            در مسائل تخصصی کاربر را به پزشک ارجاع بده.
-
-                            سؤال کاربر:
-                            ${question}
-                        `
-                    })
-                });
-
-                if (!response.ok) throw new Error('خطا در ارتباط با سرور');
-
-                const data = await response.json();
-                removeTyping();
-                showBot(data.answer);
-            } catch (error) {
-                console.error('خطا در دریافت پاسخ از AI:', error);
-                removeTyping();
-                showBot('متأسفم، در حال حاضر قادر به اتصال به سرور هوش مصنوعی نیستم. لطفاً بعداً دوباره تلاش کنید.');
-            }
-        }
-
-        // =========================================================
-        //  ارسال پیام (منطق کامل با منبع و تشخیص‌ها)
-        // =========================================================
-        function sendMessage() {
-            const text = input.value.trim();
-            if (text === '') return;
-
-            // 1. نمایش پیام کاربر و پاک کردن input (حتی قبل از بررسی دانش)
-            addUserMessage(text);
-            input.value = '';
-
-            // 2. بررسی اینکه دانش بارگذاری شده یا نه
-            if (!knowledgeLoaded) {
-                // اگر دانش موجود نیست، مستقیماً به API برو
-                getAIAnswer(text);
-                return;
-            }
-
-            // 3. جستجو در دانش
-            let answer = getAnswer(text);
-
-            if (answer) {
-                // پاسخ از دانش با منبع
-                showBot(answer, true);
-            } else if (isCareTopic(text)) {
-                // موضوع مرتبط ولی جوابی در دانش نیست
-                showBot(`
-                    من پاسخ دقیقی برای این موضوع در پایگاه دانش مراقبت آلزایمر پیدا نکردم.
-                    <br><br>
-                    برای مسائل تخصصی پزشکی، دارویی یا تشخیصی بهتر است با پزشک یا متخصص مربوطه مشورت کنید.
-                `);
-            } else if (isMedicalQuestion(text)) {
-                // سؤال پزشکی خارج از دانش
-                showBot('من نمی‌توانم درباره این موضوع تشخیص یا توصیه پزشکی قطعی ارائه کنم. لطفاً برای دریافت راهنمایی دقیق‌تر با پزشک یا فرد متخصص مشورت کنید.');
-            } else {
-                // مکالمات معمولی → API
-                getAIAnswer(text);
-            }
-        }
-
-        // ارسال با کلید Enter
-        input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-
-        // =========================================================
-        //  کپی متن
-        // =========================================================
-        function copyText(btn) {
-            const text = btn.parentElement.innerText.trim();
+        function copyText(text, btn) {
             navigator.clipboard.writeText(text)
                 .then(() => {
                     btn.innerHTML = '<i class="fa-solid fa-check"></i> کپی شد';
@@ -1109,11 +1012,148 @@
         }
 
         // =========================================================
-        //  افکت ریپل
+        //  تابع getAnswer با normalizeText
+        // =========================================================
+        function normalizeText(text) {
+            return text
+                .toLowerCase()
+                .replace(/ي/g, 'ی')
+                .replace(/ى/g, 'ی')
+                .replace(/ك/g, 'ک')
+                .replace(/ة/g, 'ه')
+                .replace(/ۀ/g, 'ه')
+                .replace(/ؤ/g, 'و')
+                .replace(/إ/g, 'ا')
+                .replace(/أ/g, 'ا')
+                .replace(/آ/g, 'ا')
+                .replace(/‌/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function getAnswer(question) {
+            const q = normalizeText(question);
+
+            if (!knowledge || knowledge.length === 0) {
+                return null;
+            }
+
+            for (const item of knowledge) {
+                if (!item.keywords || !item.content) {
+                    continue;
+                }
+
+                for (const keyword of item.keywords) {
+                    const normalizedKeyword = normalizeText(keyword);
+
+                    if (
+                        normalizedKeyword.length >= 2 &&
+                        q.includes(normalizedKeyword)
+                    ) {
+                        return item.content;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        // =========================================================
+        //  تابع sendMessage اصلاح‌شده (پاسخ محلی بدون تأخیر)
+        // =========================================================
+        async function sendMessage() {
+            const text = input.value.trim();
+
+            if (text === '') return;
+
+            // نمایش پیام کاربر
+            addUserMessage(text);
+
+            // پاک کردن کادر ورودی
+            input.value = '';
+
+            // منتظر بارگذاری دانش می‌مانیم
+            await knowledgePromise;
+
+            // جستجو در پایگاه دانش
+            const answer = getAnswer(text);
+
+            // اگر پاسخ در knowledge.json پیدا شد
+            if (answer) {
+                // پاسخ مستقیم و فوری از دانش
+                showBot(answer, true);
+            } else {
+                // اگر پاسخ در پایگاه دانش نبود
+                // سؤال به مدل AI ارسال می‌شود
+                await getAIAnswer(text);
+            }
+        }
+
+        // =========================================================
+        //  تابع AI API (با پرامپت اصلاح‌شده)
+        // =========================================================
+        async function getAIAnswer(question) {
+            showTyping();
+            const API_URL = "https://memora-2-hic1.onrender.com/chat";
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: `
+                            تو یک دستیار سلامت برای مراقبین بیماران مبتلا به آلزایمر هستی.
+
+                            قواعد پاسخ‌دهی:
+
+                            1. پایگاه دانش محلی برنامه شامل محتوای تخصصی درباره مراقبت از بیماران مبتلا به آلزایمر است.
+                            2. این درخواست فقط زمانی به تو ارسال می‌شود که پایگاه دانش محلی پاسخ مناسبی برای سؤال کاربر پیدا نکرده باشد.
+                            3. بنابراین، فقط در صورت نبود پاسخ مناسب در پایگاه دانش، به سؤال کاربر پاسخ بده.
+                            4. برای سؤال‌های عمومی و غیرتخصصی می‌توانی پاسخ طبیعی و دوستانه بدهی.
+                            5. برای مسائل پزشکی حساس، تشخیص قطعی، تجویز دارو یا تعیین دوز دارو انجام نده.
+                            6. در صورت نیاز، کاربر را به پزشک یا متخصص مربوطه ارجاع بده.
+                            7. پاسخ‌ها را ساده، کوتاه، قابل فهم و مناسب مراقبین بیماران آلزایمر ارائه کن.
+                            8. اگر سؤال خارج از حوزه سلامت و آلزایمر بود، می‌توانی مانند یک دستیار عمومی پاسخ بدهی.
+
+                            سؤال کاربر:
+                            ${question}
+                        `
+                    })
+                });
+
+                if (!response.ok) throw new Error('خطا در ارتباط با سرور');
+
+                const data = await response.json();
+                removeTyping();
+
+                if (data.answer) {
+                    showBot(data.answer);
+                } else {
+                    showBot('متأسفم، پاسخ مناسبی دریافت نشد. لطفاً دوباره تلاش کنید.');
+                }
+            } catch (error) {
+                console.error('خطا در دریافت پاسخ از AI:', error);
+                removeTyping();
+                showBot('متأسفم، در حال حاضر قادر به اتصال به سرور هوش مصنوعی نیستم. لطفاً بعداً دوباره تلاش کنید.');
+            }
+        }
+
+        // ارسال با کلید Enter
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // =========================================================
+        //  افکت ریپل (با جلوگیری از اجرا روی دکمه کپی)
         // =========================================================
         document.addEventListener('click', function(e) {
             const bubble = e.target.closest('.bubble');
-            if (!bubble) return;
+            if (!bubble || e.target.closest('.copy-btn')) {
+                return;
+            }
             const rect = bubble.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -1126,20 +1166,11 @@
         });
 
         // =========================================================
-        //  بارگذاری اولیه
+        //  بارگذاری اولیه (صفحه چت جدید)
         // =========================================================
         window.onload = function() {
-            const chats = JSON.parse(localStorage.getItem('chats')) || [];
-            if (chats.length > 0) {
-                const last = chats[chats.length - 1];
-                chat.innerHTML = last.content;
-                chat.style.justifyContent = 'flex-start';
-                const g = chat.querySelector('.greeting');
-                if (g) g.remove();
-                const s = chat.querySelector('.suggestions');
-                if (s) s.remove();
-                scrollToBottom();
-            }
+            chat.style.justifyContent = 'center';
+            scrollToBottom();
         };
 
         // =========================================================
@@ -1155,7 +1186,7 @@
         });
 
         // =========================================================
-        //  آپلود فایل
+        //  آپلود فایل (فقط UI - برای Prototype)
         // =========================================================
         const fileInput = document.getElementById('fileInput');
 
@@ -1212,7 +1243,6 @@
             chat.appendChild(msgDiv);
 
             chat.style.justifyContent = 'flex-start';
-            saveChat();
             scrollToBottom();
         }
     </script>

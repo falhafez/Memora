@@ -93,6 +93,62 @@
             color: #6b5b7a;
             border: 2px solid #d5c8e0 !important;
         }
+
+        /* ============================================================ */
+        /* ===== تغییر اول: استایل‌های اندازه متن قابل تنظیم ===== */
+        /* ============================================================ */
+
+        body.font-large .header h2 {
+            font-size: 25px;
+        }
+
+        body.font-large .header p {
+            font-size: 15px;
+        }
+
+        body.font-large .card h3 {
+            font-size: 18px;
+        }
+
+        body.font-large label {
+            font-size: 15px;
+        }
+
+        body.font-large input,
+        body.font-large select,
+        body.font-large textarea {
+            font-size: 16px;
+        }
+
+        body.font-large .btn-group button {
+            font-size: 20px;
+        }
+
+        body.font-extra-large .header h2 {
+            font-size: 28px;
+        }
+
+        body.font-extra-large .header p {
+            font-size: 17px;
+        }
+
+        body.font-extra-large .card h3 {
+            font-size: 20px;
+        }
+
+        body.font-extra-large label {
+            font-size: 17px;
+        }
+
+        body.font-extra-large input,
+        body.font-extra-large select,
+        body.font-extra-large textarea {
+            font-size: 18px;
+        }
+
+        body.font-extra-large .btn-group button {
+            font-size: 22px;
+        }
     </style>
 </head>
 <body>
@@ -158,7 +214,7 @@
         </div>
 
         <div class="btn-group">
-            <button class="save" onclick="saveProfile()">ذخیره </button>
+            <button class="save" onclick="saveProfile()">ذخیره</button>
             <button class="cancel" onclick="cancelProfile()">انصراف</button>
         </div>
     </div>
@@ -169,7 +225,6 @@
         let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
 
         if (profiles[username]) {
-
             let profile = profiles[username];
 
             document.getElementById("caregiverName").value = profile.caregiverName || "";
@@ -188,38 +243,32 @@
         }
 
         function saveProfile() {
-            // دریافت مقادیر
             let caregiverName = document.getElementById("caregiverName").value.trim();
             let patientName = document.getElementById("patientName").value.trim();
             let patientAge = document.getElementById("patientAge").value.trim();
             let caregiverPhone = document.getElementById("caregiverPhone").value.trim();
             let diagnosisYear = document.getElementById("diagnosisYear").value.trim();
 
-            // اعتبارسنجی فیلدهای اجباری
             if (caregiverName === "" || patientName === "" || patientAge === "") {
                 alert("لطفاً نام مراقب، نام بیمار و سن بیمار را وارد کنید.");
                 return;
             }
 
-            // اعتبارسنجی سن (فقط عدد)
             if (!/^\d+$/.test(patientAge)) {
                 alert("سن باید فقط شامل عدد باشد.");
                 return;
             }
 
-            // اعتبارسنجی شماره تماس (اختیاری، ولی اگر وارد شده باشد فقط عدد)
             if (caregiverPhone !== "" && !/^\d+$/.test(caregiverPhone)) {
                 alert("شماره تماس باید فقط شامل عدد باشد.");
                 return;
             }
 
-            // اعتبارسنجی سال تشخیص (اختیاری، ولی اگر وارد شده باشد فقط عدد)
             if (diagnosisYear !== "" && !/^\d+$/.test(diagnosisYear)) {
                 alert("سال تشخیص باید فقط شامل عدد باشد.");
                 return;
             }
 
-            // گرفتن رفرنس‌ها
             let relation = document.getElementById("relation");
             let gender = document.getElementById("gender");
             let stage = document.getElementById("stage");
@@ -227,25 +276,20 @@
             let medicines = document.getElementById("medicines");
             let notes = document.getElementById("notes");
 
-            // ساخت شیء پروفایل
             const profile = {
                 caregiverName,
                 relation: relation.value,
                 caregiverPhone,
-
                 patientName,
                 patientAge,
-
                 gender: gender.value,
                 stage: stage.value,
-
                 diagnosisYear,
                 otherDiseases: otherDiseases.value.trim(),
                 medicines: medicines.value.trim(),
                 notes: notes.value.trim()
             };
 
-            // ذخیره در localStorage
             let username = localStorage.getItem("currentUser");
             if (!username) {
                 alert("خطا: کاربر وارد نشده است. لطفاً ابتدا وارد شوید.");
@@ -261,10 +305,44 @@
             location.href = "home.html";
         }
 
+        // ✅ تابع انصراف با استفاده از پارامتر URL (به همان شکل باقی مانده)
         function cancelProfile() {
-            // بازگشت به صفحه ورود بدون پاک کردن اطلاعات
-            location.href = "login.html";
+            const params = new URLSearchParams(window.location.search);
+            const from = params.get("from");
+
+            if (from === "settings") {
+                location.href = "home.html";
+            } else {
+                location.href = "login.html";
+            }
         }
+
+        // ============================================================ */
+        // ===== تغییر دوم: اعمال اندازه متن ذخیره‌شده ===== */
+        // ============================================================ */
+
+        function applyFontSize(size) {
+
+            document.body.classList.remove(
+                "font-large",
+                "font-extra-large"
+            );
+
+            if (size === "large") {
+                document.body.classList.add("font-large");
+            }
+
+            if (size === "extra-large") {
+                document.body.classList.add("font-extra-large");
+            }
+        }
+
+        // خواندن اندازه متن انتخاب‌شده در Settings
+        const savedFontSize =
+            localStorage.getItem("fontSize") || "standard";
+
+        applyFontSize(savedFontSize);
+
     </script>
 </body>
 </html>

@@ -453,6 +453,76 @@
         font-size: 15px;
       }
     }
+
+    /* ============================================================ */
+    /* ===== تغییر اول: استایل‌های اندازه فونت (بعد از Media Queryها) ===== */
+    /* ============================================================ */
+
+    body.font-large .header h2 {
+      font-size: 24px;
+    }
+
+    body.font-extra-large .header h2 {
+      font-size: 26px;
+    }
+
+    body.font-large .form-group label {
+      font-size: 16px;
+    }
+
+    body.font-extra-large .form-group label {
+      font-size: 18px;
+    }
+
+    body.font-large .form-group input,
+    body.font-large .form-group select,
+    body.font-large .form-group textarea,
+    body.font-extra-large .form-group input,
+    body.font-extra-large .form-group select,
+    body.font-extra-large .form-group textarea {
+      font-size: 17px;
+    }
+
+    body.font-extra-large .form-group input,
+    body.font-extra-large .form-group select,
+    body.font-extra-large .form-group textarea {
+      font-size: 19px;
+    }
+
+    body.font-large #time {
+      font-size: 17px;
+    }
+
+    body.font-extra-large #time {
+      font-size: 19px;
+    }
+
+    body.font-large .btn-submit,
+    body.font-large .btn-cancel {
+      font-size: 18px;
+    }
+
+    body.font-extra-large .btn-submit,
+    body.font-extra-large .btn-cancel {
+      font-size: 20px;
+    }
+
+    body.font-large .toggle-label {
+      font-size: 16px;
+    }
+
+    body.font-extra-large .toggle-label {
+      font-size: 18px;
+    }
+
+    body.font-large .nav-item {
+      font-size: 13px;
+    }
+
+    body.font-extra-large .nav-item {
+      font-size: 15px;
+    }
+
   </style>
 </head>
 <body>
@@ -787,6 +857,32 @@
         window.location.href = "reminder.html";
       }, 500);
     });
+
+    // =============================================================
+    // ===== تغییر دوم: اعمال اندازه فونت انتخاب‌شده در تنظیمات =====
+    // =============================================================
+
+    function applyFontSize() {
+
+      const fontSize =
+        localStorage.getItem("fontSize") || "standard";
+
+      document.body.classList.remove(
+        "font-large",
+        "font-extra-large"
+      );
+
+      if (fontSize === "large") {
+        document.body.classList.add("font-large");
+      }
+
+      if (fontSize === "extra-large") {
+        document.body.classList.add("font-extra-large");
+      }
+    }
+
+    applyFontSize();
+
   </script>
 </body>
 </html>

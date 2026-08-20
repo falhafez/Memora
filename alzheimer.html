@@ -147,6 +147,66 @@ margin-bottom:5px;
 .extra-content.show {
     display:block;
 }
+
+/* ============================================================ */
+/* ===== تغییر اول: استایل‌های اندازه متن بر اساس تنظیمات کاربر ===== */
+/* ============================================================ */
+
+body.font-large p,
+body.font-large li {
+    font-size: 18px;
+}
+
+body.font-large h1 {
+    font-size: 27px;
+}
+
+body.font-large .section-title {
+    font-size: 21px;
+}
+
+body.font-large .badge,
+body.font-large .meta {
+    font-size: 14px;
+}
+
+body.font-large .read-more-btn,
+body.font-large .btn {
+    font-size: 16px;
+}
+
+body.font-large .nav-item {
+    font-size: 13px;
+}
+
+/* ===== خیلی بزرگ ===== */
+body.font-extra-large p,
+body.font-extra-large li {
+    font-size: 20px;
+}
+
+body.font-extra-large h1 {
+    font-size: 30px;
+}
+
+body.font-extra-large .section-title {
+    font-size: 23px;
+}
+
+body.font-extra-large .badge,
+body.font-extra-large .meta {
+    font-size: 16px;
+}
+
+body.font-extra-large .read-more-btn,
+body.font-extra-large .btn {
+    font-size: 18px;
+}
+
+body.font-extra-large .nav-item {
+    font-size: 15px;
+}
+
 </style>
 </head>
 
@@ -297,6 +357,33 @@ margin-bottom:5px;
             extraContent.classList.remove('show');
             readMoreBtn.innerHTML = 'مطالعه بیشتر <i class="fa-solid fa-chevron-down"></i>';
         }
+    });
+
+    /* ============================================================ */
+    /* ===== تغییر دوم: اعمال اندازه فونت انتخاب‌شده از Settings ===== */
+    /* ============================================================ */
+
+    function loadFontSize() {
+
+        const fontSize =
+            localStorage.getItem("fontSize") || "standard";
+
+        document.body.classList.remove(
+            "font-large",
+            "font-extra-large"
+        );
+
+        if (fontSize === "large") {
+            document.body.classList.add("font-large");
+        }
+
+        if (fontSize === "extra-large") {
+            document.body.classList.add("font-extra-large");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        loadFontSize();
     });
 </script>
 

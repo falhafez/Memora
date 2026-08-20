@@ -10,9 +10,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -41,6 +43,7 @@
         }
 
         /* ===== هدر ===== */
+
         .page-header {
             display: flex;
             align-items: center;
@@ -72,6 +75,7 @@
         }
 
         /* ===== بخش تنظیمات ===== */
+
         .settings-section {
             margin-bottom: 25px;
         }
@@ -83,7 +87,8 @@
             margin: 0 8px 10px;
         }
 
-        /* ===== آیتم تنظیمات ===== */
+        /* ===== کارت تنظیمات ===== */
+
         .settings-card {
             background: white;
             border-radius: 20px;
@@ -124,18 +129,22 @@
             background: #eee5f7;
             color: #8472a7;
         }
+
         .icon-green {
             background: #e8f2eb;
             color: #6b9b7b;
         }
+
         .icon-orange {
             background: #f7eadf;
             color: #c68d5d;
         }
+
         .icon-blue {
             background: #e6f1f3;
             color: #5c9da7;
         }
+
         .icon-red {
             background: #fde8ed;
             color: #e74c6f;
@@ -163,7 +172,123 @@
             font-size: 16px;
         }
 
+        /* ===== نمایش مقدار انتخاب شده ===== */
+
+        .setting-value {
+            color: #8472a7;
+            font-size: 12px;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        /* ===== پنجره انتخاب اندازه متن ===== */
+
+        .font-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(50, 40, 60, .35);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .font-modal.show {
+            display: flex;
+        }
+
+        .font-modal-box {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 15px 40px rgba(50, 40, 60, .18);
+        }
+
+        .font-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .font-modal-header h3 {
+            color: #574a73;
+            font-size: 17px;
+        }
+
+        .close-modal {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 11px;
+            background: #eee5f7;
+            color: #8472a7;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .font-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            border: 2px solid #eee8f3;
+            background: #fff;
+            border-radius: 16px;
+            padding: 14px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: .2s;
+            text-align: right;
+        }
+
+        .font-option:hover {
+            background: #faf8fc;
+        }
+
+        .font-option.active {
+            border-color: #8472a7;
+            background: #f7f3fb;
+        }
+
+        .font-option-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .font-option-info i {
+            color: #8472a7;
+            width: 25px;
+            text-align: center;
+        }
+
+        .font-option-info span {
+            color: #4f465d;
+            font-weight: 700;
+        }
+
+        .font-option-size {
+            color: #999;
+        }
+
+        .font-option.standard .font-option-size {
+            font-size: 13px;
+        }
+
+        .font-option.large .font-option-size {
+            font-size: 16px;
+        }
+
+        .font-option.extra-large .font-option-size {
+            font-size: 19px;
+        }
+
         /* ===== درباره همیار ===== */
+
         .about-box {
             background: #f8f5fc;
             border-radius: 20px;
@@ -191,6 +316,7 @@
         }
 
         /* ===== پایین ===== */
+
         .bottom-nav {
             margin-top: 30px;
             padding-top: 15px;
@@ -214,232 +340,577 @@
         .nav-item.active {
             color: #8472a7;
         }
+
+        /* ============================================================ */
+        /* ===== تغییر اول: استایل‌های اندازه متن ===== */
+        /* ============================================================ */
+
+        body.font-large .settings-info h3 {
+            font-size: 17px;
+        }
+
+        body.font-large .settings-info p {
+            font-size: 14px;
+        }
+
+        body.font-large .section-title {
+            font-size: 16px;
+        }
+
+        body.font-large .page-title h2 {
+            font-size: 24px;
+        }
+
+        body.font-large .page-title p {
+            font-size: 15px;
+        }
+
+        body.font-large .nav-item {
+            font-size: 13px;
+        }
+
+        body.font-extra-large .settings-info h3 {
+            font-size: 19px;
+        }
+
+        body.font-extra-large .settings-info p {
+            font-size: 16px;
+        }
+
+        body.font-extra-large .section-title {
+            font-size: 18px;
+        }
+
+        body.font-extra-large .page-title h2 {
+            font-size: 26px;
+        }
+
+        body.font-extra-large .page-title p {
+            font-size: 17px;
+        }
+
+        body.font-extra-large .nav-item {
+            font-size: 15px;
+        }
+
     </style>
 
 </head>
 
 <body>
 
-    <div class="mobile">
+<div class="mobile">
 
-        <!-- ===== هدر ===== -->
-        <div class="page-header">
+    <!-- ===== هدر ===== -->
 
-            <a href="home.html" class="back-btn">
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
+    <div class="page-header">
 
-            <div class="page-title">
-                <h2>تنظیمات</h2>
-                <p>مدیریت اطلاعات و دسترسی به امکانات همیار</p>
-            </div>
+        <a href="home.html" class="back-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
 
+        <div class="page-title">
+            <h2>تنظیمات</h2>
+            <p>مدیریت اطلاعات و شخصی‌سازی تجربه استفاده از همیار</p>
         </div>
 
-        <!-- ================================================= -->
-        <!-- ===== اطلاعات کاربر ===== -->
-        <!-- ================================================= -->
-        <div class="settings-section">
+    </div>
 
-            <div class="section-title">
-                حساب کاربری
-            </div>
 
-            <div class="settings-card">
+    <!-- ================================================= -->
+    <!-- ===== حساب کاربری ===== -->
+    <!-- ================================================= -->
 
-                <a href="patient-profile.html" class="settings-item">
+    <div class="settings-section">
 
-                    <div class="settings-icon icon-purple">
-                        <i class="fa-solid fa-user-group"></i>
-                    </div>
-
-                    <div class="settings-info">
-                        <h3>اطلاعات مراقب و بیمار</h3>
-                        <p>مشاهده و ویرایش اطلاعات مراقب و بیمار</p>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
-
-                </a>
-
-            </div>
-
+        <div class="section-title">
+            حساب کاربری
         </div>
 
-        <!-- ================================================= -->
-        <!-- ===== راهنما و پشتیبانی ===== -->
-        <!-- ================================================= -->
-        <div class="settings-section">
+        <div class="settings-card">
 
-            <div class="section-title">
-                راهنما و پشتیبانی
-            </div>
+            <a href="patient-profile.html?from=settings"
+               class="settings-item">
 
-            <div class="settings-card">
-
-                <a href="guide.html" class="settings-item">
-
-                    <div class="settings-icon icon-green">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-
-                    <div class="settings-info">
-                        <h3>راهنمای برنامه</h3>
-                        <p>آشنایی با بخش‌ها و نحوه استفاده از همیار</p>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
-
-                </a>
-
-                <a href="contact.html" class="settings-item">
-
-                    <div class="settings-icon icon-blue">
-                        <i class="fa-solid fa-headset"></i>
-                    </div>
-
-                    <div class="settings-info">
-                        <h3>ارتباط با تیم همیار</h3>
-                        <p>ارسال پیام، پیشنهاد یا گزارش مشکل به تیم همیار</p>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- ================================================= -->
-        <!-- ===== حریم خصوصی ===== -->
-        <!-- ================================================= -->
-        <div class="settings-section">
-
-            <div class="section-title">
-                حریم خصوصی
-            </div>
-
-            <div class="settings-card">
-
-                <a href="privacy.html" class="settings-item">
-
-                    <div class="settings-icon icon-purple">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-
-                    <div class="settings-info">
-                        <h3>حریم خصوصی</h3>
-                        <p>اطلاعات مربوط به حریم خصوصی و داده‌های شما</p>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- ================================================= -->
-        <!-- ===== خروج از حساب ===== (دقیقاً مطابق خواسته شما) -->
-        <!-- ================================================= -->
-        <div class="settings-section">
-
-            <div class="section-title">
-                حساب کاربری
-            </div>
-
-            <div class="settings-card">
-
-                <div class="settings-item" onclick="logoutUser()">
-
-                    <div class="settings-icon icon-red">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                    </div>
-
-                    <div class="settings-info">
-                        <h3 style="color:#e74c6f;">خروج از حساب کاربری</h3>
-                        <p>خروج از حساب کاربری همیار</p>
-                    </div>
-
-                    <i class="fa-solid fa-chevron-left settings-arrow"></i>
-
+                <div class="settings-icon icon-purple">
+                    <i class="fa-solid fa-user-group"></i>
                 </div>
 
-            </div>
+                <div class="settings-info">
+                    <h3>اطلاعات مراقب و بیمار</h3>
+                    <p>مشاهده و ویرایش اطلاعات مراقب و بیمار</p>
+                </div>
 
-        </div>
+                <i class="fa-solid fa-chevron-left settings-arrow"></i>
 
-        <!-- ================================================= -->
-        <!-- ===== درباره همیار ===== -->
-        <!-- ================================================= -->
-        <div class="about-box">
-
-            <i class="fa-solid fa-heart-pulse"></i>
-            <h3>همیار</h3>
-            <p>همراه شما برای مراقبت بهتر از بیماران مبتلا به آلزایمر</p>
-            <p>نسخه 1.0</p>
-
-        </div>
-
-        <!-- ================================================= -->
-        <!-- ===== ناوبری پایین ===== -->
-        <!-- ================================================= -->
-        <div class="bottom-nav">
-
-            <a href="home.html" class="nav-item active">
-                <i class="fa-solid fa-house"></i>
-                خانه
-            </a>
-
-            <a href="education.html" class="nav-item">
-                <i class="fa-solid fa-book-open"></i>
-                آموزش
-            </a>
-
-            <a href="chat.html" class="nav-item">
-                <i class="fa-solid fa-comments"></i>
-                چت‌ها
-            </a>
-
-            <a href="reminder.html" class="nav-item">
-                <i class="fa-solid fa-bell"></i>
-                یادآورها
-            </a>
-
-            <a href="daily-care.html" class="nav-item">
-                <i class="fa-solid fa-heart"></i>
-                مراقبت
             </a>
 
         </div>
 
     </div>
 
-    <!-- ===== اسکریپت خروج از حساب ===== -->
-    <script>
-        function logoutUser() {
 
-            const confirmLogout = confirm(
-                "آیا مطمئن هستید که می‌خواهید از حساب کاربری خارج شوید؟"
-            );
+    <!-- ================================================= -->
+    <!-- ===== شخصی‌سازی نمایش (تغییر دوم: بخش اندازه متن) ===== -->
+    <!-- ================================================= -->
 
-            if (!confirmLogout) {
-                return;
+    <div class="settings-section">
+
+        <div class="section-title">
+            شخصی‌سازی نمایش
+        </div>
+
+        <div class="settings-card">
+
+            <div class="settings-item" onclick="openFontModal()">
+
+                <div class="settings-icon icon-purple">
+                    <i class="fa-solid fa-text-height"></i>
+                </div>
+
+                <div class="settings-info">
+                    <h3>اندازه متن</h3>
+                    <p>تنظیم اندازه نوشته‌ها متناسب با نیاز شما</p>
+                </div>
+
+                <span id="fontSizeValue" class="setting-value">
+                    استاندارد
+                </span>
+
+                <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ===== راهنما و پشتیبانی ===== -->
+    <!-- ================================================= -->
+
+    <div class="settings-section">
+
+        <div class="section-title">
+            راهنما و پشتیبانی
+        </div>
+
+        <div class="settings-card">
+
+            <a href="guide.html" class="settings-item">
+
+                <div class="settings-icon icon-green">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <div class="settings-info">
+                    <h3>راهنمای برنامه</h3>
+                    <p>آشنایی با بخش‌ها و نحوه استفاده از همیار</p>
+                </div>
+
+                <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+            </a>
+
+
+            <a href="contact.html" class="settings-item">
+
+                <div class="settings-icon icon-blue">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+
+                <div class="settings-info">
+                    <h3>ارتباط با تیم همیار</h3>
+                    <p>ارسال پیام، پیشنهاد یا گزارش مشکل به تیم همیار</p>
+                </div>
+
+                <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ===== حریم خصوصی ===== -->
+    <!-- ================================================= -->
+
+    <div class="settings-section">
+
+        <div class="section-title">
+            حریم خصوصی
+        </div>
+
+        <div class="settings-card">
+
+            <a href="privacy.html" class="settings-item">
+
+                <div class="settings-icon icon-purple">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div class="settings-info">
+                    <h3>حریم خصوصی</h3>
+                    <p>اطلاعات مربوط به حریم خصوصی و داده‌های شما</p>
+                </div>
+
+                <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ===== خروج از حساب ===== -->
+    <!-- ================================================= -->
+
+    <div class="settings-section">
+
+        <div class="section-title">
+            حساب کاربری
+        </div>
+
+        <div class="settings-card">
+
+            <div class="settings-item" onclick="logoutUser()">
+
+                <div class="settings-icon icon-red">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+
+                <div class="settings-info">
+
+                    <h3 style="color:#e74c6f;">
+                        خروج از حساب کاربری
+                    </h3>
+
+                    <p>
+                        خروج از حساب کاربری همیار
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-left settings-arrow"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ===== درباره همیار ===== -->
+    <!-- ================================================= -->
+
+    <div class="about-box">
+
+        <i class="fa-solid fa-heart-pulse"></i>
+
+        <h3>همیار</h3>
+
+        <p>
+            همراه شما برای مراقبت بهتر از بیماران مبتلا به آلزایمر
+        </p>
+
+        <p>
+            نسخه 1.0
+        </p>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ===== ناوبری پایین ===== -->
+    <!-- ================================================= -->
+
+    <div class="bottom-nav">
+
+        <a href="home.html" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            خانه
+        </a>
+
+        <a href="education.html" class="nav-item">
+            <i class="fa-solid fa-book-open"></i>
+            آموزش
+        </a>
+
+        <a href="chat.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            چت‌ها
+        </a>
+
+        <a href="reminder.html" class="nav-item">
+            <i class="fa-solid fa-bell"></i>
+            یادآورها
+        </a>
+
+        <a href="daily-care.html" class="nav-item">
+            <i class="fa-solid fa-heart"></i>
+            مراقبت
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- ===== پنجره انتخاب اندازه متن ===== -->
+<!-- ================================================= -->
+
+<div id="fontModal" class="font-modal">
+
+    <div class="font-modal-box">
+
+        <div class="font-modal-header">
+
+            <h3>
+                انتخاب اندازه متن
+            </h3>
+
+            <button class="close-modal" onclick="closeFontModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <p style="color:#888; font-size:12px; line-height:1.8;">
+            اندازه متن مورد نظر خود را انتخاب کنید.
+        </p>
+
+
+        <button class="font-option standard"
+                data-size="standard"
+                onclick="setFontSize('standard')">
+
+            <div class="font-option-info">
+
+                <i class="fa-solid fa-font"></i>
+
+                <span>
+                    استاندارد
+                </span>
+
+            </div>
+
+            <span class="font-option-size">
+                نمونه متن
+            </span>
+
+        </button>
+
+
+        <button class="font-option large"
+                data-size="large"
+                onclick="setFontSize('large')">
+
+            <div class="font-option-info">
+
+                <i class="fa-solid fa-font"></i>
+
+                <span>
+                    بزرگ
+                </span>
+
+            </div>
+
+            <span class="font-option-size">
+                نمونه متن
+            </span>
+
+        </button>
+
+
+        <button class="font-option extra-large"
+                data-size="extra-large"
+                onclick="setFontSize('extra-large')">
+
+            <div class="font-option-info">
+
+                <i class="fa-solid fa-font"></i>
+
+                <span>
+                    خیلی بزرگ
+                </span>
+
+            </div>
+
+            <span class="font-option-size">
+                نمونه متن
+            </span>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- ===== اسکریپت (تغییر سوم: توابع اندازه متن) ===== -->
+<!-- ================================================= -->
+
+<script>
+
+    /* ================================================
+       اندازه متن (نسخه اصلاح‌شده)
+       ================================================ */
+
+    const fontSizes = {
+        standard: "استاندارد",
+        large: "بزرگ",
+        "extra-large": "خیلی بزرگ"
+    };
+
+
+    function openFontModal() {
+
+        document
+            .getElementById("fontModal")
+            .classList.add("show");
+
+        updateSelectedFontOption();
+
+    }
+
+
+    function closeFontModal() {
+
+        document
+            .getElementById("fontModal")
+            .classList.remove("show");
+
+    }
+
+
+    function setFontSize(size) {
+
+        // ذخیره انتخاب کاربر
+        localStorage.setItem("fontSize", size);
+
+        // اعمال فوری روی Settings
+        applyFontSize(size);
+
+        // نمایش انتخاب فعلی
+        document.getElementById("fontSizeValue").textContent =
+            fontSizes[size];
+
+        // مشخص کردن گزینه انتخاب‌شده
+        updateSelectedFontOption();
+
+        // بستن پنجره
+        closeFontModal();
+
+    }
+
+
+    function applyFontSize(size) {
+
+        document.body.classList.remove(
+            "font-large",
+            "font-extra-large"
+        );
+
+        if (size === "large") {
+            document.body.classList.add("font-large");
+        }
+
+        if (size === "extra-large") {
+            document.body.classList.add("font-extra-large");
+        }
+
+    }
+
+
+    function updateSelectedFontOption() {
+
+        const currentSize =
+            localStorage.getItem("fontSize") || "standard";
+
+        document.querySelectorAll(".font-option").forEach(function(option) {
+
+            option.classList.remove("active");
+
+            if (option.dataset.size === currentSize) {
+                option.classList.add("active");
             }
 
-            // خروج از حساب فعلی
-            localStorage.removeItem("currentUser");
+        });
 
-            // وضعیت ورود فعلی پاک شود
-            localStorage.removeItem("profileCompleted");
+    }
 
-            // انتقال به صفحه ورود
-            window.location.href = "login.html";
+
+    function loadFontSizeSetting() {
+
+        const currentSize =
+            localStorage.getItem("fontSize") || "standard";
+
+        applyFontSize(currentSize);
+
+        document.getElementById("fontSizeValue").textContent =
+            fontSizes[currentSize];
+
+        updateSelectedFontOption();
+
+    }
+
+
+    /* ================================================
+       خروج از حساب
+       ================================================ */
+
+    function logoutUser() {
+
+        const confirmLogout = confirm(
+            "آیا مطمئن هستید که می‌خواهید از حساب کاربری خارج شوید؟"
+        );
+
+        if (!confirmLogout) {
+            return;
         }
-    </script>
+
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("profileCompleted");
+
+        window.location.href = "login.html";
+
+    }
+
+
+    /* ================================================
+       بستن Modal با کلیک بیرون
+       ================================================ */
+
+    document
+        .getElementById("fontModal")
+        .addEventListener("click", function(event) {
+
+            if (event.target === this) {
+                closeFontModal();
+            }
+
+        });
+
+
+    /* ================================================
+       بارگذاری تنظیمات هنگام باز شدن صفحه
+       ================================================ */
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+        loadFontSizeSetting();
+
+    });
+
+</script>
 
 </body>
-
 </html>

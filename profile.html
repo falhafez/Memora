@@ -21,6 +21,71 @@ h2{color:#665580}.card,.note{background:#fff;border-radius:22px;box-shadow:0 8px
 .btn-group button:hover{opacity:.85}
 .edit{background:#8472a7;color:#fff}
 .cancel{background:#e8e0ed;color:#6b5b7a;border:2px solid #d5c8e0 !important}
+
+/* ============================================================ */
+/* ===== تغییر اول: استایل‌های اندازه متن قابل تنظیم ===== */
+/* ============================================================ */
+
+body.font-large .name {
+    font-size: 27px;
+}
+
+body.font-large h2 {
+    font-size: 22px;
+}
+
+body.font-large .label,
+body.font-large .value,
+body.font-large .age {
+    font-size: 17px;
+}
+
+body.font-large .badge {
+    font-size: 16px;
+}
+
+body.font-large .note h3 {
+    font-size: 18px;
+}
+
+body.font-large .note p {
+    font-size: 16px !important;
+}
+
+body.font-large .btn-group button {
+    font-size: 18px;
+}
+
+body.font-extra-large .name {
+    font-size: 30px;
+}
+
+body.font-extra-large h2 {
+    font-size: 25px;
+}
+
+body.font-extra-large .label,
+body.font-extra-large .value,
+body.font-extra-large .age {
+    font-size: 19px;
+}
+
+body.font-extra-large .badge {
+    font-size: 18px;
+}
+
+body.font-extra-large .note h3 {
+    font-size: 20px;
+}
+
+body.font-extra-large .note p {
+    font-size: 18px !important;
+}
+
+body.font-extra-large .btn-group button {
+    font-size: 20px;
+}
+
 </style></head>
 <body><div class="mobile">
 <div class="header"><a href="home.html" class="back"><i class="fa-solid fa-arrow-right"></i></a><h2>پروفایل بیمار</h2><i class="fa-regular fa-bookmark" style="color:#8472a7"></i></div>
@@ -33,7 +98,8 @@ h2{color:#665580}.card,.note{background:#fff;border-radius:22px;box-shadow:0 8px
 </div>
 <div class="note"><h3>یادداشت</h3><p id="notes" style="line-height:2;color:#555"></p></div>
 <div class="btn-group">
-    <button class="edit" onclick="location.href='patient-profile.html'">ویرایش اطلاعات</button>
+    <!-- ===== تغییر دوم: اضافه کردن ?from=settings به لینک ویرایش ===== -->
+    <button class="edit" onclick="location.href='patient-profile.html?from=settings'">ویرایش اطلاعات</button>
     <button class="cancel" onclick="cancelProfile()">انصراف و بازگشت به صفحه اصلی</button>
 </div>
 </div>
@@ -83,5 +149,31 @@ function cancelProfile() {
     // بازگشت به صفحه اصلی
     location.href = "home.html";
 }
+
+// ============================================================ */
+// ===== تغییر سوم: اعمال اندازه متن ذخیره‌شده ===== */
+// ============================================================ */
+
+function applyFontSize(size) {
+
+    document.body.classList.remove(
+        "font-large",
+        "font-extra-large"
+    );
+
+    if (size === "large") {
+        document.body.classList.add("font-large");
+    }
+
+    if (size === "extra-large") {
+        document.body.classList.add("font-extra-large");
+    }
+}
+
+// خواندن تنظیمات ذخیره‌شده
+const savedFontSize =
+    localStorage.getItem("fontSize") || "standard";
+
+applyFontSize(savedFontSize);
 
 </script></body></html>

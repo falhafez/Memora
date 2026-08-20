@@ -16,10 +16,10 @@
         .card{background:#fff;border-radius:24px;padding:20px;margin-bottom:18px;box-shadow:0 10px 28px rgba(132,114,167,.18);border:1px solid #f2edf8}
         .label{font-weight:700;color:#8472a7;margin-bottom:14px}
         .moods{display:flex;justify-content:space-between}
-        .mood{width:58px;height:58px;border-radius:18px;background:#f3f0f8;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:.2s}
+        .mood{width:58px;height:58px;border-radius:18px;background:#f3f0f8;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:.2s;user-select:none}
         .mood.active{background:#eee5f7;outline:3px solid #8472a7}
         .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-        .chip{padding:12px;min-height:45px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:#f3f0f8;text-align:center;cursor:pointer;font-size:13px;line-height:1.5;transition:.2s}
+        .chip{padding:12px;min-height:45px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:#f3f0f8;text-align:center;cursor:pointer;font-size:13px;line-height:1.5;transition:.2s;user-select:none}
         .chip.active{background:#8472a7;color:#fff}
         textarea{width:100%;height:120px;border:1px solid #eadfdc;border-radius:16px;padding:12px;resize:none}
         .btn-group{display:flex;gap:10px;margin-top:8px}
@@ -33,7 +33,6 @@
         .nav-item i{display:block;font-size:20px;margin-bottom:5px}
         .active-nav{color:#8472a7}
 
-        /* استایل وضعیت امروز */
         .today-care-status {
             background: #f0f7f0;
             padding: 12px 18px;
@@ -54,32 +53,57 @@
             color: #c62828;
             border-color: #ffcdd2;
         }
+
+        .validation-error {
+            background: #fff3f3;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+            border-radius: 14px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.7;
+            display: none;
+        }
+        .validation-error.show {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card.required-error {
+            border: 2px solid #e57373;
+            box-shadow: 0 5px 18px rgba(198, 40, 40, 0.12);
+        }
+        .card.required-error .label {
+            color: #c62828;
+        }
     </style>
 </head>
 <body>
 <div class="mobile">
-    <!-- هدر -->
     <div class="header">
         <a class="back" href="home.html"><i class="fa-solid fa-arrow-right"></i></a>
         <h2 id="pageTitle">ثبت مراقبت روزانه</h2>
     </div>
 
-    <!-- ===== وضعیت امروز (جدید) ===== -->
     <div id="todayCareStatus"></div>
 
-    <!-- حال امروز -->
+    <div id="validationError" class="validation-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span>لطفاً تمام بخش‌های فرم مراقبت را تکمیل کنید.</span>
+    </div>
+
     <div class="card">
         <div class="label" id="todayMoodTitle">حال امروز</div>
         <div class="moods">
             <div class="mood" data-mood="😣">😣</div>
             <div class="mood" data-mood="😕">😕</div>
-            <div class="mood active" data-mood="🙂">🙂</div>
+            <div class="mood" data-mood="🙂">🙂</div>
             <div class="mood" data-mood="😊">😊</div>
             <div class="mood" data-mood="😁">😁</div>
         </div>
     </div>
 
-    <!-- وضعیت شناختی -->
     <div class="card" data-group="cognitive">
         <div class="label">🧠 وضعیت حافظه و شناخت</div>
         <div class="grid">
@@ -92,9 +116,8 @@
         </div>
     </div>
 
-    <!-- رفتار -->
     <div class="card" data-group="behavior">
-        <div class="label">💜 رفتار و احساسات</div>
+        <div class="label">😊 رفتار و احساسات</div>
         <div class="grid">
             <div class="chip">آرام</div>
             <div class="chip">بی‌قرار</div>
@@ -105,7 +128,6 @@
         </div>
     </div>
 
-    <!-- خواب -->
     <div class="card" data-group="sleep">
         <div class="label">🌙 وضعیت خواب</div>
         <div class="grid">
@@ -116,7 +138,6 @@
         </div>
     </div>
 
-    <!-- تغذیه -->
     <div class="card" data-group="nutrition">
         <div class="label">🍎 تغذیه و آب</div>
         <div class="grid">
@@ -127,17 +148,19 @@
         </div>
     </div>
 
-    <!-- دارو -->
     <div class="card" data-group="medication">
         <div class="label">💊 داروها</div>
         <div class="grid">
             <div class="chip">دارو کامل مصرف شد</div>
             <div class="chip">دارو فراموش شد</div>
-            <div class="chip">عارضه دارویی</div>
+            <div class="chip">تهوع یا استفراغ</div>
+            <div class="chip">سرگیجه یا خواب‌آلودگی</div>
+            <div class="chip">بی‌اشتهایی</div>
+            <div class="chip">واکنش پوستی یا حساسیت</div>
+            <div class="chip">سایر عوارض دارویی</div>
         </div>
     </div>
 
-    <!-- فعالیت -->
     <div class="card" data-group="activity">
         <div class="label">🚶 فعالیت روزانه</div>
         <div class="grid">
@@ -148,25 +171,20 @@
         </div>
     </div>
 
-    <!-- یادداشت -->
     <div class="card">
         <div class="label">یادداشت</div>
         <textarea id="noteInput" placeholder="امروز چه اتفاقی افتاد؟"></textarea>
     </div>
 
-    <!-- دکمه‌ها -->
     <div class="btn-group">
         <button class="btn-cancel" onclick="window.location.href='home.html';">انصراف</button>
-        <!-- دکمه ذخیره با id و متن پویا -->
         <button class="btn-save" id="saveCareBtn" onclick="saveCare()">ثبت مراقبت جدید</button>
     </div>
 
-    <!-- دکمه مشاهده سوابق -->
     <button class="btn-history" onclick="location.href='history.html'">
         <i class="fa-solid fa-clock-rotate-left"></i> مشاهده سوابق
     </button>
 
-    <!-- ناوبری پایین -->
     <div class="bottom-nav">
         <a class="nav-item" href="home.html"><i class="fa-solid fa-house"></i>خانه</a>
         <a class="nav-item" href="education.html"><i class="fa-solid fa-book-open"></i>آموزش</a>
@@ -190,30 +208,117 @@
     document.getElementById("todayMoodTitle").innerText = `حال امروز ${patientName}`;
 
     /* ============================================================
-       انتخاب mood
+       انتخاب mood (با لغو با کلیک مجدد و غیرفعال‌سازی دابل کلیک)
        ============================================================ */
     document.querySelectorAll('.mood').forEach(m => {
-        m.onclick = function(){
-            document.querySelectorAll('.mood').forEach(x=>x.classList.remove('active'));
-            this.classList.add('active');
-        }
+        m.onclick = function () {
+            const wasActive = this.classList.contains('active');
+            document.querySelectorAll('.mood').forEach(x => x.classList.remove('active'));
+            if (!wasActive) {
+                this.classList.add('active');
+            }
+        };
+        m.ondblclick = function (e) {
+            e.preventDefault(); // جلوگیری از رفتار ناخواسته دابل کلیک
+        };
     });
 
     /* ============================================================
-       انتخاب چیپ‌ها (هر کارت فقط یکی)
+       انتخاب گزینه‌ها با منطق‌های مختلف
        ============================================================ */
     document.querySelectorAll('.card[data-group]').forEach(card => {
+        const group = card.dataset.group;
         const chips = card.querySelectorAll('.chip');
+
         chips.forEach(chip => {
-            chip.onclick = function() {
-                chips.forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-            }
+            chip.onclick = function () {
+                const wasActive = this.classList.contains('active');
+
+                // ---------- خواب: تک‌انتخابی ----------
+                if (group === "sleep") {
+                    chips.forEach(c => c.classList.remove("active"));
+                    if (!wasActive) this.classList.add("active");
+                    return;
+                }
+
+                // ---------- «خوب و طبیعی» در شناخت: تک‌انتخابی ----------
+                if (group === "cognitive" && this.textContent.trim() === "خوب و طبیعی") {
+                    chips.forEach(c => c.classList.remove("active"));
+                    if (!wasActive) this.classList.add("active");
+                    return;
+                }
+
+                // ---------- سایر گزینه‌های شناخت: چندانتخابی با حذف «خوب و طبیعی» ----------
+                if (group === "cognitive" && this.textContent.trim() !== "خوب و طبیعی") {
+                    const normalChip = Array.from(chips).find(
+                        c => c.textContent.trim() === "خوب و طبیعی"
+                    );
+                    if (normalChip) normalChip.classList.remove("active");
+                    this.classList.toggle("active");
+                    return;
+                }
+
+                // ---------- رفتار: «آرام» تک‌انتخابی، بقیه چندانتخابی ----------
+                if (group === "behavior") {
+                    const isCalm = this.textContent.trim() === "آرام";
+                    if (isCalm) {
+                        chips.forEach(c => c.classList.remove("active"));
+                        if (!wasActive) this.classList.add("active");
+                    } else {
+                        const calmChip = Array.from(chips).find(
+                            c => c.textContent.trim() === "آرام"
+                        );
+                        if (calmChip) calmChip.classList.remove("active");
+                        this.classList.toggle("active");
+                    }
+                    return;
+                }
+
+                // ---------- تغذیه: «اشتهای خوب» تک‌انتخابی، بقیه چندانتخابی ----------
+                if (group === "nutrition") {
+                    const isNormal = this.textContent.trim() === "اشتهای خوب";
+                    if (isNormal) {
+                        chips.forEach(c => c.classList.remove("active"));
+                        if (!wasActive) this.classList.add("active");
+                    } else {
+                        const normalChip = Array.from(chips).find(
+                            c => c.textContent.trim() === "اشتهای خوب"
+                        );
+                        if (normalChip) normalChip.classList.remove("active");
+                        this.classList.toggle("active");
+                    }
+                    return;
+                }
+
+                // ---------- دارو: تناقض بین «کامل مصرف شد» و «فراموش شد» ----------
+                if (group === "medication") {
+                    const currentText = this.textContent.trim();
+                    const isMain = currentText === "دارو کامل مصرف شد" || currentText === "دارو فراموش شد";
+
+                    if (isMain) {
+                        // حذف هر دو گزینه اصلی
+                        chips.forEach(c => {
+                            const txt = c.textContent.trim();
+                            if (txt === "دارو کامل مصرف شد" || txt === "دارو فراموش شد") {
+                                c.classList.remove("active");
+                            }
+                        });
+                        if (!wasActive) this.classList.add("active");
+                    } else {
+                        // عوارض: چندانتخابی
+                        this.classList.toggle("active");
+                    }
+                    return;
+                }
+
+                // ---------- سایر بخش‌ها: چندانتخابی ----------
+                this.classList.toggle("active");
+            };
         });
     });
 
     /* ============================================================
-       توابع کمکی برای تاریخچه (نسخه جدید)
+       توابع کمکی برای تاریخچه
        ============================================================ */
     const CARE_KEY = "careHistory";
 
@@ -234,16 +339,18 @@
     }
 
     /* ============================================================
-       دریافت مراقبت امروز (بر اساس dateISO)
+       دریافت انتخاب‌های هر گروه (آرایه)
        ============================================================ */
-    function getTodayCare() {
-        const history = getCareHistory();
-        const today = getToday();
-        return history.find(item => item.dateISO === today);
+    function getSelected(group) {
+        const card = document.querySelector(`[data-group="${group}"]`);
+        if (!card) return [];
+        const selected = Array.from(card.querySelectorAll(".chip.active"))
+            .map(chip => chip.textContent.trim());
+        return selected;
     }
 
     /* ============================================================
-       بارگذاری مراقبت امروز در فرم (با پشتیبانی از داده‌های قدیمی)
+       بارگذاری مراقبت امروز در فرم (پشتیبانی از آرایه)
        ============================================================ */
     function loadCareToForm(care) {
         // ۱. حال
@@ -254,8 +361,8 @@
             }
         });
 
-        // ۲. گروه‌ها (با فیلدهای جدید)
-        const groups = {
+        // ۲. گروه‌ها (مقادیر می‌توانند رشته یا آرایه باشند)
+        const groupsMap = {
             cognitive: care.memory,
             behavior: care.behavior,
             sleep: care.sleep,
@@ -264,13 +371,19 @@
             activity: care.activity
         };
 
-        Object.keys(groups).forEach(group => {
+        Object.keys(groupsMap).forEach(group => {
             const card = document.querySelector(`[data-group="${group}"]`);
             if (!card) return;
-            const value = groups[group];
+            let values = groupsMap[group];
+            if (typeof values === "string") {
+                values = values ? [values] : [];
+            }
+            if (!Array.isArray(values)) {
+                values = [];
+            }
             card.querySelectorAll(".chip").forEach(chip => {
                 chip.classList.remove("active");
-                if (chip.textContent.trim() === value) {
+                if (values.includes(chip.textContent.trim())) {
                     chip.classList.add("active");
                 }
             });
@@ -284,14 +397,13 @@
     }
 
     /* ============================================================
-       تابع اصلی بارگذاری امروز (با تبدیل داده‌های قدیمی)
+       بارگذاری امروز (با تبدیل داده‌های قدیمی)
        ============================================================ */
     function loadTodayCare() {
         const history = getCareHistory();
         const today = getToday();
         let care = history.find(item => item.dateISO === today);
 
-        // اگر داده وجود داشت و به فرمت جدید نبود، تبدیل کن
         if (care && !care.memory) {
             const symptoms = care.symptoms || [];
             const groupsMap = {
@@ -299,19 +411,19 @@
                 behavior: ["آرام", "بی‌قرار", "مضطرب", "پرخاشگر", "غمگین", "ترسیده"],
                 sleep: ["خواب خوب", "بیداری شبانه", "خواب زیاد", "بی‌خوابی"],
                 nutrition: ["اشتهای خوب", "کم‌اشتهایی", "آب کم مصرف کرد", "مشکل بلع"],
-                medication: ["دارو کامل مصرف شد", "دارو فراموش شد", "عارضه دارویی"],
+                medication: ["دارو کامل مصرف شد", "دارو فراموش شد", "تهوع یا استفراغ", "سرگیجه یا خواب‌آلودگی", "بی‌اشتهایی", "واکنش پوستی یا حساسیت", "سایر عوارض دارویی"],
                 activity: ["پیاده‌روی", "فعالیت ذهنی", "صحبت خانوادگی", "نیاز به کمک"]
             };
             const newCare = {
                 ...care,
-                memory: symptoms.find(s => groupsMap.cognitive.includes(s)) || "",
-                behavior: symptoms.find(s => groupsMap.behavior.includes(s)) || "",
-                sleep: symptoms.find(s => groupsMap.sleep.includes(s)) || "",
-                food: symptoms.find(s => groupsMap.nutrition.includes(s)) || "",
-                medicine: symptoms.find(s => groupsMap.medication.includes(s)) || "",
-                activity: symptoms.find(s => groupsMap.activity.includes(s)) || ""
+                memory: symptoms.filter(s => groupsMap.cognitive.includes(s)) || [],
+                behavior: symptoms.filter(s => groupsMap.behavior.includes(s)) || [],
+                sleep: symptoms.filter(s => groupsMap.sleep.includes(s)) || [],
+                food: symptoms.filter(s => groupsMap.nutrition.includes(s)) || [],
+                medicine: symptoms.filter(s => groupsMap.medication.includes(s)) || [],
+                activity: symptoms.filter(s => groupsMap.activity.includes(s)) || []
             };
-            delete newCare.symptoms; // حذف فیلد قدیمی
+            delete newCare.symptoms;
             const index = history.findIndex(item => item.dateISO === today);
             if (index !== -1) {
                 history[index] = newCare;
@@ -320,7 +432,6 @@
             }
         }
 
-        // به‌روزرسانی دکمه و وضعیت
         const button = document.getElementById("saveCareBtn");
         const statusDiv = document.getElementById("todayCareStatus");
 
@@ -334,7 +445,7 @@
             `;
             loadCareToForm(care);
         } else {
-            button.textContent = "ثبت مراقبت جدید";
+            button.textContent = "ثبت مراقبت";
             statusDiv.innerHTML = `
                 <div class="today-care-status empty">
                     <i class="fa-solid fa-circle-exclamation"></i>
@@ -345,13 +456,57 @@
     }
 
     /* ============================================================
-       تابع ذخیره‌سازی (نسخه جدید)
+       ذخیره‌سازی با اعتبارسنجی
        ============================================================ */
     function saveCare() {
+        const validationError = document.getElementById("validationError");
+
+        document.querySelectorAll(".card[data-group]").forEach(card => {
+            card.classList.remove("required-error");
+        });
+        validationError.classList.remove("show");
+
+        const moodSelected = document.querySelector(".mood.active");
+        const requiredGroups = ["cognitive", "behavior", "sleep", "nutrition", "medication", "activity"];
+        let missingGroups = [];
+
+        if (!moodSelected) {
+            missingGroups.push("حال امروز");
+        }
+
+        requiredGroups.forEach(group => {
+            const selected = getSelected(group);
+            if (selected.length === 0) {
+                missingGroups.push(group);
+                const card = document.querySelector(`[data-group="${group}"]`);
+                if (card) card.classList.add("required-error");
+            }
+        });
+
+        if (missingGroups.length > 0) {
+            validationError.querySelector("span").textContent =
+                "لطفاً همه بخش‌های الزامی مراقبت را تکمیل کنید.";
+            validationError.classList.add("show");
+
+            const firstErrorCard = document.querySelector(".required-error");
+            if (!moodSelected) {
+                document.querySelector(".mood").closest(".card").scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            } else if (firstErrorCard) {
+                firstErrorCard.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+            return;
+        }
+
+        // ذخیره‌سازی
         const history = getCareHistory();
         const todayISO = getToday();
 
-        // تاریخ شمسی برای نمایش
         const now = new Date();
         const persianDate = new Intl.DateTimeFormat("fa-IR", {
             year: "numeric",
@@ -363,17 +518,7 @@
             minute: "2-digit"
         }).format(now);
 
-        // گرفتن mood
-        const moodElement = document.querySelector(".mood.active");
-        const mood = moodElement ? moodElement.dataset.mood : "🙂";
-
-        // تابع کمکی برای دریافت انتخاب هر گروه
-        function getSelected(group) {
-            const card = document.querySelector(`[data-group="${group}"]`);
-            if (!card) return "";
-            const selected = card.querySelector(".chip.active");
-            return selected ? selected.textContent.trim() : "";
-        }
+        const mood = moodSelected.dataset.mood;
 
         const careData = {
             mood: mood,
@@ -386,24 +531,21 @@
             note: document.getElementById("noteInput")?.value.trim() || ""
         };
 
-        // جستجوی رکورد امروز
         const existingIndex = history.findIndex(item => item.dateISO === todayISO);
         let savedCare;
 
         if (existingIndex !== -1) {
-            // ویرایش
             savedCare = {
                 ...history[existingIndex],
                 ...careData,
-                time: time // به‌روزرسانی زمان
+                time: time
             };
             history[existingIndex] = savedCare;
         } else {
-            // ثبت جدید
             savedCare = {
                 id: Date.now(),
                 dateISO: todayISO,
-                date: persianDate, // تاریخ شمسی برای نمایش در تاریخچه
+                date: persianDate,
                 time: time,
                 ...careData
             };
@@ -411,18 +553,14 @@
         }
 
         saveCareHistory(history);
-
-        // ذخیره شناسه برای صفحه موفقیت (اختیاری)
         localStorage.setItem("selectedCareId", String(savedCare.id));
-
         window.location.href = "daily-care-success.html";
     }
 
     /* ============================================================
-       اجرا پس از بارگذاری صفحه
+       اجرا
        ============================================================ */
     document.addEventListener("DOMContentLoaded", loadTodayCare);
 </script>
-
 </body>
 </html>

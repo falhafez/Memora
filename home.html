@@ -14,6 +14,7 @@
 
 
     <style>
+        /* تمام استایل‌های شما بدون تغییر */
         * {
             margin: 0;
             padding: 0;
@@ -21,43 +22,25 @@
             font-family: 'Vazirmatn', sans-serif;
         }
 
-
         body {
-
             min-height: 100dvh;
             background: #eee7f3;
-
             display: flex;
             justify-content: center;
-
         }
-
 
         .mobile {
-
             width: 100%;
             max-width: 480px;
-
             min-height: 100dvh;
-
             background: #fdf6f4;
-
             padding: 20px;
-
         }
-
-
-
-        /* لینک ها */
 
         a {
             text-decoration: none;
             color: inherit;
         }
-
-
-
-        /* ===== هدر (با تغییرات جدید) ===== */
 
         .header {
             display: flex;
@@ -66,32 +49,20 @@
             position: relative;
         }
 
-
         .profile {
             display: inline-block;
-            /* برای لینک شدن به درستی */
             width: 58px;
             height: 58px;
-
             border-radius: 50%;
-
             overflow: hidden;
-
             flex-shrink: 0;
-
         }
-
 
         .profile img {
-
             width: 100%;
             height: 100%;
-
             object-fit: cover;
-
         }
-
-
 
         .header-text {
             display: flex;
@@ -99,13 +70,9 @@
         }
 
         .header-text h2 {
-
             color: #8472a7;
-
             font-size: 22px;
-
             font-weight: 700;
-
             line-height: 1.2;
         }
 
@@ -116,24 +83,17 @@
             font-weight: 500;
         }
 
-
-        /* ===== دکمه تنظیمات هدر ===== */
         .settings-btn {
             width: 44px;
             height: 44px;
             margin-right: auto;
-
             border-radius: 14px;
-
             background: #f0eaf7;
             color: #8472a7;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             font-size: 20px;
-
             transition: .2s;
         }
 
@@ -143,8 +103,6 @@
             transform: rotate(20deg);
         }
 
-
-        /* ===== بخش جدید وضعیت امروز ===== */
         .today {
             background: #f9f6fc;
             border-radius: 25px;
@@ -178,7 +136,6 @@
             color: #6f5a8f;
         }
 
-        /* ردیف‌های خلاصه */
         .summary-row {
             background: white;
             color: #555;
@@ -208,7 +165,6 @@
             color: #e74c6f;
         }
 
-        /* ===== استایل جدید کارت وضعیت ثبت شده ===== */
         .today-done {
             background: linear-gradient(135deg, #f7f3fb, #ffffff);
             border: 1px solid #ebe2f5;
@@ -262,7 +218,6 @@
             flex-shrink: 0;
         }
 
-        /* ===== استایل جدید care-status ===== */
         .care-status {
             background: #f8f5fc;
             border-radius: 18px;
@@ -297,229 +252,114 @@
             font-size: 13px;
         }
 
-
-        /* منوی اصلی */
-
-
         .menu {
-
             display: grid;
-
             grid-template-columns: repeat(4, 1fr);
-
             gap: 8px;
-
             margin: 25px 0;
-
         }
-
-
 
         .menu-item {
-
             text-align: center;
-
             font-size: 12px;
-
             color: #665b70;
-
         }
-
-
 
         .icon {
-
             width: 55px;
-
             height: 55px;
-
             margin: auto;
-
             margin-bottom: 6px;
-
             border-radius: 18px;
-
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
-
             font-size: 24px;
-
         }
-
-
 
         .menu-item:nth-child(1) .icon {
-
             background: #eee5f7;
-
             color: #8472a7;
-
         }
-
 
         .menu-item:nth-child(2) .icon {
-
             background: #e6f1f3;
-
             color: #5c9da7;
-
         }
-
 
         .menu-item:nth-child(3) .icon {
-
             background: #f7eadf;
-
             color: #c68d5d;
-
         }
-
 
         .menu-item:nth-child(4) .icon {
-
             background: #e8f2eb;
-
             color: #6b9b7b;
-
         }
-
-
-
-
-
-        /* کارت ها */
-
 
         .card {
-
             display: flex;
-
             gap: 15px;
-
             align-items: center;
-
-
             padding: 15px;
-
             border-radius: 22px;
-
             margin-bottom: 15px;
-
-
-            box-shadow:
-
-                0 8px 25px rgba(132, 114, 167, .18);
-
+            box-shadow: 0 8px 25px rgba(132, 114, 167, .18);
         }
-
-
 
         .article {
-
             background: #f2f0f6;
-
         }
-
-
 
         .relax {
-
             background: #9fc9cf;
-
         }
-
-
 
         .card-image {
-
             width: 90px;
-
             height: 90px;
-
             border-radius: 18px;
-
             overflow: hidden;
-
             flex-shrink: 0;
-
             background: #ddd;
-
         }
-
-
 
         .card-image img {
-
             width: 100%;
             height: 100%;
-
             object-fit: cover;
-
         }
-
-
 
         .card b {
-
             color: #665580;
-
             font-size: 16px;
-
         }
-
-
 
         .card p {
-
             margin-top: 8px;
-
             color: #555;
-
             font-size: 14px;
-
             line-height: 1.8;
-
         }
-
-
 
         .relax button,
         .relax a.btn {
-
             margin-top: 10px;
-
             background: #8472a7;
-
             color: white;
-
             border: 0;
-
             padding: 9px 18px;
-
             border-radius: 15px;
-
             display: inline-block;
-
             font-size: inherit;
-
             cursor: pointer;
-
             transition: background 0.2s;
-
         }
 
         .relax a.btn:hover {
-
             background: #6f5a8f;
-
         }
 
-        /* ===== استایل‌های جدید برای کادر پیشنهاد امروز ===== */
         .today-suggestion {
             background: #fff;
             border-radius: 22px;
@@ -543,8 +383,6 @@
             margin-bottom: 0;
         }
 
-
-        /* ===== استایل‌های جدید برای کارت‌های ناوبری ===== */
         .nav-card {
             display: flex;
             justify-content: space-between;
@@ -584,11 +422,6 @@
             margin-right: 10px;
         }
 
-
-        /* ============================================================= */
-        /* ===== بخش جدید: گروه اشتراک‌گذاری نظرات مراقبین (شبکه اجتماعی) ===== */
-        /* ============================================================= */
-
         .community-section {
             margin-top: 28px;
             border-radius: 25px;
@@ -612,7 +445,6 @@
             font-size: 20px;
         }
 
-        /* ---- بخش ارسال پست جدید ---- */
         .new-post {
             background: white;
             border-radius: 20px;
@@ -738,7 +570,6 @@
             background: rgba(0, 0, 0, 0.7);
         }
 
-        /* ---- فید پست‌ها ---- */
         .post-feed {
             display: flex;
             flex-direction: column;
@@ -878,7 +709,6 @@
             font-size: 18px;
         }
 
-        /* ---- بخش کامنت‌ها ---- */
         .comments-section {
             margin-top: 12px;
             padding-top: 8px;
@@ -970,7 +800,6 @@
             background: #6f5a8f;
         }
 
-        /* لینک مشاهده همه نظرات */
         .view-all-comments {
             font-size: 12px;
             color: #8472a7;
@@ -984,58 +813,30 @@
             text-decoration: underline;
         }
 
-
-        /* پایین */
-
-
         .bottom-nav {
-
             margin-top: 25px;
-
             padding-top: 15px;
-
             border-top: 1px solid #eadfdc;
-
-
             display: flex;
-
             justify-content: space-around;
-
         }
-
-
 
         .nav-item {
-
             text-align: center;
-
             font-size: 11px;
-
             color: #999;
-
         }
-
-
 
         .nav-item i {
-
             display: block;
-
             font-size: 20px;
-
             margin-bottom: 5px;
-
         }
-
-
 
         .active {
-
             color: #8472a7;
-
         }
 
-        /* استایل برچسب وضعیت */
         .status-badge {
             font-size: 12px;
             padding: 3px 10px;
@@ -1044,20 +845,22 @@
             display: inline-block;
             margin-top: 4px;
         }
+
         .status-badge.done {
             background: #e8f2eb;
             color: #6b9b7b;
         }
+
         .status-badge.missed {
             background: #fde8ed;
             color: #c0392b;
         }
+
         .status-badge.pending {
             background: #fef9e7;
             color: #b7950b;
         }
 
-        /* استایل برای نمایش زمان تکمیل */
         .completed-time {
             font-size: 11px;
             color: #6b9b7b;
@@ -1069,64 +872,46 @@
             .mobile {
                 padding: 15px;
             }
-
-
             .header-text h2 {
                 font-size: 18px;
             }
-
-
             .card-image {
                 width: 75px;
                 height: 75px;
-
             }
-
-
             .icon {
                 width: 45px;
                 height: 45px;
-
                 font-size: 20px;
-
             }
-
             .nav-info h3 {
                 font-size: 17px;
             }
-
             .nav-info p {
                 font-size: 13px;
             }
-
             .arrow {
                 font-size: 24px;
             }
-
             .today-suggestion .section-title {
                 font-size: 17px;
             }
-
             .status-circle {
                 width: 60px;
                 height: 60px;
             }
-
             .status-circle span {
                 font-size: 20px;
             }
-
             .summary-buttons a {
                 font-size: 12px;
                 padding: 10px;
             }
-
             .summary-header h3 {
                 font-size: 17px;
             }
         }
 
-        /* ===== استایل جدید alert-box ===== */
         .alert-box {
             background: #fff8ea;
             border-right: 5px solid #f39c12;
@@ -1153,9 +938,161 @@
             text-decoration: none;
             font-size: 13px;
         }
+
         .alert-box a:hover {
             background: #6f5a8f;
         }
+
+        /* ============================================================ */
+        /* ===== استایل‌های اندازه متن هماهنگ با Settings ===== */
+        /* ============================================================ */
+
+        body.font-large .header-text h2 {
+            font-size: 24px;
+        }
+
+        body.font-large .header-text p {
+            font-size: 16px;
+        }
+
+        body.font-large .today h3 {
+            font-size: 22px;
+        }
+
+        body.font-large .today .date {
+            font-size: 16px;
+        }
+
+        body.font-large .summary-row {
+            font-size: 16px;
+        }
+
+        body.font-large .summary-title {
+            font-size: 17px;
+        }
+
+        body.font-large .summary-text {
+            font-size: 14px;
+        }
+
+        body.font-large .care-status strong {
+            font-size: 17px;
+        }
+
+        body.font-large .care-status p {
+            font-size: 15px;
+        }
+
+        body.font-large .menu-item {
+            font-size: 14px;
+        }
+
+        body.font-large .card b {
+            font-size: 18px;
+        }
+
+        body.font-large .card p {
+            font-size: 16px;
+        }
+
+        body.font-large .today-suggestion .section-title {
+            font-size: 22px;
+        }
+
+        body.font-large .nav-info h3 {
+            font-size: 22px;
+        }
+
+        body.font-large .nav-info p {
+            font-size: 16px;
+        }
+
+        body.font-large .community-section .section-title {
+            font-size: 20px;
+        }
+
+        body.font-large .post-content .text {
+            font-size: 16px;
+        }
+
+        body.font-large .bottom-nav .nav-item {
+            font-size: 13px;
+        }
+
+        /* ===== خیلی بزرگ ===== */
+
+        body.font-extra-large .header-text h2 {
+            font-size: 26px;
+        }
+
+        body.font-extra-large .header-text p {
+            font-size: 18px;
+        }
+
+        body.font-extra-large .today h3 {
+            font-size: 24px;
+        }
+
+        body.font-extra-large .today .date {
+            font-size: 18px;
+        }
+
+        body.font-extra-large .summary-row {
+            font-size: 18px;
+        }
+
+        body.font-extra-large .summary-title {
+            font-size: 19px;
+        }
+
+        body.font-extra-large .summary-text {
+            font-size: 16px;
+        }
+
+        body.font-extra-large .care-status strong {
+            font-size: 19px;
+        }
+
+        body.font-extra-large .care-status p {
+            font-size: 17px;
+        }
+
+        body.font-extra-large .menu-item {
+            font-size: 16px;
+        }
+
+        body.font-extra-large .card b {
+            font-size: 20px;
+        }
+
+        body.font-extra-large .card p {
+            font-size: 18px;
+        }
+
+        body.font-extra-large .today-suggestion .section-title {
+            font-size: 24px;
+        }
+
+        body.font-extra-large .nav-info h3 {
+            font-size: 24px;
+        }
+
+        body.font-extra-large .nav-info p {
+            font-size: 18px;
+        }
+
+        body.font-extra-large .community-section .section-title {
+            font-size: 22px;
+        }
+
+        body.font-extra-large .post-content .text {
+            font-size: 18px;
+        }
+
+        body.font-extra-large .bottom-nav .nav-item {
+            font-size: 15px;
+        }
+
     </style>
 
 </head>
@@ -1165,7 +1102,7 @@
     <div class="mobile">
 
 
-        <!-- ===== هدر با تغییرات جدید ===== -->
+        <!-- ===== هدر ===== -->
         <div class="header">
 
             <a href="profile.html" class="profile">
@@ -1186,7 +1123,7 @@
 
 
         <!-- ========================================================== -->
-        <!-- ===== وضعیت امروز (جایگزین خلاصه امروز) ===== -->
+        <!-- وضعیت امروز -->
         <!-- ========================================================== -->
 
         <div class="today">
@@ -1197,7 +1134,7 @@
 
 
         <!-- ========================================================== -->
-        <!-- ===== منوی چهارگانه (بدون تغییر) ===== -->
+        <!-- منوی چهارگانه -->
         <!-- ========================================================== -->
 
         <div class="menu">
@@ -1234,7 +1171,7 @@
 
 
         <!-- ========================================================== -->
-        <!-- ===== کادر پیشنهاد امروز ===== -->
+        <!-- کادر پیشنهاد امروز -->
         <!-- ========================================================== -->
 
         <div class="today-suggestion">
@@ -1277,7 +1214,7 @@
 
 
         <!-- ============================================================ -->
-        <!-- ===== بخش سوالات متداول، مراکز درمانی و جامعه مراقبین (کارت‌های ناوبری) ===== -->
+        <!-- کارت‌های ناوبری (سوالات متداول، مراکز درمانی، جامعه مراقبین) -->
         <!-- ============================================================ -->
 
         <!-- سوالات متداول -->
@@ -1307,9 +1244,20 @@
             <span class="arrow">›</span>
         </div>
 
+        <!-- ============================================================ -->
+        <!-- ✨ کارت جدید: ویرایش پروفایل -->
+        <!-- ============================================================ -->
+        <div class="card nav-card" onclick="goToProfile()">
+            <div class="nav-info">
+                <h3>✏️ ویرایش پروفایل</h3>
+                <p>اطلاعات مراقب و بیمار را به‌روزرسانی کنید</p>
+            </div>
+            <span class="arrow">›</span>
+        </div>
+
 
         <!-- ============================================================ -->
-        <!-- ===== ناوبری پایین ===== -->
+        <!-- ناوبری پایین -->
         <!-- ============================================================ -->
 
         <div class="bottom-nav">
@@ -1345,10 +1293,37 @@
 
 
     <!-- ============================================================ -->
-    <!-- ===== اسکریپت ===== -->
+    <!-- اسکریپت -->
     <!-- ============================================================ -->
 
     <script>
+
+        // =============================================================
+        // اعمال اندازه متن انتخاب‌شده در تنظیمات (هماهنگ با Settings)
+        // =============================================================
+
+        function applyFontSize() {
+
+            const fontSize =
+                localStorage.getItem("fontSize") || "standard";
+
+            document.body.classList.remove(
+                "font-large",
+                "font-extra-large"
+            );
+
+            if (fontSize === "large") {
+                document.body.classList.add("font-large");
+            }
+
+            if (fontSize === "extra-large") {
+                document.body.classList.add("font-extra-large");
+            }
+        }
+
+        applyFontSize();
+
+
         // =============================================================
         // ۱. تغییر نام کاربر
         // =============================================================
@@ -1367,19 +1342,14 @@
         // ۲. تاریخ شمسی
         // =============================================================
         function gregorianToJalali(gy, gm, gd) {
-
             let g_d_m = [
                 0, 31, 59, 90, 120, 151,
                 181, 212, 243, 273,
                 304, 334
             ];
-
             let jy = (gy <= 1600) ? 0 : 979;
-
             gy -= (gy <= 1600) ? 621 : 1600;
-
             let gy2 = (gm > 2) ? (gy + 1) : gy;
-
             let days =
                 (365 * gy) +
                 Math.floor((gy2 + 3) / 4) -
@@ -1388,21 +1358,16 @@
                 80 +
                 gd +
                 g_d_m[gm - 1];
-
             jy += 33 * Math.floor(days / 12053);
             days %= 12053;
-
             jy += 4 * Math.floor(days / 1461);
             days %= 1461;
-
             if (days > 365) {
                 jy += Math.floor((days - 1) / 365);
                 days = (days - 1) % 365;
             }
-
             let jm;
             let jd;
-
             if (days < 186) {
                 jm = 1 + Math.floor(days / 31);
                 jd = 1 + (days % 31);
@@ -1410,7 +1375,6 @@
                 jm = 7 + Math.floor((days - 186) / 30);
                 jd = 1 + ((days - 186) % 30);
             }
-
             return [jy, jm, jd];
         }
 
@@ -1431,322 +1395,116 @@
 
 
         // =============================================================
-        // ۳. تابع نمایش خلاصه وضعیت امروز (فقط مراقبت و هشدارها) – نسخه جدید
+        // ۳. تابع نمایش خلاصه وضعیت امروز
         // =============================================================
 
         function renderTodaySummary() {
-
-            // ===============================
-            // دریافت سوابق مراقبت
-            // ===============================
-
             let careHistory =
                 JSON.parse(localStorage.getItem("careHistory")) || [];
 
-
-            // ===============================
-            // تاریخ امروز
-            // ===============================
-
             const now = new Date();
-
             const todayISO =
                 now.getFullYear() + "-" +
                 String(now.getMonth() + 1).padStart(2, "0") + "-" +
                 String(now.getDate()).padStart(2, "0");
 
-
-            // ===============================
-            // پیدا کردن مراقبت امروز (با کلید `dateISO`)
-            // ===============================
-
             const todayCare =
                 careHistory.find(item => item.dateISO === todayISO);
-
 
             let careHTML = "";
             let alertHTML = "";
 
-
-            // ===============================
-            // هشدارهای مراقبتی
-            // ===============================
-
             const alertMap = [
-
-                {
-                    condition: "بی‌خوابی",
-
-                    text:
-                        "امروز بی‌خوابی ثبت شده است. بهتر است توصیه‌های مربوط به بهداشت خواب را مطالعه کنید.",
-
-                    link: "care-guide.html"
-                },
-
-                {
-                    condition: "کم‌اشتهایی",
-
-                    text:
-                        "امروز کم‌اشتهایی ثبت شده است. توصیه‌های تغذیه بیماران آلزایمر را مرور کنید.",
-
-                    link: "care.html"
-                },
-
-                {
-                    condition: "دارو فراموش شد",
-
-                    text:
-                        "مصرف دارو کامل انجام نشده است. راهکارهای یادآوری دارو را بررسی کنید.",
-
-                    link: "care.html"
-                },
-
-                {
-                    condition: "پرخاشگر",
-
-                    text:
-                        "رفتار بیمار نیاز به مدیریت و آرام‌سازی دارد. تکنیک‌های کاهش پرخاشگری را مطالعه کنید.",
-
-                    link: "care-guide.html"
-                },
-
-                {
-                    condition: "بی‌قرار",
-
-                    text:
-                        "بی‌قراری بیمار بیشتر از حد معمول بوده است. روش‌های کاهش بی‌قراری را مرور کنید.",
-
-                    link: "care-guide.html"
-                },
-
-                {
-                    condition: "مشکل بلع",
-
-                    text:
-                        "مشکل بلع نیاز به توجه دارد. توصیه‌های تغذیه ایمن را مطالعه کنید.",
-
-                    link: "care.html"
-                },
-
-                {
-                    condition: "نیاز به کمک",
-
-                    text:
-                        "بیمار در انجام فعالیت‌ها به کمک بیشتری نیاز دارد. راهنمای مراقبت روزانه را ببینید.",
-
-                    link: "imen.html"
-                }
+                { condition: "بی‌خوابی", text: "امروز بی‌خوابی ثبت شده است. بهتر است توصیه‌های مربوط به بهداشت خواب را مطالعه کنید.", link: "care-guide.html" },
+                { condition: "کم‌اشتهایی", text: "امروز کم‌اشتهایی ثبت شده است. توصیه‌های تغذیه بیماران آلزایمر را مرور کنید.", link: "care.html" },
+                { condition: "دارو فراموش شد", text: "مصرف دارو کامل انجام نشده است. راهکارهای یادآوری دارو را بررسی کنید.", link: "care.html" },
+                { condition: "پرخاشگر", text: "رفتار بیمار نیاز به مدیریت و آرام‌سازی دارد. تکنیک‌های کاهش پرخاشگری را مطالعه کنید.", link: "care-guide.html" },
+                { condition: "بی‌قرار", text: "بی‌قراری بیمار بیشتر از حد معمول بوده است. روش‌های کاهش بی‌قراری را مرور کنید.", link: "care-guide.html" },
+                { condition: "مشکل بلع", text: "مشکل بلع نیاز به توجه دارد. توصیه‌های تغذیه ایمن را مطالعه کنید.", link: "care.html" },
+                { condition: "نیاز به کمک", text: "بیمار در انجام فعالیت‌ها به کمک بیشتری نیاز دارد. راهنمای مراقبت روزانه را ببینید.", link: "imen.html" }
             ];
 
-
-            // =================================================
-            // اگر امروز هنوز مراقبت ثبت نشده
-            // =================================================
-
             if (!todayCare) {
-
                 careHTML = `
-
-                <div class="summary-row"
-                     style="
-                     flex-direction:column;
-                     align-items:stretch;
-                     gap:8px;
-                     ">
-
-                    <span>
-                        💜 مراقبت امروز
-                    </span>
-
-                    <span style="
-                        font-size:13px;
-                        color:#777;
-                    ">
-                        وضعیت امروز بیمار هنوز ثبت نشده است.
-                    </span>
-
-                    <a href="daily-care.html"
-                       style="
-                       display:inline-block;
-                       padding:8px 16px;
-                       background:#8472a7;
-                       color:#fff;
-                       border-radius:12px;
-                       text-align:center;
-                       font-weight:500;
-                       align-self:flex-start;
-                       ">
-
-                        <i class="fa-solid fa-plus"></i>
-                        ثبت مراقبت جدید
-
+                <div class="summary-row" style="flex-direction:column;align-items:stretch;gap:8px;">
+                    <span>💜 مراقبت امروز</span>
+                    <span style="font-size:13px;color:#777;">وضعیت امروز بیمار هنوز ثبت نشده است.</span>
+                    <a href="daily-care.html" style="display:inline-block;padding:8px 16px;background:#8472a7;color:#fff;border-radius:12px;text-align:center;font-weight:500;align-self:flex-start;">
+                        <i class="fa-solid fa-plus"></i> ثبت مراقبت جدید
                     </a>
-
                 </div>
-
                 `;
-
-            }
-
-
-            // =================================================
-            // اگر امروز مراقبت ثبت شده
-            // =================================================
-
-            else {
-
-                // ---------------------------------------------
-                // جمع‌آوری همه علائم از هر دو ساختار (قدیمی و جدید)
-                // ---------------------------------------------
-
+            } else {
                 let symptoms = todayCare.symptoms || [];
-
                 const currentConditions = [
-
                     todayCare.memory,
                     todayCare.behavior,
                     todayCare.sleep,
                     todayCare.food,
                     todayCare.medicine,
                     todayCare.activity
-
                 ].filter(Boolean);
-
-
-                const allConditions = [
-                    ...symptoms,
-                    ...currentConditions
-                ];
-
-
+                const allConditions = [...symptoms, ...currentConditions];
                 let foundAlert = null;
-
-
                 for (const item of alertMap) {
-
                     if (allConditions.includes(item.condition)) {
-
                         foundAlert = item;
-
                         break;
                     }
                 }
-
-
-                // ---------------------------------------------
-                // اگر نیاز به توجه وجود داشته باشد
-                // ---------------------------------------------
-
                 if (foundAlert) {
-
                     alertHTML = `
-
                     <div class="alert-box">
-
-                        <b>
-                            🔶 نیاز به توجه
-                        </b>
-
-                        <p>
-                            ⚠️ ${foundAlert.text}
-                        </p>
-
-                        <a href="${foundAlert.link}">
-                            مشاهده آموزش
-                        </a>
-
+                        <b>🔶 نیاز به توجه</b>
+                        <p>⚠️ ${foundAlert.text}</p>
+                        <a href="${foundAlert.link}">مشاهده آموزش</a>
                     </div>
-
                     `;
-
                 }
-
-
-                // ---------------------------------------------
-                // کارت مراقبت ثبت شده (با دکمه ویرایش)
-                // ---------------------------------------------
-
                 careHTML = `
-
                 <div class="care-status">
-
                     <div class="status-icon">
-
                         <i class="fa-solid fa-circle-check"></i>
-
                     </div>
-
-
                     <div style="flex:1;">
-
-                        <strong>
-                            مراقبت امروز ثبت شده
-                        </strong>
-
-                        <p>
-                            وضعیت بیمار با موفقیت ثبت شده است
-                        </p>
-
+                        <strong>مراقبت امروز ثبت شده</strong>
+                        <p>وضعیت بیمار با موفقیت ثبت شده است</p>
                     </div>
-
-
-                    <a href="daily-care.html"
-                       style="
-                       color:#8472a7;
-                       font-size:13px;
-                       font-weight:700;
-                       text-decoration:none;
-                       white-space:nowrap;
-                       ">
-
-                        <i class="fa-solid fa-pen"></i>
-                        ویرایش
-
+                    <a href="daily-care.html" style="color:#8472a7;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;">
+                        <i class="fa-solid fa-pen"></i> ویرایش
                     </a>
-
                 </div>
-
                 `;
             }
 
-
-            // =================================================
-            // نمایش نهایی
-            // =================================================
-
             document.getElementById("todaySummary").innerHTML = `
-
                 ${careHTML}
-
                 ${alertHTML}
-
             `;
-
         }
 
-
-        // اجرای تابع برای بارگذاری اولیه
         renderTodaySummary();
-
-        // =============================================================
-        // ۴. به‌روزرسانی خودکار هر ۳۰ ثانیه
-        // =============================================================
         setInterval(renderTodaySummary, 30000);
-
-        // =============================================================
-        // ۵. به‌روزرسانی هنگام فوکوس مجدد صفحه (بازگشت از reminder)
-        // =============================================================
         window.addEventListener("focus", function() {
             renderTodaySummary();
         });
 
+
         // =============================================================
-        // ۶. چک کردن آلارم‌ها هر دقیقه (اعلان زمان یادآور)
+        // ۴. تابع رفتن به صفحه تکمیل پروفایل
+        // =============================================================
+        function goToProfile() {
+            sessionStorage.setItem('profileSource', 'settings');
+            location.href = 'patient-profile.html?from=settings';
+        }
+
+
+        // =============================================================
+        // ۵. چک کردن آلارم‌ها
         // =============================================================
         function checkAlarms() {
             let reminders = JSON.parse(localStorage.getItem("reminders")) || [];
             let now = new Date();
-
             let todayString =
                 now.getFullYear() + "/" +
                 String(now.getMonth() + 1).padStart(2, "0") + "/" +
@@ -1755,12 +1513,11 @@
             reminders.forEach(r => {
                 if (r.done && r.completedDate === todayString) return;
                 if (r.completedDate && r.completedDate !== todayString) return;
-
                 let [h, m] = r.time.split(":");
                 if (now.getHours() == Number(h) && now.getMinutes() == Number(m)) {
                     if (Notification.permission === "granted") {
                         new Notification("⏰ زمان انجام: " + r.title, {
-                            body: "یادآور: " + r.desc || "زمان انجام رسیده است",
+                            body: r.desc || "زمان انجام رسیده است",
                             icon: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2"
                         });
                     } else {
@@ -1776,6 +1533,7 @@
 
         setInterval(checkAlarms, 60000);
         setTimeout(checkAlarms, 5000);
+
     </script>
 
 </body>
